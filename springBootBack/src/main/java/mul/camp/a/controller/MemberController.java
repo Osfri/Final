@@ -9,10 +9,6 @@ import mul.camp.a.service.MemberService;
 @RestController
 public class MemberController {
 	
-	/*static {
-	    System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-	}*/
-	
 	@Autowired
 	MemberService aaa;
 	
@@ -26,9 +22,6 @@ public class MemberController {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		System.out.println(a);
-		System.out.println("ddd");
-		System.out.println("dssss");
 		return a;
 		
 	}
