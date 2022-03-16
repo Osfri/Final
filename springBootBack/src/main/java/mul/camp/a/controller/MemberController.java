@@ -27,8 +27,9 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		System.out.println(a);
-		System.out.println("ㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ");
-		System.out.println("ㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㅇㄹㄹㄹㄹㄹㄷㄹㄷㄹㅇㅊ퓨류흏ㄹㄷㄱㄿㅍ변경");
+
+		System.out.println("ddd");
+		System.out.println("dssss");
 		return a;
 		
 	}
