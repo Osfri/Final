@@ -1,4 +1,4 @@
-package com.example.finalproject.bbs
+package com.example.android.bbs
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,17 +16,17 @@ class Bbs : AppCompatActivity() {
 
 
         // bbs리스트
-        var bbslistRecyclerView = findViewById<RecyclerView>(R.id.recyclerView)  // bbsRecyclerView 변수
+        //var bbslistRecyclerView = findViewById<RecyclerView>(R.id.recyclerView)  // bbsRecyclerView 변수
 
-        val bbslist = BbsDao.getInstance().getBbsList()
-        println(bbslist[0].title)
+        //val bbslist = BbsDao.getInstance().getBbsList()
+        //println(bbslist[0].title)
 
-        val mAdapter = CustomAdapterBbsList(this, bbslist)
-        bbslistRecyclerView.adapter = mAdapter
+        //val mAdapter = CustomAdapterBbsList(this, bbslist)
+        //bbslistRecyclerView.adapter = mAdapter
 
-        val layout = LinearLayoutManager(this)
-        bbslistRecyclerView.layoutManager = layout
-        bbslistRecyclerView.setHasFixedSize(true)
+        //val layout = LinearLayoutManager(this)
+        //bbslistRecyclerView.layoutManager = layout
+        //bbslistRecyclerView.setHasFixedSize(true)
         
 
 

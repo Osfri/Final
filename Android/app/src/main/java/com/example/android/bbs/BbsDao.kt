@@ -1,4 +1,4 @@
-package com.example.finalproject.bbs
+package com.example.android.bbs
 
 import retrofit2.Call
 import retrofit2.http.GET

@@ -1,11 +1,11 @@
-package com.example.finalproject.bbs
+package com.example.android.bbs
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import com.example.finalproject.R
+import com.example.android.R
 
 class BbsDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

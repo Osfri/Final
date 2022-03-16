@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_bbs.xml" value="0.2078125" />
-        <entry key="..\:/finalProject/Android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22760416666666666" />
+        <entry key="app/src/main/res/layout/activity_bbs.xml" value="0.297554347826087" />
+        <entry key="app/src/main/res/layout/activity_bbs_detail.xml" value="0.297554347826087" />
+        <entry key="app/src/main/res/layout/activity_bbs_write.xml" value="0.297554347826087" />
+        <entry key="app/src/main/res/layout/activity_bottom_navi_fragment1.xml" value="0.297554347826087" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.297554347826087" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/view_item_layout_bbs.xml" value="0.297554347826087" />
       </map>
     </option>
   </component>

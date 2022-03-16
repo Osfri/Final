@@ -1,4 +1,4 @@
-package com.example.finalproject.bbs
+package com.example.android.bbs
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -10,6 +10,19 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Android">
         <activity
+                android:name=".bbs.BbsDetail"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.BbsWrite"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.BottomNaviFragment1"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.Bbs"
+                android:exported="true"/>
+        <activity android:name=".signin.signinActivity" android:exported="true"/>
+        <activity
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>

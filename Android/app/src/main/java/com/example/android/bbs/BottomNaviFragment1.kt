@@ -1,8 +1,8 @@
-package com.example.finalproject.bbs
+package com.example.android.bbs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.finalproject.R
+import com.example.android.R
 
 class BottomNaviFragment1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
