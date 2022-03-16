@@ -6,6 +6,6 @@
 <mapper namespace="mul.camp.a.dao.MemberDao">
 <select id="kim">
 INSERT INTO HOSPITAL(NAME,LOCATION,CODE)
-VALUES ('aa','aa','dddddd')
+VALUES ('a','a','a')
 </select>
 </mapper>
