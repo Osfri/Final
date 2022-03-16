@@ -12,7 +12,7 @@ public class MemberController {
 	/*static {
 	    System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 	}*/
-	
+	// 아무거나주석123 
 	@Autowired
 	MemberService aaa;
 	
@@ -27,6 +27,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		System.out.println(a);
+
 		System.out.println("ddd");
 		System.out.println("dssss");
 		return a;
