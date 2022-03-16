@@ -8,7 +8,7 @@ import mul.camp.a.service.MemberService;
 
 @RestController
 public class MemberController {
-	
+
 	@Autowired
 	MemberService aaa;
 	
