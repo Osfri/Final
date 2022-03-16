@@ -22,6 +22,7 @@
                 android:name=".bbs.Bbs"
                 android:exported="true"/>
         <activity android:name=".signin.signinActivity" android:exported="true"/>
+        <activity android:name=".firstscreen.firstscreenActivity"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
