@@ -14,7 +14,7 @@ class BbsWrite : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs_write)
 
-
+//주석추가 10 04분
 
         val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
 
@@ -22,7 +22,6 @@ class BbsWrite : AppCompatActivity() {
 
         val bbsWriteTitle = findViewById<EditText>(R.id.bbsWriteTitle)
         val bbsWriteContent = findViewById<EditText>(R.id.bbsWriteContent)
-
         val btn_bbsWriteFin = findViewById<Button>(R.id.btn_bbsWriteFin)
 
 
@@ -46,7 +45,7 @@ class BbsWrite : AppCompatActivity() {
             Toast.makeText(this, "추가되었습니다", Toast.LENGTH_LONG).show()
 
 
-            val i = Intent(this, Bbs::class.java)
+            val i = Intent(this, BbsActivity::class.java)
             startActivity(i)
         }
     }
