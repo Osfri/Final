@@ -11,7 +11,7 @@ import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.LunchActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
-import com.example.android.signin.signinActivity
+import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         // 로그인
         btnLogin.setOnClickListener {
-            val i = Intent(this, signinActivity::class.java)
+            val i = Intent(this, SigninActivity::class.java)
             startActivity(i)
         }
         // 관리자,개인 구분창

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.android.R
-import com.example.android.signin.signinActivity
+import com.example.android.signin.SigninActivity
 
 class firstscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +16,7 @@ class firstscreenActivity : AppCompatActivity() {
         val signup = findViewById<Button>(R.id.btn_signin1)
 
         signin.setOnClickListener {
-            val i = Intent(this,signinActivity::class.java)
+            val i = Intent(this,SigninActivity::class.java)
             startActivity(i)
         }
 

@@ -11,7 +11,7 @@ import mul.camp.a.dto.MemberDto;
 @Repository
 public interface MemberDao {
 
-	String kim();
+    MemberDto login(MemberDto dto);
 }
 
 

@@ -16,9 +16,14 @@ public class MemberService {
 	@Autowired
 	MemberDao dao;
 	
-	public String kim() throws Exception {
-		String a = dao.kim();
-		return a;
+
+	public MemberDto login(MemberDto dto){
+		MemberDto mem = dao.login(dto);
+		if (mem != null){
+			return mem;
+		}else {
+			return null;
+		}
 	}
 
 }
