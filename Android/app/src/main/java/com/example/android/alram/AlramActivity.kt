@@ -1,12 +1,12 @@
-package com.example.android.calender
+package com.example.android.alram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.android.R
 
-class CalenderActivity : AppCompatActivity() {
+class AlramActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calender)
+        setContentView(R.layout.activity_alram)
     }
 }
