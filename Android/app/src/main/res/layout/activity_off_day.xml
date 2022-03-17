@@ -7,15 +7,42 @@
         android:layout_height="match_parent"
         tools:context=".offday.OffDayActivity">
 
+
     <TextView
-            android:id="@+id/textView3"
-            android:text="off 휴일 신청란"
-            android:layout_width="236dp"
-            android:layout_height="209dp"
-            android:textSize="30dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/offTitleTextView"
+            android:text="오프 신청"
+            android:layout_width="312dp"
+            android:layout_height="71dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="284dp"
-            android:layout_marginStart="204dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="36dp"
+            app:layout_constraintStart_toStartOf="parent" android:textSize="34sp"
+            app:layout_constraintHorizontal_bias="0.718"/>
+    <CalendarView
+            android:id="@+id/offCalendarView"
+            android:layout_width="542dp"
+            android:layout_height="453dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/offTitleTextView"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:id="@+id/offTextView"
+            android:text="해당 날짜 클릭시 오프 여부"
+            android:layout_width="562dp"
+            android:layout_height="138dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/offCalendarView"
+            android:layout_marginTop="32dp" app:layout_constraintHorizontal_bias="0.578"/>
+    <Button
+            android:id="@+id/offSaveBtn"
+            android:text="오프 신청"
+            android:layout_width="189dp"
+            android:layout_height="89dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="204dp" app:layout_constraintTop_toBottomOf="@+id/offTextView"
+            android:layout_marginTop="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
