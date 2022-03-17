@@ -12,8 +12,8 @@ class firstscreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firstscreen)
 
-        val signin = findViewById<Button>(R.id.btn_signin)
-        val signup = findViewById<Button>(R.id.btn_signin)
+        val signin = findViewById<Button>(R.id.btn_signin1)
+        val signup = findViewById<Button>(R.id.btn_signin1)
 
         signin.setOnClickListener {
             val i = Intent(this,signinActivity::class.java)
