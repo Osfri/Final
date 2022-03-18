@@ -25,6 +25,15 @@ public class MemberService {
 			return null;
 		}
 	}
+	public int register(MemberDto dto){
+		return dao.register(dto);
+	}
+	public String emailCheck(MemberDto dto){
+		return dao.emailCheck(dto);
+	}
+	public String idCheck(MemberDto dto){
+		return dao.idCheck(dto);
+	}
 
 }
 

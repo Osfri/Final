@@ -26,4 +26,23 @@ public class MemberController {
 		return mem;
 
 	}
+	@RequestMapping(value = "/register",method= RequestMethod.POST)
+	public String register(@RequestBody MemberDto dto){
+		System.out.println("DTO"+dto.toString());
+		int result = service.register(dto);
+		System.out.println("result"+result);
+		return "NO";
+	}
+	@RequestMapping(value = "/emailCheck",method = RequestMethod.POST)
+	public String emailCheck(@RequestBody MemberDto dto){
+		String mem = service.emailCheck(dto);
+		System.out.println(mem);
+		return mem;
+	}
+	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
+	public String idCheck(@RequestBody MemberDto dto){
+		String mem = service.idCheck(dto);
+		System.out.println(mem);
+		return mem;
+	}
 }

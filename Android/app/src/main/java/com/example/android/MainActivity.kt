@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
 
 
-
         // 로그인
         btnLogin.setOnClickListener {
             val i = Intent(this, SigninActivity::class.java)

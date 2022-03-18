@@ -5,8 +5,9 @@ import android.os.Parcelable
 
 
 //id, name , email , pw , phonenumber , code , auth , alarm , alarmtime , point
-class MemberDto(val id:String? , val name:String? , val email:String? , val pw:String? , val phonenumber:String? , val code:String?,
-                val auth:Int? , val alarm:Int? , val alarmtime:Int, val point:Int) :Parcelable {
+class MemberDto(
+    val id:String?, val name:String?, val email:String?, val pw:String?, val phonenumber:String?, val code:String?,
+    val auth:Int?, val alarm:Int?, val alarmtime: Int?, val point:Int?) :Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -29,8 +30,8 @@ class MemberDto(val id:String? , val name:String? , val email:String? , val pw:S
         parcel.writeString(code)
         parcel.writeValue(auth)
         parcel.writeValue(alarm)
-        parcel.writeInt(alarmtime)
-        parcel.writeInt(point)
+        parcel.writeValue(alarmtime)
+        parcel.writeValue(point)
     }
 
     override fun describeContents(): Int {

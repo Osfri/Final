@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.android.R
 import com.example.android.signin.SigninActivity
+import com.example.android.signup.SignupActivity
 
 class firstscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,10 @@ class firstscreenActivity : AppCompatActivity() {
 
         signin.setOnClickListener {
             val i = Intent(this,SigninActivity::class.java)
+            startActivity(i)
+        }
+        signup.setOnClickListener {
+            val i = Intent(this,SignupActivity::class.java)
             startActivity(i)
         }
 

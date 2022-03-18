@@ -12,6 +12,9 @@ import mul.camp.a.dto.MemberDto;
 public interface MemberDao {
 
     MemberDto login(MemberDto dto);
+    int register(MemberDto dto);
+    String emailCheck(MemberDto dto);
+    String idCheck(MemberDto dto);
 }
 
 

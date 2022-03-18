@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.android.R
+import com.example.android.signup.SignupActivity
 
 class SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +21,9 @@ class SigninActivity : AppCompatActivity() {
         val pw = findViewById<EditText>(R.id.signin_pw)
         val login = findViewById<Button>(R.id.btn_btin)
         val checkbox = findViewById<CheckBox>(R.id.Signin_autoin)
+        val signup = findViewById<TextView>(R.id.signin_move)
 
-        val boo:Boolean = PreferenceManager.getBoolean(mContext,"check") //로그인 정보 기억하기 체크 유무 확인
+        /*val boo:Boolean = PreferenceManager.getBoolean(mContext,"check") //로그인 정보 기억하기 체크 유무 확인
         if(boo) { // 체크가 되어있다면 아래 코드를 수행 //저장된 아이디와 암호를 가져와 셋팅한다.
             id.setText(PreferenceManager.getString(mContext, "id"));
             pw.setText(PreferenceManager.getString(mContext, "pw"));
@@ -34,6 +37,11 @@ class SigninActivity : AppCompatActivity() {
                 0, 1 -> {} // main페이지
             }
             Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+        }*/
+
+        signup.setOnClickListener {
+            val i = Intent(this, SignupActivity::class.java)
+            startActivity(i)
         }
         login.setOnClickListener {
             val idtext: String = id.text.toString()
@@ -48,7 +56,7 @@ class SigninActivity : AppCompatActivity() {
                 if (mem != null) {
                     MemberDao.user = mem
                     when (MemberDao.user!!.auth) {
-                        null -> {} // 생성,추가 페이지
+                        5 -> {} // 생성,추가 페이지
                         2 -> {} // 승인대기 페이지
                         0, 1 -> {} // main페이지
                     }
