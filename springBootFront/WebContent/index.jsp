@@ -8,7 +8,8 @@
 </head>
 <body>
 <script type="text/javascript">
-location.href="login.jsp";
+//location.href="login.jsp";
+location.href="upload.jsp";
 </script>
 </body>
 </html>
