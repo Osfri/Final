@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import mul.camp.a.dto.CalendarDto;
 import mul.camp.a.service.MemberService;
 import mul.camp.a.util.MediatypeUtils;
+import mul.camp.a.util.readExcel;
 
 @RestController
 public class MemberController {
@@ -30,14 +36,14 @@ public class MemberController {
     private ServletContext servletContext;
 
 	@Autowired
-	MemberService aaa;
+	MemberService ser;
 	
 	@RequestMapping("/api")
 	public String test() {
 		
 		String a = "";
 		try {
-			a = aaa.kim();
+			a = ser.kim();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -49,7 +55,7 @@ public class MemberController {
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
     public String fileUpload(@RequestParam("uploadFile") MultipartFile uploadfile, HttpServletRequest req, String date){
 		System.out.println("fileUpload()");
-		System.out.println(date);
+		System.out.println(date.split("-"));
 		// server
 		String UPLOADPATH = req.getServletContext().getRealPath("/upload");
 		
@@ -60,8 +66,26 @@ public class MemberController {
             
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
             stream.write(uploadfile.getBytes());
+            
+            
+            
+			/*
+			 * Map<String, Object> map = new HashMap<String, Object>();
+			 * 
+			 * try { List<CalendarDto> fileList = ser.readExcelData(req, fileName, date);
+			 * 
+			 * map.put("list", fileList);
+			 * 
+			 * dao.addExcel(map); } catch (Exception e) { e.printStackTrace(); }
+			 */
 
             stream.close();
+            try {
+				ArrayList<CalendarDto> list = readExcel.readExcelFile(fileName, req, date);
+				System.out.println(list.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
         } catch (Exception e) {     
         	e.printStackTrace();
