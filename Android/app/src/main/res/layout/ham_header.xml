@@ -3,16 +3,24 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="200dp"
-              android:background="@color/cardview_dark_background"
+              android:background="@color/likeblue"
               android:gravity="center"
               android:orientation="vertical"
               android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-            android:id="@+id/text"
+            android:id="@+id/hamLoginId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Item"
-            android:textSize="50dp" />
+            android:gravity="center"
+            android:text="'로그인'님"
+            android:textSize="50dp"/>
+    <TextView
+            android:id="@+id/hamLoginCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="코드번호: 59781548 "
+            android:textSize="20dp"/>
 
 </LinearLayout>

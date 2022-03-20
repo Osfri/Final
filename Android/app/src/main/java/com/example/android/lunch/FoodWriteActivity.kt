@@ -1,65 +1,29 @@
-package com.example.android.bbs
+package com.example.android.lunch
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.R
 import com.example.android.alram.AlramActivity
+import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
 
-class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+class FoodWriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bbs_write)
-
-//주석추가 10 04분
-
-        val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
-
-        // bbsWriteId.text = MemberDao.user?.id                  글쓰기 db완성시 주석 풀면 됩니다
-
-        val bbsWriteTitle = findViewById<EditText>(R.id.bbsWriteTitle)
-        val bbsWriteContent = findViewById<EditText>(R.id.bbsWriteContent)
-        val btn_bbsWriteFin = findViewById<Button>(R.id.btn_bbsWriteFin)
-
-
-
-
-
-
-
-
-        // bbsWrite 글추가완료 버튼
-        btn_bbsWriteFin.setOnClickListener {
-            println(bbsWriteId.text.toString())
-            println(bbsWriteTitle.text.toString())
-            println(bbsWriteContent.text.toString())
-
-/*   db쿼리문
-            BbsDao.getInstance().bbswrite(BbsDto(0, MemberDao.user?.id, 0, 0, 0,
-                title.text.toString(), content.text.toString(), "",
-                0, 0))      */
-
-            Toast.makeText(this, "추가되었습니다", Toast.LENGTH_LONG).show()
-
-
-            val i = Intent(this, BbsActivity::class.java)
-            startActivity(i)
-        }
+        setContentView(R.layout.activity_food_write)
 
 
 
@@ -75,11 +39,11 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         drawerLayout = findViewById(R.id.drawer_layout)
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_Bbs_Write)
+        navigationView = findViewById(R.id.nav_Food_Write)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{

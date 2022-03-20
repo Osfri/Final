@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".LinearActivity">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:context=".LinearActivity">
+        <Button
+                android:id="@+id/btnFoodGallary"
+                android:text="갤러리"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:background="@drawable/button_shape"
+                android:layout_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/btnFoodCamera"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <Button
+                android:id="@+id/btnFoodWriteCamera"
+                android:text="카메라"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:background="@drawable/button_shape"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+                android:id="@+id/btnFoodWriteAf"
+                android:text="식단 등록"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:background="@drawable/button_shape_red"
+                android:textColor="#ffffff"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </LinearLayout>
+    <EditText
+            android:id="@+id/edittextFood"
+            android:layout_width="351dp"
+            android:layout_height="92dp"
+            android:inputType="textPersonName"
+            android:hint="식단 내용을 입력해주세요."
+            android:ems="10"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_marginTop="24dp" android:layout_marginEnd="112dp"/>
+    <ImageView
+            android:layout_width="352dp"
+            android:layout_height="285dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="200dp"
+            app:layout_constraintHorizontal_bias="0.536"/>
+    <Button
+            android:text="카메라"
+            android:layout_width="187dp"
+            android:layout_height="70dp" android:id="@+id/btnFoodCamera"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="112dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="120dp"/>
+
+    </LinearLayout>
+
+
+
+    <include
+            layout="@layout/ham_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_Food_Write"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/ham_menu_list"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/ham_header"/>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
