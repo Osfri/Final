@@ -12,7 +12,7 @@ import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
-import com.example.android.signin.signinActivity
+import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +30,9 @@ class MainActivity : AppCompatActivity() {
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
 
 
-
         // 로그인
         btnLogin.setOnClickListener {
-            val i = Intent(this, signinActivity::class.java)
+            val i = Intent(this, SigninActivity::class.java)
             startActivity(i)
         }
         // 관리자,개인 구분창
