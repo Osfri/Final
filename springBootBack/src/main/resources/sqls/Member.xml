@@ -4,8 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mul.camp.a.dao.MemberDao">
-<select id="kim">
-INSERT INTO HOSPITAL(NAME,LOCATION,CODE)
-VALUES ('a','a','a')
+<select id="login" parameterType="mul.camp.a.dto.MemberDto" resultType="mul.camp.a.dto.MemberDto">
+    SELECT *
+    FROM MEMBER
+    WHERE ID = #{ id } AND PW = #{ pw }
 </select>
+    <!-- id, name , email , pw , phonenumber , code , auth , alarm , alarmtime , point -->
+<insert id="register" parameterType="mul.camp.a.dto.MemberDto">
+    INSERT INTO MEMBER( ID,NAME,EMAIL,PW,PHONENUMBER,CODE,AUTH,ALARM,ALARMTIME,POINT )
+    VALUES (#{id},#{name},#{email},#{pw},#{phonenumber},#{code},#{auth},#{alarm},#{alarmtime},#{point})
+</insert>
+<select id="emailCheck" parameterType="mul.camp.a.dto.MemberDto" resultType="java.lang.String">
+    SELECT EMAIL
+    FROM MEMBER
+    WHERE EMAIL = #{email}
+</select>
+<select id="idCheck" parameterType="mul.camp.a.dto.MemberDto" resultType="java.lang.String">
+    SELECT ID
+    FROM MEMBER
+    WHERE ID = #{id}
+</select>
+
 </mapper>

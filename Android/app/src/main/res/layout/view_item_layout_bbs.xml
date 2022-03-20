@@ -10,7 +10,7 @@
 
 
     <TextView
-            android:id="@+id/bbsRecycleViewTitle"
+            android:id="@+id/bbsRecycleViewDate"
             android:text="타이틀"
             android:layout_width="119dp"
             android:layout_height="38dp"
@@ -19,20 +19,20 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"/>
     <TextView
-            android:id="@+id/bbsRecycleViewId"
+            android:id="@+id/calRecycleViewId"
             android:text="아이디"
             android:layout_width="148dp"
             android:layout_height="38dp"
-            app:layout_constraintTop_toTopOf="@+id/bbsRecycleViewTitle"
-            app:layout_constraintStart_toEndOf="@+id/bbsRecycleViewTitle"
+            app:layout_constraintTop_toTopOf="@+id/bbsRecycleViewDate"
+            app:layout_constraintStart_toEndOf="@+id/bbsRecycleViewDate"
             android:layout_marginStart="16dp"/>
     <TextView
-            android:id="@+id/bbsRecycleViewCount"
+            android:id="@+id/calRecycleViewMemo"
             android:text="조회수"
             android:layout_width="255dp"
             android:layout_height="38dp"
-            app:layout_constraintTop_toTopOf="@+id/bbsRecycleViewId"
-            app:layout_constraintStart_toEndOf="@+id/bbsRecycleViewId"
+            app:layout_constraintTop_toTopOf="@+id/calRecycleViewId"
+            app:layout_constraintStart_toEndOf="@+id/calRecycleViewId"
             android:layout_marginStart="12dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

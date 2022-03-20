@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 
@@ -15,9 +14,9 @@ class CustomAdapterBbsList(val context: Context, val dataList:ArrayList<BbsDto>)
     inner class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
 
-        val bbsRecycleViewId = itemView.findViewById<TextView>(R.id.bbsRecycleViewId)            // 아이디
-        val bbsRecycleViewTitle = itemView.findViewById<TextView>(R.id.bbsRecycleViewTitle)      // 제목
-        val bbsRecycleViewCount = itemView.findViewById<TextView>(R.id.bbsRecycleViewCount)      // 조회수
+        val bbsRecycleViewId = itemView.findViewById<TextView>(R.id.calRecycleViewId)            // 아이디
+        val bbsRecycleViewTitle = itemView.findViewById<TextView>(R.id.bbsRecycleViewDate)      // 제목
+        val bbsRecycleViewCount = itemView.findViewById<TextView>(R.id.calRecycleViewMemo)      // 조회수
 
         fun bind(dataVo:BbsDto, context: Context){
             bbsRecycleViewId.text = "2223333"

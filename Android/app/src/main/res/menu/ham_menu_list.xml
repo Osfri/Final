@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/menu_bbs"
+            android:title="공지/건의사항" />
+    <item
+            android:id="@+id/menu_alram"
+            android:title="알람" />
+    <item
+            android:id="@+id/menu_cal"
+            android:title="일정표" />
+    <item
+            android:id="@+id/menu_point"
+            android:title="포인트몰" />
+    <item
+            android:id="@+id/menu_chat"
+            android:title="채팅" />
+    <item
+            android:id="@+id/menu_offday"
+            android:title="오프 신청" />
+    <item
+            android:id="@+id/menu_item7"
+            android:title="관리자" />
+
+
+</menu>
