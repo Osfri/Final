@@ -42,6 +42,7 @@
             app:layout_constraintStart_toEndOf="@+id/bbsRecycleViewdate"
             app:layout_constraintTop_toTopOf="@+id/bbsRecycleViewdate"/>
 
+    <!-- view = 선 한줄 -->
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
