@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.example.android.R
 import com.example.android.signup.SignupActivity
 
-class SigninActivity : AppCompatActivity() {
+class   SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)

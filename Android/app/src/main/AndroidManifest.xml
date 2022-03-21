@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,16 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-                android:name=".FragmentMenuActivity"
+                android:name=".signinAf.SemiWaitingActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiIndividualActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiManagementActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiScreenActivity"
                 android:exported="true"/>
         <activity
                 android:name=".phoneNumber.PhoneNumActivity"
@@ -20,8 +30,6 @@
         <activity
                 android:name=".lunch.FoodWriteActivity"
                 android:exported="true"/>
-            android:theme="@style/Theme.Design.NoActionBar"
-            android:usesCleartextTraffic="true">
         <activity
                 android:name=".alram.AlramActivity"
                 android:exported="true"/>

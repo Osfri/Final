@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/finalProject/Android/app/src/main/res/drawable/button_main_menu.xml" value="0.446875" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/drawable/button_round.xml" value="0.446875" />
         <entry key="..\:/finalProject/Android/app/src/main/res/drawable/button_shape.xml" value="0.446875" />
         <entry key="..\:/finalProject/Android/app/src/main/res/drawable/button_shape_red.xml" value="0.22916666666666666" />
         <entry key="..\:/finalProject/Android/app/src/main/res/drawable/ic_baseline_area_chart_24.xml" value="0.4479166666666667" />
@@ -23,12 +24,18 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_food_write.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_fragment_menu.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_holiday.xml" value="0.28854166666666664" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_individual.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_lunch.xml" value="0.42857142857142855" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_main.xml" value="0.5142857142857143" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_off_day.xml" value="0.28854166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_phone_num.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_point_mall.xml" value="0.28854166666666664" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_individual.xml" value="0.5142857142857143" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_management.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_screen.xml" value="0.3828571428571429" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_waiting.xml" value="0.4171875" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signin.xml" value="0.22708333333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signup.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/appbar.xml" value="0.43072916666666666" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/hamHeader.xml" value="0.43072916666666666" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/ham_appbar.xml" value="0.4317708333333333" />
