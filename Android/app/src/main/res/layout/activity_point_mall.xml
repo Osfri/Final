@@ -1,13 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-                                           xmlns:app="http://schemas.android.com/apk/res-auto"
-                                           xmlns:tools="http://schemas.android.com/tools"
-                                           android:id="@+id/drawer_layout"
-                                           android:layout_width="match_parent"
-                                           android:layout_height="match_parent"
-                                           android:fitsSystemWindows="true"
-                                           tools:openDrawer="start">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".LinearActivity">
+
+        <!-- 여기 레이아웃은 툴바위치인데, 어떻게 처리할지 미정-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#003B5A">
+
+
+        </LinearLayout>
+
+
+
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/point01"
+                android:scaleType="centerCrop"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="20dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여긴 쇼핑몰의 제목"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2022년 4월 18일"
+                    android:textSize="12dp"/>
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView
+                android:id="@+id/pointContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+
+                android:layout_weight="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="20dp"
+                android:text="포인트몰의 제품 설명부분"
+                android:textColor="@android:color/black"/>
+
+        <Button
+                android:id="@+id/pointBuyBtn"
+                android:text="구매 신청"
+                android:layout_width="match_parent"
+                android:layout_height="251dp"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+    </LinearLayout>
 
 
     <include
@@ -18,12 +98,13 @@
 
 
     <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
+            android:id="@+id/nav_PointMall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

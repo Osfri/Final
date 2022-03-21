@@ -19,8 +19,11 @@
             android:id="@+id/menu_offday"
             android:title="오프 신청" />
     <item
-            android:id="@+id/menu_item7"
-            android:title="관리자" />
+            android:id="@+id/menu_phonenumber"
+            android:title="연락처" />
+    <item
+            android:id="@+id/menu_item8"
+            android:title="관리자"/>
 
 
 </menu>
