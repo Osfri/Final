@@ -1,12 +1,12 @@
-package com.example.android.signin
+package com.example.android.alram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.android.R
 
-class signinActivity : AppCompatActivity() {
+class AlramActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signin)
+        setContentView(R.layout.activity_alram)
     }
 }

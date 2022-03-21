@@ -28,6 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import mul.camp.a.dto.MemberDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,20 +48,37 @@ public class MemberController {
     private ServletContext servletContext;
 
 	@Autowired
-	MemberService ser;
-	
-	@RequestMapping("/api")
-	public String test() {
-		
-		String a = "";
-		try {
-			a = ser.kim();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return a;
-		
+	MemberService service;
+
+
+	//@RequestBody
+
+	@RequestMapping(value ="/login",method= RequestMethod.POST)
+	public MemberDto login(@RequestBody MemberDto dto) {
+		System.out.println("DTO"+dto.toString());
+		MemberDto mem = service.login(dto);
+		System.out.println("MEM"+mem.toString());
+		return mem;
+
+	}
+	@RequestMapping(value = "/register",method= RequestMethod.POST)
+	public String register(@RequestBody MemberDto dto){
+		System.out.println("DTO"+dto.toString());
+		int result = service.register(dto);
+		System.out.println("result"+result);
+		return "NO";
+	}
+	@RequestMapping(value = "/emailCheck",method = RequestMethod.POST)
+	public String emailCheck(@RequestBody MemberDto dto){
+		String mem = service.emailCheck(dto);
+		System.out.println(mem);
+		return mem;
+	}
+	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
+	public String idCheck(@RequestBody MemberDto dto){
+		String mem = service.idCheck(dto);
+		System.out.println(mem);
+		return mem;
 	}
 	
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
@@ -98,7 +120,7 @@ public class MemberController {
 		System.out.println("downloadFile()");
 		
 		//TODO 해당 병원 코드인 사람만 불러오기
-		ArrayList<MemberDto> member = ser.getMember();
+		ArrayList<MemberDto> member = service.getMember();
 		System.out.println(member.get(3).getId());
 		
 		// server

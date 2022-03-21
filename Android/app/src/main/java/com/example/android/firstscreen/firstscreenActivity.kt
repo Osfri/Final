@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.android.R
-import com.example.android.signin.signinActivity
+import com.example.android.signin.SigninActivity
+import com.example.android.signup.SignupActivity
 
 class firstscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firstscreen)
 
-        val signin = findViewById<Button>(R.id.btn_signin)
-        val signup = findViewById<Button>(R.id.btn_signin)
+        val signin = findViewById<Button>(R.id.btn_signin1)
+        val signup = findViewById<Button>(R.id.btn_signin1)
 
         signin.setOnClickListener {
-            val i = Intent(this,signinActivity::class.java)
+            val i = Intent(this,SigninActivity::class.java)
+            startActivity(i)
+        }
+        signup.setOnClickListener {
+            val i = Intent(this,SignupActivity::class.java)
             startActivity(i)
         }
 

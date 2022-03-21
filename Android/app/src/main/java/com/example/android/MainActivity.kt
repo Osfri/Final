@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.android.bbs.BbsActivity
-import com.example.android.calender.CalenderActivity
+import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.firstscreen.firstscreenActivity
-import com.example.android.lunch.LunchActivity
+import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
-import com.example.android.signin.signinActivity
+import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +28,9 @@ class MainActivity : AppCompatActivity() {
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
 
 
-
         // 로그인
         btnLogin.setOnClickListener {
-            val i = Intent(this, signinActivity::class.java)
+            val i = Intent(this, SigninActivity::class.java)
             startActivity(i)
         }
         // 관리자,개인 구분창
@@ -46,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         }
         // 일정표
         btnCalender.setOnClickListener {
-            val i = Intent(this, CalenderActivity::class.java)
+            val i = Intent(this, CalendarActivity::class.java)
             startActivity(i)
         }
         // 식단표
         btnLunch.setOnClickListener {
-            val i = Intent(this,LunchActivity::class.java)
+            val i = Intent(this,FoodActivity::class.java)
             startActivity(i)
         }
         // off 휴일 신청

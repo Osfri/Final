@@ -1,33 +1,32 @@
 package mul.camp.a.dto;
 
 public class MemberDto {
-
+	//id, name , email , pw , phonenumber , code , auth , alarm , alarmtime , point
 	private String id;
 	private String name;
 	private String email;
-	private String pwd;
-	private String phoneNumber;
+	private String pw;
+	private String phonenumber;
 	private String code;
 	private int auth;
 	private int alarm;
-	private int alarmTime;
+	private int alarmtime;
 	private int point;
 	
 	public MemberDto() {
 	}
 
-	public MemberDto(String id, String name, String email, String pwd, String phoneNumber, String code, int auth,
-			int alarm, int alarmTime, int point) {
+	public MemberDto(String id, String name, String email, String pw, String phonenumber, String code, int auth, int alarm, int alarmtimel, int point) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.pwd = pwd;
-		this.phoneNumber = phoneNumber;
+		this.pw = pw;
+		this.phonenumber = phonenumber;
 		this.code = code;
 		this.auth = auth;
 		this.alarm = alarm;
-		this.alarmTime = alarmTime;
+		this.alarmtime = alarmtimel;
 		this.point = point;
 	}
 
@@ -55,20 +54,20 @@ public class MemberDto {
 		this.email = email;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getPw() {
+		return pw;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public String getCode() {
@@ -95,12 +94,12 @@ public class MemberDto {
 		this.alarm = alarm;
 	}
 
-	public int getAlarmTime() {
-		return alarmTime;
+	public int getAlarmtime() {
+		return alarmtime;
 	}
 
-	public void setAlarmTime(int alarmTime) {
-		this.alarmTime = alarmTime;
+	public void setAlarmtime(int alarmtime) {
+		this.alarmtime = alarmtime;
 	}
 
 	public int getPoint() {
@@ -113,9 +112,10 @@ public class MemberDto {
 
 	@Override
 	public String toString() {
-		return "MemberDto [id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + ", phoneNumber="
-				+ phoneNumber + ", code=" + code + ", auth=" + auth + ", alarm=" + alarm + ", alarmTime=" + alarmTime
+		return "MemberDto [id=" + id + ", name=" + name + ", email=" + email + ", pw=" + pw + ", phonenumber="
+				+ phonenumber + ", code=" + code + ", auth=" + auth + ", alarm=" + alarm + ", alarmtime=" + alarmtime
 				+ ", point=" + point + "]";
 	}
+	
 
 }

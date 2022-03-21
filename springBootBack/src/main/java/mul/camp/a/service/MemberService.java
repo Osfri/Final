@@ -25,9 +25,23 @@ public class MemberService {
 	@Autowired
 	MemberDao dao;
 	
-	public String kim() throws Exception {
-		String a = dao.kim();
-		return a;
+
+	public MemberDto login(MemberDto dto){
+		MemberDto mem = dao.login(dto);
+		if (mem != null){
+			return mem;
+		}else {
+			return null;
+		}
+	}
+	public int register(MemberDto dto){
+		return dao.register(dto);
+	}
+	public String emailCheck(MemberDto dto){
+		return dao.emailCheck(dto);
+	}
+	public String idCheck(MemberDto dto){
+		return dao.idCheck(dto);
 	}
 	
 	public ArrayList<MemberDto> getMember(){
