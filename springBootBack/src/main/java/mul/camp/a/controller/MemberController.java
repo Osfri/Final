@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,12 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import mul.camp.a.dto.CalendarDto;
+import mul.camp.a.dto.MemberDto;
 import mul.camp.a.service.MemberService;
 import mul.camp.a.util.MediatypeUtils;
 import mul.camp.a.util.readExcel;
@@ -59,6 +66,8 @@ public class MemberController {
 		// server
 		String UPLOADPATH = req.getServletContext().getRealPath("/upload");
 		
+		//TODO: file directory and file saveName setting, db save
+		
         try {
             String fileName = uploadfile.getOriginalFilename();
             String filePath = UPLOADPATH + File.separator + fileName;
@@ -67,18 +76,6 @@ public class MemberController {
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
             stream.write(uploadfile.getBytes());
             
-            
-            
-			/*
-			 * Map<String, Object> map = new HashMap<String, Object>();
-			 * 
-			 * try { List<CalendarDto> fileList = ser.readExcelData(req, fileName, date);
-			 * 
-			 * map.put("list", fileList);
-			 * 
-			 * dao.addExcel(map); } catch (Exception e) { e.printStackTrace(); }
-			 */
-
             stream.close();
             try {
 				ArrayList<CalendarDto> list = readExcel.readExcelFile(fileName, req, date);
@@ -96,20 +93,44 @@ public class MemberController {
     }
 	
 	@RequestMapping("/download")
-    public ResponseEntity<InputStreamResource> downloadFile(String fileName, HttpServletRequest req) throws IOException {
+    public ResponseEntity<InputStreamResource> downloadFile(String fileName, HttpServletRequest req, HttpServletResponse response) throws IOException {
 		
 		System.out.println("downloadFile()");
+		
+		//TODO 해당 병원 코드인 사람만 불러오기
+		ArrayList<MemberDto> member = ser.getMember();
+		System.out.println(member.get(3).getId());
 		
 		// server
 		String UPLOADPATH = req.getServletContext().getRealPath("/download");
 		
-	//	String UPLOADPATH = "D:\\tmp";
- 
         MediaType mediaType = MediatypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
         System.out.println("fileName: " + fileName);
         System.out.println("mediaType: " + mediaType);
- 
+        
+        FileInputStream fis = new FileInputStream(UPLOADPATH + File.separator + fileName);
+        HSSFWorkbook wb = new HSSFWorkbook(fis);
+        HSSFSheet sheet = wb.getSheetAt(0);
+
+		//엑셀 index는 0부터 시작
+		int rowindex= member.size();
+			
+		for(int i=5; i < rowindex + 5; i++) {
+			sheet.getRow(i).createCell(0).setCellValue(member.get(i-5).getId());
+			sheet.getRow(i).createCell(1).setCellValue(member.get(i-5).getName());
+		}
+		
+		//FileOutputStream fos = new FileOutputStream(UPLOADPATH + File.separator + fileName);
+		String fn = "sample.xls";
+        response.setContentType("ms-vnd/excel;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fn);
+
+        wb.write(response.getOutputStream());
+        wb.close();
+        //fos.close();
+        
         File file = new File(UPLOADPATH + File.separator + fileName);
+		
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
  
         return ResponseEntity.ok()
@@ -121,5 +142,5 @@ public class MemberController {
                 .contentLength(file.length()) 
                 .body(resource);
     }
-	
+		 
 }

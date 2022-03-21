@@ -9,13 +9,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import mul.camp.a.dto.CalendarDto;
@@ -47,12 +43,12 @@ public class readExcel {
 				//행 읽기
 				Row row = sheet.getRow(rowindex);
 					
-				for(int i=2; i<10; i++) {
+				for(int i=3; i<10; i++) {
 					CalendarDto ed = new CalendarDto();
 					
 					ed.setId(Integer.toString(i));
 					ed.setName(String.valueOf(row.getCell(0)));
-					ed.setWdate(date+"-"+(i-1));
+					ed.setWdate(date+"-"+(i-2));
 					ed.setTime(String.valueOf(row.getCell(i)));
 					list.add(ed);
 				}
