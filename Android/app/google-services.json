@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "699634507401",
+    "firebase_url": "https://finalprojectchat-7cc05-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "finalprojectchat-7cc05",
+    "storage_bucket": "finalprojectchat-7cc05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699634507401:android:449a1f47dba9bac221b058",
+        "android_client_info": {
+          "package_name": "com.example.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699634507401-3aqqtpvpf0hgigirq342duthrfgei91l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBowU_qrgVx0J22bTv7-hVIfZtjkHyYJGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699634507401-3aqqtpvpf0hgigirq342duthrfgei91l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

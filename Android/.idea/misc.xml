@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/drawable/outline_chat_bubble_24.xml" value="0.21203703703703702" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/activity_chat.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/activity_group_message.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/activity_message.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/activity_select_people.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/fragment_account.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/fragment_chat.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/fragment_people.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/item_chat_chat.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/item_chat_friend.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/item_chat_friend_select.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/layout/item_chat_message.xml" value="0.22192028985507245" />
+        <entry key="..\:/MulticampProject_Final/Final/Android/app/src/main/res/menu/navigation_chat.xml" value="0.25729166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_calender.xml" value="0.28854166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_chat.xml" value="0.28854166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_firstscreen.xml" value="0.28854166666666664" />
