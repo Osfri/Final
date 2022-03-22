@@ -18,7 +18,7 @@
         <Button
                 android:text="Sign up"
                 android:layout_width="240dp"
-                android:layout_height="140dp" android:id="@+id/btn_signup"
+                android:layout_height="140dp" android:id="@+id/btn_signup1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
                 android:text="Sigh in"
                 android:layout_width="240dp"
                 android:layout_height="140dp"
-                android:id="@+id/btn_signin"
+                android:id="@+id/btn_signin1"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="40dp"
                 app:layout_constraintTop_toTopOf="parent"

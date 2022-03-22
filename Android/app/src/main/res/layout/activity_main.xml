@@ -51,7 +51,7 @@
                 android:text="공지사항"
                 android:layout_marginBottom="5dp"
                 android:textSize="34sp"
-                android:backgroundTint="#ffc107"
+                android:backgroundTint="#FFA41D"
                 android:textColor="#FFFFFF"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -99,7 +99,7 @@
                     android:text="오프(휴일)신청란"
                     android:layout_marginBottom="10dp"
                     android:textSize="34sp"
-                    android:background="#FFAC07"
+                    android:background="#717171"
                     android:textColor="#FFFFFF"
             />
             <LinearLayout
