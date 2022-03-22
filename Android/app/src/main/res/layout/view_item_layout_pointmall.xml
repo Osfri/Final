@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/point_itemlist_cardview"
+        android:layout_margin="15dp"
+        card_view:cardBackgroundColor="#E4E4E4"
+        card_view:cardCornerRadius="12dp"
+        card_view:cardElevation="3dp"
+        card_view:contentPadding="4dp">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:padding="16dp">
+
+        <ImageView
+                android:id="@+id/point_itemlist_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/point01"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"/>
+
+
+            <TextView
+                    android:id="@+id/point_itemlist_title"
+                    android:text="임시용: 라운드 셔츠"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/point_itemlist_image"
+                    android:layout_toRightOf="@id/point_itemlist_image"
+                    android:layout_alignParentTop="true"
+                    android:textSize="30sp"/>
+
+        <TextView
+                android:id="@+id/point_itemlist_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Creative Business card Free Psd Template Download Free PNG Images, Vectors, Stock Photos, PSD Templates, Icons, Fonts, Graphics, Clipart, Mockups, with Transparent Background. On this site which…"
+                android:layout_toEndOf="@+id/point_itemlist_image"
+                android:layout_toRightOf="@+id/point_itemlist_image"
+                android:layout_below="@+id/point_itemlist_title">
+        </TextView>
+
+
+        <TextView
+                android:id="@+id/point_itemlist_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="132dp"
+                android:textSize="20dp"
+                android:textColor="@color/pointred"
+                android:text="150,000 포인트"
+                android:layout_toRightOf="@+id/point_itemlist_image"
+                android:layout_below="@+id/point_itemlist_title"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="-3dp"
+                android:layout_alignStart="@+id/point_itemlist_content">
+        </TextView>
+
+
+        <Button
+                android:id="@+id/pointlist_btn_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="구매 희망"
+                android:layout_marginTop="220dp"
+                android:background="@drawable/button_round"
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

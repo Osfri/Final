@@ -24,7 +24,25 @@
                 android:exported="true"/>
 
         <activity
-                android:name=".FragmentMenuActivity"
+                android:name=".pointMall.PointMallHistoryActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointMallDetailActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointmallListActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiWaitingActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiIndividualActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiManagementActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiScreenActivity"
                 android:exported="true"/>
         <activity
                 android:name=".phoneNumber.PhoneNumActivity"
@@ -63,9 +81,14 @@
                 android:name=".bbs.BbsActivity"
                 android:exported="true"/>
         <activity
-                android:name=".signin.signinActivity"
+                android:name=".signin.SigninActivity"
                 android:exported="true"/>
-        <activity android:name=".firstscreen.firstscreenActivity"/>
+        <activity
+                android:name=".firstscreen.firstscreenActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signup.SignupActivity"
+                android:exported="true"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
