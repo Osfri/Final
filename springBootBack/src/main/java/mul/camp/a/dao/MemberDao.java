@@ -20,10 +20,8 @@ public interface MemberDao {
     String emailCheck(MemberDto dto);
     String idCheck(MemberDto dto);
     
-    int delCalendar(ArrayList<CalendarDto> list);
-    int upCalendar(List<CalendarDto> list);
-    //int upCalendar(CalendarDto list);
-    
+    int calendarInsert(List<CalendarDto> list);
+    int calendarUpdate(List<CalendarDto> list);
 }
 
 

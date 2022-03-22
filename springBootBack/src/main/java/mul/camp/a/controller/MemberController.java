@@ -97,23 +97,29 @@ public class MemberController {
     public String fileUpload(HttpServletRequest req, @RequestParam("uploadFile") MultipartFile uploadfile, String date, String code){
 		System.out.println("fileUpload()");
 		System.out.println(date.split("-"));
-		System.out.println(code);
-		// server
+
 		String UPLOADPATH = req.getServletContext().getRealPath("/upload");
 		
         try {
-        	//해당 코드의 폴더 유무 확인후, 폴더에 저장
         	String path = UPLOADPATH + File.separator + code;
-        	File Folder = new File(path);
-        	if(!Folder.exists()) {
+        	File FolderChk = new File(path);
+        	//해당 코드의 폴더 유무 확인후, 폴더에 저장
+        	if(!FolderChk.exists()) {
         		try {
-        			Folder.mkdir();
+        			FolderChk.mkdir();
         		}catch(Exception e){
         			System.out.println(e);
         		}
         	}
     		String fileName = code+"_"+date+".xls";
             String filePath = path + File.separator + fileName;
+            File fileChk = new File(filePath);
+            boolean fileTf = false;
+            //해당 폴더에 파일 유무 확인
+            if(fileChk.exists()) {
+            	fileTf = true;
+            	System.out.println("이미 파일 있음");
+            }
             System.out.println("filePath:" + filePath);
             
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
@@ -125,7 +131,12 @@ public class MemberController {
 				System.out.println(list.toString());
 				
 				//CalendarDto test = new CalendarDto("a", "a", "2022-03-02", "n", "");
-				service.calendar(list);
+				if(!fileTf) {
+					service.calendarInsert(list);
+				}else {
+					System.out.println("file ok update");
+					service.calendarUpdate(list);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

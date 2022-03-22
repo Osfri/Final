@@ -43,15 +43,14 @@ public class MemberService {
 		return dao.getMember();
 	}
 	
-	public int calendar(List<CalendarDto> list) {
-		//dao.delCalendar(list);
-		return dao.upCalendar(list);
+	public int calendarInsert(List<CalendarDto> list) {
+		return dao.calendarInsert(list);
 	}
 	
-//	public int calendar(CalendarDto list) {
-//		//dao.delCalendar(list);
-//		return dao.upCalendar(list);
-//	}
+	public int calendarUpdate(List<CalendarDto> list) {
+		return dao.calendarUpdate(list);
+	}
+	
 	
 }
 

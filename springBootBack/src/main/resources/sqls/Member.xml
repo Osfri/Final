@@ -13,7 +13,7 @@
 	    FROM MEMBER
 	    WHERE ID = #{ id } AND PW = #{ pw }
 	</select>
-	    <!-- id, name , email , pw , phonenumber , code , auth , alarm , alarmtime , point -->
+	   <!--  id, name , email , pw , phonenumber , code , auth , alarm , alarmtime , point -->
 	<insert id="register" parameterType="mul.camp.a.dto.MemberDto">
 	    INSERT INTO MEMBER( ID,NAME,EMAIL,PW,PHONENUMBER,CODE,AUTH,ALARM,ALARMTIME,POINT )
 	    VALUES (#{id},#{name},#{email},#{pw},#{phonenumber},#{code},#{auth},#{alarm},#{alarmtime},#{point})
@@ -28,29 +28,21 @@
 	    FROM MEMBER
 	    WHERE ID = #{id}
 	</select>
-	<!-- 
-	<update id="delCalendar" parameterType="java.util.ArrayList">
-		UPDATE CALENDAR
-		SET TIME=''
-		WHERE ID=#{id} and WDATE=#{wdate}
-	</update>
-	-->
-	<insert id="upCalendar" parameterType="java.util.List">
-		<foreach collection="list" item="item" open="INSERT ALL" separator=" ">
-		INSERT INTO CALENDAR (ID, WDATE, ITME)
-		VALUES
-			(#{item.id}, #{item.wdate}, #{item.time})
+	<insert id="calendarInsert" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO CALENDAR (ID, WDATE, TIME)
+		VALUES			
+			(
+			#{item.id},  TO_DATE(#{item.wdate}), #{item.time}
+			)
 		</foreach>
 	</insert>
-	<!-- <update id="upCalendar" parameterType="mul.camp.a.dto.CalendarDto">
-		merge into calendar
-		using dual
-		on(id=#{id})
-		when matched then
-		update set time=${time}
-		when not matched then
-		insert(id, wdate, time)
-		values(#{id}, #{wdate}, #{time})
-	</update> -->
+	<update id="calendarUpdate" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
+			UPDATE CALENDAR
+			SET TIME = #{item.time}
+			WHERE ID=#{item.id} AND WDATE=TO_DATE(#{item.wdate})
+		</foreach>
+	</update>
 
 </mapper>
