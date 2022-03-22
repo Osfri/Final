@@ -10,7 +10,9 @@ import com.example.android.chat.ChatActivity
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.pointMall.PointMallDetailActivity
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val btnHoliday = findViewById<Button>(R.id.btnHoliday)                  // off 휴일 신청
         val btnPointMall = findViewById<Button>(R.id.btnPointMall)              // 포인트몰
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
+        val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
 
 
         // 로그인
@@ -69,6 +72,13 @@ class MainActivity : AppCompatActivity() {
             i.putExtra("loginUserId", "test1") // 로그인 유저 아이디 전달 필요
             startActivity(i)
         }
+
+        // 임의로 경로바꿔서 쓰는중 (확인해야됨)
+        btnPhoneNumber.setOnClickListener {
+            val i = Intent(this,PointMallDetailActivity::class.java)
+            startActivity(i)
+        }
+
 
 
 

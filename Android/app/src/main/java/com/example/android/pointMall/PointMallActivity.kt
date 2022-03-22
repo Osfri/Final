@@ -1,14 +1,25 @@
 package com.example.android.pointMall
 
+import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.example.android.R
+import com.example.android.alram.AlramActivity
+import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.BbsDto
+import com.example.android.bbs.CustomAdapterBbsList
+import com.example.android.calendar.CalendarActivity
+import com.example.android.chat.ChatActivity
+import com.example.android.offday.OffDayActivity
 
 class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
@@ -19,22 +30,42 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_point_mall)
 
+/*   리스트에서  구매 희망 누르면 일단 오류나는 중
+
+        val pointDetail =  findViewById<Button>(R.id.pointlist_btn_detail)
+        pointDetail.setOnClickListener{
+            val i = Intent(this, PointMallDetailActivity::class.java)
+            startActivity(i)
+        }
+*/
+
+
+        // bbs리스트
+        var pointRecyclerView = findViewById<RecyclerView>(R.id.pointRecyclerView)  // bbsRecyclerView 변수
+
+        val mAdapter = CustomAdapterPointMall()
+        pointRecyclerView.adapter = mAdapter
+        val layout = LinearLayoutManager(this)
+        pointRecyclerView.layoutManager = layout
+        pointRecyclerView.setHasFixedSize(true)
+
+
+
+
+        // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_article_24) // 홈버튼 이미지 변경
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
-
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_view)
+        navigationView = findViewById(R.id.nav_PointMall)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
     }
 
-
+    // drawerlayout bar 함수
     // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -47,17 +78,34 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         return super.onOptionsItemSelected(item)
     }
-
+    // drawerlayout bar
     // 드로어 내 아이템 클릭 이벤트 처리하는 함수
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_bbs-> Toast.makeText(this,"공지사항/건의사항 게시판 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_alram-> Toast.makeText(this,"알람 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_cal-> Toast.makeText(this,"일정표 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_point-> Toast.makeText(this,"포인트몰 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_chat-> Toast.makeText(this,"채팅 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_offday-> Toast.makeText(this,"오프신청 실행",Toast.LENGTH_SHORT).show()
-
+            R.id.menu_bbs-> {
+                val i = Intent(this, BbsActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_alram-> {
+                val i = Intent(this, AlramActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_cal->  {
+                val i = Intent(this, CalendarActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_point->  {
+                val i = Intent(this, PointMallActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_chat->  {
+                val i = Intent(this, ChatActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_offday->  {
+                val i = Intent(this, OffDayActivity::class.java)
+                startActivity(i)
+            }
         }
         return false
     }
