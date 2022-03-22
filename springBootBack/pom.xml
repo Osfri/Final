@@ -94,6 +94,14 @@
 		    <groupId>com.oracle.database.security</groupId>
 		    <artifactId>osdt_core</artifactId>
 		</dependency>
+		
+		<!-- 파이어베이스 관련 (스토리지포함) -->
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>7.0.1</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
