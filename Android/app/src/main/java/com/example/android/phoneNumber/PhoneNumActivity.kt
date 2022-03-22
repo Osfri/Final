@@ -7,27 +7,42 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlramActivity
 import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.CustomAdapterBbsList
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarMode
+import kotlinx.android.synthetic.main.activity_calendar.*
+import java.util.*
 
 class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone_num)
 
+        // 연락처 리스트
+        var phoneRecyclerView = findViewById<RecyclerView>(R.id.phoneRecyclerView)  // bbsRecyclerView 변수
 
 
+        val mAdapter = CustomAdapterPhone()
+        phoneRecyclerView.adapter = mAdapter
 
+        val layout = LinearLayoutManager(this)
+        phoneRecyclerView.layoutManager = layout
+        phoneRecyclerView.setHasFixedSize(true)
 
 
         // drawerlayout bar 설정

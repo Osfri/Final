@@ -72,9 +72,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
 
-        // 임의로 경로바꿔서 쓰는중 (확인해야됨)
+        // 연락처
         btnPhoneNumber.setOnClickListener {
-            val i = Intent(this,PointMallDetailActivity::class.java)
+            val i = Intent(this,PhoneNumActivity::class.java)
             startActivity(i)
         }
 
