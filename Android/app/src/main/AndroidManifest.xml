@@ -13,6 +13,15 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+                android:name=".pointMall.PointMallHistoryActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointMallDetailActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointmallListActivity"
+                android:exported="true"/>
+        <activity
                 android:name=".signinAf.SemiWaitingActivity"
                 android:exported="true"/>
         <activity

@@ -12,6 +12,7 @@ import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.pointMall.PointMallDetailActivity
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
@@ -71,8 +72,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
 
+        // 임의로 경로바꿔서 쓰는중 (확인해야됨)
         btnPhoneNumber.setOnClickListener {
-            val i = Intent(this,PhoneNumActivity::class.java)
+            val i = Intent(this,PointMallDetailActivity::class.java)
             startActivity(i)
         }
 

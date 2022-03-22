@@ -14,10 +14,8 @@ import com.example.android.R
 import com.example.android.alram.AlramActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
-import com.example.android.lunch.FoodDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

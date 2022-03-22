@@ -16,7 +16,7 @@
             android:textColor="@color/likeblue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:background="#D3FFFFFF"
             android:layout_weight="1"/>
     <Button
             android:id="@+id/semiSc_Btn_Invidual"
@@ -25,6 +25,6 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/likeblue"
+            android:background="#0C5998"
             android:layout_weight="1"/>
 </LinearLayout>
