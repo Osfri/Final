@@ -8,7 +8,10 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.android.MainActivity
 import com.example.android.R
+import com.example.android.signinAf.SemiScreenActivity
+import com.example.android.signinAf.SemiWaitingActivity
 import com.example.android.signup.SignupActivity
 
 class   SigninActivity : AppCompatActivity() {
@@ -56,9 +59,15 @@ class   SigninActivity : AppCompatActivity() {
                 if (mem != null) {
                     MemberDao.user = mem
                     when (MemberDao.user!!.auth) {
-                        5 -> {} // 생성,추가 페이지
-                        2 -> {} // 승인대기 페이지
-                        0, 1 -> {} // main페이지
+                        5 -> {
+                            startActivity(Intent(this,SemiScreenActivity::class.java))
+                        } // 생성,추가 페이지
+                        2 -> {
+                            startActivity(Intent(this,SemiWaitingActivity::class.java))
+                        } // 승인대기 페이지
+                        0, 1, 3 -> {
+                            startActivity(Intent(this,MainActivity::class.java))
+                        } // main페이지
                     }
                     Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                     //아이디 패스워드 저장
@@ -76,6 +85,5 @@ class   SigninActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.camp.a.dao.HospitalDao">
+    <select id="codeCheck" parameterType="java.lang.String" resultType="mul.camp.a.dto.HospitalDto">
+        SELECT NAME, LOCATION, CODE
+        FROM HOSPITAL
+        WHERE CODE = #{ code }
+    </select>
+    <insert id="insertHospital" parameterType="mul.camp.a.dto.HospitalDto">
+        INSERT INTO HOSPITAL( NAME , LOCATION , CODE )
+        VALUES ( #{ name }, #{ location }, #{ code } )
+    </insert>
+    <update id="insertHospitalAf" parameterType="mul.camp.a.dto.MemberDto">
+        UPDATE MEMBER
+        SET CODE = #{code}, AUTH = #{auth}
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

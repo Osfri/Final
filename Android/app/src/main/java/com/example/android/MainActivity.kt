@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         // 채팅
         btnChat.setOnClickListener {
             val i = Intent(this,ChatActivity::class.java)
+            i.putExtra("loginUserId", "test1") // 로그인 유저 아이디 전달 필요
             startActivity(i)
         }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mul.camp.a.dao.ChatDao">
+ 
+ 
+	<select id="getAllUserInfo" resultType="mul.camp.a.dto.ChatDto">
+		SELECT ID, NAME, EMAIL, PW, PHONENUMBER, CODE, AUTH, ALARM, ALARMTIME, POINT
+		FROM MEMBER
+		WHERE auth = 1
+	</select>
+	
+	<select id="getLoginUserInfo" parameterType="java.lang.String" resultType="mul.camp.a.dto.ChatDto">
+		SELECT ID, NAME, EMAIL, PW, PHONENUMBER, CODE, AUTH, ALARM, ALARMTIME, POINT
+		FROM MEMBER
+		WHERE ID = #{id}
+	</select>
+ 
+	<select id="getSameCodeUsers" parameterType="mul.camp.a.dto.ChatDto" resultType="mul.camp.a.dto.ChatDto">
+		SELECT ID, NAME, EMAIL, PW, PHONENUMBER, CODE, AUTH, ALARM, ALARMTIME, POINT
+		FROM MEMBER
+		WHERE code = (SELECT CODE
+						FROM MEMBER
+						WHERE id=#{id})
+	        AND NOT id = #{id}
+	        AND auth = 1
+	</select>
+	
+	<select id="getLoginUserHospitalInfo" parameterType="mul.camp.a.dto.ChatDto" resultType="mul.camp.a.dto.ChatDto$HospitalDto">
+		SELECT NAME, LOCATION, CODE
+		FROM HOSPITAL
+		WHERE code = (SELECT CODE
+	                   FROM MEMBER
+	                   WHERE id = #{id})
+	</select>
+	
+	
+ </mapper>
