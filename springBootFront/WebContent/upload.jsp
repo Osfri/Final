@@ -10,24 +10,29 @@
 <body>
 <button id="download_file_btn">근무표 양식 다운로드</button>
 <br><br><br>
+	<input type="month" id="month" name="nameFile" value="2022-03">
+	<!-- <input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /> -->
 <form id="upload_file_frm">
-	<input type="month" id="month" name="month" value="2022-03">
-	<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+	<input type="file" id="upload_file" name="uploadFile" accept="*" />
 	<button type="button" id="upload_file_btn">근무표 업로드</button>
 </form>
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	   
+	let str = sessionStorage.getItem("login");	
+	let json = JSON.parse(str);
+
 	$("#upload_file_btn").click(function(){
 		if($("#month").val() != null){
 			if($("#upload_file").val() == ""){
 				alert("파일을 등록해 주세요.");
 			}else{
 				$.ajax({
-					url:"http://localhost:3000/fileupload?date="+$("#month").val(),
+ 					url:"http://localhost:3000/fileupload?date="+$("#month").val()+"&code="+json.code,
+					//url:"http://localhost:3000/files?nameFile="+$("#month").val(),
 					type: "POST",
-					data: new FormData($("#upload_file_frm")[0]),			
+					data: new FormData($("#upload_file_frm")[0]),	
+					//data: {file: $("#upload_file").val()},
 					enctype: 'multipart/form-data',
 			        processData: false,
 			        contentType: false,
@@ -35,8 +40,8 @@ $(document).ready(function(){
 			        success: function () {   
 			        	alert("success");
 			        },
-			        error: function () { 
-			        	alert("error");
+			        error: function (e) { 
+			        	alert("error", e);
 			        }
 				}); 
 			}
@@ -67,5 +72,7 @@ $(document).ready(function(){
 		});*/
 	});
 });
+
+
 </script>
 </html>

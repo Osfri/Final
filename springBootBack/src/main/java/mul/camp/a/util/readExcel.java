@@ -18,12 +18,13 @@ import mul.camp.a.dto.CalendarDto;
 
 public class readExcel {
 
-	public static ArrayList<CalendarDto> readExcelFile(String fileName, HttpServletRequest req, String date) {
+	public static ArrayList<CalendarDto> readExcelFile(String fileName, HttpServletRequest req, String date, String code) {
 		ArrayList<CalendarDto> list = new ArrayList<CalendarDto>();
 		String UPLOADPATH = req.getServletContext().getRealPath("/upload");
+		String path = UPLOADPATH + File.separator + code;
 			
 		try{
-			String filePath = UPLOADPATH + File.separator + fileName;
+			String filePath = path + File.separator + fileName;
 			File file = new File(filePath);
 	        
 			FileInputStream fis = new FileInputStream(file);
@@ -38,20 +39,27 @@ public class readExcel {
 			//시트 수
 			Sheet sheet = workbook.getSheetAt(0);
 			//행의 수
-			for(rowindex=5; rowindex <7 ; rowindex++) {
+			for(rowindex=5; rowindex <35 ; rowindex++) {
 					
 				//행 읽기
 				Row row = sheet.getRow(rowindex);
-					
-				for(int i=3; i<10; i++) {
+				if(String.valueOf(row.getCell((short)0))=="" || String.valueOf(row.getCell((short)0))==null) {
+					break;
+				}
+				for(int i=3; i<34; i++) {
+					if(String.valueOf(row.getCell(i))=="" || String.valueOf(row.getCell(i))==null) {
+						break;
+					}
 					CalendarDto ed = new CalendarDto();
-					
-					ed.setId(Integer.toString(i));
-					ed.setName(String.valueOf(row.getCell(0)));
-					ed.setWdate(date+"-"+(i-2));
+					ed.setId(String.valueOf(row.getCell(0)));
+					ed.setName(String.valueOf(row.getCell(1)));
+					String tmp = "0"+(i-2); 
+					String d = tmp.substring(tmp.length()-2, tmp.length());
+					ed.setWdate(date+"-"+d);
 					ed.setTime(String.valueOf(row.getCell(i)));
 					list.add(ed);
 				}
+				
 			}
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();

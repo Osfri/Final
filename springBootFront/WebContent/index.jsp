@@ -9,7 +9,7 @@
 <body>
 <script type="text/javascript">
 //location.href="login.jsp";
-location.href="upload.jsp";
+location.href="login.jsp";
 </script>
 </body>
 </html>

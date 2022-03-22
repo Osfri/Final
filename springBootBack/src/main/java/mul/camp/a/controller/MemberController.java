@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -30,15 +31,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import mul.camp.a.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.firebase.auth.FirebaseAuthException;
+
 import mul.camp.a.dto.CalendarDto;
 import mul.camp.a.dto.MemberDto;
 import mul.camp.a.service.MemberService;
+import mul.camp.a.controller.FirebaseService;
 import mul.camp.a.util.MediatypeUtils;
 import mul.camp.a.util.readExcel;
 
@@ -49,10 +54,9 @@ public class MemberController {
 
 	@Autowired
 	MemberService service;
-
-
+	
+	
 	//@RequestBody
-
 	@RequestMapping(value ="/login",method= RequestMethod.POST)
 	public MemberDto login(@RequestBody MemberDto dto) {
 		System.out.println("DTO"+dto.toString());
@@ -81,18 +85,35 @@ public class MemberController {
 		return mem;
 	}
 	
+	@RequestMapping(value ="/webLogin",method= RequestMethod.POST)
+	public MemberDto webLogin(MemberDto dto) {
+		MemberDto mem = service.login(dto);
+		System.out.println("MEM"+mem.toString());
+		
+		return mem;
+
+	}
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
-    public String fileUpload(@RequestParam("uploadFile") MultipartFile uploadfile, HttpServletRequest req, String date){
+    public String fileUpload(HttpServletRequest req, @RequestParam("uploadFile") MultipartFile uploadfile, String date, String code){
 		System.out.println("fileUpload()");
 		System.out.println(date.split("-"));
+		System.out.println(code);
 		// server
 		String UPLOADPATH = req.getServletContext().getRealPath("/upload");
 		
-		//TODO: file directory and file saveName setting, db save
-		
         try {
-            String fileName = uploadfile.getOriginalFilename();
-            String filePath = UPLOADPATH + File.separator + fileName;
+        	//해당 코드의 폴더 유무 확인후, 폴더에 저장
+        	String path = UPLOADPATH + File.separator + code;
+        	File Folder = new File(path);
+        	if(!Folder.exists()) {
+        		try {
+        			Folder.mkdir();
+        		}catch(Exception e){
+        			System.out.println(e);
+        		}
+        	}
+    		String fileName = code+"_"+date+".xls";
+            String filePath = path + File.separator + fileName;
             System.out.println("filePath:" + filePath);
             
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
@@ -100,12 +121,15 @@ public class MemberController {
             
             stream.close();
             try {
-				ArrayList<CalendarDto> list = readExcel.readExcelFile(fileName, req, date);
+				List<CalendarDto> list = readExcel.readExcelFile(fileName, req, date, code);
 				System.out.println(list.toString());
+				
+				//CalendarDto test = new CalendarDto("a", "a", "2022-03-02", "n", "");
+				service.calendar(list);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+        	
         } catch (Exception e) {     
         	e.printStackTrace();
             return "file upload fail";
@@ -164,5 +188,16 @@ public class MemberController {
                 .contentLength(file.length()) 
                 .body(resource);
     }
+	
+	@PostMapping("/files")
+	public String uploadFile(@RequestParam("uploadFile") MultipartFile file, String nameFile)
+	    throws IOException, FirebaseAuthException {
+		System.out.println("file====================="+file);
+		System.out.println("name====================="+nameFile);
+	    if (file.isEmpty()) {
+	        return "is empty";
+	    }
+	    return FirebaseService.uploadFiles(file, nameFile);
+	}
 		 
 }
