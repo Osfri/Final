@@ -14,23 +14,25 @@ class CustomAdapterBbsList(val context: Context, val dataList:ArrayList<BbsDto>)
     inner class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
 
-        val bbsRecycleViewId = itemView.findViewById<TextView>(R.id.calRecycleViewId)            // 아이디
-        val bbsRecycleViewTitle = itemView.findViewById<TextView>(R.id.bbsRecycleViewDate)      // 제목
-        val bbsRecycleViewCount = itemView.findViewById<TextView>(R.id.calRecycleViewMemo)      // 조회수
+        val bbsRecycleViewId = itemView.findViewById<TextView>(R.id.bbsRecycleViewId)            // 아이디
+        val bbsRecycleViewTitle = itemView.findViewById<TextView>(R.id.bbsRecycleViewTitle)      // 제목
+        val bbsRecycleViewCount = itemView.findViewById<TextView>(R.id.bbsRecycleViewCount)      // 조회수
+        val bbsRecycleViewdate = itemView.findViewById<TextView>(R.id.bbsRecycleViewdate)      // 날짜
 
         fun bind(dataVo:BbsDto, context: Context){
-            bbsRecycleViewId.text = "2223333"
-            bbsRecycleViewTitle.text = "2332"
-            bbsRecycleViewCount.text = "6767"
-            if(dataVo.del == 0) {
+
+            if (dataVo.del == 0) {
                 bbsRecycleViewId.text = dataVo.id
                 bbsRecycleViewTitle.text = dataVo.title
                 bbsRecycleViewCount.text = dataVo.readCount.toString()
-            } else{
+                bbsRecycleViewdate.text = dataVo.wdate
+
+            } else {
+
                 bbsRecycleViewId.text = ""
                 bbsRecycleViewTitle.text = ""
-                bbsRecycleViewCount.text = "삭제된 게시글입니다"
-
+                bbsRecycleViewCount.text = "삭제됨"
+                bbsRecycleViewdate.text = ""
             }
 
 
@@ -53,18 +55,16 @@ class CustomAdapterBbsList(val context: Context, val dataList:ArrayList<BbsDto>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapterBbsList.ItemViewHolder {
-        TODO("Not yet implemented")
+
         val view = LayoutInflater.from(context).inflate(R.layout.view_item_layout_bbs, parent,false)
         return ItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CustomAdapterBbsList.ItemViewHolder, position: Int) {
         holder.bind(dataList[position],context)
-        TODO("Not yet implemented")
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
         return dataList.size
     }
 

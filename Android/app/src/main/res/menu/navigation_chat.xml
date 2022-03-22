@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="People" android:id="@+id/action_people" android:icon="@drawable/outline_people_24"/>
+    <item android:title="Chat" android:id="@+id/action_chat" android:icon="@drawable/outline_chat_24"/>
+    <item android:title="Account" android:id="@+id/action_account" android:icon="@drawable/outline_account_circle_24"/>
+</menu>

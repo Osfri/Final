@@ -7,15 +7,21 @@
         android:layout_height="match_parent"
         tools:context=".chat.ChatActivity">
 
-    <TextView
-            android:id="@+id/textView3"
-            android:text="1:1채팅"
-            android:layout_width="236dp"
-            android:layout_height="209dp"
-            android:textSize="30dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chatactivity_bottomnavigationview"
+            app:itemTextColor="@color/white" android:background="@color/black" app:itemIconTint="@color/white"
+            app:menu="@menu/navigation_chat"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="284dp"
-            android:layout_marginStart="204dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:id="@+id/chatactivity_framelayout">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
