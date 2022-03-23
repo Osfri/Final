@@ -12,12 +12,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+        <TextView
+                android:id="@+id/point_tv_point"
+                android:text="나의 포인트"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="30dp"
+                android:gravity="right"
+                android:textColor="@color/pointred"
+                android:textSize="20dp"
+                android:layout_marginTop="?attr/actionBarSize"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pointRecyclerView"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.recyclerview.widget.RecyclerView>

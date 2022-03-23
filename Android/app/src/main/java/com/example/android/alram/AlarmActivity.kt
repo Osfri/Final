@@ -31,7 +31,7 @@ import java.util.*
 class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
-    val from = "2022-03-23 10:55:00"
+    val from = "2022-03-23 14:23:00"
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -57,7 +57,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         Log.v("AlarmActivity", mCalender!!.getTime().toString())
 
-        setContentView(R.layout.activity_alarm)
+//        setContentView(R.layout.activity_alarm)
 
         val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         //접수일 알람 버튼
@@ -90,7 +90,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private fun setAlarm(){
         //AlarmReceiver에 값 전달
         val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
 
 

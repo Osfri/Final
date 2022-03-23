@@ -22,14 +22,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:textSize="34sp"
             app:layout_constraintHorizontal_bias="0.718"/>
-    <CalendarView
-            android:id="@+id/offCalendarView"
-            android:layout_width="542dp"
-            android:layout_height="453dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/offTitleTextView"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/offMaterialCalendarView"
+            app:mcv_selectionColor="@color/pointred"
+            app:mcv_showOtherDates="all"
+            android:layout_width="match_parent"
+            android:layout_height="559dp"/>
 
 
     <TextView
