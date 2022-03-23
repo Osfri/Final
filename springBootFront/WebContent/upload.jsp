@@ -8,12 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<input type="month" id="dmonth" name="dnameFile" value="2022-03">
 <button id="download_file_btn">근무표 양식 다운로드</button>
 <br><br><br>
-	<input type="month" id="month" name="nameFile" value="2022-03">
-	<!-- <input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /> -->
+	
+<input type="month" id="month" name="nameFile" value="2022-03">
 <form id="upload_file_frm">
-	<input type="file" id="upload_file" name="uploadFile" accept="*" />
+	<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+	<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
 	<button type="button" id="upload_file_btn">근무표 업로드</button>
 </form>
 </body>
@@ -56,7 +58,7 @@ $(document).ready(function(){
 		/* 해결법
 		1.ajax를 사용하지 말고 window.location.href를 파일의 URL로 설정하고 서버 스크립트에서 http 컨텐츠 처리 헤더를 설정하여 브라우저가 파일을 저장하도록하십시오.
 		*/
-		window.location.href = "http://localhost:3000/download?fileName=" + "근무표작성용.xls";
+		window.location.href = "http://localhost:3000/download?date="+$("#dmonth").val()+"&code="+json.code;
 		
 		/*
 		 $.ajax({

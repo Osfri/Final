@@ -38,18 +38,7 @@ public class MemberService {
 		return dao.idCheck(dto);
 	}
 	
-	public ArrayList<MemberDto> getMember(){
-		
-		return dao.getMember();
-	}
 	
-	public int calendarInsert(List<CalendarDto> list) {
-		return dao.calendarInsert(list);
-	}
-	
-	public int calendarUpdate(List<CalendarDto> list) {
-		return dao.calendarUpdate(list);
-	}
 	
 	
 }

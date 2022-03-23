@@ -21,6 +21,12 @@ public class CalendarDto {
 		this.memo = memo;
 	}
 
+	public CalendarDto(String id, String wdate) {
+		super();
+		this.id = id;
+		this.wdate = wdate;
+	}
+
 	public String getId() {
 		return id;
 	}

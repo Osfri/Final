@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mul.camp.a.dao.FileDao">
+	<select id="getMember" resultType="mul.camp.a.dto.MemberDto" parameterType="java.lang.String">
+		SELECT ID, NAME 
+		FROM MEMBER
+		WHERE CODE = #{code}
+	</select>
+	<insert id="calendarInsert" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO CALENDAR (ID, WDATE, TIME)
+		VALUES			
+			(
+			#{item.id},  TO_DATE(#{item.wdate}), #{item.time}
+			)
+		</foreach>
+	</insert>
+	<update id="calendarUpdate" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
+			UPDATE CALENDAR
+			SET TIME = #{item.time}
+			WHERE ID=#{item.id} AND WDATE=TO_DATE(#{item.wdate})
+		</foreach>
+	</update>
+	<select id="offChk" parameterType="mul.camp.a.dto.CalendarDto" resultType="mul.camp.a.dto.CalendarDto">
+		SELECT *
+		FROM CALENDAR
+		WHERE ID=#{id} AND TO_CHAR(WDATE, 'YYYY-MM-DD') > #{wdate}
+	</select>
+
+</mapper>
