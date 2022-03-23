@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         val btnHoliday = findViewById<Button>(R.id.btnHoliday)                  // off 휴일 신청
         val btnPointMall = findViewById<Button>(R.id.btnPointMall)              // 포인트몰
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
+        val btnAlarm = findViewById<Button>(R.id.btnAlarm)                      // 알람
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
 
 
@@ -87,15 +89,17 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             }
         }
+        // 알람푸쉬
+        btnAlarm.setOnClickListener{
+        val i = Intent(this,AlarmActivity::class.java)
+        startActivity(i)
+            }
 
-        // 임의로 경로바꿔서 쓰는중 (확인해야됨)
+        // 연락처
         btnPhoneNumber.setOnClickListener {
-            val i = Intent(this,PointMallDetailActivity::class.java)
+            val i = Intent(this,PhoneNumActivity::class.java)
             startActivity(i)
         }
-
-
-
 
     }
 }
