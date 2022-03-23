@@ -21,7 +21,6 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/point01"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
@@ -29,15 +28,15 @@
                 android:layout_marginRight="16dp"/>
 
 
-            <TextView
-                    android:id="@+id/point_itemlist_title"
-                    android:text="임시용: 라운드 셔츠"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/point_itemlist_image"
-                    android:layout_toRightOf="@id/point_itemlist_image"
-                    android:layout_alignParentTop="true"
-                    android:textSize="30sp"/>
+        <TextView
+                android:id="@+id/point_itemlist_title"
+                android:text="임시용: 라운드 셔츠"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/point_itemlist_image"
+                android:layout_toRightOf="@id/point_itemlist_image"
+                android:layout_alignParentTop="true"
+                android:textSize="30sp" android:maxLines="1" android:ellipsize="end"/>
 
         <TextView
                 android:id="@+id/point_itemlist_content"
@@ -47,7 +46,7 @@
                 android:text="Creative Business card Free Psd Template Download Free PNG Images, Vectors, Stock Photos, PSD Templates, Icons, Fonts, Graphics, Clipart, Mockups, with Transparent Background. On this site which…"
                 android:layout_toEndOf="@+id/point_itemlist_image"
                 android:layout_toRightOf="@+id/point_itemlist_image"
-                android:layout_below="@+id/point_itemlist_title">
+                android:layout_below="@+id/point_itemlist_title" android:maxLines="3" android:ellipsize="end">
         </TextView>
 
 

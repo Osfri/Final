@@ -11,8 +11,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.Android"
-            android:usesCleartextTraffic="true">
+            android:usesCleartextTraffic="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
                 android:name=".chat.fragment.SelectPeopleActivity"
                 android:exported="true"/>
@@ -57,6 +57,9 @@
                 android:exported="true"/>
         <activity
                 android:name=".signup.SignupActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointMallDetailActivity"
                 android:exported="true"/>
         <activity
                 android:name=".MainActivity"

@@ -3,16 +3,20 @@ package com.example.android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.ChatSingleton
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.pointMall.PointMallDetailActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
@@ -63,14 +67,25 @@ class MainActivity : AppCompatActivity() {
         }
         // 포인트몰
         btnPointMall.setOnClickListener {
-            val i = Intent(this,PointMallActivity::class.java)
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this,PointMallActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
+                startActivity(i)
+            }
         }
         // 채팅
         btnChat.setOnClickListener {
-            val i = Intent(this,ChatActivity::class.java)
-            i.putExtra("loginUserId", "test1") // 로그인 유저 아이디 전달 필요
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this,ChatActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id) // 로그인 유저 아이디 전달 필요
+                startActivity(i)
+            }
         }
 
         // 임의로 경로바꿔서 쓰는중 (확인해야됨)

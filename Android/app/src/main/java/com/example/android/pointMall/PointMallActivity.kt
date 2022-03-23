@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -19,37 +20,31 @@ import com.example.android.bbs.BbsDto
 import com.example.android.bbs.CustomAdapterBbsList
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.ChatSingleton
+import com.example.android.chat.ChatUserDto
 import com.example.android.offday.OffDayActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 
 class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_point_mall)
 
-/*   리스트에서  구매 희망 누르면 일단 오류나는 중
-
-        val pointDetail =  findViewById<Button>(R.id.pointlist_btn_detail)
-        pointDetail.setOnClickListener{
-            val i = Intent(this, PointMallDetailActivity::class.java)
-            startActivity(i)
-        }
-*/
+        // TODO: 사이드바에서 쇼핑몰 진입시 오류 (로그인 객체 null)
+        // (수정,추가_백엔드) 임시데이터 생성 (객체로 넘어올 경우 삭제)
+        val loginUserId:String = intent.getStringExtra("loginUserId")!!
+        val userInfo:ChatUserDto = ChatSingleton.getInstance().getLoginUserInfo(loginUserId)
+        MemberDao.user = MemberDto(userInfo.id,userInfo.name,userInfo.email, userInfo.pw, userInfo.phonenumber,userInfo.code,userInfo.auth,userInfo.alarm, userInfo.alarmtime,userInfo.point)
 
 
-        // bbs리스트
-        var pointRecyclerView = findViewById<RecyclerView>(R.id.pointRecyclerView)  // bbsRecyclerView 변수
-
-        val mAdapter = CustomAdapterPointMall()
-        pointRecyclerView.adapter = mAdapter
-        val layout = LinearLayoutManager(this)
-        pointRecyclerView.layoutManager = layout
-        pointRecyclerView.setHasFixedSize(true)
-
-
+        // (수정,추가_백엔드) 내용 최신화
+        updateViewContent()
 
 
         // drawerlayout bar 설정
@@ -63,6 +58,39 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_PointMall)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // (수정,추가_백엔드) 현재 페이지에서 point 최신화 필요 => 아래방식으로 사용가능 or 최신화 함수 추가필요
+        val loginUserId:String = intent.getStringExtra("loginUserId")!!
+        val userInfo:ChatUserDto = ChatSingleton.getInstance().getLoginUserInfo(loginUserId)
+        MemberDao.user = MemberDto(userInfo.id,userInfo.name,userInfo.email, userInfo.pw, userInfo.phonenumber,userInfo.code,userInfo.auth,userInfo.alarm, userInfo.alarmtime,userInfo.point)
+
+        // (수정,추가_백엔드) 내용 최신화
+        updateViewContent()
+
+    }
+
+    // (수정,추가_백엔드) 최신화 항목
+    fun updateViewContent(){
+        // (수정,추가_백엔드) 로그인 유저 포인트 표시
+        val userPoint:TextView = findViewById<TextView>(R.id.point_tv_point)
+        userPoint.text = "나의 포인트: ${MemberDao.user!!.point}"
+
+        // (수정,추가_백엔드) 상품목록 생성
+        PointMallSingleton.getInstance().getShopItemAll()
+        val itemList:MutableList<ShopDto> = PointMallSingleton.getInstance().shopItemList
+
+        // (수정,추가_백엔드) 리사이클러뷰 생성
+        var pointRecyclerView = findViewById<RecyclerView>(R.id.pointRecyclerView)  // bbsRecyclerView 변수
+
+        val mAdapter = CustomAdapterPointMall(this, itemList)
+        pointRecyclerView.adapter = mAdapter
+        val layout = LinearLayoutManager(this)
+        pointRecyclerView.layoutManager = layout
+        pointRecyclerView.setHasFixedSize(true)
+
     }
 
     // drawerlayout bar 함수
