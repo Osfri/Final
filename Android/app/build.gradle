@@ -2,8 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 
+
     // 파이어베이스 03 21 추가
     id 'com.google.gms.google-services'
+
 
     /* 02 28 추가 */
     id 'kotlin-kapt'
@@ -43,8 +45,10 @@ android {
         jvmTarget = '1.8'
     }
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+
 dependencies {
     //캘린더뷰 22 03 22
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'

@@ -29,9 +29,7 @@
         <activity
                 android:name=".pointMall.PointMallDetailActivity"
                 android:exported="true"/>
-        <activity
-                android:name=".pointMall.PointmallListActivity"
-                android:exported="true"/>
+
         <activity
                 android:name=".signinAf.SemiWaitingActivity"
                 android:exported="true"/>
@@ -51,7 +49,7 @@
                 android:name=".lunch.FoodWriteActivity"
                 android:exported="true"/>
         <activity
-                android:name=".alram.AlramActivity"
+                android:name=".alram.AlarmActivity"
                 android:exported="true"/>
         <activity
                 android:name=".offday.OffDayActivity"
@@ -75,9 +73,6 @@
                 android:name=".bbs.BbsWrite"
                 android:exported="true"/>
         <activity
-                android:name=".bbs.BottomNaviFragment1"
-                android:exported="true"/>
-        <activity
                 android:name=".bbs.BbsActivity"
                 android:exported="true"/>
         <activity
@@ -98,6 +93,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <receiver android:name=".alram.AlarmReceiver"
+                  android:exported="false"/>
     </application>
 
 </manifest>

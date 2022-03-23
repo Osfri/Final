@@ -10,18 +10,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
-import com.example.android.bbs.CustomAdapterBbsList
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
-import kotlinx.android.synthetic.main.activity_calendar.*
-import java.util.*
 
 class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener{
 
@@ -75,7 +70,7 @@ class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {

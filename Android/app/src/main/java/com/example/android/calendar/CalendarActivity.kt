@@ -6,27 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.chat.ChatActivity
-import com.example.android.lunch.CustomAdapterFood
-import com.example.android.lunch.FoodDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
 import kotlinx.android.synthetic.main.activity_calendar.*
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.util.*
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
@@ -55,8 +47,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-
-        textView2.visibility = View.INVISIBLE
 
 
 
@@ -95,6 +85,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             calDeleteBtn.visibility = View.VISIBLE
             contextEditText.visibility = View.INVISIBLE
             datetitle.visibility = View.VISIBLE
+
         }
 
 
@@ -152,7 +143,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {
