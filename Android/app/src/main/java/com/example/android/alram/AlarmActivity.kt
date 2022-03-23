@@ -30,6 +30,9 @@ import java.util.*
 
 class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
+    //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
+    val from = "2022-03-23 10:55:00"
+
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
@@ -63,7 +66,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
             setAlarm()
             Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
-            ampmTextView.text = "알람이 곧 울립니다"
+            ampmTextView.text = "$from 에 알람이 울립니다"
         }
 
 
@@ -89,8 +92,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, 0)
 
-        //임의로 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
-        val from = "2022-03-23 10:46:00"
+
 
         //날짜 포맷을 바꿔주는 소스코드
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
