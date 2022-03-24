@@ -1,18 +1,20 @@
 package com.example.android.offday
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.toColorInt
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
@@ -20,58 +22,49 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
-import com.prolificinteractive.materialcalendarview.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
-
+    // 임시데이터
+    var tempData:MutableMap<String, OffdayDto>
+            = mutableMapOf(
+        Pair("2022.03.24", OffdayDto("2022.03.24", mutableListOf("박현준", "최성규"))),
+        Pair("2022.03.11", OffdayDto("2022.03.11", mutableListOf("김다균"))),
+                Pair("2022.03.11", OffdayDto("2022.03.28", mutableListOf("추현지")))
+    )
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    private val calendar = Calendar.getInstance()
-
-
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_off_day)
 
-        val offCalendarView = findViewById<CalendarView>(R.id.offCalendarView)      // 달력
-        val offTextView = findViewById<TextView>(R.id.offTextView)                  // 오프 등록시 날짜 누르면 textview에 목록 표시
-        val offSaveBtn = findViewById<Button>(R.id.offSaveBtn)                      // 오프 등록 버튼
-
-        val calendarView = findViewById<MaterialCalendarView>(R.id.offMaterialCalendarView)
-        calendarView.setSelectedDate(CalendarDay.today())
-
-        var startTimeCalendar = Calendar.getInstance()
-        var endTimeCalendar = Calendar.getInstance()
-
-        val currentYear = startTimeCalendar.get(Calendar.YEAR)
-        val currentMonth = startTimeCalendar.get(Calendar.MONTH)
-        val currentDate = startTimeCalendar.get(Calendar.DATE)
-
-        endTimeCalendar.set(Calendar.MONTH, currentMonth+3)
-
-        calendarView.state().edit()
-            .setFirstDayOfWeek(Calendar.SUNDAY)
-            .setMinimumDate(CalendarDay.from(currentYear, currentMonth, 1))
-            .setMaximumDate(CalendarDay.from(currentYear, currentMonth+100, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
-            .setCalendarDisplayMode(CalendarMode.MONTHS)
-            .commit()
-
-        val stCalendarDay = CalendarDay(currentYear, currentMonth, currentDate)
-        val enCalendarDay = CalendarDay(endTimeCalendar.get(Calendar.YEAR), endTimeCalendar.get(Calendar.MONTH), endTimeCalendar.get(Calendar.DATE))
-
-        val sundayDecorator = SundayDecorator()
-        val saturdayDecorator = SaturdayDecorator()
-        val minMaxDecorator = MinMaxDecorator(stCalendarDay, enCalendarDay)
-//        val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
-        val todayDecorator = TodayDecorator(this)
-
-        calendarView.addDecorators(sundayDecorator, saturdayDecorator,  todayDecorator) //, minMaxDecorator boldDecorator,
+        //버튼 변수
+        val offBtn = findViewById<Button>(R.id.offBtn)              // 신청
+        val offBtnCancle = findViewById<Button>(R.id.offBtnCancle)  // 취소
 
 
 
+
+
+
+
+
+
+        // 달력일자 생성
+        val mCalendarList:MutableList<OffdayDto> = setCalendarList(tempData)
+
+        // 그리드 뷰 생성
+        val gridManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
+
+        // 리사이클러뷰 생성
+        val recyclerView = findViewById<RecyclerView>(R.id.offRecyclerView)
+        val calendarRecyclerViewAdapter:CalendarRecyclerViewAdapter = CalendarRecyclerViewAdapter(mCalendarList, this)
+        recyclerView.adapter = calendarRecyclerViewAdapter
+        recyclerView.layoutManager = gridManager
 
 
         // drawerlayout bar 설정
@@ -131,72 +124,164 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
 
 
-    // 커스텀 캘린더
 
 
-    // 오늘 날짜에 도형 표시
-    class TodayDecorator(context:Context):DayViewDecorator {
-        private var date = CalendarDay.today()
-        val drawable = context.resources.getDrawable(R.drawable.button_round)
-        override fun shouldDecorate(day: CalendarDay?): Boolean {
-            return day?.equals(date)!!
-        }
-        override fun decorate(view: DayViewFacade?) {
-            view?.setBackgroundDrawable(drawable)
-        }
-    }
-    // 일요일 빨간색 표시
-    class SundayDecorator:DayViewDecorator {
-        private val calendar = Calendar.getInstance()
-        override fun shouldDecorate(day: CalendarDay?): Boolean {
-            day?.copyTo(calendar)
+    fun setCalendarList(tempData:MutableMap<String, OffdayDto>): MutableList<OffdayDto>{
+        var nowDate:GregorianCalendar = GregorianCalendar()   // 오늘 날짜
+        var calendarList: MutableList<OffdayDto> = mutableListOf()    // 캘린더 목록("date") + 정보("info")
+        val sdf: SimpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
 
-            val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
-            return weekDay == Calendar.SUNDAY
-        }
-        override fun decorate(view: DayViewFacade?) {
-            view?.addSpan(object:ForegroundColorSpan(Color.RED){})
-        }
-    }
+        // TODO: 선택한 일자 전후로 보이게 설정
+        // 리사이클러뷰에 보일 날짜 생성
+        for(i in 0..12){
+            // calendar: 오늘 날짜의 년, 월
+            var calendar:GregorianCalendar = GregorianCalendar(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH)+i,1,0,0,0)
+            var date: OffdayDto = OffdayDto(calendar.timeInMillis)
+            calendarList.add(date)
+            //calendarList.add(sdf.format(calendar.time))
 
-    //토요일 파란색 표시
-    class SaturdayDecorator:DayViewDecorator {
-        private val calendar = Calendar.getInstance()
-        override fun shouldDecorate(day: CalendarDay?): Boolean {
-            day?.copyTo(calendar)
-            val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
-            return weekDay == Calendar.SATURDAY
-        }
-        override fun decorate(view: DayViewFacade?) {
-            view?.addSpan(object:ForegroundColorSpan(Color.BLUE){})
-        }
-    }
+            // dayOfWeek: 1=일, 2=월, 3=화, 4=수, 5=목, 6=금, 7=토
+            var dayOfWeek:Int = calendar.get(Calendar.DAY_OF_WEEK) - 1  // 해당 월에 시작하는 요일 -1 = 빈칸
 
-    class MinMaxDecorator(min:CalendarDay, max:CalendarDay):DayViewDecorator {
-        val maxDay = max
-        val minDay = min
-        override fun shouldDecorate(day: CalendarDay?): Boolean {
-            return (day?.month == maxDay.month && day.day > maxDay.day)
-                    || (day?.month == minDay.month && day.day < minDay.day)
+            var maxOfMonth:Int = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)   // 해당 월의 마지막 요일
+
+            // 해당 월의 빈칸 추가
+            for(j in 0 until dayOfWeek){
+                var date: OffdayDto = OffdayDto("empty")
+                calendarList.add(date)
+            }
+
+            // 해당 월의 일자 추가
+            for(k in 1..maxOfMonth){
+                var day:GregorianCalendar = GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), k)
+                var date: OffdayDto = OffdayDto(day)
+                calendarList.add(date)
+                //calendarList.add(sdf.format(GregorianCalendar(nowDate.get(Calendar.YEAR),nowDate.get(Calendar.MONTH), k).time))
+            }
         }
-        override fun decorate(view: DayViewFacade?) {
-            view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#c3c3c3")){})
-           // view?.setDaysDisabled(true)
+
+        // 일정 내용 추가
+        for((index:Int, dto: OffdayDto) in calendarList.withIndex()){
+            if(dto.date !is Long && dto.date !is String){
+                if(tempData.containsKey(sdf.format((dto.date as GregorianCalendar).time))){
+                    calendarList[index].content = tempData.get(sdf.format((dto.date as GregorianCalendar).time))!!.content
+                }
+            }
         }
+
+        return  calendarList
     }
 
-    // 오늘 기준으로 이전 날짜 보다 글씨 크기가 굵어짐
-/*    class BoldDecorator(min:CalendarDay, max:CalendarDay):DayViewDecorator {
-        val maxDay = max
-        val minDay = min
-        override fun shouldDecorate(day: CalendarDay?): Boolean {
-            return (day?.month == maxDay.month && day.day <= maxDay.day)
-                    || (day?.month == minDay.month && day.day >= minDay.day)
-                    || (minDay.month < day?.month!! && day.month < maxDay.month)
+    class CalendarRecyclerViewAdapter(val mCalendarList:MutableList<OffdayDto>, val context: Context)
+        : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
+        // 날짜타입
+        class HeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+            val headText = itemView.findViewById<TextView>(R.id.calendar_item_headText)
+            val sdf: SimpleDateFormat = SimpleDateFormat("yyyy년 MM월")
+            fun headBind(dto: OffdayDto){
+                headText.text = sdf.format(dto.date as Long)
+            }
         }
-        override fun decorate(view: DayViewFacade?) {
-            view?.addSpan(object:StyleSpan(Typeface.NORMAL){})
-            view?.addSpan(object:RelativeSizeSpan(1.4f){})
+        // 비어있는 날짜타입
+        class EmptyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
         }
-    }*/
+        // 요일타입
+        class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+            val dayText = itemView.findViewById<TextView>(R.id.calendar_item_dayText)
+            val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
+            fun dayBind(dto: OffdayDto, context: Context){
+                dayText.text = sdf.format((dto.date as GregorianCalendar).time)
+                if((dto.date as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
+                    dayText.setTextColor(Color.parseColor("#FF4081"))
+                }else if((dto.date as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 7){
+                    dayText.setTextColor(Color.parseColor("#448AFF"))
+                }else{
+                    dayText.setTextColor(Color.parseColor("#000000"))
+                }
+
+
+
+                if(dto.content.size>0){
+                    setContentItem(dto, context)
+                }else{
+                    var linerLayout = itemView.findViewById<LinearLayout>(R.id.calendar_item_addContent)
+                    linerLayout.removeAllViews()
+                }
+            }
+
+            fun setContentItem(dto: OffdayDto, context:Context){
+                var linerLayout = itemView.findViewById<LinearLayout>(R.id.calendar_item_addContent)
+                val contentCount = dto.content.size
+
+                for(i in 0 until contentCount){
+                    // 텍스트뷰 속성 설정
+                    val contentTextViewParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+
+                    // 텍스트뷰 생성
+                    val contentTextView = TextView(context).apply {
+                        text = dto.content.get(i)
+                        layoutParams = contentTextViewParams
+                        id = i
+                        gravity = Gravity.CENTER
+
+                        setOnClickListener {
+                            val testToast = Toast.makeText(context, "${dto.content.get(i)}님의 off는 ", Toast.LENGTH_SHORT)
+                            testToast.show()
+                        }
+                    }
+                    // 텍스트뷰 추가
+                    linerLayout.addView(contentTextView)
+                }
+
+            }
+        }
+
+
+        // onCreateViewHolder 호출 전 뷰타입 지정
+        override fun getItemViewType(position: Int): Int {
+            if(mCalendarList[position].date is Long){ // 날짜타입
+                return 0
+            }else if(mCalendarList[position].date is String) { // 비어있는 날짜타입
+                return 1
+            }else{  // 요일타입
+                return 2
+            }
+        }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            var view: View
+            if(viewType == 0 ){
+                view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_off_header, parent, false)
+                // 그리드 레이아웃 1줄로 표시
+                val params:StaggeredGridLayoutManager.LayoutParams = (view.rootView.layoutParams as StaggeredGridLayoutManager.LayoutParams)
+                params.isFullSpan = true
+                view.rootView.layoutParams = params
+                return HeaderViewHolder(view)
+            }else if(viewType == 1){
+                view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_off_empty, parent, false)
+                return EmptyViewHolder(view)
+            }else{
+                view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_off_day, parent, false)
+                return DayViewHolder(view)
+            }
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            if(mCalendarList[position].date is Long){ // 날짜타입
+                (holder as HeaderViewHolder).headBind(mCalendarList[position])
+            }else if(mCalendarList[position].date is String) { // 비어있는 날짜타입
+
+            }else{  // 요일타입
+                (holder as DayViewHolder).dayBind(mCalendarList[position], context)
+            }
+        }
+
+        override fun getItemCount(): Int {
+            return mCalendarList.size
+        }
+
+
+
+    }
 }

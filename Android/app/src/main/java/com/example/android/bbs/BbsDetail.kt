@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
@@ -19,8 +22,15 @@ import com.google.android.material.navigation.NavigationView
 
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
+    //임의로 만든 데이터 댓글보이기 위해, 지워야합니다
+    var userList = arrayListOf<CommentDto>(
+        CommentDto(1, 0, 0,0, 0,"2022-03-15","22222",0),
+        CommentDto(1, 0, 0,0, 0,"댓글두번째","22222",0)
+    )
+
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs_detail)
@@ -40,14 +50,50 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
 
-
-
-
         bbsDetailId.text = data?.id
         bbsDetailCount.text = data?.readCount.toString()
         bbsDetailTitle.text = data?.title
         bbsDetailContent.text = data?.content
         bbsDetailDate.text = data?.wdate
+
+
+        val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        //댓글 입력부분
+        val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
+        btnCommentWrite.setOnClickListener {
+            val i = Intent(this, BbsDetail::class.java)
+            startActivity(i)
+        }
+
+
+
+
+
+        // 댓글리스트
+        var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
+
+        val mAdapter = CustomAdapterCommentList(this, userList)
+        bbsDetailCommentRecycleview.adapter = mAdapter
+
+        val layout = LinearLayoutManager(this)
+        bbsDetailCommentRecycleview.layoutManager = layout
+        bbsDetailCommentRecycleview.setHasFixedSize(true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // bbsDetail -> Bbs 로 이동
