@@ -25,6 +25,7 @@ import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
+import org.w3c.dom.Text
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

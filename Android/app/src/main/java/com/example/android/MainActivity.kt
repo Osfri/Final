@@ -13,7 +13,6 @@ import com.example.android.lunch.FoodActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
-import com.example.android.pointMall.PointMallDetailActivity
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
 
 
+
+        // 로딩화면
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivity(intent)
         // 로그인
         btnLogin.setOnClickListener {
             val i = Intent(this, SigninActivity::class.java)

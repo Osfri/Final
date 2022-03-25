@@ -25,30 +25,21 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-
     var fname: String = ""
     var str: String = ""
 
-
-
-
+/*
 
     // 데이터 확인용 변수로 지워도 됩니다
     var userList = arrayListOf<CalendarDto>(
         CalendarDto("againsa", "2022-06-08", "오후","2일 휴무"),
         CalendarDto("bstro", "2022-08-08", "새벽","1일 휴무"),
         CalendarDto("cvbk", "2023-02-08", "오전","1일 휴무"),
-
     )
-
-
-
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
-
-
-
 
         // 달력 날짜가 선택되면
         datetitle.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
@@ -58,8 +49,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         calDeleteBtn.visibility = View.INVISIBLE // 삭제 Button이 Invisible
 
 
+        // 달력 기능
         calCalendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-// 달력 날짜가 선택되면
+
+            // 달력 날짜가 선택되면
             datetitle.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
             calSaveBtn.visibility = View.VISIBLE // 저장 버튼이 Visible
             contextEditText.visibility = View.VISIBLE // EditText가 Visible
@@ -67,18 +60,19 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             calDeleteBtn.visibility = View.INVISIBLE // 삭제 Button이 Invisible
 
             datetitle.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth)
-// 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
+
+            // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
             contextEditText.setText("") // EditText에 공백값 넣기
 
             checkedDay(year, month, dayOfMonth) // checkedDay 메소드 호출
 
 
         }
-
-        calSaveBtn.setOnClickListener { // 저장 Button이 클릭되면
+        // 저장버튼
+        calSaveBtn.setOnClickListener {
             saveDiary(fname) // saveDiary 메소드 호출
             str = contextEditText.getText().toString() // str 변수에 edittext내용을 toString
-//형으로 저장
+            //형으로 저장
             datetitle.text = "${str}" // textView에 str 출력
             calSaveBtn.visibility = View.INVISIBLE
             calUpdateBtn.visibility = View.VISIBLE
@@ -87,12 +81,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             datetitle.visibility = View.VISIBLE
 
         }
-
-
-
-
-
-
 
 
 
@@ -166,11 +154,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         return false
     }
 
-
     // 달력 날짜 체크
     fun checkedDay(cYear: Int, cMonth: Int, cDay: Int) {
         fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
-// 저장할 파일 이름 설정. Ex) 2019-01-20.txt
+    // 저장할 파일 이름 설정. Ex) 2019-01-20.txt
         var fis: FileInputStream? = null // FileStream fis 변수 설정
 
         try {
@@ -256,8 +243,4 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
     }
-
-
-
-
 }
