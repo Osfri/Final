@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+	String dateForm = sf.format(nowTime).toString();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +14,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<input type="month" id="dmonth" name="dnameFile" value="2022-03">
+<input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
 <button id="download_file_btn">근무표 양식 다운로드</button>
 <br><br><br>
 	
-<input type="month" id="month" name="nameFile" value="2022-03">
+<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
 <form id="upload_file_frm">
 	<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
 	<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
