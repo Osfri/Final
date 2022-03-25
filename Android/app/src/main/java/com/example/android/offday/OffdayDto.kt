@@ -1,15 +1,22 @@
 package com.example.android.offday
 
 class OffdayDto {
-    var date:Any =""
+    var id:String = ""
+    var wdate:Any =""
     var content:MutableList<String> = mutableListOf()
+    var time:String = ""
 
 
-    constructor(date:Any):super(){
-        this.date = date
+    constructor(wdate:Any):super(){
+        this.wdate = wdate
     }
-    constructor(date: Any, content:MutableList<String>):super(){
-        this.date = date
+    constructor(wdate: Any, content:MutableList<String>):super(){
+        this.wdate = wdate
         this.content = content
+    }
+    constructor(id: String, wdate: String, time:String):super(){
+        this.id = id
+        this.wdate = wdate
+        this.time = time
     }
 }

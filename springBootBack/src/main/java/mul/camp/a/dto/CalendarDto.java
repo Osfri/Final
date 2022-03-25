@@ -20,6 +20,13 @@ public class CalendarDto {
 		this.time = time;
 		this.memo = memo;
 	}
+	
+	public CalendarDto(String id, String wdate, String time) {
+		super();
+		this.id = id;
+		this.wdate = wdate;
+		this.time = time;
+	}
 
 	public CalendarDto(String id, String wdate) {
 		super();

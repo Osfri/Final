@@ -147,7 +147,7 @@ public class FileUpDownController {
     			sheet.getRow(i).createCell(0).setCellValue(member.get(i-5).getId());
     			sheet.getRow(i).createCell(1).setCellValue(member.get(i-5).getName());
     			
-    			CalendarDto cd = new CalendarDto(member.get(i-5).getId(), date+"-00");
+    			CalendarDto cd = new CalendarDto(member.get(i-5).getId(), date);
     			List<CalendarDto> offlist = service.offChk(cd);
     			int size = offlist.size();
     			

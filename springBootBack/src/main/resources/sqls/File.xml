@@ -28,7 +28,7 @@
 	<select id="offChk" parameterType="mul.camp.a.dto.CalendarDto" resultType="mul.camp.a.dto.CalendarDto">
 		SELECT *
 		FROM CALENDAR
-		WHERE ID=#{id} AND TO_CHAR(WDATE, 'YYYY-MM-DD') > #{wdate}
+		WHERE ID=#{id} AND TO_CHAR(WDATE, 'YYYY-MM') = #{wdate}
 	</select>
 
 </mapper>

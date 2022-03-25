@@ -20,7 +20,7 @@ class RetrofitClient {
                     .create()
 
                 instance = Retrofit.Builder()
-                    .baseUrl("http://192.168.45.229:3000/")// 자기 아이피 주소만 변경하시면 됩니다. 변경사항
+                    .baseUrl("http://172.23.48.1:3000/")// 자기 아이피 주소만 변경하시면 됩니다. 변경사항
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build()

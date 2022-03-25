@@ -5,7 +5,7 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="100dp"
                                                    android:orientation="vertical" android:background="#33FFFFFF"
->
+                                                   android:id="@+id/dayBack">
 
     <TextView
             android:text="일"
