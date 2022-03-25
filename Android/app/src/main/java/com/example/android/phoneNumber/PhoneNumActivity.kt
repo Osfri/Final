@@ -3,6 +3,7 @@ package com.example.android.phoneNumber
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -14,6 +15,8 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.ChatSingleton
+import com.example.android.chat.ChatUserDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
@@ -28,11 +31,22 @@ class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone_num)
 
+        // TODO: 사이드바에서 쇼핑몰 진입시 오류 (로그인 객체 null)
+        // (수정,추가_백엔드) 로그인한 유저의 친구목록생성 (chatSingleton 사용)
+        // 로그인한 회원정보 생성
+        ChatSingleton.getInstance().createLoginUserInfo(intent.getStringExtra("loginUserId")!!)
+        // 친구 목록 생성
+        val peopleMap:MutableMap<String, ChatUserDto> = ChatSingleton.getInstance().getChatPeopleList()
+        var peopleList:MutableList<ChatUserDto> = mutableListOf()
+        for (dto:ChatUserDto in peopleMap.values){
+            peopleList.add(dto)
+        }
+
         // 연락처 리스트
         var phoneRecyclerView = findViewById<RecyclerView>(R.id.phoneRecyclerView)  // bbsRecyclerView 변수
 
 
-        val mAdapter = CustomAdapterPhone()
+        val mAdapter = CustomAdapterPhone(this, peopleList)
         phoneRecyclerView.adapter = mAdapter
 
         val layout = LinearLayoutManager(this)
