@@ -31,7 +31,7 @@ import java.util.*
 class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
-    val from = "2022-03-23 14:23:00"
+    val from = "2022-03-25 10:09:00"
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -48,7 +48,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_alarm)
 
 
-
+        // 알람 매니저 기능
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -57,10 +57,9 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         Log.v("AlarmActivity", mCalender!!.getTime().toString())
 
-//        setContentView(R.layout.activity_alarm)
 
-        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         //접수일 알람 버튼
+        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         val onOffButton = findViewById<View>(R.id.onOffButton) as Button
         onOffButton.setOnClickListener{
 
@@ -70,6 +69,12 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
 
 
+        //취소 버튼
+        val onOffButtonCancle = findViewById<Button>(R.id.onOffButtonCancle)
+        onOffButtonCancle.setOnClickListener {
+            ampmTextView.text = "알람이 취소되었습니다"
+            Toast.makeText(this,"아직 취소 기능 구현은 안됨, 토스트만 뿌리는 중",Toast.LENGTH_SHORT).show()
+        }
 
 
         // drawerlayout bar 설정

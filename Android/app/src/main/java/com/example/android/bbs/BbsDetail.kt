@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.activity_bbs_detail.*
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
 
-    lateinit var binding : ActivityBbsDetailBinding;
 
     //임의로 만든 데이터 댓글보이기 위해, 지워야합니다
     var userList = arrayListOf<CommentDto>(
@@ -45,37 +44,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_bbs_detail)
-
-        binding = ActivityBbsDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setCurrentFragment(NaviCommentFragment())
-
-
-        // 하단의 버튼 navi를 클릭했을시
-        detail_bottomnavigationview.setOnItemSelectedListener {
-            var fr: Fragment?= null
-            when(it.itemId){
-                R.id.bottomNaviDetailWrite-> {
-                    fr = NaviCommentFragment()
-                }
-                R.id.bottomNaviDetailDelete -> {
-                    fr = NaviDeleteFragment()
-                }
-                R.id.bottomNaviDetailUpdate -> {
-                    fr = NaviUpdateFragment()
-                }
-            }
-            setCurrentFragment(fr!!)
-            true
-        }
-
-
-
-
-
-
+        setContentView(R.layout.activity_bbs_detail)
 
 
         val data = intent.getParcelableExtra<BbsDto>("data")
@@ -85,7 +54,8 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val dto = BbsDao.getInstance().bbsDetail(data!!.seq)
         println(data?.id ) // aaa 넘어갈것
 */
-        // 디테일 속 정보 표시
+
+        // 디테일 글 정보 표시
         val bbsDetailId = findViewById<TextView>(R.id.bbsDetailId)
         val bbsDetailCount = findViewById<TextView>(R.id.bbsDetailCount)
         val bbsDetailTitle = findViewById<TextView>(R.id.bbsDetailTitle)
@@ -99,12 +69,19 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         bbsDetailDate.text = data?.wdate
 
 
-        val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        //댓글 입력부분
+
+        // 디테일 하단부 버튼들  (댓글쓰기, 글수정, 글삭제)
+        val btnDetailDel = findViewById<TextView>(R.id.btnDetailDel)                    // 글 삭제
+        val btnDetailUpdate = findViewById<TextView>(R.id.btnDetailUpdate)              // 글 수정
+        val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        // 댓글 입력
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
+
         btnCommentWrite.setOnClickListener {
             val i = Intent(this, BbsDetail::class.java)
             startActivity(i)
         }
+
+
 
 
         // 댓글리스트
@@ -185,11 +162,5 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
 
-
-    // 하단네비게이션
-    fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
-        replace(R.id.detail_framelayout, fragment)
-        commit()
-    }
 
 }

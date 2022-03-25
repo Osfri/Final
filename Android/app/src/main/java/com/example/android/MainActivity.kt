@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
         // 식단표
         btnLunch.setOnClickListener {
-            val i = Intent(this,FoodActivity::class.java)
+            val i = Intent(this, FoodActivity::class.java)
             startActivity(i)
         }
         // off 휴일 신청

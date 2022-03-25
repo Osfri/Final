@@ -5,6 +5,12 @@
     <!-- Retrofit -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--카메라 등록 매니페스트 3줄 -->
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+
+
 
     <application
             android:allowBackup="true"
@@ -14,9 +20,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
-        <activity
-                android:name=".bbs.bottomfragment.NaviUpdateFragment"
-                android:exported="true"/>
+
         <activity
                 android:name=".bbs.BbsUpdateActivity"
                 android:exported="true"/>

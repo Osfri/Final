@@ -15,7 +15,7 @@ class CustomAdapterFood(val context: Context, val dataList:ArrayList<FoodDto>):R
         val foodRecycleViewMenu = itemView.findViewById<TextView>(R.id.foodRecycleViewMenu)        // 메뉴
         val foodRecycleViewDate = itemView.findViewById<TextView>(R.id.foodRecycleViewDate)        // 날짜
 
-        fun bind(dataVo:FoodDto, context: Context){
+        fun bind(dataVo: FoodDto, context: Context){
 
             foodRecycleViewMenu.text = dataVo.menu
             foodRecycleViewDate.text = dataVo.fdate
@@ -24,13 +24,13 @@ class CustomAdapterFood(val context: Context, val dataList:ArrayList<FoodDto>):R
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapterFood.ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
         val view = LayoutInflater.from(context).inflate(R.layout.view_item_layout_food, parent,false)
         return ItemViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CustomAdapterFood.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(dataList[position],context)
 
     }
