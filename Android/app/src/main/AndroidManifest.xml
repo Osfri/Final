@@ -15,6 +15,12 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
         <activity
+                android:name=".bbs.bottomfragment.NaviUpdateFragment"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.BbsUpdateActivity"
+                android:exported="true"/>
+        <activity
                 android:name=".bbs.SelectActivity"
                 android:exported="true"/>
         <activity

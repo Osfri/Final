@@ -133,7 +133,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         // TODO: 선택한 일자 전후로 보이게 설정
         // 리사이클러뷰에 보일 날짜 생성
-        for(i in 0..12){
+        for(i in -5..12){
             // calendar: 오늘 날짜의 년, 월
             var calendar:GregorianCalendar = GregorianCalendar(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH)+i,1,0,0,0)
             var date: OffdayDto = OffdayDto(calendar.timeInMillis)

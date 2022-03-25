@@ -11,11 +11,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/chatactivity_bottomnavigationview"
-            app:itemTextColor="@color/white" android:background="@color/black" app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            android:background="@color/black"
+            app:itemIconTint="@color/white"
             app:menu="@menu/navigation_chat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"

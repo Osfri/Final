@@ -58,6 +58,30 @@
             android:layout_marginRight="20dp"
             app:layout_constraintStart_toEndOf="@+id/textView7"/>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            tools:context=".LinearActivity">
+        <Button
+                android:id="@+id/bbsWriteFile"
+                android:text="파일"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <Button
+                android:id="@+id/bbsWriteImage"
+                android:text="이미지"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
 
     <EditText android:id="@+id/bbsWriteContent"
               android:layout_width="match_parent"
@@ -84,6 +108,7 @@
             layout="@layout/ham_appbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_Bbs_Write"

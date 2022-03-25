@@ -10,17 +10,29 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
+import com.example.android.bbs.bottomfragment.NaviCommentFragment
+import com.example.android.bbs.bottomfragment.NaviDeleteFragment
+import com.example.android.bbs.bottomfragment.NaviUpdateFragment
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.fragment.AccountFragment
+import com.example.android.chat.fragment.ChatFragment
+import com.example.android.chat.fragment.PeopleFragment
+import com.example.android.databinding.ActivityBbsDetailBinding
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_bbs_detail.*
 
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+
+
+    lateinit var binding : ActivityBbsDetailBinding;
 
     //임의로 만든 데이터 댓글보이기 위해, 지워야합니다
     var userList = arrayListOf<CommentDto>(
@@ -33,7 +45,37 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bbs_detail)
+//        setContentView(R.layout.activity_bbs_detail)
+
+        binding = ActivityBbsDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setCurrentFragment(NaviCommentFragment())
+
+
+        // 하단의 버튼 navi를 클릭했을시
+        detail_bottomnavigationview.setOnItemSelectedListener {
+            var fr: Fragment?= null
+            when(it.itemId){
+                R.id.bottomNaviDetailWrite-> {
+                    fr = NaviCommentFragment()
+                }
+                R.id.bottomNaviDetailDelete -> {
+                    fr = NaviDeleteFragment()
+                }
+                R.id.bottomNaviDetailUpdate -> {
+                    fr = NaviUpdateFragment()
+                }
+            }
+            setCurrentFragment(fr!!)
+            true
+        }
+
+
+
+
+
+
 
 
         val data = intent.getParcelableExtra<BbsDto>("data")
@@ -65,9 +107,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
 
 
-
-
-
         // 댓글리스트
         var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
 
@@ -77,23 +116,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val layout = LinearLayoutManager(this)
         bbsDetailCommentRecycleview.layoutManager = layout
         bbsDetailCommentRecycleview.setHasFixedSize(true)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // bbsDetail -> Bbs 로 이동
@@ -117,6 +139,9 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Bbs_Detail)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+
+
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
@@ -157,4 +182,14 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
         return false
     }
+
+
+
+
+    // 하단네비게이션
+    fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
+        replace(R.id.detail_framelayout, fragment)
+        commit()
+    }
+
 }

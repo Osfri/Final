@@ -44,13 +44,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // 22 03 24 뷰바인딩
+    buildFeatures{
+        viewBinding true
+    }
+
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 dependencies {
-
     //캘린더뷰 22 03 22
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     //카드뷰 2022 03 21
