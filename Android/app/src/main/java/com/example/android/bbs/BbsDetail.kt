@@ -50,34 +50,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         binding = ActivityBbsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setCurrentFragment(NaviCommentFragment())
-
-
-        // 하단의 버튼 navi를 클릭했을시
-        detail_bottomnavigationview.setOnItemSelectedListener {
-            var fr: Fragment?= null
-            when(it.itemId){
-                R.id.bottomNaviDetailWrite-> {
-                    fr = NaviCommentFragment()
-                }
-                R.id.bottomNaviDetailDelete -> {
-                    fr = NaviDeleteFragment()
-                }
-                R.id.bottomNaviDetailUpdate -> {
-                    fr = NaviUpdateFragment()
-                }
-            }
-            setCurrentFragment(fr!!)
-            true
-        }
-
-
-
-
-
-
-
-
         val data = intent.getParcelableExtra<BbsDto>("data")
         println("DDDDDDDDDDDDDDDDDDDDDD--------------------------------------${data!!.seq}")
 
@@ -186,10 +158,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
 
-    // 하단네비게이션
-    fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply{
-        replace(R.id.detail_framelayout, fragment)
-        commit()
-    }
+
 
 }
