@@ -1,49 +1,73 @@
-package com.example.android.pointMall
+package com.example.android.alram
 
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.navigation.NavigationView
 import com.example.android.R
-import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.pointMall.PointMallActivity
+import com.google.android.material.navigation.NavigationView
+import org.w3c.dom.Text
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
-class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+
+class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+
+    //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
+    val from = "2022-03-23 10:55:00"
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+
+    private var alarmManager: AlarmManager? = null
+    private var mCalender: GregorianCalendar? = null
+
+    private var notificationManager: NotificationManager? = null
+    var builder: NotificationCompat.Builder? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_point_mall)
+        setContentView(R.layout.activity_alarm)
 
-/*   리스트에서  구매 희망 누르면 일단 오류나는 중
 
-        val pointDetail =  findViewById<Button>(R.id.pointlist_btn_detail)
-        pointDetail.setOnClickListener{
-            val i = Intent(this, PointMallDetailActivity::class.java)
-            startActivity(i)
+
+        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        mCalender = GregorianCalendar()
+
+        Log.v("AlarmActivity", mCalender!!.getTime().toString())
+
+        setContentView(R.layout.activity_alarm)
+
+        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
+        //접수일 알람 버튼
+        val onOffButton = findViewById<View>(R.id.onOffButton) as Button
+        onOffButton.setOnClickListener{
+
+            setAlarm()
+            Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
+            ampmTextView.text = "$from 에 알람이 울립니다"
         }
-*/
-
-
-        // bbs리스트
-        var pointRecyclerView = findViewById<RecyclerView>(R.id.pointRecyclerView)  // bbsRecyclerView 변수
-
-        val mAdapter = CustomAdapterPointMall()
-        pointRecyclerView.adapter = mAdapter
-        val layout = LinearLayoutManager(this)
-        pointRecyclerView.layoutManager = layout
-        pointRecyclerView.setHasFixedSize(true)
 
 
 
@@ -56,13 +80,38 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
+
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_PointMall)
+        navigationView = findViewById(R.id.nav_Alarm)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
     }
 
-    // drawerlayout bar 함수
-    // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
+    private fun setAlarm(){
+        //AlarmReceiver에 값 전달
+        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, 0)
+
+
+
+        //날짜 포맷을 바꿔주는 소스코드
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        var datetime: Date? = null
+        try {
+            datetime = dateFormat.parse(from)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+        val calendar = Calendar.getInstance()
+        calendar.time = datetime
+
+        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
+    }
+
+
+
+    // drawerlayout 네비바
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
@@ -74,8 +123,7 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         return super.onOptionsItemSelected(item)
     }
-    // drawerlayout bar
-    // 드로어 내 아이템 클릭 이벤트 처리하는 함수
+    // drawerlayout 네비바
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_bbs-> {

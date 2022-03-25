@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
@@ -70,7 +70,7 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {

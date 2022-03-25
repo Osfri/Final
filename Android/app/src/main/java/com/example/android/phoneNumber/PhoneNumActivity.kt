@@ -7,8 +7,10 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
@@ -21,13 +23,21 @@ class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone_num)
 
+        // 연락처 리스트
+        var phoneRecyclerView = findViewById<RecyclerView>(R.id.phoneRecyclerView)  // bbsRecyclerView 변수
 
 
+        val mAdapter = CustomAdapterPhone()
+        phoneRecyclerView.adapter = mAdapter
 
+        val layout = LinearLayoutManager(this)
+        phoneRecyclerView.layoutManager = layout
+        phoneRecyclerView.setHasFixedSize(true)
 
 
         // drawerlayout bar 설정
@@ -60,7 +70,7 @@ class PhoneNumActivity : AppCompatActivity(),NavigationView.OnNavigationItemSele
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {

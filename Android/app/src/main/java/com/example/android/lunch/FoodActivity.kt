@@ -11,9 +11,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
-import com.example.android.bbs.BbsWrite
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
@@ -92,7 +91,7 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {

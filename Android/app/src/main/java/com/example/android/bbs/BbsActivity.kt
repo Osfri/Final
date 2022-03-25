@@ -11,7 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
-import com.example.android.alram.AlramActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
@@ -62,11 +62,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val layout = LinearLayoutManager(this)
         bbslistRecyclerView.layoutManager = layout
         bbslistRecyclerView.setHasFixedSize(true)
-        
 
 
 
-        
+
+
         // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)
         val btn_bbsListWrite = findViewById<Button>(R.id.btn_bbsListWrite)
         btn_bbsListWrite.setOnClickListener {
@@ -80,6 +80,8 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
+
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
 
@@ -106,7 +108,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 startActivity(i)
             }
             R.id.menu_alram-> {
-                val i = Intent(this, AlramActivity::class.java)
+                val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_cal->  {
