@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -56,9 +57,11 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 */
 
         // 디테일 글 정보 표시
+
         val bbsDetailId = findViewById<TextView>(R.id.bbsDetailId)
         val bbsDetailCount = findViewById<TextView>(R.id.bbsDetailCount)
         val bbsDetailTitle = findViewById<TextView>(R.id.bbsDetailTitle)
+        val bbsDetailImage = findViewById<ImageView>(R.id.bbsWriteImageView)
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
 
