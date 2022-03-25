@@ -54,6 +54,8 @@
                         android:text="제품 제목"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
                         android:textSize="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -63,6 +65,8 @@
                         android:text="명d제품제품 설제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품품 설명d제품 설명d 설명d제품제품 설제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품제품 설제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명dd제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d제품 설명d"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
                         android:scrollbars="vertical"
                         android:textSize="19dp"
                         android:paddingStart="12dp"
@@ -72,6 +76,17 @@
             </LinearLayout>
         </ScrollView>
 
+        <TextView
+                android:id="@+id/pointDetail_tv_Point"
+                android:text="나의 보유 포인트: "
+                android:textColor="@color/pointred"
+                android:gravity="right"
+                android:textSize="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         <LinearLayout
                 android:layout_width="match_parent"

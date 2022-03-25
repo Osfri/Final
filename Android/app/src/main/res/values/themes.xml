@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
 
     <!--이부분만 변경하면 에러가 난다-->
-    <style name="Theme.Android" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Android" parent="Theme.MaterialComponents.DayNight.DarkActionBar"> 기존 썼던것 정상적
+    <!--   <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar"> 로딩창만들기위해 추가함 -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,5 +15,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/loding</item>
     </style>
+
 </resources>
