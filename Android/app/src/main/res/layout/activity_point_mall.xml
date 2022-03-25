@@ -24,7 +24,6 @@
                 android:layout_marginTop="?attr/actionBarSize"/>
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pointRecyclerView"
             android:layout_height="match_parent"

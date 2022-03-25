@@ -6,7 +6,7 @@ import retrofit2.http.GET
 interface BbsService {
 
     @GET("/getBbsList")
-    fun getBbsList(): Call<List<BbsDto>>
+    fun getBbsList(code:String): Call<List<BbsDto>>
 
     @GET("/bbswrite")
     fun bbswrite(dto:BbsDto) : Call<String>
@@ -26,11 +26,11 @@ class BbsDao {
     }
 }
 
-fun getBbsList():ArrayList<BbsDto>{
+fun getBbsList(code:String):ArrayList<BbsDto>{
     val retrofit = RetrofitClient.getInstance()
 
     val service = retrofit?.create(BbsService::class.java)
-    val call = service?.getBbsList()
+    val call = service?.getBbsList(code)
     val response = call?.execute()
 
     return response?.body() as ArrayList<BbsDto>

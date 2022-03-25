@@ -62,8 +62,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-android:id="@+id/datetitle"/>
+                <TextView
+                        android:text="등록시 일정뜨는 부분"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/datetitle"/>
                 <EditText
                     android:id="@+id/contextEditText"
                     android:layout_width="match_parent"

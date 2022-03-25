@@ -44,6 +44,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // 22 03 24 뷰바인딩
+    buildFeatures{
+        viewBinding true
+    }
+
 }
 
 apply plugin: 'com.android.application'

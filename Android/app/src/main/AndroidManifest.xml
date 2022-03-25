@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.example.android">
     <!-- Retrofit -->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -18,8 +19,20 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:usesCleartextTraffic="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:usesCleartextTraffic="true">
+        <activity
+                android:name=".bbs.bottomfragment.NaviUpdateFragment"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.BbsUpdateActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".bbs.SelectActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".SplashActivity"
+                android:exported="true"/>
         <activity
                 android:name=".chat.fragment.SelectPeopleActivity"
                 android:exported="true"/>
@@ -28,6 +41,33 @@
                 android:exported="true"/>
         <activity
                 android:name=".chat.GroupMessageActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointMallHistoryActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".pointMall.PointMallDetailActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiWaitingActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiIndividualActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiManagementActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".signinAf.SemiScreenActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".phoneNumber.PhoneNumActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".lunch.FoodWriteActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".alram.AlarmActivity"
                 android:exported="true"/>
         <activity
                 android:name=".offday.OffDayActivity"
@@ -81,14 +121,14 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".alram.AlarmReceiver"
-                  android:enabled="true"
-                  android:exported="false">
+        <receiver
+                android:name=".alram.AlarmReceiver"
+                android:enabled="true"
+                android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
