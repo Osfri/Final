@@ -10,6 +10,8 @@ interface OffDayService{
     fun offApply(@Body offlist: MutableList<OffdayDto>): Call<String>
     @POST("/offList")
     fun offList(@Body date: String): Call<List<OffdayDto>>
+    @POST("/offCancel")
+    fun offCancel(@Body dto: OffdayDto): Call<String>
 }
 
 class OffDayDao {
@@ -46,6 +48,19 @@ class OffDayDao {
             val call = service?.offList(date)
             val response = call?.execute()
             return response?.body() as List<OffdayDto>
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
+    fun offCancel(dto: OffdayDto): String?{
+        try{
+            val retrofit = RetrofitClient.getInstance()
+
+            val service = retrofit?.create(OffDayService::class.java)
+            val call = service?.offCancel(dto)
+            val response = call?.execute()
+            return response?.body() as String
         } catch (e: Exception) {
             return null
         }

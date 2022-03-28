@@ -26,4 +26,8 @@ public class CalendarService {
     public List<CalendarDto> offList(String date){
     	return dao.offList(date);
     }
+    
+    public int offCancel(CalendarDto dto){
+    	return dao.offCancel(dto);
+    }
 }

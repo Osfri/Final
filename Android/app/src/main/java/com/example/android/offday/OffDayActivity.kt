@@ -1,19 +1,21 @@
 package com.example.android.offday
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.style.ForegroundColorSpan
 import android.view.*
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.toColorInt
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -26,23 +28,19 @@ import com.example.android.chat.ChatActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.example.android.signin.MemberDto
-import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 
 open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
     // 임시데이터
-    var tempData:MutableMap<String, OffdayDto>
-            = mutableMapOf(
-        Pair("2022.04.24", OffdayDto("2022.04.24", mutableListOf("박현준", "최성규"))),
-        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("김다균"))),
-        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("추현지")))
-    )
+//    var tempData:MutableMap<String, OffdayDto>
+//            = mutableMapOf(
+//        Pair("2022.04.24", OffdayDto("2022.04.24", mutableListOf("박현준", "최성규"))),
+//        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("김다균"))),
+//        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("추현지")))
+//    )
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -52,7 +50,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_off_day)
 
-        println(tempData.toString())
+        var curData: MutableMap<String, MutableList<OffdayDto>>? = null
 
         val cal = Calendar.getInstance()
         cal.time = Date()
@@ -61,30 +59,50 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         var offData: List<OffdayDto>? = OffDayDao.getInstance().offList(df.format(cal.time).toString())
 
         for(i in offData!!){
-            println(i.id +"       "+i.wdate)
+            var d = i.wdate.toString().substring(0 until 10).replace("-", ".")
+            if(curData == null){
+                var dto = OffdayDto(i.id, d, i.time, i.name)
+                curData = mutableMapOf(Pair(d, mutableListOf(dto)))
+            }else{
+                var dto = OffdayDto(i.id, d, i.time, i.name)
+                if(curData.containsKey(d)){
+                    curData.get(d)!!.add(dto) //as MutableList<String>
+                }else{
+                    curData[d] = mutableListOf(dto)
+                }
+            }
         }
-
         OffDayDao.useroff = null
 
         //버튼 변수
         val offBtn = findViewById<Button>(R.id.offBtn)              // 신청
-        val offBtnCancle = findViewById<Button>(R.id.offBtnCancle)  // 취소
+        //val offBtnCancle = findViewById<Button>(R.id.offBtnCancle)  // 취소
 
         offBtn.setOnClickListener {
             if(OffDayDao.useroff != null){
-                AlertDialog.Builder(this).setTitle("OFF 신청")
-                    .setMessage("선택하신 날짜로 OFF를 신청하시겠습니까?")
-                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
-                        val result = OffDayDao.getInstance().offApply(OffDayDao.useroff!!)
-                        if(result=="success"){
-                            Toast.makeText(this, "신청되었습니다.", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this, "신청되지 않았습니다.", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-                    .setNegativeButton("아니요", null)
-                    .show()
+                if(OffDayDao.useroff!!.size > 0){
+                    AlertDialog.Builder(this).setTitle("OFF 신청")
+                        .setMessage("선택하신 날짜로 OFF를 신청하시겠습니까?")
+                        .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                            val result = OffDayDao.getInstance().offApply(OffDayDao.useroff!!)
+                            if(result=="success"){
+                                Toast.makeText(this, "신청되었습니다.", Toast.LENGTH_SHORT).show()
+                                //화면 새로고침
+                                finish() //인텐트 종료
+                                overridePendingTransition(0, 0) //인텐트 효과 없애기
+                                val intent = intent //인텐트
+                                startActivity(intent) //액티비티 열기
+                                overridePendingTransition(0, 0) //인텐트 효과 없애기
 
+                            }else{
+                                Toast.makeText(this, "신청되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                        .setNegativeButton("아니요", null)
+                        .show()
+                }else{
+                    Toast.makeText(this, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                }
             }else{
                 Toast.makeText(this, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -92,7 +110,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
 
         // 달력일자 생성
-        val mCalendarList:MutableList<OffdayDto> = setCalendarList(tempData)
+        val mCalendarList:MutableList<OffdayDto> = setCalendarList(curData!!)
 
         // 그리드 뷰 생성
         val gridManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
@@ -158,7 +176,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         return false
     }
 
-    fun setCalendarList(tempData:MutableMap<String, OffdayDto>): MutableList<OffdayDto>{
+    fun setCalendarList(tempData:MutableMap<String, MutableList<OffdayDto>>): MutableList<OffdayDto>{
         var nowDate:GregorianCalendar = GregorianCalendar()   // 오늘 날짜
         var calendarList: MutableList<OffdayDto> = mutableListOf()    // 캘린더 목록("date") + 정보("info")
         val sdf: SimpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
@@ -196,7 +214,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         for((index:Int, dto: OffdayDto) in calendarList.withIndex()){
             if(dto.wdate !is Long && dto.wdate !is String){
                 if(tempData.containsKey(sdf.format((dto.wdate as GregorianCalendar).time))){
-                    calendarList[index].content = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!.content
+                    calendarList[index].content = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!
                 }
             }
         }
@@ -243,35 +261,42 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     val mem: MemberDto? = MemberDao.user
                     if(mem != null){
                         val selectedDate:String = sdfAll.format((dto.wdate as GregorianCalendar).time).toString()
-                        //Toast.makeText(context, mem.id + selectedDate, Toast.LENGTH_SHORT).show()
 
                         if(dto.content.size>1){
                             Toast.makeText(context, "2명 이상 신청은 불가능 합니다.", Toast.LENGTH_SHORT).show()
                         }else{
-                            val dto = OffdayDto(mem.id!!, selectedDate, "o")
-                            if(OffDayDao.useroff == null){
-                                OffDayDao.useroff = mutableListOf(dto)
-                                dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
-                            }else{
-
-                                var findId = -1
-                                for (i in (0 until OffDayDao.useroff!!.size)){
-                                   if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
-                                       findId = i
-                                       break
-                                   }
+                            var chk = true
+                            for(i in dto.content){
+                                if(i.id == mem.id){
+                                    Toast.makeText(context, "이미 신청 되었습니다.", Toast.LENGTH_SHORT).show()
+                                    chk = false
+                                    break;
                                 }
-
-                                if(findId != -1){
-                                    println("here================")
-                                    dayBack.setBackgroundColor(Color.parseColor("#33FFFFFF"))
-                                    OffDayDao.useroff!!.removeAt(findId)
+                            }
+                            if(chk){
+                                val dto = OffdayDto(mem.id!!, selectedDate, "o")
+                                if(OffDayDao.useroff == null){
+                                    OffDayDao.useroff = mutableListOf(dto)
+                                    dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
                                 }else{
-                                    if(OffDayDao.useroff!!.size > 4){
-                                        Toast.makeText(context, "5일 이상은 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
+
+                                    var findId = -1
+                                    for (i in (0 until OffDayDao.useroff!!.size)){
+                                        if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
+                                            findId = i
+                                            break
+                                        }
+                                    }
+                                    if(findId != -1){
+                                        dayBack.setBackgroundColor(Color.parseColor("#33FFFFFF"))
+                                        OffDayDao.useroff!!.removeAt(findId)
                                     }else{
-                                        OffDayDao.useroff!!.add(dto)
-                                        dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
+                                        if(OffDayDao.useroff!!.size > 4){
+                                            Toast.makeText(context, "5일 이상은 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                                        }else{
+                                            OffDayDao.useroff!!.add(dto)
+                                            dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
+                                        }
                                     }
                                 }
                             }
@@ -289,26 +314,44 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 for(i in 0 until contentCount){
                     // 텍스트뷰 속성 설정
                     val contentTextViewParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-
+                    val mem = MemberDao.user
                     // 텍스트뷰 생성
                     val contentTextView = TextView(context).apply {
-                        text = dto.content.get(i)
+                        text = dto.content.get(i).name
                         layoutParams = contentTextViewParams
                         id = i
                         gravity = Gravity.CENTER
 
                         setOnClickListener {
-                            val testToast = Toast.makeText(context, "${dto.content.get(i)}님의 off는 ", Toast.LENGTH_SHORT)
-                            testToast.show()
+                            if(dto.content.get(i).id == mem!!.id){
+                                AlertDialog.Builder(context).setTitle("OFF 신청")
+                                    .setMessage("${dto.content.get(i).name}님, 선택하신 날짜 OFF를 취소하시겠습니까?")
+                                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                                        val dto = OffdayDto(dto.content.get(i).id, dto.content.get(i).wdate.toString(), dto.content.get(i).time)
+                                        val result = OffDayDao.getInstance().offCancel(dto)
+                                        if(result=="success"){
+                                            Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                            //화면 새로고침
+                                            val intent = (context as Activity).intent
+                                            context.finish() //현재 액티비티 종료 실시
+                                            context.overridePendingTransition(0, 0) //효과 없애기
+                                            context.startActivity(intent) //현재 액티비티 재실행 실시
+                                            context.overridePendingTransition(0, 0) //효과 없애기
+
+                                        }else{
+                                            Toast.makeText(context, "삭제되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
+                                    .setNegativeButton("아니요", null)
+                                    .show()
+                            }
                         }
                     }
                     // 텍스트뷰 추가
                     linerLayout.addView(contentTextView)
                 }
-
             }
         }
-
 
         // onCreateViewHolder 호출 전 뷰타입 지정
         override fun getItemViewType(position: Int): Int {

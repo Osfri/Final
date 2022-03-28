@@ -37,4 +37,15 @@ public class CalendarController {
 		System.out.println(result.toString());
 		return result;
 	}
+
+	@RequestMapping(value ="/offCancel",method= RequestMethod.POST)
+	public String offCancel(@RequestBody CalendarDto dto) {
+		System.out.println("offCancel"+dto.toString());
+		int i = service.offCancel(dto);
+		if(i>0) {
+			return "success"; 
+		}else {
+			return "fail";
+		}
+	}
 }

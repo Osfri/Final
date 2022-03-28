@@ -13,4 +13,5 @@ import mul.camp.a.dto.CalendarDto;
 public interface CalendarDao {
 	public int offApply(List<CalendarDto> dto);
 	public List<CalendarDto> offList(String date);
+	public int offCancel(CalendarDto dto);
 }
