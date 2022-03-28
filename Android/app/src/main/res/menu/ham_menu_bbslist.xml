@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/notice">
+        <item
+                android:id="@+id/menu_bbs_important"
+                android:icon="@drawable/ic_bbs"
+                android:orderInCategory="0"
+                android:title="공지사항"/>
+    </group>
+    <!--코드로 메뉴 만들어야 되는곳 이 부분-->
+
+    <item android:title="다른 메뉴"
+          android:orderInCategory="1000"
+          android:id="@+id/menuid">
+        <menu>
+            <item
+                    android:id="@+id/menu_alram"
+                    android:icon="@drawable/ic_alarm"
+                    android:title="알람"/>
+            <item
+                    android:id="@+id/menu_cal"
+                    android:icon="@drawable/ic_cal"
+                    android:title="일정표"/>
+            <item
+                    android:id="@+id/menu_point"
+                    android:icon="@drawable/ic_shop"
+                    android:title="포인트몰"/>
+            <item
+                    android:id="@+id/menu_chat"
+                    android:icon="@drawable/ic_chat"
+                    android:title="채팅"/>
+            <item
+                    android:id="@+id/menu_offday"
+                    android:icon="@drawable/ic_off"
+                    android:title="오프 신청"/>
+            <item
+                    android:id="@+id/menu_phonenumber"
+                    android:icon="@drawable/ic_phone"
+                    android:title="연락처"/>
+            <item
+                    android:id="@+id/menu_manager"
+                    android:title="관리자"/>
+        </menu>
+    </item>
+</menu>

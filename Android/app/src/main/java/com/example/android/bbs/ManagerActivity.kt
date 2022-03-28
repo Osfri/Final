@@ -1,80 +1,60 @@
-package com.example.android.alram
+package com.example.android.bbs
 
-import android.app.AlarmManager
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.R
-import com.example.android.bbs.BbsActivity
+import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
-import org.w3c.dom.Text
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
-class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
-
-    //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
-    val from = "2022-03-26 18:08:00"
+class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
 
-    private var alarmManager: AlarmManager? = null
-    private var mCalender: GregorianCalendar? = null
-
-    private var notificationManager: NotificationManager? = null
-    var builder: NotificationCompat.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_alarm)
+        setContentView(R.layout.activity_manager)
 
 
-        // 알람 매니저 기능
-        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        mCalender = GregorianCalendar()
-
-        Log.v("AlarmActivity", mCalender!!.getTime().toString())
-
-
-        //접수일 알람 버튼
-        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
-        val onOffButton = findViewById<View>(R.id.onOffButton) as Button
-        onOffButton.setOnClickListener{
-
-            setAlarm()
-            Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
-            ampmTextView.text = "$from 에 알람이 울립니다"
+        // 게시판 추가manage_btn_bbs
+       val managebtnBbs = findViewById<Button>(R.id.manage_btn_bbs)
+        val edit = findViewById<EditText>(R.id.manage_et_bbs)
+        managebtnBbs.setOnClickListener {
+            val i = Intent(this, BbsActivity::class.java)
+            startActivity(i)
         }
 
 
-        //취소 버튼
-        val onOffButtonCancle = findViewById<Button>(R.id.onOffButtonCancle)
-        onOffButtonCancle.setOnClickListener {
-            ampmTextView.text = "알람이 취소되었습니다"
-            Toast.makeText(this,"아직 취소 기능 구현은 안됨, 토스트만 뿌리는 중",Toast.LENGTH_SHORT).show()
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // drawerlayout bar 설정
@@ -83,40 +63,18 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_Alarm)
+        navigationView = findViewById(R.id.nav_Manager)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
     }
 
-    private fun setAlarm(){
-        //AlarmReceiver에 값 전달
-        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
 
-
-        //날짜 포맷을 바꿔주는 소스코드
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        var datetime: Date? = null
-        try {
-            datetime = dateFormat.parse(from)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.time = datetime
-
-        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
-    }
-
-
-
-    // drawerlayout 네비바
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
@@ -128,10 +86,9 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
         return super.onOptionsItemSelected(item)
     }
-    // drawerlayout 네비바
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_bbs-> {
+            R.id.menu_bbs_important-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
                 startActivity(i)
             }
@@ -153,6 +110,10 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
             R.id.menu_offday->  {
                 val i = Intent(this, OffDayActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerActivity::class.java)
                 startActivity(i)
             }
         }

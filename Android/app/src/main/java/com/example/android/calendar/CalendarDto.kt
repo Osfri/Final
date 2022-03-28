@@ -4,35 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.example.android.lunch.FoodDto
 
-class CalendarDto(val id:String?, val wdate:String?, val time:String?, val memo:String?) :Parcelable  {
+class CalendarDto {
+    var date:Any =""
+    var content:MutableList<String> = mutableListOf()
 
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
-    ) {
+
+    constructor(date:Any):super(){
+        this.date = date
     }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(wdate)
-        parcel.writeString(time)
-        parcel.writeString(memo)
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<CalendarDto> {
-        override fun createFromParcel(parcel: Parcel): CalendarDto {
-            return CalendarDto(parcel)
-        }
-
-        override fun newArray(size: Int): Array<CalendarDto?> {
-            return arrayOfNulls(size)
-        }
+    constructor(date: Any, content:MutableList<String>):super(){
+        this.date = date
+        this.content = content
     }
 }
