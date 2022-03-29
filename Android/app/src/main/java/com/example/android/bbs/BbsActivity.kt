@@ -1,15 +1,19 @@
 package com.example.android.bbs
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.view.SubMenu
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +33,22 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var drawerLayout: DrawerLayout
 
     // 정보확인용 지워야 됩니다
+    var userList = arrayListOf<BbsDto>(
+        BbsDto(1, "abcdffff", "제목부분입니다","내용입니다 내용", 15,"2022-03-15",0,0,"57781",0),
+        BbsDto(2, "abcdffff", "제목부분입니다","내용입니다 내용", 16,"2022-04-15",0,0,"1222222",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
+        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0)
 
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,13 +56,13 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setContentView(R.layout.activity_bbs)
 
 
-        var code = MemberDao.user?.code!!
+        /*var code = MemberDao.user?.code!!
         if (code.contains("_")){
             val split:List<String> = code.split("_")
             code = split[0]
         }
         val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
-
+*/
 
         // bbs리스트
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
