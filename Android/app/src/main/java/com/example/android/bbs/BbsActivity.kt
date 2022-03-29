@@ -20,6 +20,7 @@ import com.example.android.chat.ChatActivity
 import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 
 class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,23 +29,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var drawerLayout: DrawerLayout
 
     // 정보확인용 지워야 됩니다
-    var userList = arrayListOf<BbsDto>(
-        BbsDto(1, "abcdffff", "제목부분입니다","내용입니다 내용", 15,"2022-03-15",0,0,"57781"),
-        BbsDto(2, "abcdffff", "제목부분입니다","내용입니다 내용", 16,"2022-04-15",0,0,"1222222"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323"),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323")
 
-
-    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +37,17 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setContentView(R.layout.activity_bbs)
 
 
+        var code = MemberDao.user?.code!!
+        if (code.contains("_")){
+            val split:List<String> = code.split("_")
+            code = split[0]
+        }
+        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
+
 
         // bbs리스트
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
 
-        //val bbslist = BbsDao.getInstance().getBbsList()
-        //println(bbslist[0].title)
 
         val mAdapter = CustomAdapterBbsList(this, userList)
         bbslistRecyclerView.adapter = mAdapter

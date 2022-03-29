@@ -15,12 +15,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 import org.w3c.dom.Text
 import java.text.ParseException
@@ -47,25 +50,66 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
+        val id = MemberDao.user?.id!!
+        val parttime:List<AlarmDto> = MemberDao.getInstance().alarmList(id)!!
 
         // 알람 매니저 기능
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        var alarmlistRecyclerView = findViewById<RecyclerView>(R.id.AlarmRecyclerView)
+
+        val mAdapter = CustomAdapterAlarm(this,parttime)
+        alarmlistRecyclerView.adapter = mAdapter
+
+        val layout = LinearLayoutManager(this)
+        alarmlistRecyclerView.layoutManager = layout
+        alarmlistRecyclerView.setHasFixedSize(true)
+
+        for (i in parttime.indices){
+            val a:Int = i
+            println("===="+a)
+            val from:String = parttime[i].starttime!!
+            notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         mCalender = GregorianCalendar()
 
+        //AlarmReceiver에 값 전달
+        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, a , receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+
+
+        //날짜 포맷을 바꿔주는 소스코드
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        var datetime: Date? = null
+        try {
+            datetime = dateFormat.parse(from)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+
+        val calendar = Calendar.getInstance()
+        calendar.time = datetime
+
+        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
+
+        }
+
+
         Log.v("AlarmActivity", mCalender!!.getTime().toString())
 
 
+
+        //val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         //접수일 알람 버튼
         val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         val onOffButton = findViewById<View>(R.id.onOffButton) as Button
         onOffButton.setOnClickListener{
 
-            setAlarm()
+            //setAlarm()
             Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
-            ampmTextView.text = "$from 에 알람이 울립니다"
+            //ampmTextView.text = "$from 에 알람이 울립니다"
         }
 
 
@@ -92,27 +136,6 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     }
 
-    private fun setAlarm(){
-        //AlarmReceiver에 값 전달
-        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-
-
-        //날짜 포맷을 바꿔주는 소스코드
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        var datetime: Date? = null
-        try {
-            datetime = dateFormat.parse(from)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.time = datetime
-
-        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
-    }
 
 
 

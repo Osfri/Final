@@ -166,4 +166,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
 
+
+
 }
