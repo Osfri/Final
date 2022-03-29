@@ -66,7 +66,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             }else{
                 var dto = OffdayDto(i.id, d, i.time, i.name)
                 if(curData.containsKey(d)){
-                    curData.get(d)!!.add(dto) //as MutableList<String>
+                    curData.get(d)!!.add(dto)
                 }else{
                     curData[d] = mutableListOf(dto)
                 }
@@ -279,7 +279,6 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                                     OffDayDao.useroff = mutableListOf(dto)
                                     dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
                                 }else{
-
                                     var findId = -1
                                     for (i in (0 until OffDayDao.useroff!!.size)){
                                         if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
@@ -319,8 +318,12 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     val contentTextView = TextView(context).apply {
                         text = dto.content.get(i).name
                         layoutParams = contentTextViewParams
+                        textSize=16.0f
                         id = i
                         gravity = Gravity.CENTER
+                        if(mem!!.id == dto.content.get(i).id){
+                            setTextColor(Color.parseColor("#FF4081"))
+                        }
 
                         setOnClickListener {
                             if(dto.content.get(i).id == mem!!.id){

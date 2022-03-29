@@ -119,7 +119,4 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

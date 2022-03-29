@@ -3,9 +3,12 @@ package mul.camp.a.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import mul.camp.a.dto.CalendarDto;
@@ -47,5 +50,13 @@ public class CalendarController {
 		}else {
 			return "fail";
 		}
+	}
+	
+	@RequestMapping(value ="/dutyList",method= RequestMethod.POST)
+	public List<CalendarDto> dutyList(@RequestBody String id) {
+		System.out.println("dutyList"+id.replace("\"", ""));
+		List<CalendarDto> result = service.dutyList(id.replace("\"", ""));
+		System.out.println(result.toString());
+		return result;
 	}
 }
