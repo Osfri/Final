@@ -9,8 +9,7 @@ class FoodDto(val code:String?, val fdate:String?, val menu:String?) :Parcelable
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    ) {}
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(code)

@@ -103,6 +103,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         navigationView = findViewById(R.id.nav_Bbs)
         navigationView.setNavigationItemSelectedListener(this) //naviga
 
+/*
         // 네비 메뉴 추가
         navigationView.menu.add(R.id.notice,0,0,"건의사항")
         navigationView.menu.get(1).setIcon(R.drawable.alarm_back_ring)
@@ -116,6 +117,8 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
             navigationView.menu.get(3).setIcon(R.drawable.alarm_back_ring)
         }
 
+*/
+
 
         /*
         새로고침 해야되는지 체크해야됨
@@ -127,7 +130,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
     }
-/*
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         Log.d("로그","${menu!![0].title}")
         return super.onPrepareOptionsMenu(menu)
@@ -143,9 +146,9 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         val mi:MenuItem = menu!!.add(0,100,2,"sub")
         mi.setIcon(R.drawable.ic_bbs)
-        menu!!.get(2).title = "이룬"
+        menu!!.get(2).title = "게시판외"
         return super.onCreateOptionsMenu(menu)
-    }*/
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
