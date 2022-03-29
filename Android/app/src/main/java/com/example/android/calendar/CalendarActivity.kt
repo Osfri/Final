@@ -6,13 +6,12 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -51,7 +50,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val mem = MemberDao.user
         val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(mem!!.id.toString())
         if (dutyList != null) {
-            for(i in dutyList){
+            for(i in dutyList!!){
                 val dto = CalendarDto(i.wdate.toString(), i.time, i.id)
                 if(curData == null){
                     curData = mutableMapOf(Pair(i.wdate.toString(), dto))
@@ -60,7 +59,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 }
             }
         }
-        println("curData======"+curData!!.get("2022.03.01").toString())
 
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
@@ -143,7 +141,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // TODO: 선택한 일자 전후로 보이게 설정
 
         // 리사이클러뷰에 보일 날짜 생성
-        for(i in 0..5){
+        for(i in -6..6){
             // calendar: 오늘 날짜의 년, 월
             var calendar: GregorianCalendar = GregorianCalendar(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH)+i,1,0,0,0)
             var date: CalendarDto = CalendarDto(calendar.timeInMillis)
@@ -174,7 +172,8 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         for((index:Int, dto: CalendarDto) in calendarList.withIndex()){
             if(dto.wdate !is Long && dto.wdate !is String){
                 if(tempData.containsKey(sdf.format((dto.wdate as GregorianCalendar).time))){
-                    calendarList[index].time = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!.time
+                    calendarList[index].content = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!
+                    println(dto.wdate)
                 }
             }
         }
@@ -199,9 +198,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
         // 요일타입
         class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            val dayText = itemView.findViewById<TextView>(R.id.cal_item_ImageView)
+            val dayText = itemView.findViewById<TextView>(R.id.cal_item_dayText)
             val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
             fun dayBind(dto: CalendarDto, context: Context){
+
                 dayText.text = sdf.format((dto.wdate as GregorianCalendar).time)
                 if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
                     dayText.setTextColor(Color.parseColor("#FF4081"))
@@ -213,37 +213,34 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 if(dto.content != null){
                     setContentItem(dto, context)
                 }else{
-                    var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
-                    linerLayout.removeAllViews()
+                    var img = itemView.findViewById<ImageView>(R.id.cal_item_imageView)
+                    img.setImageResource(R.drawable.ic_cal_zz)
                 }
             }
 
             fun setContentItem(dto: CalendarDto, context: Context){
-                var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
-                //val contentCount = dto.content.size
+                var img = itemView.findViewById<ImageView>(R.id.cal_item_imageView)
+                val saveBtn = itemView.findViewById<Button>(R.id.calSaveBtn)
+                val carEt = itemView.findViewById<EditText>(R.id.cal_et)
+                if(dto.content!!.time == "d" || dto.content!!.time == "D"){
+                    img.setImageResource(R.drawable.ic_cal_d)
+                }else if(dto.content!!.time == "e" || dto.content!!.time == "E"){
+                    img.setImageResource(R.drawable.ic_cal_e)
+                }else if(dto.content!!.time == "n" || dto.content!!.time == "N"){
+                    img.setImageResource(R.drawable.ic_cal_n)
+                }else if(dto.content!!.time == "m" || dto.content!!.time == "M"){
+                    img.setImageResource(R.drawable.ic_cal_m)
+                }else if(dto.content!!.time == "o" || dto.content!!.time == "O"){
+                    img.setImageResource(R.drawable.ic_cal_o)
+                }
+                img.setOnClickListener{
+                    Toast.makeText(context, "${dto.content!!.time} ${dto.content!!.wdate}", Toast.LENGTH_SHORT).show()
+                    //saveBtn.visibility = View.VISIBLE
+                    //carEt.visibility = View.VISIBLE
 
-                //for(i in 0 until contentCount){
-                    // 텍스트뷰 속성 설정
-                    val contentTextViewParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-
-                    // 텍스트뷰 생성
-                    val contentTextView = TextView(context).apply {
-                        text = dto.time
-                        layoutParams = contentTextViewParams
-                        id = 0
-                        gravity = Gravity.CENTER
-
-                        setOnClickListener {
-                            val testToast = Toast.makeText(context, "${dto.time}님의 off는 ", Toast.LENGTH_SHORT)
-                            testToast.show()
-                        }
-                    }
-                    // 텍스트뷰 추가
-                    linerLayout.addView(contentTextView)
-                //}
+                }
             }
         }
-
 
         // onCreateViewHolder 호출 전 뷰타입 지정
         override fun getItemViewType(position: Int): Int {
