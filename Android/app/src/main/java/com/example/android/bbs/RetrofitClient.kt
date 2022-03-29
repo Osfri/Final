@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class RetrofitClient {
+
     companion object {
         private var instance: Retrofit? = null
 
@@ -20,7 +21,7 @@ class RetrofitClient {
                     .create()
 
                 instance = Retrofit.Builder()
-                    .baseUrl("http://172.30.1.36:3000/")// 자기 아이피 주소만 변경하시면 됩니다. 변경사항
+                    .baseUrl("http://221.167.119.1:3000/")// 자기 아이피 주소만 변경하시면 됩니다. 변경사항
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build()

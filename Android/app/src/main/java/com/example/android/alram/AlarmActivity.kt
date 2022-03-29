@@ -103,7 +103,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         //val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         //접수일 알람 버튼
-        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
+//        val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
         val onOffButton = findViewById<View>(R.id.onOffButton) as Button
         onOffButton.setOnClickListener{
 
@@ -116,7 +116,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         //취소 버튼
         val onOffButtonCancle = findViewById<Button>(R.id.onOffButtonCancle)
         onOffButtonCancle.setOnClickListener {
-            ampmTextView.text = "알람이 취소되었습니다"
+//            ampmTextView.text = "알람이 취소되었습니다"
             Toast.makeText(this,"아직 취소 기능 구현은 안됨, 토스트만 뿌리는 중",Toast.LENGTH_SHORT).show()
         }
 
