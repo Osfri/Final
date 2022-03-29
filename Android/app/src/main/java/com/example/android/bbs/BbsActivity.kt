@@ -1,12 +1,19 @@
 package com.example.android.bbs
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.view.SubMenu
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +32,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var drawerLayout: DrawerLayout
 
     // 정보확인용 지워야 됩니다
-
 
 
 
@@ -57,6 +63,8 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
 
+
+
         // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)
         val btn_bbsListWrite = findViewById<Button>(R.id.btn_bbsListWrite)
         btn_bbsListWrite.setOnClickListener {
@@ -71,15 +79,58 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Bbs)
-        navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+        navigationView.setNavigationItemSelectedListener(this) //naviga
+
+        // 네비 메뉴 추가
+        navigationView.menu.add(R.id.notice,0,0,"건의사항")
+        navigationView.menu.get(1).setIcon(R.drawable.alarm_back_ring)
+        navigationView.menu.add(R.id.notice,0,0,"게시판1")
+        navigationView.menu.get(2).setIcon(R.drawable.alarm_back_ring)
+
+        val sel = findViewById<Button>(R.id.btn_bbsListSelect)
+        sel.setOnClickListener {
+            val se = findViewById<EditText>(R.id.se)
+            navigationView.menu.add(R.id.notice,0,0,se.text.toString())
+            navigationView.menu.get(3).setIcon(R.drawable.alarm_back_ring)
+        }
+
+
+        /*
+        새로고침 해야되는지 체크해야됨
+        navigationView.menu.add(R.id.notice,999,2,"공지리리")
+        navigationView.menu[navigationView.menu.size-1].setIcon(R.drawable.button_round_original)
+        Log.d("로그","${navigationView.menu.size()}")
+        */
+
+
 
     }
+/*
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Log.d("로그","${menu!![0].title}")
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    // 오른쪽 메뉴 ... 생성
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.ham_menu_bbslist,menu)
+        //val menuitem =  menu!!.findItem(R.id.menu_bbs_important)
+        Log.d("로그","@@@${menu!!.get(0).title}")
+
+
+        val mi:MenuItem = menu!!.add(0,100,2,"sub")
+        mi.setIcon(R.drawable.ic_bbs)
+        menu!!.get(2).title = "이룬"
+        return super.onCreateOptionsMenu(menu)
+    }*/
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
@@ -89,17 +140,30 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_bbs-> {
+
+
+            R.id.menu_bbs_important-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
+                Log.d("로그","공지")
                 startActivity(i)
+
             }
             R.id.menu_alram-> {
+
+/*
+                navigationView.menu.add(R.id.notice,0,0,"게시판221")
+                navigationView.menu.get(3).setIcon(R.drawable.alarm_back_ring)
+                navigationView.invalidateOutline()
+                navigationView.invalidate()*/
+
                 val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
+
             }
             R.id.menu_cal->  {
                 val i = Intent(this, CalendarActivity::class.java)
@@ -117,6 +181,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val i = Intent(this, OffDayActivity::class.java)
                 startActivity(i)
             }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerActivity::class.java)
+                startActivity(i)
+            }
+
         }
         return false
     }

@@ -45,10 +45,8 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_bbs_detail)
+        setContentView(R.layout.activity_bbs_detail)
 
-        binding = ActivityBbsDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         val data = intent.getParcelableExtra<BbsDto>("data")
         println("DDDDDDDDDDDDDDDDDDDDDD--------------------------------------${data!!.seq}")
@@ -57,10 +55,13 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val dto = BbsDao.getInstance().bbsDetail(data!!.seq)
         println(data?.id ) // aaa 넘어갈것
 */
-        // 디테일 속 정보 표시
+
+        // 디테일 글 정보 표시
+
         val bbsDetailId = findViewById<TextView>(R.id.bbsDetailId)
         val bbsDetailCount = findViewById<TextView>(R.id.bbsDetailCount)
         val bbsDetailTitle = findViewById<TextView>(R.id.bbsDetailTitle)
+        val bbsDetailImage = findViewById<ImageView>(R.id.bbsWriteImageView)
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
 
@@ -71,12 +72,19 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         bbsDetailDate.text = data?.wdate
 
 
-        val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        //댓글 입력부분
+
+        // 디테일 하단부 버튼들  (댓글쓰기, 글수정, 글삭제)
+        val btnDetailDel = findViewById<TextView>(R.id.btnDetailDel)                    // 글 삭제
+        val btnDetailUpdate = findViewById<TextView>(R.id.btnDetailUpdate)              // 글 수정
+        val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        // 댓글 입력
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
+
         btnCommentWrite.setOnClickListener {
             val i = Intent(this, BbsDetail::class.java)
             startActivity(i)
         }
+
+
 
 
         // 댓글리스트
@@ -154,8 +162,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
         return false
     }
-
-
 
 
 

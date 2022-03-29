@@ -129,6 +129,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val i = Intent(this, OffDayActivity::class.java)
                 startActivity(i)
             }
+
         }
         return false
     }
@@ -201,7 +202,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
         // 요일타입
         class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            val dayText = itemView.findViewById<TextView>(R.id.cal_item_dayText)
+            val dayText = itemView.findViewById<TextView>(R.id.cal_item_ImageView)
             val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
             fun dayBind(dto: CalendarDto, context: Context){
                 dayText.text = sdf.format((dto.date as GregorianCalendar).time)
