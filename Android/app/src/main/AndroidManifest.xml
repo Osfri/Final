@@ -17,9 +17,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
-        <activity
-                android:name=".manager.ManagementActivity"
-                android:exported="true"/>
+
         <activity
                 android:name=".manager.ManagerActivity"
                 android:exported="true"/>
