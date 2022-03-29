@@ -74,7 +74,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-            <!--<Button
+            <Button
                     android:id="@+id/offBtnCancle"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
@@ -84,7 +84,7 @@
                     android:layout_gravity="bottom"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />-->
+                    app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
 

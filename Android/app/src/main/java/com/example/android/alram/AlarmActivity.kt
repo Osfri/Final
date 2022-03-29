@@ -82,7 +82,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         var datetime: Date? = null
         try {
-            datetime = dateFormat.parse(from)
+            //datetime = dateFormat.parse(from)
         } catch (e: ParseException) {
             e.printStackTrace()
         }
