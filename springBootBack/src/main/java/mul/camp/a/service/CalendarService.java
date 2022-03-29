@@ -30,4 +30,8 @@ public class CalendarService {
     public int offCancel(CalendarDto dto){
     	return dao.offCancel(dto);
     }
+    
+    public List<CalendarDto> dutyList(String id){
+    	return dao.dutyList(id);
+    }
 }

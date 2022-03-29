@@ -23,6 +23,7 @@ import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.offday.OffdayDto
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_calendar.*
 import java.io.FileInputStream
@@ -46,24 +47,23 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-
-
+        var curData:MutableMap<String, String>? = null
+        val mem = MemberDao.user
+        val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(mem!!.id.toString())
+        if (dutyList != null) {
+            for(i in dutyList){
+                if(curData == null){
+                    curData = mutableMapOf(Pair(i.wdate.toString(), i.time))
+                }else{
+                    curData[i.wdate.toString()] = i.time
+                }
+            }
+        }
+        println(curData.toString())
 
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
         val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
-
-
-
-
-
-
-
-
-
-
-
-
 
         // 달력일자 생성
         val mCalendarList:MutableList<CalendarDto> = setCalendarList(tempData)
@@ -134,10 +134,6 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         return false
     }
 
-
-
-
-
     fun setCalendarList(tempData:MutableMap<String, CalendarDto>): MutableList<CalendarDto>{
         var nowDate: GregorianCalendar = GregorianCalendar()   // 오늘 날짜
         var calendarList: MutableList<CalendarDto> = mutableListOf()    // 캘린더 목록("date") + 정보("info")
@@ -146,7 +142,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // TODO: 선택한 일자 전후로 보이게 설정
 
         // 리사이클러뷰에 보일 날짜 생성
-        for(i in 0..1){
+        for(i in -5..5){
             // calendar: 오늘 날짜의 년, 월
             var calendar: GregorianCalendar = GregorianCalendar(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH)+i,1,0,0,0)
             var date: CalendarDto = CalendarDto(calendar.timeInMillis)
@@ -175,9 +171,9 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         // 일정 내용 추가
         for((index:Int, dto: CalendarDto) in calendarList.withIndex()){
-            if(dto.date !is Long && dto.date !is String){
-                if(tempData.containsKey(sdf.format((dto.date as GregorianCalendar).time))){
-                    calendarList[index].content = tempData.get(sdf.format((dto.date as GregorianCalendar).time))!!.content
+            if(dto.wdate !is Long && dto.wdate !is String){
+                if(tempData.containsKey(sdf.format((dto.wdate as GregorianCalendar).time))){
+                    calendarList[index].content = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!.content
                 }
             }
         }
@@ -193,7 +189,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             val headText = itemView.findViewById<TextView>(R.id.cal_item_headText)
             val sdf: SimpleDateFormat = SimpleDateFormat("yyyy년 MM월")
             fun headBind(dto: CalendarDto){
-                headText.text = sdf.format(dto.date as Long)
+                headText.text = sdf.format(dto.wdate as Long)
             }
         }
         // 비어있는 날짜타입
@@ -205,17 +201,14 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             val dayText = itemView.findViewById<TextView>(R.id.cal_item_ImageView)
             val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
             fun dayBind(dto: CalendarDto, context: Context){
-                dayText.text = sdf.format((dto.date as GregorianCalendar).time)
-                if((dto.date as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
+                dayText.text = sdf.format((dto.wdate as GregorianCalendar).time)
+                if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
                     dayText.setTextColor(Color.parseColor("#FF4081"))
-                }else if((dto.date as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 7){
+                }else if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 7){
                     dayText.setTextColor(Color.parseColor("#448AFF"))
                 }else{
                     dayText.setTextColor(Color.parseColor("#000000"))
                 }
-
-
-
                 if(dto.content.size>0){
                     setContentItem(dto, context)
                 }else{
@@ -247,16 +240,15 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     // 텍스트뷰 추가
                     linerLayout.addView(contentTextView)
                 }
-
             }
         }
 
 
         // onCreateViewHolder 호출 전 뷰타입 지정
         override fun getItemViewType(position: Int): Int {
-            if(mCalendarList[position].date is Long){ // 날짜타입
+            if(mCalendarList[position].wdate is Long){ // 날짜타입
                 return 0
-            }else if(mCalendarList[position].date is String) { // 비어있는 날짜타입
+            }else if(mCalendarList[position].wdate is String) { // 비어있는 날짜타입
                 return 1
             }else{  // 요일타입
                 return 2
@@ -281,9 +273,9 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            if(mCalendarList[position].date is Long){ // 날짜타입
+            if(mCalendarList[position].wdate is Long){ // 날짜타입
                 (holder as HeaderViewHolder).headBind(mCalendarList[position])
-            }else if(mCalendarList[position].date is String) { // 비어있는 날짜타입
+            }else if(mCalendarList[position].wdate is String) { // 비어있는 날짜타입
 
             }else{  // 요일타입
                 (holder as DayViewHolder).dayBind(mCalendarList[position], context)
@@ -293,8 +285,5 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         override fun getItemCount(): Int {
             return mCalendarList.size
         }
-
-
-
     }
 }

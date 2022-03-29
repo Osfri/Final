@@ -22,4 +22,9 @@
 		DELETE FROM CALENDAR
 		WHERE ID=#{id} AND WDATE=TO_DATE(#{wdate})
 	</delete>
+	<select id="dutyList" resultType="mul.camp.a.dto.CalendarDto">
+		SELECT TO_CHAR(WDATE, 'YYYY.MM.dd') AS WDATE, TIME
+		FROM CALENDAR
+		WHERE ID=#{id}
+	</select>
 </mapper>
