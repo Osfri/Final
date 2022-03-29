@@ -1,92 +1,63 @@
-package com.example.android.bbs
+package com.example.android.manager
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.SubMenu
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
-import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
+import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
-import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
-import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 
-class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    // 정보확인용 지워야 됩니다
-    var userList = arrayListOf<BbsDto>(
-        BbsDto(1, "abcdffff", "제목부분입니다","내용입니다 내용", 15,"2022-03-15",0,0,"57781",0),
-        BbsDto(2, "abcdffff", "제목부분입니다","내용입니다 내용", 16,"2022-04-15",0,0,"1222222",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0)
-
-    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bbs)
+        setContentView(R.layout.activity_manager)
 
 
-        /*var code = MemberDao.user?.code!!
-        if (code.contains("_")){
-            val split:List<String> = code.split("_")
-            code = split[0]
-        }
-        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
-*/
-
-        // bbs리스트
-        var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
-
-
-        val mAdapter = CustomAdapterBbsList(this, userList)
-        bbslistRecyclerView.adapter = mAdapter
-
-        val layout = LinearLayoutManager(this)
-        bbslistRecyclerView.layoutManager = layout
-        bbslistRecyclerView.setHasFixedSize(true)
-
-
-
-
-
-
-
-        // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)
-        val btn_bbsListWrite = findViewById<Button>(R.id.btn_bbsListWrite)
-        btn_bbsListWrite.setOnClickListener {
-            val i = Intent(this, BbsWrite::class.java)
+        // 게시판 추가manage_btn_bbs
+       val managebtnBbs = findViewById<Button>(R.id.manage_btn_bbs)
+        val edit = findViewById<EditText>(R.id.manage_et_bbs)
+        managebtnBbs.setOnClickListener {
+            val i = Intent(this, BbsActivity::class.java)
             startActivity(i)
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
@@ -99,22 +70,22 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         drawerLayout = findViewById(R.id.drawer_layout)
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
-        navigationView = findViewById(R.id.nav_Bbs)
-        navigationView.setNavigationItemSelectedListener(this) //naviga
+        navigationView = findViewById(R.id.nav_Manager)
+        navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
-/*
+
+
         // 네비 메뉴 추가
         navigationView.menu.add(R.id.notice,0,0,"건의사항")
         navigationView.menu.get(1).setIcon(R.drawable.alarm_back_ring)
 
-
-        val sel = findViewById<Button>(R.id.btn_bbsListSelect)
-        sel.setOnClickListener {
-            val se = findViewById<EditText>(R.id.se)
-            navigationView.menu.add(R.id.notice,0,0,se.text.toString())
+        // 게시판 생성 입력창과 버튼
+        val manage_btn_bbs = findViewById<Button>(R.id.manage_btn_bbs)
+        manage_btn_bbs.setOnClickListener {
+            val manage_et_bbs = findViewById<EditText>(R.id.manage_et_bbs)
+            navigationView.menu.add(R.id.notice,0,0,manage_et_bbs.text.toString())
             navigationView.menu.get(2).setIcon(R.drawable.alarm_back_ring)
         }
-*/
 
 
         /*

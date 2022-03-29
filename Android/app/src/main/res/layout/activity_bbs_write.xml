@@ -65,8 +65,8 @@
             android:weightSum="2"
             tools:context=".LinearActivity">
         <Button
-                android:id="@+id/bbsWriteFile"
-                android:text="파일"
+                android:id="@+id/bbsWriteCamera"
+                android:text="카메라"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -79,27 +79,31 @@
                 android:layout_weight="1"/>
 
     </LinearLayout>
+        <ImageView
+                android:id="@+id/bbsWriteImageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+        />
 
-
-
-
-    <EditText android:id="@+id/bbsWriteContent"
-              android:layout_width="match_parent"
-              android:layout_height="500dp"
-              android:lines="10"
-              android:layout_marginLeft="20dp"
-              android:layout_marginRight="20dp"
-              android:hint="내용을 입력해주세요"
-              android:gravity="top|left"
-              android:inputType="textMultiLine"
-              android:scrollHorizontally="false"
-              android:minWidth="10.0dip"
-              android:maxWidth="5.0dip"
-              app:layout_constraintTop_toBottomOf="@+id/textView9"
-              android:layout_marginTop="44dp"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0.377"/>
+        <EditText android:id="@+id/bbsWriteContent"
+                  android:layout_width="match_parent"
+                  android:layout_height="303dp"
+                  android:lines="10"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:hint="내용을 입력해주세요"
+                  android:gravity="top|left"
+                  android:inputType="textMultiLine"
+                  android:scrollHorizontally="false"
+                  android:minWidth="10.0dip"
+                  android:maxWidth="5.0dip"
+                  app:layout_constraintTop_toBottomOf="@+id/textView9"
+                  android:layout_marginTop="44dp"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintHorizontal_bias="0.377"/>
 
     </LinearLayout>
 

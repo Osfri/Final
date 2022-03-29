@@ -38,12 +38,20 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
+                android:id="@+id/se"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:hint="검색어를 입력하세요"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+        </LinearLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -89,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/ham_menu_list"
+            app:menu="@menu/ham_menu_bbslist"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 

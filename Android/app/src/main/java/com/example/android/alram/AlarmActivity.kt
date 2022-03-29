@@ -82,7 +82,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         var datetime: Date? = null
         try {
-            datetime = dateFormat.parse(from)
+            //datetime = dateFormat.parse(from)
         } catch (e: ParseException) {
             e.printStackTrace()
         }
@@ -97,6 +97,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         Log.v("AlarmActivity", mCalender!!.getTime().toString())
 
+//        setContentView(R.layout.activity_alarm)
 
 
         //val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
@@ -110,6 +111,12 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
 
 
+        //취소 버튼
+        val onOffButtonCancle = findViewById<Button>(R.id.onOffButtonCancle)
+        onOffButtonCancle.setOnClickListener {
+            //ampmTextView.text = "알람이 취소되었습니다"
+            Toast.makeText(this,"아직 취소 기능 구현은 안됨, 토스트만 뿌리는 중",Toast.LENGTH_SHORT).show()
+        }
 
 
         // drawerlayout bar 설정
