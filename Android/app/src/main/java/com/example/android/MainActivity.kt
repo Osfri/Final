@@ -10,6 +10,7 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
+import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
         val btnAlarm = findViewById<Button>(R.id.btnAlarm)                      // 알람
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
+        val btnManager = findViewById<Button>(R.id.btnManager)
+
 
 
 
@@ -88,6 +91,9 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this,PhoneNumActivity::class.java)
             startActivity(i)
         }
-
+        btnManager.setOnClickListener {
+            val i = Intent(this,ManagerActivity::class.java)
+            startActivity(i)
+        }
     }
 }

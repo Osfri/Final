@@ -18,7 +18,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
         <activity
-                android:name=".bbs.ManagerActivity"
+                android:name=".manager.ManagementActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".manager.ManagerActivity"
                 android:exported="true"/>
         <activity
                 android:name=".bbs.BbsUpdateActivity"
