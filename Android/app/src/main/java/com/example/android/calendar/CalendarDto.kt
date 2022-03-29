@@ -5,15 +5,20 @@ import android.os.Parcelable
 import com.example.android.lunch.FoodDto
 
 class CalendarDto {
-    var date:Any =""
+    var wdate:Any =""
+    var time:String = ""
     var content:MutableList<String> = mutableListOf()
 
 
-    constructor(date:Any):super(){
-        this.date = date
+    constructor(wdate:Any):super(){
+        this.wdate = wdate
     }
-    constructor(date: Any, content:MutableList<String>):super(){
-        this.date = date
+    constructor(wdate: Any, content:MutableList<String>):super(){
+        this.wdate = wdate
         this.content = content
+    }
+    constructor(wdate: Any, time:String):super(){
+        this.wdate = wdate
+        this.time = time
     }
 }

@@ -67,7 +67,7 @@
                     android:id="@+id/offBtn"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
-                    android:text="off신청"
+                    android:text="off신청\n(취소는 이름을 눌러주세요.)"
                     android:layout_weight="1"
                     android:background="@drawable/button_round"
                     android:layout_gravity="bottom"

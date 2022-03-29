@@ -9,6 +9,7 @@ import com.example.android.chat.fragment.AccountFragment
 import com.example.android.chat.fragment.ChatFragment
 import com.example.android.chat.fragment.PeopleFragment
 import com.example.android.databinding.ActivityChatBinding
+import com.example.android.signin.MemberDao
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ChatActivity : AppCompatActivity() {

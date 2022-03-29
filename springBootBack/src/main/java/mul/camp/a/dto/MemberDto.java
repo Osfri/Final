@@ -16,14 +16,6 @@ public class MemberDto {
 	public MemberDto() {
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public MemberDto(String id, String name, String email, String pw, String phonenumber, String code, int auth, int alarm, int alarmtimel, int point) {
 		super();
 		this.id = id;
@@ -52,6 +44,14 @@ public class MemberDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPw() {
@@ -112,17 +112,10 @@ public class MemberDto {
 
 	@Override
 	public String toString() {
-		return "MemberDto{" +
-				"id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", email='" + email + '\'' +
-				", pw='" + pw + '\'' +
-				", phonenumber='" + phonenumber + '\'' +
-				", code='" + code + '\'' +
-				", auth=" + auth +
-				", alarm=" + alarm +
-				", alarmtime=" + alarmtime +
-				", point=" + point +
-				'}';
+		return "MemberDto [id=" + id + ", name=" + name + ", email=" + email + ", pw=" + pw + ", phonenumber="
+				+ phonenumber + ", code=" + code + ", auth=" + auth + ", alarm=" + alarm + ", alarmtime=" + alarmtime
+				+ ", point=" + point + "]";
 	}
+	
+
 }
