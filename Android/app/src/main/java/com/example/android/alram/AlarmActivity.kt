@@ -134,27 +134,6 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     }
 
-    private fun setAlarm(){
-        //AlarmReceiver에 값 전달
-        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, 0, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-
-
-        //날짜 포맷을 바꿔주는 소스코드
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        var datetime: Date? = null
-        try {
-            datetime = dateFormat.parse(from)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.time = datetime
-
-        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
-    }
 
 
 

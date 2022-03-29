@@ -1,19 +1,15 @@
 package com.example.android.bbs
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.SubMenu
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
-import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +17,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
@@ -86,18 +83,19 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         navigationView = findViewById(R.id.nav_Bbs)
         navigationView.setNavigationItemSelectedListener(this) //naviga
 
+/*
         // 네비 메뉴 추가
         navigationView.menu.add(R.id.notice,0,0,"건의사항")
         navigationView.menu.get(1).setIcon(R.drawable.alarm_back_ring)
-        navigationView.menu.add(R.id.notice,0,0,"게시판1")
-        navigationView.menu.get(2).setIcon(R.drawable.alarm_back_ring)
+
 
         val sel = findViewById<Button>(R.id.btn_bbsListSelect)
         sel.setOnClickListener {
             val se = findViewById<EditText>(R.id.se)
             navigationView.menu.add(R.id.notice,0,0,se.text.toString())
-            navigationView.menu.get(3).setIcon(R.drawable.alarm_back_ring)
+            navigationView.menu.get(2).setIcon(R.drawable.alarm_back_ring)
         }
+*/
 
 
         /*

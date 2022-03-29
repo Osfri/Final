@@ -7,7 +7,7 @@
                 android:orderInCategory="0"
                 android:title="공지사항"/>
     </group>
-    <!--코드로 메뉴 만들어야 되는곳 이 부분-->
+    <!--코드로 게시판 추가 메뉴 만들어야 되는곳 이 부분-->
 
     <item android:title="다른 메뉴"
           android:orderInCategory="1000"

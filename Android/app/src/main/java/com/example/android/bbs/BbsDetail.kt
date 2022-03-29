@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -32,7 +33,6 @@ import kotlinx.android.synthetic.main.activity_bbs_detail.*
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
 
-    lateinit var binding : ActivityBbsDetailBinding;
 
     //임의로 만든 데이터 댓글보이기 위해, 지워야합니다
     var userList = arrayListOf<CommentDto>(
@@ -162,6 +162,8 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
         return false
     }
+
+
 
 
 
