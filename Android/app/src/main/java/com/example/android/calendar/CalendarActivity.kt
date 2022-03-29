@@ -33,12 +33,12 @@ import java.util.*
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
     // 임시데이터
-    var tempData:MutableMap<String, CalendarDto>
-            = mutableMapOf(
-        Pair("2022.03.24", CalendarDto("2022.03.24", mutableListOf("박현준", "최성규"))),
-        Pair("2022.03.11", CalendarDto("2022.03.11", mutableListOf("김다균"))),
-        Pair("2022.03.11", CalendarDto("2022.03.28", mutableListOf("추현지")))
-    )
+//    var tempData:MutableMap<String, CalendarDto>
+//            = mutableMapOf(
+//        Pair("2022.03.24", CalendarDto("2022.03.24", mutableListOf("박현준", "최성규"))),
+//        Pair("2022.03.11", CalendarDto("2022.03.11", mutableListOf("김다균"))),
+//        Pair("2022.03.11", CalendarDto("2022.03.28", mutableListOf("추현지")))
+//    )
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
@@ -47,26 +47,27 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
-        var curData:MutableMap<String, String>? = null
+        var curData:MutableMap<String, CalendarDto>? = null
         val mem = MemberDao.user
         val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(mem!!.id.toString())
         if (dutyList != null) {
             for(i in dutyList){
+                val dto = CalendarDto(i.wdate.toString(), i.time, i.id)
                 if(curData == null){
-                    curData = mutableMapOf(Pair(i.wdate.toString(), i.time))
+                    curData = mutableMapOf(Pair(i.wdate.toString(), dto))
                 }else{
-                    curData[i.wdate.toString()] = i.time
+                    curData[i.wdate.toString()] = dto
                 }
             }
         }
-        println(curData.toString())
+        println("curData======"+curData!!.get("2022.03.01").toString())
 
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
         val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
 
         // 달력일자 생성
-        val mCalendarList:MutableList<CalendarDto> = setCalendarList(tempData)
+        val mCalendarList:MutableList<CalendarDto> = setCalendarList(curData!!)
 
         // 그리드 뷰 생성
         val gridManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
@@ -141,7 +142,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // TODO: 선택한 일자 전후로 보이게 설정
 
         // 리사이클러뷰에 보일 날짜 생성
-        for(i in -5..5){
+        for(i in 0..5){
             // calendar: 오늘 날짜의 년, 월
             var calendar: GregorianCalendar = GregorianCalendar(nowDate.get(Calendar.YEAR), nowDate.get(Calendar.MONTH)+i,1,0,0,0)
             var date: CalendarDto = CalendarDto(calendar.timeInMillis)
@@ -172,7 +173,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         for((index:Int, dto: CalendarDto) in calendarList.withIndex()){
             if(dto.wdate !is Long && dto.wdate !is String){
                 if(tempData.containsKey(sdf.format((dto.wdate as GregorianCalendar).time))){
-                    calendarList[index].content = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!.content
+                    calendarList[index].time = tempData.get(sdf.format((dto.wdate as GregorianCalendar).time))!!.time
                 }
             }
         }
@@ -208,7 +209,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 }else{
                     dayText.setTextColor(Color.parseColor("#000000"))
                 }
-                if(dto.content.size>0){
+                if(dto.content != null){
                     setContentItem(dto, context)
                 }else{
                     var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
@@ -218,27 +219,27 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
             fun setContentItem(dto: CalendarDto, context: Context){
                 var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
-                val contentCount = dto.content.size
+                //val contentCount = dto.content.size
 
-                for(i in 0 until contentCount){
+                //for(i in 0 until contentCount){
                     // 텍스트뷰 속성 설정
                     val contentTextViewParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
 
                     // 텍스트뷰 생성
                     val contentTextView = TextView(context).apply {
-                        text = dto.content.get(i)
+                        text = dto.time
                         layoutParams = contentTextViewParams
-                        id = i
+                        id = 0
                         gravity = Gravity.CENTER
 
                         setOnClickListener {
-                            val testToast = Toast.makeText(context, "${dto.content.get(i)}님의 off는 ", Toast.LENGTH_SHORT)
+                            val testToast = Toast.makeText(context, "${dto.time}님의 off는 ", Toast.LENGTH_SHORT)
                             testToast.show()
                         }
                     }
                     // 텍스트뷰 추가
                     linerLayout.addView(contentTextView)
-                }
+                //}
             }
         }
 
