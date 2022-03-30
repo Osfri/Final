@@ -34,7 +34,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
+                    android:paddingBottom="15dp"
                     android:drawableTop="@drawable/ic_menu_bbs"
                     android:fontFamily="@font/nanumbarungothic"
                     android:background="@drawable/button_main_menu"/>
@@ -51,14 +51,14 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
+                    android:paddingBottom="15dp"
                     android:drawableTop="@drawable/ic_menu_chat"
                     android:fontFamily="@font/nanumbarungothic"
                     android:background="@drawable/button_main_menu"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnManager"
-                    android:text="관리자"
+                    android:id="@+id/btnAlarm"
+                    android:text="알람"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:layout_marginRight="20dp"
@@ -67,12 +67,72 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_mana"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/ic_menu_alarm"
                     android:fontFamily="@font/nanumbarungothic"
                     android:background="@drawable/button_main_menu"/>
 
 
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="13dp"
+                tools:context=".LinearActivity">
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPointMall"
+                    android:text="포인트몰"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/ic_menu_mall"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:background="@drawable/button_main_menu"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCalender"
+                    android:text="일정"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/ic_menu_cal"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:background="@drawable/button_main_menu"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnHoliday"
+                    android:text="off신청"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/ic_menu_off"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:background="@drawable/button_main_menu"/>
         </LinearLayout>
 
         <LinearLayout
@@ -94,83 +154,11 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
+                    android:paddingBottom="15dp"
                     android:drawableTop="@drawable/ic_menu_food"
                     android:fontFamily="@font/nanumbarungothic"
                     android:background="@drawable/button_main_menu">
             </androidx.appcompat.widget.AppCompatButton>
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnCalender"
-                    android:text="일정"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_cal"
-                    android:fontFamily="@font/nanumbarungothic"
-                    android:background="@drawable/button_main_menu"/>
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnHoliday"
-                    android:text="off신청"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_off"
-                    android:fontFamily="@font/nanumbarungothic"
-                    android:background="@drawable/button_main_menu"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="13dp"
-                tools:context=".LinearActivity">
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnPointMall"
-                    android:text="포인트몰"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_mall"
-                    android:fontFamily="@font/nanumbarungothic"
-                    android:background="@drawable/button_main_menu"/>
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnAlarm"
-                    android:text="알람"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_alarm"
-                    android:fontFamily="@font/nanumbarungothic"
-                    android:background="@drawable/button_main_menu"/>
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -183,11 +171,28 @@
                     android:textColor="#FFFFFF"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="15dp"
                     android:drawableTop="@drawable/ic_menu_phone"
                     android:fontFamily="@font/nanumbarungothic"
                     android:background="@drawable/button_main_menu"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnManager"
+                    android:text="관리자"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/ic_menu_mana"
+                    android:fontFamily="@font/nanumbarungothic"
+                    android:background="@drawable/button_main_menu"/>
+
         </LinearLayout>
 
         <LinearLayout
