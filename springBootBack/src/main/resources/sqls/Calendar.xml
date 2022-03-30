@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.camp.a.dao.CalendarDao">
+	<insert id="offApply" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO CALENDAR (ID, WDATE, TIME)
+		VALUES			
+			(
+			#{item.id},  TO_DATE(#{item.wdate}), #{item.time}
+			)
+		</foreach>
+	</insert>
+	<select id="offList" resultType="mul.camp.a.dto.CalendarDto">
+		SELECT C.ID, C.WDATE, C.TIME, (SELECT NAME FROM MEMBER M WHERE M.ID=C.ID) AS NAME
+		FROM CALENDAR C
+		WHERE TO_CHAR(C.WDATE, 'YYYY-MM') = #{date}
+	</select>
+	<delete id="offCancel" parameterType="mul.camp.a.dto.CalendarDto">
+		DELETE FROM CALENDAR
+		WHERE ID=#{id} AND WDATE=TO_DATE(#{wdate})
+	</delete>
+	<select id="dutyList" resultType="mul.camp.a.dto.CalendarDto">
+		SELECT TO_CHAR(WDATE, 'YYYY.MM.dd') AS WDATE, TIME
+		FROM CALENDAR
+		WHERE ID=#{id}
+	</select>
+</mapper>

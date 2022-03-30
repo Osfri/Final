@@ -10,130 +10,105 @@
         tools:openDrawer="start">
 
 
+    <LinearLayout
+            android:id="@+id/calLinearLayoutParent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
+            android:layout_weight="2"
             tools:context=".LinearActivity">
-
-        <!-- 최상단 툴바 LinearLayout -->
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="#003B5A">
-        </LinearLayout>
-
-        <!-- LinearLayout 감싸지 않은 달력-->
-
-        <CalendarView
-                android:id="@+id/calCalendarView"
-                android:layout_width="match_parent"
-                android:layout_height="507dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:minWidth="1dp"/>
-<!--
-
-
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/calRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calCalendarView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"/>
--->
+                android:layout_height="637dp"
+                android:layout_marginTop="?attr/actionBarSize"
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                <TextView
-                        android:text="등록시 일정뜨는 부분"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/datetitle"/>
-                <EditText
-                    android:id="@+id/contextEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="일정을 적으세요"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/calCalendarView"
-            android:layout_marginTop="50dp"/>
-            </LinearLayout>
-
-            <FrameLayout
-                    android:id="@+id/calFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    tools:context=".LinearActivity">
-                <Button
-                        android:id="@+id/calSaveBtn"
-                        android:text="일정 등록"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:textColor="#ffffff"
-                        android:backgroundTint="#ED3717"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/calContentEditText"/>
-                <Button
-                        android:id="@+id/calUpdateBtn"
-                        android:text="수정"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/calSaveBtn"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/calDeleteBtn"
-                        android:visibility="invisible"/>
-
-                <Button
-                        android:id="@+id/calDeleteBtn"
-                        android:text="삭제"
-                        android:layout_width="176dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/calUpdateBtn"
-                        app:layout_constraintEnd_toEndOf="@+id/calSaveBtn"
-                        android:visibility="invisible"/>
-
-            </LinearLayout>
-        </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
     </LinearLayout>
 
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            tools:context=".LinearActivity">
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="700dp"
+                android:background="#A6A6A6"
+                tools:ignore="MissingConstraints"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:hint="일정을 입력해주세요"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            tools:context=".LinearActivity">
+
+
+        <Button
+                android:id="@+id/calSaveBtn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:text="일정등록"
+                android:layout_weight="1"
+                android:background="@drawable/button_round"
+                android:layout_gravity="bottom"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        <Button
+                android:id="@+id/calDeleteBtn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:text="일정삭제"
+                android:layout_weight="1"
+                android:background="@drawable/button_round_original"
+                android:layout_gravity="bottom"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="invisible"/>
+        <Button
+                android:id="@+id/calUpdateBtn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:text="일정수정"
+                android:layout_weight="1"
+                android:background="@drawable/button_round_original"
+                android:layout_gravity="bottom"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="invisible"/>
+    </LinearLayout>
 
     <include
             layout="@layout/ham_appbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_Calendar"
@@ -143,12 +118,5 @@
             app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
-
-
-
-
-
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

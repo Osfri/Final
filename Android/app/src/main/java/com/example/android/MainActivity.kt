@@ -12,6 +12,7 @@ import com.example.android.chat.ChatActivity
 import com.example.android.chat.ChatSingleton
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
+import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         val btnChat = findViewById<Button>(R.id.btnChat)                        // 채팅
         val btnAlarm = findViewById<Button>(R.id.btnAlarm)                      // 알람
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
+        val btnManager = findViewById<Button>(R.id.btnManager)
+
 
 
 
@@ -60,14 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
         // 식단표
         btnLunch.setOnClickListener {
-            // (수정,추가_백엔드) 임시데이터
-            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
-            // (수정,추가_백엔드) 로그인했을시에만 동작
-            if(MemberDao.user != null){
-                val i = Intent(this,FoodActivity::class.java)
-                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
-                startActivity(i)
-            }
+            val i = Intent(this, FoodActivity::class.java)
+            startActivity(i)
         }
         // off 휴일 신청
         btnHoliday.setOnClickListener {
@@ -113,6 +110,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             }
         }
-
+        btnManager.setOnClickListener {
+            val i = Intent(this,ManagerActivity::class.java)
+            startActivity(i)
+        }
     }
 }

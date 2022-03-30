@@ -57,7 +57,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:layout_constraintStart_toEndOf="@+id/textView7"/>
-
+        <ImageView
+                android:id="@+id/bbsWriteImageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+        />
 
         <EditText android:id="@+id/bbsUpdateContent"
                   android:layout_width="match_parent"

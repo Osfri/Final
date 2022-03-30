@@ -83,7 +83,7 @@
 		    <version>3.5.9</version>
 		</dependency>
 		
-				<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
+		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc10</artifactId>
@@ -105,13 +105,24 @@
 		    <artifactId>osdt_core</artifactId>
 		</dependency>
 		
-		<!-- 파이어베이스 관련 (스토리지포함) -->
+		<!-- excel -->
 		<dependency>
-			<groupId>com.google.firebase</groupId>
-			<artifactId>firebase-admin</artifactId>
-			<version>7.0.1</version>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>4.1.2</version>
 		</dependency>
 		
+		<!-- firebase -->
+		<dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>6.11.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>

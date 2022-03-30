@@ -22,7 +22,7 @@ class CustomAdapterFood(val context: Context, val dataList:MutableList<FoodDto>)
         val sdfAf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd E요일")
         val sdf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
 
-        fun bind(dataVo:FoodDto, context: Context){
+        fun bind(dataVo: FoodDto, context: Context){
 
             foodRecycleViewMenu.text = dataVo.menu
             foodRecycleViewDate.text = sdfAf.format(sdf.parse(dataVo.fdate))
@@ -43,13 +43,13 @@ class CustomAdapterFood(val context: Context, val dataList:MutableList<FoodDto>)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapterFood.ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
         val view = LayoutInflater.from(context).inflate(R.layout.view_item_layout_food, parent,false)
         return ItemViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CustomAdapterFood.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(dataList[position],context)
 
     }
