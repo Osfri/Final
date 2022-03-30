@@ -1,6 +1,6 @@
 package com.example.android.offday
 
-import com.example.android.bbs.RetrofitClient
+import com.example.android.RetrofitClient
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

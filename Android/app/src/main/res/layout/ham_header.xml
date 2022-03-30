@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="'로그인'님"
-            android:textSize="50dp"/>
+            android:textSize="30dp"/>
     <TextView
             android:id="@+id/hamLoginCode"
             android:layout_width="wrap_content"

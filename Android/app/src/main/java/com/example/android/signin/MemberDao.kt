@@ -1,7 +1,7 @@
 package com.example.android.signin
 
 import com.example.android.alram.AlarmDto
-import com.example.android.bbs.RetrofitClient
+import com.example.android.RetrofitClient
 import com.example.android.signinAf.HospitalDto
 import retrofit2.Call
 import retrofit2.http.Body

@@ -1,5 +1,6 @@
 package com.example.android.bbs
 
+import com.example.android.RetrofitClient
 import retrofit2.Call
 import retrofit2.http.GET
 

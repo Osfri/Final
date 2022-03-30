@@ -34,7 +34,8 @@ public class CalendarController {
 	@RequestMapping(value ="/offList",method= RequestMethod.POST)
 	public List<CalendarDto> offList(@RequestBody String date) {
 		System.out.println("offList"+date);
-		date = date.substring(1, 8);
+		// "2022-04-14" 2022 04월까지 자름
+ 		date = date.substring(1, 8);
 		System.out.println(date);
 		List<CalendarDto> result = service.offList(date);
 		System.out.println(result.toString());
@@ -53,7 +54,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value ="/dutyList",method= RequestMethod.POST)
-	public List<CalendarDto> dutyList(@RequestBody String id) {
+	public List<CalendarDto> dutyList(@RequestBody String id) {		
 		System.out.println("dutyList"+id.replace("\"", ""));
 		List<CalendarDto> result = service.dutyList(id.replace("\"", ""));
 		System.out.println(result.toString());

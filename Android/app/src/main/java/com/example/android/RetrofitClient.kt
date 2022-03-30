@@ -1,4 +1,4 @@
-package com.example.android.bbs
+package com.example.android
 
 import android.os.StrictMode
 import com.google.gson.GsonBuilder
