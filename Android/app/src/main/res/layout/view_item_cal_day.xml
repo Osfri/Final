@@ -14,21 +14,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cal_item_dayText">
+
+        <ImageView
+                android:layout_width="12dp"
+               android:layout_gravity="right"
+                android:layout_height="10dp" tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/cal_item_memoimg"
+        />
     </LinearLayout>
     <TextView
             android:id="@+id/cal_item_dayText"
             android:text="일"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="9dp" app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="9dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     <ImageView
-            android:layout_width="82dp"
-            android:layout_height="71dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/cal_item_imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            tools:srcCompat="@tools:sample/avatars"
+            android:id="@+id/cal_item_imageView"
             app:layout_constraintTop_toBottomOf="@+id/cal_item_dayText"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.875"/>
+            app:layout_constraintVertical_bias="0.777"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

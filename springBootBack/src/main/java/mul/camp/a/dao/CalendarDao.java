@@ -15,4 +15,5 @@ public interface CalendarDao {
 	public List<CalendarDto> offList(String date);
 	public int offCancel(CalendarDto dto);
 	public List<CalendarDto> dutyList(String id);
+	public int memoInsert(CalendarDto dto);
 }

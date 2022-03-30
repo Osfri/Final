@@ -1,18 +1,22 @@
 package com.example.android.calendar
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.android.R
@@ -20,13 +24,10 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
-import com.example.android.offday.OffdayDto
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_calendar.*
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,7 +52,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(mem!!.id.toString())
         if (dutyList != null) {
             for(i in dutyList!!){
-                val dto = CalendarDto(i.wdate.toString(), i.time, i.id)
+                val dto = CalendarDto(i.wdate.toString(), i.time, i.id, i.memo)
                 if(curData == null){
                     curData = mutableMapOf(Pair(i.wdate.toString(), dto))
                 }else{
@@ -60,9 +61,11 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
         }
 
+        val calEt = findViewById<EditText>(R.id.cal_et)
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
         val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
+
 
         // 달력일자 생성
         val mCalendarList:MutableList<CalendarDto> = setCalendarList(curData!!)
@@ -197,7 +200,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         }
         // 요일타입
-        class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        class DayViewHolder(itemView: View, val context: Context): RecyclerView.ViewHolder(itemView){
             val dayText = itemView.findViewById<TextView>(R.id.cal_item_dayText)
             val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
             fun dayBind(dto: CalendarDto, context: Context){
@@ -214,29 +217,107 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     setContentItem(dto, context)
                 }else{
                     var img = itemView.findViewById<ImageView>(R.id.cal_item_imageView)
+                    val memoImg = itemView.findViewById<ImageView>(R.id.cal_item_memoimg)
                     img.setImageResource(R.drawable.ic_cal_zz)
+                    memoImg.setImageResource(R.drawable.ic_cal_white)
                 }
             }
 
             fun setContentItem(dto: CalendarDto, context: Context){
-                var img = itemView.findViewById<ImageView>(R.id.cal_item_imageView)
-                val saveBtn = itemView.findViewById<Button>(R.id.calSaveBtn)
-                val carEt = itemView.findViewById<EditText>(R.id.cal_et)
-                if(dto.content!!.time == "d" || dto.content!!.time == "D"){
-                    img.setImageResource(R.drawable.ic_cal_d)
-                }else if(dto.content!!.time == "e" || dto.content!!.time == "E"){
-                    img.setImageResource(R.drawable.ic_cal_e)
-                }else if(dto.content!!.time == "n" || dto.content!!.time == "N"){
-                    img.setImageResource(R.drawable.ic_cal_n)
-                }else if(dto.content!!.time == "m" || dto.content!!.time == "M"){
-                    img.setImageResource(R.drawable.ic_cal_m)
-                }else if(dto.content!!.time == "o" || dto.content!!.time == "O"){
-                    img.setImageResource(R.drawable.ic_cal_o)
+                val activity = context as Activity
+                val img = itemView.findViewById<ImageView>(R.id.cal_item_imageView)
+                val memoImg = itemView.findViewById<ImageView>(R.id.cal_item_memoimg)
+                val et = activity.findViewById<EditText>(R.id.cal_et)
+                val calSaveBtn = activity.findViewById<Button>(R.id.calSaveBtn)
+                val calUpdateBtn = activity.findViewById<Button>(R.id.calUpdateBtn)
+                val calDeleteBtn = activity.findViewById<Button>(R.id.calDeleteBtn)
+                val tv = activity.findViewById<TextView>(R.id.cal_tv)
+
+                when(dto.content!!.time){
+                    "o"-> img.setImageResource(R.drawable.ic_cal_o)
+                    "O"-> img.setImageResource(R.drawable.ic_cal_o)
+                    "e"-> img.setImageResource(R.drawable.ic_cal_e)
+                    "E"-> img.setImageResource(R.drawable.ic_cal_e)
+                    "d"-> img.setImageResource(R.drawable.ic_cal_d)
+                    "D"-> img.setImageResource(R.drawable.ic_cal_d)
+                    "n"-> img.setImageResource(R.drawable.ic_cal_n)
+                    "N"-> img.setImageResource(R.drawable.ic_cal_n)
+                    "m"-> img.setImageResource(R.drawable.ic_cal_m)
+                    "M"-> img.setImageResource(R.drawable.ic_cal_m)
+                }
+
+                if(dto.content!!.memo == null  || dto.content!!.memo == ""){
+                    memoImg.setImageResource(R.drawable.ic_cal_white)
+                }else{
+                    memoImg.setImageResource(R.drawable.ic_cal_me)
+                }
+                calSaveBtn.setOnClickListener {
+                    Toast.makeText(context, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
                 }
                 img.setOnClickListener{
-                    Toast.makeText(context, "${dto.content!!.time} ${dto.content!!.wdate}", Toast.LENGTH_SHORT).show()
-                    //saveBtn.visibility = View.VISIBLE
-                    //carEt.visibility = View.VISIBLE
+                    CalendarDao.memoDate = dto.content!!
+                    tv.text = CalendarDao.memoDate!!.wdate.toString()
+                    if(CalendarDao.memoDate!!.memo == null || CalendarDao.memoDate!!.memo.toString() == ""){
+                        et.setText("")
+                        calUpdateBtn.visibility = View.INVISIBLE
+                        calDeleteBtn.visibility = View.INVISIBLE
+                        calSaveBtn.visibility = View.VISIBLE
+                        calSaveBtn.setOnClickListener {
+                            if(et.text.toString() == ""){
+                                Toast.makeText(context, "일정을 입력해주세요", Toast.LENGTH_SHORT).show()
+                            }else{
+                                CalendarDao.memoDate!!.memo = et.text.toString()
+                                val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
+                                if(result == "success"){
+                                    Toast.makeText(context, "메모가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                                    val intent = (context as Activity).intent
+                                    context.finish() //현재 액티비티 종료 실시
+                                    context.overridePendingTransition(0, 0) //효과 없애기
+                                    context.startActivity(intent) //현재 액티비티 재실행 실시
+                                    context.overridePendingTransition(0, 0) //효과 없애기
+                                }
+                            }
+                        }
+                    }else{
+                        et.setText(CalendarDao.memoDate!!.memo.toString())
+                        calUpdateBtn.visibility = View.VISIBLE
+                        calDeleteBtn.visibility = View.VISIBLE
+                        calSaveBtn.visibility = View.INVISIBLE
+                        calUpdateBtn.setOnClickListener{
+                            if(et.text.toString() == ""){
+                                Toast.makeText(context, "일정을 입력해주세요", Toast.LENGTH_SHORT).show()
+                            }else{
+                                CalendarDao.memoDate!!.memo = et.text.toString()
+                                val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
+                                if(result == "success"){
+                                    Toast.makeText(context, "메모가 수정되었습니다.", Toast.LENGTH_SHORT).show()
+                                    val intent = (context as Activity).intent
+                                    context.finish() //현재 액티비티 종료 실시
+                                    context.overridePendingTransition(0, 0) //효과 없애기
+                                    context.startActivity(intent) //현재 액티비티 재실행 실시
+                                    context.overridePendingTransition(0, 0) //효과 없애기
+                                }
+                            }
+                        }
+                        calDeleteBtn.setOnClickListener{
+                            AlertDialog.Builder(context).setTitle("MEMO 삭제")
+                                .setMessage("${CalendarDao.memoDate!!.wdate}의 메모를 삭제하시겠습니까?")
+                                .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                                    CalendarDao.memoDate!!.memo = ""
+                                    val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
+                                    if(result == "success"){
+                                        Toast.makeText(context, "메모가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                        val intent = (context as Activity).intent
+                                        context.finish() //현재 액티비티 종료 실시
+                                        context.overridePendingTransition(0, 0) //효과 없애기
+                                        context.startActivity(intent) //현재 액티비티 재실행 실시
+                                        context.overridePendingTransition(0, 0) //효과 없애기
+                                    }
+                                })
+                                .setNegativeButton("아니오", null)
+                                .show()
+                        }
+                    }
 
                 }
             }
@@ -266,7 +347,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 return EmptyViewHolder(view)
             }else{
                 view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_cal_day, parent, false)
-                return DayViewHolder(view)
+                return DayViewHolder(view, context)
             }
         }
 

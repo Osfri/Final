@@ -59,4 +59,15 @@ public class CalendarController {
 		System.out.println(result.toString());
 		return result;
 	}
+	
+	//메모 등록, 근무가 등록된 날짜에만 메모 입력할 수 있음
+	@RequestMapping(value ="/memoInsert",method= RequestMethod.POST)
+	public String memoInsert(@RequestBody CalendarDto dto) {
+		System.out.println("memoInsert"+dto.toString());
+		int i = service.memoInsert(dto);
+		if(i > 0) {
+			return "success";
+		}
+		return "fail";
+	}
 }
