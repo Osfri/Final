@@ -26,10 +26,10 @@ class CustomAdapterBbsType(val context: Context, val dataList:ArrayList<Boardtyp
                     Intent(context, BbsActivity::class.java).apply {
                         putExtra("data", dataVo)
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    }.run { context.startActivity(this) }
-
+                    }.run {
+                        context.startActivity(this)
+                 }
             }
-
         }
     }
 
