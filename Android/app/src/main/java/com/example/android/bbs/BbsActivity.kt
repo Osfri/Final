@@ -21,6 +21,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.BoardtypeDto
 import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
@@ -32,6 +33,12 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+    // 게시판추가 리사이클러뷰 임시 확인 데이터(지워야됩니다)
+    val typebbs = arrayListOf<BoardtypeDto>(
+        BoardtypeDto(0,"게시판11111","814",3),
+        BoardtypeDto(0,"게시판22222","1848",3)
+        )
+
     //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경 해야함
     companion object {
         var type = 0
@@ -40,6 +47,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
+
 
 
 
@@ -59,6 +67,17 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val layout = LinearLayoutManager(this)
         bbslistRecyclerView.layoutManager = layout
         bbslistRecyclerView.setHasFixedSize(true)
+
+
+
+        // 게시판 추가 부분 리사이클러뷰
+        var bbsTypeRecyclerView = findViewById<RecyclerView>(R.id.bbsTypeRecyclerView)  // bbsRecyclerView 변수
+        val mAdaptertype = CustomAdapterBbsType(this, typebbs)
+        bbsTypeRecyclerView.adapter = mAdaptertype
+        val layouttype = LinearLayoutManager(this)
+        bbsTypeRecyclerView.layoutManager = layouttype
+        bbsTypeRecyclerView.setHasFixedSize(true)
+
 
 
         // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)

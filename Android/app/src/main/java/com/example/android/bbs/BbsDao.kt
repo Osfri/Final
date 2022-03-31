@@ -27,6 +27,7 @@ interface BbsService {
 
     @GET("/deleteBbs")
     fun deleteBbs(seq: Int) : Call<Int>
+
 }
 
 
