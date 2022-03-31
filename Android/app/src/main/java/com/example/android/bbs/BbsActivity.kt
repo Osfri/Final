@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.SubMenu
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
@@ -89,6 +90,28 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
             startActivity(i)
         }
 
+
+
+        //상단 검색바
+        val bbsSearchView = findViewById<SearchView>(R.id.bbsSearchView)
+        bbsSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
+
+
+
+
+
+
+
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
@@ -143,11 +166,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         //val menuitem =  menu!!.findItem(R.id.menu_bbs_important)
         Log.d("로그","@@@${menu!!.get(0).title}")
 
-
         val mi:MenuItem = menu!!.add(0,100,2,"sub")
         mi.setIcon(R.drawable.ic_bbs)
         menu!!.get(2).title = "게시판외"
         return super.onCreateOptionsMenu(menu)
+
     }
 
 

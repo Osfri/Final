@@ -11,6 +11,8 @@
             android:layout_width="100dp"
             android:layout_height="50dp" android:id="@+id/messageActivity_sendBtn"
             android:layout_marginEnd="20dp"
+            android:background="@color/pointred"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/messageActivity_recyclerView"/>
     <EditText
@@ -32,14 +34,23 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="600dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/messageActivity_recyclerView"
-            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/messageActivity_selectUser"/>
-    <Button
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/messageActivity_recyclerView"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/messageActivity_selectUser"/>
+    <ImageButton
             android:text="대화방 나가기"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/messageActivity_chatExitBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/ic_chat_out"
+            android:backgroundTint="#4E4E4E"
+            android:id="@+id/messageActivity_chatExitBtn"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp" android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
