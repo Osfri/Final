@@ -19,7 +19,7 @@ class CustomAdapterBbsType(val context: Context, val dataList:ArrayList<Boardtyp
 
         fun bind(dataVo:BoardtypeDto, context: Context){
 
-            bbsTypeRecycleViewName.text = dataVo.type.toString()
+            bbsTypeRecycleViewName.text = dataVo.name
 
             itemView.setOnClickListener{
 

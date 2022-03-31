@@ -21,7 +21,6 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
-import com.example.android.manager.BoardtypeDto
 import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
@@ -39,6 +38,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         BoardtypeDto(0,"게시판22222","1848",3)
         )
 
+
     //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경 해야함
     companion object {
         var type = 0
@@ -50,7 +50,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
 
-//커밋 22 03 31 22 18
         // bbs리스트
         // 병원 코드 변환
         var code = MemberDao.user?.code!!
@@ -59,8 +58,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
             code = split[0]
         }
         // 게시물 가져오는 곳
-        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code, type)
-
+        //val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code, type)
+        val userList = arrayListOf<BbsDto>(
+            BbsDto(0,"a","abc","abc",0,"2020-01-01",0,0,"2",0,0,""),
+            BbsDto(0,"a","bcd","bcd",0,"2020-02-02",0,0,"2",0,0,"")
+        )
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
         val mAdapter = CustomAdapterBbsList(this, userList)
         bbslistRecyclerView.adapter = mAdapter
