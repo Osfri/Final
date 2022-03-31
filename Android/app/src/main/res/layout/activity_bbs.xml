@@ -19,15 +19,31 @@
             android:orientation="vertical"
             tools:context=".LinearActivity">
 
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    tools:context=".LinearActivity">
 
-        <androidx.appcompat.widget.SearchView
-                android:id="@+id/bbsSearchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconifiedByDefault="false"
-                android:layout_marginTop="90dp"
-                android:layout_marginBottom="20dp"
-                app:queryHint="검색어를 입력하시오" />
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/bbsTypeRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="70dp"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_constraintTop_toBottomOf="@+id/textView"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:layout_editor_absoluteX="16dp" />
+
+                <FrameLayout
+                        android:id="@+id/bbsTypeFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView

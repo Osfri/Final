@@ -50,7 +50,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
@@ -63,6 +62,24 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }
         val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
 */
+
+        // bbs리스트
+        var bbsTypeRecyclerView = findViewById<RecyclerView>(R.id.bbsTypeRecyclerView)  // bbsRecyclerView 변수
+
+        //val bbslist = BbsDao.getInstance().getBbsList()
+        //println(bbslist[0].title)
+
+
+        val mAdapter2 = CustomAdapterBbsList(this, userList2)
+        bbsTypeRecyclerView.adapter = mAdapter2
+
+        val layout2 = LinearLayoutManager(this)
+        bbsTypeRecyclerView.layoutManager = layout2
+        bbsTypeRecyclerView.setHasFixedSize(true)
+
+
+
+
 
         // bbs리스트
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
@@ -92,18 +109,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
 
-        //상단 검색바
-        val bbsSearchView = findViewById<SearchView>(R.id.bbsSearchView)
-        bbsSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
 
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
 
 
 
