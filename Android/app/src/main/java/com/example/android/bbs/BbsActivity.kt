@@ -50,7 +50,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
 
-
+//11
         // bbs리스트
         // 병원 코드 변환
         var code = MemberDao.user?.code!!
