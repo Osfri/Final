@@ -14,11 +14,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.BbsDao
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
+import kotlin.random.Random
 
 
 class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -36,9 +39,26 @@ class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         // 게시판 추가manage_btn_bbs
        val managebtnBbs = findViewById<Button>(R.id.manage_btn_bbs)
         val edit = findViewById<EditText>(R.id.manage_et_bbs)
+        var index = true
+        var randomPass = 0
+
+        //글쓰기 권한( 관리자만 0,모두 1)
+        var auth = 0
+
         managebtnBbs.setOnClickListener {
-            val i = Intent(this, BbsActivity::class.java)
-            startActivity(i)
+            while (index){
+                val random = (1..999999).random()
+                randomPass = random
+                val result:BoardtypeDto = BbsDao.getInstance().bbsRandomCheck(randomPass)
+                if (result == null){
+                    index = false
+                }
+            }
+            val split = MemberDao.user!!.code!!.split("_")[0]
+            val BoardtypeDto = BoardtypeDto(randomPass,edit.text.toString(),split,auth)
+            BbsDao.getInstance().bbsAdd(BoardtypeDto)
+            /*val i = Intent(this, BbsActivity::class.java)
+            startActivity(i)*/
         }
 
 

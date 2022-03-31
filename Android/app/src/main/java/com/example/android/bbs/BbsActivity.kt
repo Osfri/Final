@@ -32,53 +32,33 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    // 정보확인용 지워야 됩니다
-    var userList = arrayListOf<BbsDto>(
-        BbsDto(1, "abcdffff", "제목부분입니다","내용입니다 내용", 15,"2022-03-15",0,0,"57781",0),
-        BbsDto(2, "abcdffff", "제목부분입니다","내용입니다 내용", 16,"2022-04-15",0,0,"1222222",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0)
-
-    )
-
+    //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경 해야함
+    companion object {
+        var type = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
 
 
-        /*var code = MemberDao.user?.code!!
-        if (code.contains("_")){
-            val split:List<String> = code.split("_")
-            code = split[0]
-        }
-        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
-*/
 
         // bbs리스트
+        // 병원 코드 변환
+        var code = MemberDao.user?.code!!
+        if (code.contains("_")) {
+            val split: List<String> = code.split("_")
+            code = split[0]
+        }
+        // 게시물 가져오는 곳
+        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code, type)
+
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
-
-
         val mAdapter = CustomAdapterBbsList(this, userList)
         bbslistRecyclerView.adapter = mAdapter
-
         val layout = LinearLayoutManager(this)
         bbslistRecyclerView.layoutManager = layout
         bbslistRecyclerView.setHasFixedSize(true)
-
-
-
-
-
 
 
         // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)
@@ -127,7 +107,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
     }
-/*
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         Log.d("로그","${menu!![0].title}")
         return super.onPrepareOptionsMenu(menu)
@@ -142,10 +122,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
         val mi:MenuItem = menu!!.add(0,100,2,"sub")
+        
         mi.setIcon(R.drawable.ic_bbs)
-        menu!!.get(2).title = "이룬"
+        menu!!.get(2).title = "게시판외"
         return super.onCreateOptionsMenu(menu)
-    }*/
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
