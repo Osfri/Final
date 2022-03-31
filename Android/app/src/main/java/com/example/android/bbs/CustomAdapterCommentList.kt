@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 
-class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<CommentDto>):RecyclerView.Adapter<CustomAdapterCommentList.ItemViewHolder>()  {
+class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsDto>):RecyclerView.Adapter<CustomAdapterCommentList.ItemViewHolder>()  {
 
     inner class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -19,34 +19,18 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<Comm
         val bbsCommentRecycleViewContent = itemView.findViewById<TextView>(R.id.bbsCommentRecycleViewContent)      // 내용
 
 
-        fun bind(dataVo:CommentDto, context: Context){
+        fun bind(dataVo:BbsDto){
 
             if (dataVo.del == 0) {
-               // bbsCommentRecycleViewId.text = dataVo.id                      // id는 bbsdto 에서 가져와야하는데
+                bbsCommentRecycleViewId.text = dataVo.id
                 bbsCommentRecycleViewDate.text = dataVo.wdate
                 bbsCommentRecycleViewContent.text = dataVo.content
-
             } else {
 
                 bbsCommentRecycleViewId.text = ""
                 bbsCommentRecycleViewDate.text = ""
                 bbsCommentRecycleViewContent.text = "삭제됨"
             }
-
-
-            itemView.setOnClickListener{
-                if(dataVo!!.del == 0) {                      //    isFocusable 터치해서 접근여부
-                    Intent(context, BbsDetail::class.java).apply {
-
-                        putExtra("data", dataVo)
-
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    }.run { context.startActivity(this) }
-                } else{
-
-                }
-            }
-
         }
 
 
@@ -59,7 +43,7 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<Comm
     }
 
     override fun onBindViewHolder(holder: CustomAdapterCommentList.ItemViewHolder, position: Int) {
-        holder.bind(dataList[position],context)
+        holder.bind(dataList[position])
     }
 
     override fun getItemCount(): Int {

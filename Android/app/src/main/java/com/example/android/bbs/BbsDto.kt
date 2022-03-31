@@ -12,7 +12,9 @@ class BbsDto (val seq:Int,
               val del:Int,
               val type:Int,
               val code:String?,
-              val step:Int) : Parcelable {
+              val step:Int,
+              val gr:Int,
+              val image:String?) : Parcelable {
 
     constructor(parcel:Parcel):this(
         parcel.readInt(),
@@ -24,7 +26,9 @@ class BbsDto (val seq:Int,
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readString()
     ){}
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -38,6 +42,8 @@ class BbsDto (val seq:Int,
         parcel.writeInt(type)
         parcel.writeString(code)
         parcel.writeInt(step)
+        parcel.writeInt(gr)
+        parcel.writeString(image)
     }
 
     override fun describeContents(): Int {
