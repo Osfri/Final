@@ -53,10 +53,9 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value ="/dutyList",method= RequestMethod.POST)
-	public List<CalendarDto> dutyList(@RequestBody String id) {
-		System.out.println("dutyList"+id.replace("\"", ""));
-		List<CalendarDto> result = service.dutyList(id.replace("\"", ""));
-		System.out.println(result.toString());
+	public List<CalendarDto> dutyList(@RequestBody CalendarDto dto) {
+		System.out.println("dutyList"+dto.toString());
+		List<CalendarDto> result = service.dutyList(dto);
 		return result;
 	}
 	

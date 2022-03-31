@@ -49,7 +49,12 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         var curData:MutableMap<String, CalendarDto>? = null
         val mem = MemberDao.user
-        val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(mem!!.id.toString())
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+        val df = SimpleDateFormat("yyyy-MM")
+        cal.add(Calendar.MONTH, 1)
+        val dto = CalendarDto(mem!!.id.toString(), df.format(cal.time).toString())
+        val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(dto)
         if (dutyList != null) {
             for(i in dutyList!!){
                 val dto = CalendarDto(i.wdate.toString(), i.time, i.id, i.memo)
@@ -65,6 +70,11 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
         val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
+        calSaveBtn.setOnClickListener {
+            if(CalendarDao.memoDate == null){
+                Toast.makeText(this, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
         // 달력일자 생성
@@ -252,7 +262,9 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     memoImg.setImageResource(R.drawable.ic_cal_me)
                 }
                 calSaveBtn.setOnClickListener {
-                    Toast.makeText(context, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                    if(CalendarDao.memoDate == null){
+                        Toast.makeText(context, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 img.setOnClickListener{
                     CalendarDao.memoDate = dto.content!!

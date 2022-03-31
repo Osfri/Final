@@ -25,9 +25,9 @@ class CalendarDto {
         this.id = id
         this.memo = memo
     }
-    constructor(wdate: Any, memo:String):super(){
+    constructor(id: String, wdate:String):super(){
+        this.id = id
         this.wdate = wdate
-        this.memo = memo
     }
 
     override fun toString(): String {

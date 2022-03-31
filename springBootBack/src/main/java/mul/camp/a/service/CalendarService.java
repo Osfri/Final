@@ -31,8 +31,8 @@ public class CalendarService {
     	return dao.offCancel(dto);
     }
     
-    public List<CalendarDto> dutyList(String id){
-    	return dao.dutyList(id);
+    public List<CalendarDto> dutyList(CalendarDto dto){
+    	return dao.dutyList(dto);
     }
     
     public int memoInsert(CalendarDto dto){
