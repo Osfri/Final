@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlin.random.Random
 
 
-class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ManagerActivity : AppCompatActivity() /*, NavigationView.OnNavigationItemSelectedListener*/ {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -35,6 +35,7 @@ class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager)
 
+/*  게시물 관리로 가야될 변수
 
         // 게시판 추가manage_btn_bbs
        val managebtnBbs = findViewById<Button>(R.id.manage_btn_bbs)
@@ -195,6 +196,6 @@ class ManagerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
 
         }
-        return false
+        return false*/
     }
 }

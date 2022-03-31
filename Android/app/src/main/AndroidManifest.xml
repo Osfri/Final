@@ -17,7 +17,15 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
-
+        <activity
+                android:name=".manager.staff.ManagerStaffActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".manager.bbs.ManagerBbsActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".manager.ManagerMenuActivity"
+                android:exported="true"/>
         <activity
                 android:name=".manager.ManagerActivity"
                 android:exported="true"/>

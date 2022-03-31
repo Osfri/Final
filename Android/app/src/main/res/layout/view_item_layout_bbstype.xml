@@ -6,7 +6,7 @@
 
 
     <TextView
-            android:id="@+id/bbsRecycleViewId"
+            android:id="@+id/bbsTypeRecycleViewId"
             android:text="게시판1"
             android:layout_width="119dp"
             android:textSize="25dp"

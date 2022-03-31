@@ -9,37 +9,32 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
     <LinearLayout
-            android:id="@+id/linearManager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:weightSum="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             tools:context=".LinearActivity">
 
-        <EditText
-                android:id="@+id/manage_et_bbs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:hint="생성할 게시판 이름을 입력하세요"
-                android:layout_weight="1"/>
-        <Button
-                android:id="@+id/manage_btn_bbs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize"
-                android:onClick="btnStart_Click"/>
-        android:text="게시판 추가"
-        android:layout_weight="1"/>
 
+    <Button
+            android:id="@+id/manage_Btn_Bbs"
+            android:text="게시물 관리"
+            android:textSize="30dp"
+            android:textColor="@color/likeblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#D3FFFFFF"
+            android:layout_weight="1"/>
+    <Button
+            android:id="@+id/manage_Btn_Staff"
+            android:text="직원 관리"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0C5998"
+            android:layout_weight="1"/>
     </LinearLayout>
-
 
     <include
             layout="@layout/ham_appbar"
@@ -47,7 +42,7 @@
             android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_Manager"
+            android:id="@+id/nav_Manager_menu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -55,7 +50,6 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 
-    </ScrollView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

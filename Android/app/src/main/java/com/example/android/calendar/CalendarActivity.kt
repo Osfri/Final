@@ -196,23 +196,23 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         class EmptyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         }
-        // 요일타입
-        class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-            val dayText = itemView.findViewById<TextView>(R.id.cal_item_ImageView)
-            val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
-            fun dayBind(dto: CalendarDto, context: Context){
-                dayText.text = sdf.format((dto.wdate as GregorianCalendar).time)
-                if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
-                    dayText.setTextColor(Color.parseColor("#FF4081"))
-                }else if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 7){
-                    dayText.setTextColor(Color.parseColor("#448AFF"))
-                }else{
-                    dayText.setTextColor(Color.parseColor("#000000"))
-                }
-                if(dto.content.size>0){
-                    setContentItem(dto, context)
-                }else{
-                    var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
+                    // 요일타입
+                    class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+                        val dayText = itemView.findViewById<TextView>(R.id.cal_item_dayText)
+                        val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
+                        fun dayBind(dto: CalendarDto, context: Context){
+                            dayText.text = sdf.format((dto.wdate as GregorianCalendar).time)
+                            if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
+                                dayText.setTextColor(Color.parseColor("#FF4081"))
+                            }else if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 7){
+                                dayText.setTextColor(Color.parseColor("#448AFF"))
+                            }else{
+                                dayText.setTextColor(Color.parseColor("#000000"))
+                            }
+                            if(dto.content.size>0){
+                                setContentItem(dto, context)
+                            }else{
+                                var linerLayout = itemView.findViewById<LinearLayout>(R.id.cal_item_addContent)
                     linerLayout.removeAllViews()
                 }
             }
