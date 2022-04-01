@@ -24,6 +24,7 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.offday.OffdayDto
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
@@ -55,7 +56,8 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         cal.add(Calendar.MONTH, 1)
         val dto = CalendarDto(mem!!.id.toString(), df.format(cal.time).toString())
         val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(dto)
-        if (dutyList != null) {
+
+        if (dutyList != null && dutyList.size != 0) {
             for(i in dutyList!!){
                 val dto = CalendarDto(i.wdate.toString(), i.time, i.id, i.memo)
                 if(curData == null){
@@ -64,6 +66,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     curData[i.wdate.toString()] = dto
                 }
             }
+        }else{
+            println("sssssssssssss")
+            val dto = CalendarDto("", "", "", "")
+            curData = mutableMapOf(Pair("2022-03", dto))
         }
 
         val calEt = findViewById<EditText>(R.id.cal_et)

@@ -58,17 +58,23 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         cal.add(Calendar.MONTH, 1)
         var offData: List<OffdayDto>? = OffDayDao.getInstance().offList(df.format(cal.time).toString())
 
-        for(i in offData!!){
-            var d = i.wdate.toString().substring(0 until 10).replace("-", ".")
-            if(curData == null){
-                var dto = OffdayDto(i.id, d, i.time, i.name)
-                curData = mutableMapOf(Pair(d, mutableListOf(dto)))
-            }else{
-                var dto = OffdayDto(i.id, d, i.time, i.name)
-                if(curData.containsKey(d)){
-                    curData.get(d)!!.add(dto)
+        if(offData == null || offData.size == 0){
+            println("ddddddddddddddd")
+            val dto = OffdayDto("", "", "", "")
+            curData = mutableMapOf(Pair("2022-03", mutableListOf(dto)))
+        }else{
+            for(i in offData!!){
+                var d = i.wdate.toString().substring(0 until 10).replace("-", ".")
+                if(curData == null){
+                    var dto = OffdayDto(i.id, d, i.time, i.name)
+                    curData = mutableMapOf(Pair(d, mutableListOf(dto)))
                 }else{
-                    curData[d] = mutableListOf(dto)
+                    var dto = OffdayDto(i.id, d, i.time, i.name)
+                    if(curData.containsKey(d)){
+                        curData.get(d)!!.add(dto)
+                    }else{
+                        curData[d] = mutableListOf(dto)
+                    }
                 }
             }
         }
