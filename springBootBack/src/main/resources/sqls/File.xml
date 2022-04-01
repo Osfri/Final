@@ -13,9 +13,7 @@
 		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 		INTO CALENDAR (ID, WDATE, TIME)
 		VALUES			
-			(
-			#{item.id},  TO_DATE(#{item.wdate}), #{item.time}
-			)
+			(#{item.id}, TO_DATE(#{item.wdate}), #{item.time})
 		</foreach>
 	</insert>
 	<update id="calendarUpdate" parameterType="java.util.List">

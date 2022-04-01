@@ -55,8 +55,14 @@
                 android:background="#A6A6A6"
                 tools:ignore="MissingConstraints"/>
 
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/cal_tv"/>
+
+
         <EditText android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:id="@+id/cal_et"
                   android:layout_marginTop="30dp"
                   android:hint="일정을 입력해주세요"/>
     </LinearLayout>

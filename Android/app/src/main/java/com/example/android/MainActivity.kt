@@ -13,6 +13,7 @@ import com.example.android.chat.ChatSingleton
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
 import com.example.android.manager.ManagerActivity
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
@@ -119,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         btnManager.setOnClickListener {
-            val i = Intent(this,ManagerActivity::class.java)
+            val i = Intent(this,ManagerMenuActivity::class.java)
             startActivity(i)
         }
     }

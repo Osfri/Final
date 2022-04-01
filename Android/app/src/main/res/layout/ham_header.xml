@@ -7,6 +7,14 @@
               android:gravity="center"
               android:orientation="vertical"
               android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#D6D6D6"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center"/>
 
     <TextView
             android:id="@+id/hamLoginId"
@@ -14,7 +22,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="'로그인'님"
-            android:textSize="50dp"/>
+            android:textSize="30dp"/>
+
     <TextView
             android:id="@+id/hamLoginCode"
             android:layout_width="wrap_content"
@@ -22,5 +31,12 @@
             android:gravity="center"
             android:text="코드번호: 59781548 "
             android:textSize="20dp"/>
-
+    <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="#D6D6D6"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center"/>
 </LinearLayout>

@@ -21,6 +21,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.BoardtypeDto
 import com.example.android.manager.ManagerActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
@@ -32,52 +33,63 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    // 정보확인용 지워야 됩니다
-    var userList = arrayListOf<BbsDto>(
-        BbsDto(1, "abcdffff", "제목부분입니다","내용입니다 내용", 15,"2022-03-15",0,0,"57781",0),
-        BbsDto(2, "abcdffff", "제목부분입니다","내용입니다 내용", 16,"2022-04-15",0,0,"1222222",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0),
-        BbsDto(3, "abcdffff", "제목부분입니다","내용입니다 내용", 22,"2022-05-15",0,0,"1323",0)
+    // 게시판추가 리사이클러뷰 임시 확인 데이터(지워야됩니다)
+    val typebbs = arrayListOf<BoardtypeDto>(
+        BoardtypeDto(0,"게시판11111","814",3),
+        BoardtypeDto(0,"게시판22222","1848",3),
+        BoardtypeDto(0,"게시판22222","1848",3),
+        BoardtypeDto(0,"게시판22222","1848",3),
+        BoardtypeDto(0,"게시판22222","1848",3),
+        BoardtypeDto(0,"게시판22222","1848",3),
+        BoardtypeDto(0,"게시판22222","1848",3)
+        )
 
-    )
 
+
+    //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경 해야함
+    companion object {
+        var type = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
 
-
-        /*var code = MemberDao.user?.code!!
-        if (code.contains("_")){
-            val split:List<String> = code.split("_")
-            code = split[0]
+        val a = intent?.getParcelableExtra<BoardtypeDto>("dataType")
+        if (a !== null){
+            type = a.type
         }
-        val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code)
-*/
 
         // bbs리스트
+        // 병원 코드 변환
+        var code = MemberDao.user?.code!!
+        if (code.contains("_")) {
+            val split: List<String> = code.split("_")
+            code = split[0]
+        }
+        // 게시물 가져오는 곳
+        //val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code, type)
+        val userList = arrayListOf<BbsDto>(
+            BbsDto(0,"a","abc","abc",0,"2020-01-01",0,0,"2",0,0,""),
+            BbsDto(0,"a","bcd","bcd",0,"2020-02-02",0,0,"2",0,0,"")
+        )
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
-
-
         val mAdapter = CustomAdapterBbsList(this, userList)
         bbslistRecyclerView.adapter = mAdapter
-
         val layout = LinearLayoutManager(this)
         bbslistRecyclerView.layoutManager = layout
         bbslistRecyclerView.setHasFixedSize(true)
 
 
 
-
+        // 게시판 추가 부분 리사이클러뷰
+        var bbsTypeRecyclerView = findViewById<RecyclerView>(R.id.bbsTypeRecyclerView)  // bbsRecyclerView 변수
+        //bbsTypeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val mAdaptertype = CustomAdapterBbsType(this, typebbs)
+        bbsTypeRecyclerView.adapter = mAdaptertype
+        val layouttype = LinearLayoutManager(this)
+        bbsTypeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        bbsTypeRecyclerView.setHasFixedSize(true)
 
 
 
@@ -127,7 +139,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
     }
-/*
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         Log.d("로그","${menu!![0].title}")
         return super.onPrepareOptionsMenu(menu)
@@ -142,10 +154,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
         val mi:MenuItem = menu!!.add(0,100,2,"sub")
+
         mi.setIcon(R.drawable.ic_bbs)
-        menu!!.get(2).title = "이룬"
+        menu!!.get(2).title = "게시판외"
         return super.onCreateOptionsMenu(menu)
-    }*/
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

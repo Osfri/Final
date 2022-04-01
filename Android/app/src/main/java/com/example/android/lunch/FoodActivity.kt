@@ -52,7 +52,6 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             foodWriteBtn.visibility = View.GONE
         }
          */
-        
 
         // (수정,추가_백엔드) 식단 데이터 생성
         FoodSingleton.getInstance().getSameCodeFoodInfo(MemberDao.user!!)

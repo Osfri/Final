@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="120dp"
+                                                   android:layout_height="50dp">
+
+
+    <TextView
+            android:id="@+id/bbsTypeRecycleViewId"
+            android:text="게시판1"
+            android:layout_width="119dp"
+            android:textSize="25dp"
+            android:layout_height="38dp"
+            tools:ignore="MissingConstraints"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
