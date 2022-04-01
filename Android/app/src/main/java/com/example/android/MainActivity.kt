@@ -3,11 +3,13 @@ package com.example.android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.ChatSingleton
 import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
 import com.example.android.manager.ManagerActivity
@@ -15,6 +17,8 @@ import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
@@ -62,8 +66,14 @@ class MainActivity : AppCompatActivity() {
         }
         // 식단표
         btnLunch.setOnClickListener {
-            val i = Intent(this, FoodActivity::class.java)
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this, FoodActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
+                startActivity(i)
+            }
         }
         // off 휴일 신청
         btnHoliday.setOnClickListener {
@@ -72,14 +82,25 @@ class MainActivity : AppCompatActivity() {
         }
         // 포인트몰
         btnPointMall.setOnClickListener {
-            val i = Intent(this,PointMallActivity::class.java)
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this,PointMallActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
+                startActivity(i)
+            }
         }
         // 채팅
         btnChat.setOnClickListener {
-            val i = Intent(this,ChatActivity::class.java)
-            i.putExtra("loginUserId", "test1") // 로그인 유저 아이디 전달 필요
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test2", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this,ChatActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id) // 로그인 유저 아이디 전달 필요
+                startActivity(i)
+            }
         }
         // 알람푸쉬
         btnAlarm.setOnClickListener{
@@ -89,8 +110,14 @@ class MainActivity : AppCompatActivity() {
 
         // 연락처
         btnPhoneNumber.setOnClickListener {
-            val i = Intent(this,PhoneNumActivity::class.java)
-            startActivity(i)
+            // (수정,추가_백엔드) 임시데이터
+            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
+            // (수정,추가_백엔드) 로그인했을시에만 동작
+            if(MemberDao.user != null){
+                val i = Intent(this,PhoneNumActivity::class.java)
+                i.putExtra("loginUserId", MemberDao.user!!.id) // 로그인 유저 아이디 전달 필요
+                startActivity(i)
+            }
         }
         btnManager.setOnClickListener {
             val i = Intent(this,ManagerMenuActivity::class.java)
