@@ -54,10 +54,20 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value ="/dutyList",method= RequestMethod.POST)
-	public List<CalendarDto> dutyList(@RequestBody String id) {		
-		System.out.println("dutyList"+id.replace("\"", ""));
-		List<CalendarDto> result = service.dutyList(id.replace("\"", ""));
-		System.out.println(result.toString());
+	public List<CalendarDto> dutyList(@RequestBody CalendarDto dto) {
+		System.out.println("dutyList"+dto.toString());
+		List<CalendarDto> result = service.dutyList(dto);
 		return result;
+	}
+
+	//메모 등록, 근무가 등록된 날짜에만 메모 입력할 수 있음
+	@RequestMapping(value ="/memoInsert",method= RequestMethod.POST)
+	public String memoInsert(@RequestBody CalendarDto dto) {
+		System.out.println("memoInsert"+dto.toString());
+		int i = service.memoInsert(dto);
+		if(i > 0) {
+			return "success";
+		}
+		return "fail";
 	}
 }

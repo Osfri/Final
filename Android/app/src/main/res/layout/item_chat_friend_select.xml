@@ -9,20 +9,20 @@
             android:layout_height="wrap_content" android:id="@+id/chatfriend_user_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:gravity="center" android:layout_marginStart="30dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView" android:textStyle="bold" android:textSize="20sp"/>
+            android:gravity="center" android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/foodactivity_foodImg" android:textStyle="bold" android:textSize="20sp"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/outline_face_black_24"
-            android:id="@+id/imageView"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="30dp"
+            android:id="@+id/foodactivity_foodImg"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
             android:text="휴대폰 번호"
             android:layout_width="100dp"
             android:layout_height="wrap_content" android:id="@+id/chatfriend_user_phone"
-            android:layout_marginStart="30dp" app:layout_constraintStart_toEndOf="@+id/chatfriend_user_name"
+            android:layout_marginStart="10dp" app:layout_constraintStart_toEndOf="@+id/chatfriend_user_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
     <CheckBox
@@ -30,6 +30,6 @@
             android:layout_height="wrap_content" android:id="@+id/chatfriend_select_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="30dp" app:layout_constraintEnd_toEndOf="parent" android:gravity="center"
+            android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent" android:gravity="center"
     />
 </androidx.constraintlayout.widget.ConstraintLayout>

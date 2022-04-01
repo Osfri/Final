@@ -88,6 +88,7 @@ class ChatFragment : Fragment() {
             val lastMsgTitle: TextView = itemView.findViewById<TextView>(R.id.chatitem_lastmsg)
             val lastMsgTime: TextView = itemView.findViewById<TextView>(R.id.chatitem_lastmsg_time)
 
+            // (수정,추가_백엔드) 1:1채팅 상대방 선택 오류 수정
             fun ChatListViewHolder(title:String, lastMsg:String, chatRoom:ChatModel, chatRoomUsers:String, context: Context, lastTime:Long, chatRoomSeq:String){
                 // chatRoom: 채팅방의 seq
                 chatRoomTitle.text = title
@@ -97,7 +98,10 @@ class ChatFragment : Fragment() {
                 // 채팅방 목록에서 채팅 클릭시 해당채팅방으로 이동
                 itemView.setOnClickListener {
                     var chatIntent: Intent
-
+                    val chatRoomUserTemp:MutableMap<String, Boolean> = mutableMapOf<String, Boolean>()
+                    chatRoomUserTemp.putAll(chatRoom.users)
+                    chatRoomUserTemp.keys.remove(ChatSingleton.getInstance().loginUserInfo.id)
+                    val chatRoomUsers:String = chatRoomUserTemp.keys.first()
 
                     if(chatRoom.users.keys.size>2){ // 채팅방이 단체(3명 이상)으로 되어 있는 경우 (자신포함)
                         chatIntent = Intent(itemView.context, GroupMessageActivity::class.java)

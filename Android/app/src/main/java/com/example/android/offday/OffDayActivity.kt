@@ -135,20 +135,20 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
     }
 
-                override fun onOptionsItemSelected(item: MenuItem): Boolean {
-                    // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
-                    when(item!!.itemId){
-                        android.R.id.home->{
-                            // 햄버거 버튼 클릭시 네비게이션 드로어 열기
-                            drawerLayout.openDrawer(GravityCompat.START)
-                        }
-                    }
-                    return super.onOptionsItemSelected(item)
-                }
-                override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                    when(item.itemId){
-                        R.id.menu_bbs-> {
-                            val i = Intent(this, BbsActivity::class.java)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
+        when(item!!.itemId){
+            android.R.id.home->{
+                // 햄버거 버튼 클릭시 네비게이션 드로어 열기
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_bbs-> {
+                val i = Intent(this, BbsActivity::class.java)
                 startActivity(i)
             }
             R.id.menu_alram-> {

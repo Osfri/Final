@@ -18,6 +18,6 @@ public interface CalendarDao {
 	public List<CalendarDto> offList(String date);
 	// 취소
 	public int offCancel(CalendarDto dto);
-	// 자기 일정표
-	public List<CalendarDto> dutyList(String id);
+	public List<CalendarDto> dutyList(CalendarDto dto);
+	public int memoInsert(CalendarDto dto);
 }

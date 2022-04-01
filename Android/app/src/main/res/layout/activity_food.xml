@@ -33,15 +33,14 @@
         </LinearLayout>
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/foodRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.89"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.89" android:layout_gravity="center"/>
 
     <FrameLayout
             android:id="@+id/foodFragment"
@@ -85,7 +84,7 @@
             android:layout_gravity="start"
             app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
-            app:headerLayout="@layout/ham_header"/>
+            app:headerLayout="@layout/ham_header" tools:visibility="gone"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
