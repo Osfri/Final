@@ -59,7 +59,7 @@ class SelectPeopleActivity : AppCompatActivity() {
                 nextIntent = Intent(this, MessageActivity::class.java)
                 nextIntent.putExtra("selectUser", selectUser)
                 startActivity(nextIntent)
-            }else{
+            }else if(chatModel.users.keys.size > 2){    // 2명 이상선택할 경우 (0명 선택 방지)
                 checkGroupChatRoom()
             }
         }

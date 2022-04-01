@@ -27,12 +27,12 @@ class PointMallDto(val seq:Int, val title:String?, val content:String?, val imag
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<FoodDto> {
-        override fun createFromParcel(parcel: Parcel): FoodDto {
-            return FoodDto(parcel)
+    companion object CREATOR : Parcelable.Creator<PointMallDto> {
+        override fun createFromParcel(parcel: Parcel): PointMallDto {
+            return PointMallDto(parcel)
         }
 
-        override fun newArray(size: Int): Array<FoodDto?> {
+        override fun newArray(size: Int): Array<PointMallDto?> {
             return arrayOfNulls(size)
         }
     }
