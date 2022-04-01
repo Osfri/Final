@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -15,8 +16,12 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.ChatSingleton
+import com.example.android.chat.ChatUserDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 import com.google.android.material.navigation.NavigationView
 
 class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
@@ -24,21 +29,34 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    // 데이터 확인용 변수로 지워도 됩니다
-    var userList = arrayListOf<FoodDto>(
-        FoodDto("1", "2022-06-08", "자장면,짬뽕"),
-        FoodDto("2", "2022-05-08", "자장면"),
-        FoodDto("3", "2022-01-08", "밥")
-
-
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_food)
 
 
+        // TODO: 사이드바에서 쇼핑몰 진입시 오류 (로그인 객체 null)
+        // (수정,추가_백엔드) 임시데이터 생성 (객체로 넘어올 경우 삭제)
+        val loginUserId:String = intent.getStringExtra("loginUserId")!!
+        val userInfo: ChatUserDto = ChatSingleton.getInstance().getLoginUserInfo(loginUserId)
+        MemberDao.user = MemberDto(userInfo.id,userInfo.name,userInfo.email, userInfo.pw, userInfo.phonenumber,userInfo.code,userInfo.auth,userInfo.alarm, userInfo.alarmtime,userInfo.point)
+
+        // TODO: 식단등록은 웹에서 등록하므로 등록기능 해제함
+        // (수정,추가_백엔드) 관리자인 경우만 식단등록 표시 => 앱에서는 권한 관계없이 등록페이지 안보이도록 수정함
+        val foodWriteBtn:Button = findViewById<Button>(R.id.btnFoodWrite)
+        foodWriteBtn.visibility = View.GONE
+        /*
+        if(MemberDao.user!!.auth == 0 || MemberDao.user!!.auth == 3){   // 0: 관리자, 3: 최고관리자
+            foodWriteBtn.visibility = View.VISIBLE
+        }else{
+            foodWriteBtn.visibility = View.GONE
+        }
+         */
+
+
+        // (수정,추가_백엔드) 식단 데이터 생성
+        FoodSingleton.getInstance().getSameCodeFoodInfo(MemberDao.user!!)
+        val foodItemList: MutableList<FoodDto> = FoodSingleton.getInstance().foodItemList
 
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
@@ -57,11 +75,12 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // 리사이클러 뷰
         var foodRecyclerView = findViewById<RecyclerView>(R.id.foodRecyclerView)
-        val mAdapter = CustomAdapterFood(this, userList)
+        val mAdapter = CustomAdapterFood(this, foodItemList)
         foodRecyclerView.adapter = mAdapter
         var layout = LinearLayoutManager(this)
         foodRecyclerView.layoutManager = layout
         foodRecyclerView.setHasFixedSize(true)
+
 
 
         // food -> foodwrite 이동    (식단 등록으로 가는 버튼)
@@ -71,6 +90,21 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(i)
         }
 
+    }
+
+    // (수정,추가_백엔드)
+    override fun onResume() {
+        super.onResume()
+        FoodSingleton.getInstance().getSameCodeFoodInfo(MemberDao.user!!)
+        val foodItemList: MutableList<FoodDto> = FoodSingleton.getInstance().foodItemList
+        val mAdapter = CustomAdapterFood(this, foodItemList)
+        //mAdapter.notifyDataSetChanged()
+
+        var foodRecyclerView = findViewById<RecyclerView>(R.id.foodRecyclerView)
+        foodRecyclerView.adapter = mAdapter
+        var layout = LinearLayoutManager(this)
+        foodRecyclerView.layoutManager = layout
+        foodRecyclerView.setHasFixedSize(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

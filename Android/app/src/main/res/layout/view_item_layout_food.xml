@@ -16,7 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="28dp"/>
+            android:layout_marginStart="28dp" android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/foodRecycleViewMenu"
@@ -35,8 +35,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/foodRecycleViewMenu"
             app:layout_constraintTop_toTopOf="@+id/foodRecycleViewDate"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintVertical_bias="0.058"/>
+            android:layout_marginEnd="30dp"
+            app:layout_constraintVertical_bias="0.058" android:scaleType="fitCenter"/>
 
     <!-- view = 선 한줄 -->
     <View

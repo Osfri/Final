@@ -1,6 +1,7 @@
 package com.example.android.bbs
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -27,29 +29,30 @@ import com.example.android.chat.fragment.PeopleFragment
 import com.example.android.databinding.ActivityBbsDetailBinding
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_bbs_detail.*
+import java.time.LocalDate
 
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
 
 
     //임의로 만든 데이터 댓글보이기 위해, 지워야합니다
-    var userList = arrayListOf<CommentDto>(
-        CommentDto(1, 0, 0,0, 0,"2022-03-15","22222",0),
-        CommentDto(1, 0, 0,0, 0,"댓글두번째","22222",0)
-    )
+
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs_detail)
 
 
         val data = intent.getParcelableExtra<BbsDto>("data")
-        println("DDDDDDDDDDDDDDDDDDDDDD--------------------------------------${data!!.seq}")
+
+
 
 /*
         val dto = BbsDao.getInstance().bbsDetail(data!!.seq)
@@ -80,7 +83,16 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
 
         btnCommentWrite.setOnClickListener {
-            val i = Intent(this, BbsDetail::class.java)
+            val onlyDate: String = LocalDate.now().toString()
+            val dto = BbsDto(0,MemberDao.user!!.id.toString(),"",bbsCommentEditText.text.toString(),0,onlyDate,0,data!!.type,data.code,1,data.gr,"")
+            BbsDao.getInstance().bbswrite(dto)
+            /*val i = Intent(this, BbsDetail::class.java)
+            startActivity(i)*/
+        }
+
+        btnDetailDel.setOnClickListener {
+
+            val i = Intent(this, BbsActivity::class.java)
             startActivity(i)
         }
 
@@ -88,9 +100,10 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
         // 댓글리스트
+        val commentlist = BbsDao.getInstance().getCommentList(data!!.gr)
         var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
 
-        val mAdapter = CustomAdapterCommentList(this, userList)
+        val mAdapter = CustomAdapterCommentList(this, commentlist)
         bbsDetailCommentRecycleview.adapter = mAdapter
 
         val layout = LinearLayoutManager(this)

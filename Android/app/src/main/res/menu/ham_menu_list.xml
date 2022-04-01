@@ -30,6 +30,7 @@
             android:title="연락처" />
     <item
             android:id="@+id/menu_manager"
+            android:icon="@drawable/ic_manager"
             android:title="관리자"/>
 
 

@@ -10,7 +10,9 @@
         tools:openDrawer="start">
 
 
-
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
     <LinearLayout
             android:id="@+id/linearManager"
@@ -53,7 +55,7 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 
-
+    </ScrollView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

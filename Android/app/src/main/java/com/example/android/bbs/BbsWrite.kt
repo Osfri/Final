@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,9 +27,11 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     //STORAGE권한 처리에 필요한 변수 - Manifest 부분의 안드로이드 부분이 필요
@@ -42,6 +45,12 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
+    // Db에 넣을 사진 주소
+    companion object {
+        var imageAddr = ""
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs_write)
@@ -60,6 +69,8 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
 
 
+
+
         // bbsWriteId.text = MemberDao.user?.id                  글쓰기 db완성시 주석 풀면 됩니다
         val bbsWriteTitle = findViewById<EditText>(R.id.bbsWriteTitle)
         val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
@@ -71,10 +82,25 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             println(bbsWriteId.text.toString())
             println(bbsWriteTitle.text.toString())
             println(bbsWriteContent.text.toString())
-/*   db쿼리문
-            BbsDao.getInstance().bbswrite(BbsDto(0, MemberDao.user?.id, 0, 0, 0,
-                title.text.toString(), content.text.toString(), "",
-                0, 0))      */
+
+            val onlyDate:LocalDate = LocalDate.now() // 현재날짜
+
+            val split = MemberDao.user!!.code!!.split("_")
+            val trueCode:String = split[0] // 병동코드 123_1 -> 병원코드 123 변환
+            //db쿼리문
+            // seq , id , title , content , readCount , wdate , del , type , code , step , group , image
+            BbsDao.getInstance().bbswrite(BbsDto(0 , //seq
+                                                    MemberDao.user!!.id , //id
+                                                    bbsWriteTitle.text.toString() , //title
+                                                    bbsWriteContent.text.toString() , //content
+                                                    0 , //readCount
+                                                    onlyDate.toString() , //wdate
+                                                     0 , //del
+                                                    0 , //type
+                                                    trueCode , //code
+                                                    0 , //step
+                                                    0 , //group
+                                                    imageAddr)) //image
 
             Toast.makeText(this, "추가되었습니다", Toast.LENGTH_LONG).show()
 
@@ -237,11 +263,13 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                         imageView.setImageURI(uri)
                         println("이미지경로:$uri")
                         println("실제 이미지경로      :" + getPath(uri))
+                        imageAddr = uri.toString()
                     }
                 }
                 STORAGE_CODE -> {
                     val uri = data?.data
                     imageView.setImageURI(uri)
+                    imageAddr = uri.toString()
                 }
             }
         }
@@ -271,5 +299,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         cursor.moveToFirst()
         return cursor.getString(columnIndex)
     }
+
+
 
 }

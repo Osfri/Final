@@ -3,19 +3,21 @@ package com.example.android.lunch
 import android.os.Parcel
 import android.os.Parcelable
 
-class FoodDto(val code:String?, val fdate:String?, val menu:String?) :Parcelable {
+class FoodDto(val code:String?, val fdate:String?, val menu:String?, val photo:String?) :Parcelable {
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
     ) {
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(code)
-        parcel.writeString(fdate)
-        parcel.writeString(menu)
+    override fun writeToParcel(parcel: Parcel?, flags: Int) {
+        parcel?.writeString(code)
+        parcel?.writeString(fdate)
+        parcel?.writeString(menu)
+        parcel?.writeString(photo)
 
     }
 

@@ -9,7 +9,9 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -106,7 +108,7 @@
                   app:layout_constraintHorizontal_bias="0.377"/>
 
     </LinearLayout>
-
+    </ScrollView>
 
     <include
             layout="@layout/ham_appbar"
