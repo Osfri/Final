@@ -5,18 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.bottomfragment.NaviCommentFragment
+import com.example.android.bbs.bottomfragment.NaviUpdateFragment
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.chat.fragment.AccountFragment
+import com.example.android.chat.fragment.ChatFragment
+import com.example.android.chat.fragment.PeopleFragment
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
@@ -37,6 +45,33 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_food)
+
+
+        var bottomNaviFood = findViewById<BottomNavigationView>(R.id.bottomNaviFood)
+        // 하단의 버튼 navi를 클릭했을시
+        bottomNaviFood.setOnItemSelectedListener {
+            var fr: Fragment?= null
+            when(it.itemId){
+                R.id.bottomAlarm-> {
+                    fr = NaviCommentFragment()
+                }
+                R.id.bottomChat -> {
+                    fr = NaviUpdateFragment()
+                }
+                R.id.bottomCal -> {
+                    fr = NaviCommentFragment()
+                }
+            }
+            setCurrentFragment(fr!!)
+            true
+        }
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +106,15 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(i)
         }
 
+
     }
+
+    private fun setCurrentFragment(fr: Fragment) = supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flBottomFood, fr)
+            commit()
+
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

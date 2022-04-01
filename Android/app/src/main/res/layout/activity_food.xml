@@ -54,6 +54,24 @@
 
 
     </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <FrameLayout
+                android:id="@+id/flBottomFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNaviFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/bottom_nav_menu"
+                app:itemBackground="@color/black"
+                app:itemTextColor="@color/white"/>
+    </LinearLayout>
 
     <include
             layout="@layout/ham_appbar"
@@ -68,7 +86,6 @@
             app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

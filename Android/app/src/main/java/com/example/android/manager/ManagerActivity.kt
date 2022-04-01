@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlin.random.Random
 
 
-class ManagerActivity : AppCompatActivity() /*, NavigationView.OnNavigationItemSelectedListener*/ {
+class ManagerActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
@@ -197,6 +197,6 @@ class ManagerActivity : AppCompatActivity() /*, NavigationView.OnNavigationItemS
             }
 
         }
-        return false*/
+        return false
     }
 }
