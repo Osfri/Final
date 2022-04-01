@@ -284,7 +284,7 @@ class MessageActivity : AppCompatActivity() {
                 }
 
                 val backgroundDirection:Int = if(dir.equals("R")) R.drawable.message_right else R.drawable.message_left
-                val textColor:Int = if(dir.equals("R")) Color.BLACK else Color.WHITE
+                val textColor:Int = if(dir.equals("R")) Color.WHITE else Color.WHITE
                 message.text = msg
                 message.setBackgroundResource(backgroundDirection)  // 말풍선 이미지 나인패치 적용(파일명.9.확장자) (크기에 따라 자동으로 늘어남)
                 message.setTextColor(textColor)
