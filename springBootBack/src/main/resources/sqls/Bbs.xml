@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mul.camp.a.dao.BbsDao">
+    <insert id="bbsAdd" parameterType="mul.camp.a.dto.BoardTypeDto">
+        INSERT INTO BOARDTYPE( TYPE , NAME , CODE , AUTH )
+        VALUES ( #{type}, #{name} , #{code} , #{auth} )
+    </insert>
+    <select id="bbsRandomCheck" parameterType="integer" resultType="mul.camp.a.dto.BoardTypeDto">
+        SELECT *
+        FROM BOARDTYPE
+        WHERE TYPE = #{type}
+    </select>
+    <select id="getBoardTypeList" parameterType="java.lang.String" resultType="mul.camp.a.dto.BoardTypeDto">
+        SELECT *
+        FROM BOARDTYPE
+        WHERE CODE = #{code}
+    </select>
+    <insert id="bbswrite" parameterType="mul.camp.a.dto.BoardDto">
+        INTSERT INTO BOARD( SEQ , ID , TITLE , CONTENT , READCOUNT , WDATE , DEL , TYPE , CODE , STEP , GR , IMAGE )
+        VALUES { BOARD_SEQ.NEXTVAL , #{id} , #{title} , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , 0 , BOARDTYPE_SEQ.NEXTVAL , #{image} }
+    </insert>
+    <select id="getBbsList" parameterType="Map" resultType="mul.camp.a.dto.BoardDto">
+        SELECT *
+        FROM BOARD
+        WHERE CODE = #{code} AND TYPE = #{type} AND STEP = 0
+        ORDER BY SEQ DESC
+    </select>
+    <select id="getCommentList" parameterType="integer" resultType="mul.camp.a.dto.BoardDto">
+        SELECT *
+        FROM BOARD
+        WHERE GROUP = #{gr} AND STEP = 1
+        ORDER BY SEQ
+    </select>
+    <update id="deleteBbs" parameterType="integer">
+        UPDATE BOARD
+        SET DEL = 1
+        WHERE SEQ = #{seq}
+    </update>
+    <update id="updateBbs" parameterType="mul.camp.a.dto.BoardDto">
+        UPDATE BOARD
+        SET TITLE = #{title} , CONTENT = #{content} , IMAGE = #{image}
+        WHERE SEQ = #{seq}
+    </update>
+
+</mapper>

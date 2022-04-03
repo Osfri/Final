@@ -17,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.BbsDao
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.BoardtypeDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
 
 
@@ -42,7 +45,7 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_bbs)
 
-
+        var boardAuth = 0  // 관리자만 작성가능 0 , 모두 작성가능 1
         val manager_btn_check = findViewById<Button>(R.id.manager_btn_check)                // 게시판 등록 버튼
         val radioGroups = findViewById<RadioGroup>(R.id.manager_bbs_radioGroup)             // 라디오 버튼 그룹
         val manager_et_bbs = findViewById<EditText>(R.id.manager_et_bbs)                    // 게시판명 입력창
@@ -55,10 +58,39 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         radioGroups.setOnCheckedChangeListener { _, checkedId ->    // checkedId는 어디서 나왔냐, 임의로 생성한 말
             Log.d("RadioButton", "라디오 버튼 활성화")
             when(checkedId) {
-                R.id.manager_bbs_radioManager -> Toast.makeText(this,"관리자 권한으로 게시판이 생성됩니다", Toast.LENGTH_SHORT).show()     // 텍스트 뷰에다가 문자를 넣는 (버튼 클릭시 텍스트 뷰에 글이 뜬다)
-                R.id.manager_bbs_radioStaff -> Toast.makeText(this,"개인 권한으로 게시판이 생성됩니다", Toast.LENGTH_SHORT).show()
+                R.id.manager_bbs_radioManager -> {
+                    Toast.makeText(this,"관리자 권한으로 게시판이 생성됩니다", Toast.LENGTH_SHORT).show()
+                    boardAuth = 0
+                }     // 텍스트 뷰에다가 문자를 넣는 (버튼 클릭시 텍스트 뷰에 글이 뜬다)
+                R.id.manager_bbs_radioStaff -> {
+                    Toast.makeText(this,"개인 권한으로 게시판이 생성됩니다", Toast.LENGTH_SHORT).show()
+                    boardAuth = 1
+                }
 
             }
+        }
+        // 게시판 등록
+        var result = true
+        var type = 0
+        manager_btn_check.setOnClickListener {
+            while (result){
+            var random:Int = (1..999999).random()
+            val temp:BoardtypeDto? = BbsDao.getInstance().bbsRandomCheck(random)
+                if (temp == null){
+                    type = random
+                    println("===randon"+random)
+                    println("===randon"+type)
+                    result = false
+                }
+            }
+            var code = MemberDao.user!!.code
+            if (code!!.contains("_")){
+                code = code.split("_")[0]
+            }
+            println("===randon"+type)
+            val typeDto = BoardtypeDto(type,manager_et_bbs.text.toString(),code,boardAuth)
+            BbsDao.getInstance().bbsAdd(typeDto)
+            println("===========================fdsafdsafdsa"+typeDto.toString())
         }
 
 
