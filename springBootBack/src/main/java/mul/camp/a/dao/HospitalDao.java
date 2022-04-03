@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface HospitalDao {
-
+	
     HospitalDto codeCheck(String code);
     int insertHospital(HospitalDto dto);
     int insertHospitalAf(MemberDto dto);

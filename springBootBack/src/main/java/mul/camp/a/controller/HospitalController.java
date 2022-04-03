@@ -29,6 +29,7 @@ public class HospitalController {
         System.out.println("인서트병원"+dto.toString());
         return service.insertHospital(dto);
     }
+    
     @RequestMapping(value = "/insertHospitalAf",method = RequestMethod.POST)
     public int insertHospitalAf(@RequestBody MemberDto dto){
         System.out.println("인서트병원AF"+dto.toString());
