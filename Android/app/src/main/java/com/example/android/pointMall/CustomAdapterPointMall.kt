@@ -59,6 +59,7 @@ class CustomAdapterPointMall(val context:Context, val itemList:MutableList<ShopD
                 if(MemberDao.user!!.point!! < dataVo.price){
                     pointlist_btn_detail.text = "구매 불가"
                     pointlist_btn_detail.setBackgroundColor(ContextCompat.getColor(context,R.color.silver))
+                    pointlist_btn_detail.setBackgroundResource(R.drawable.button_round_original)
                     pointlist_btn_detail.isEnabled = false
                 }else{
                     // (수정,추가_백엔드) 구매버튼 클릭시
@@ -73,6 +74,7 @@ class CustomAdapterPointMall(val context:Context, val itemList:MutableList<ShopD
             }else{  // 재고가 없을 경우
                 pointlist_btn_detail.text = "재고 없음"
                 pointlist_btn_detail.setBackgroundColor(ContextCompat.getColor(context,R.color.silver))
+                pointlist_btn_detail.setBackgroundResource(R.drawable.button_round_original)
                 pointlist_btn_detail.isEnabled = false
             }
         }

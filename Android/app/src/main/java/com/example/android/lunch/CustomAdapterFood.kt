@@ -31,6 +31,7 @@ class CustomAdapterFood(val context: Context, val dataList:MutableList<FoodDto>)
                 val resourceId = context.resources.getIdentifier(dataVo.photo,"drawable",context.packageName)
                 if(resourceId > 0){
                     foodRecycleViewImg.setImageResource(resourceId)
+                    foodRecycleViewImg.setClipToOutline(true)
                 }else{
                     foodRecycleViewImg.setBackgroundResource(0)
                     Glide.with(context).load(dataVo.photo).into(foodRecycleViewImg)

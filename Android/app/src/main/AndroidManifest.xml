@@ -35,9 +35,7 @@
         <activity
                 android:name=".bbs.SelectActivity"
                 android:exported="true"/>
-        <activity
-                android:name=".SplashActivity"
-                android:exported="true"/>
+
         <activity
                 android:name=".chat.fragment.SelectPeopleActivity"
                 android:exported="true"/>
@@ -109,7 +107,13 @@
                 android:exported="true"/>
         <activity
                 android:name=".MainActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".SplashActivity"
+                android:screenOrientation="portrait"
+                android:noHistory="true"
                 android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

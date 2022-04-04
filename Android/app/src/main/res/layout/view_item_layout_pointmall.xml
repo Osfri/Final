@@ -6,9 +6,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/point_itemlist_cardview"
         android:layout_margin="15dp"
-        card_view:cardBackgroundColor="#E4E4E4"
-        card_view:cardCornerRadius="12dp"
-        card_view:cardElevation="3dp"
+        card_view:cardBackgroundColor="#D6EEF1"
+        card_view:cardCornerRadius="30dp"
+        card_view:cardElevation="5dp"
         card_view:contentPadding="4dp">
 
     <RelativeLayout
@@ -31,6 +31,7 @@
         <TextView
                 android:id="@+id/point_itemlist_title"
                 android:text="임시용: 라운드 셔츠"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/point_itemlist_image"

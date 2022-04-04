@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import com.example.android.R
 import com.example.android.bbs.BbsWrite
 
@@ -12,8 +13,8 @@ class SemiScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_semi_screen)
 
-        val semiSc_Btn_Manager = findViewById<Button>(R.id.semiSc_Btn_Manager)      // 관리자버튼
-        val semiSc_Btn_Invidual = findViewById<Button>(R.id.semiSc_Btn_Invidual)    // 개인버튼
+        val semiSc_Btn_Manager = findViewById<ImageButton>(R.id.semiSc_Btn_Manager)      // 관리자버튼
+        val semiSc_Btn_Invidual = findViewById<ImageButton>(R.id.semiSc_Btn_Invidual)    // 개인버튼
 
 
         // 관리자 확인 페이지이동

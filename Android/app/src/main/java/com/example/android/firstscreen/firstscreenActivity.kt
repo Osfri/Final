@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import com.example.android.R
 import com.example.android.signin.SigninActivity
 import com.example.android.signup.SignupActivity
@@ -14,7 +15,7 @@ class firstscreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_firstscreen)
 
         val signin = findViewById<Button>(R.id.btn_signin1)
-        val signup = findViewById<Button>(R.id.btn_signin1)
+        val signup = findViewById<ImageButton>(R.id.btn_signup1)
 
         signin.setOnClickListener {
             val i = Intent(this,SigninActivity::class.java)
