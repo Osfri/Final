@@ -53,10 +53,13 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val cal = Calendar.getInstance()
         cal.time = Date()
         val df = SimpleDateFormat("yyyy-MM")
+        //현재 시간 기준으로 다음 달
         cal.add(Calendar.MONTH, 1)
         val dto = CalendarDto(mem!!.id.toString(), df.format(cal.time).toString())
+        //db에 저장된 본인 일정 모두 불러옴
         val dutyList: List<CalendarDto>? = CalendarDao.getInstance().dutyList(dto)
 
+        //데이터 형태에 맞게 저장
         if (dutyList != null && dutyList.size != 0) {
             for(i in dutyList!!){
                 val dto = CalendarDto(i.wdate.toString(), i.time, i.id, i.memo)
@@ -66,16 +69,13 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     curData[i.wdate.toString()] = dto
                 }
             }
-        }else{
-            println("sssssssssssss")
+        }else{  //db에 데이터가 없는 경우 처리
             val dto = CalendarDto("", "", "", "")
             curData = mutableMapOf(Pair("2022-03", dto))
         }
 
-        val calEt = findViewById<EditText>(R.id.cal_et)
         val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
-        val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
-        val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
+        //날짜가 선택되지 않고 버튼이 눌리는 것 방지
         calSaveBtn.setOnClickListener {
             if(CalendarDao.memoDate == null){
                 Toast.makeText(this, "날짜를 선택해 주세요.", Toast.LENGTH_SHORT).show()
@@ -93,6 +93,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val recyclerView = findViewById<RecyclerView>(R.id.calRecyclerView)
         val calendarRecyclerViewAdapter:CalRecyclerViewAdapter = CalRecyclerViewAdapter(mCalendarList, this)
         recyclerView.adapter = calendarRecyclerViewAdapter
+        //calendarRecyclerViewAdapter.notifyDataSetChanged()
         recyclerView.layoutManager = gridManager
 
 
@@ -249,6 +250,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val calDeleteBtn = activity.findViewById<Button>(R.id.calDeleteBtn)
                 val tv = activity.findViewById<TextView>(R.id.cal_tv)
 
+                //근무표에 맞는 이미지 넣기
                 when(dto.content!!.time){
                     "o"-> img.setImageResource(R.drawable.ic_cal_o)
                     "O"-> img.setImageResource(R.drawable.ic_cal_o)
@@ -262,9 +264,10 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     "M"-> img.setImageResource(R.drawable.ic_cal_m)
                 }
 
+                //메모 없는 경우 => 초기화를 위해 해줘야 함
                 if(dto.content!!.memo == null  || dto.content!!.memo == ""){
                     memoImg.setImageResource(R.drawable.ic_cal_white)
-                }else{
+                }else{      //메모 있는 경우
                     memoImg.setImageResource(R.drawable.ic_cal_me)
                 }
                 calSaveBtn.setOnClickListener {
@@ -275,6 +278,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 img.setOnClickListener{
                     CalendarDao.memoDate = dto.content!!
                     tv.text = CalendarDao.memoDate!!.wdate.toString()
+                    //저장된 메모가 없는 경우 새로 등록
                     if(CalendarDao.memoDate!!.memo == null || CalendarDao.memoDate!!.memo.toString() == ""){
                         et.setText("")
                         calUpdateBtn.visibility = View.INVISIBLE
@@ -288,6 +292,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                                 val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
                                 if(result == "success"){
                                     Toast.makeText(context, "메모가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                                    //화면 새로고침
                                     val intent = (context as Activity).intent
                                     context.finish() //현재 액티비티 종료 실시
                                     context.overridePendingTransition(0, 0) //효과 없애기
@@ -296,7 +301,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                                 }
                             }
                         }
-                    }else{
+                    }else{      //저장된 메모가 있는 경우 수정/삭제 기능
                         et.setText(CalendarDao.memoDate!!.memo.toString())
                         calUpdateBtn.visibility = View.VISIBLE
                         calDeleteBtn.visibility = View.VISIBLE
@@ -309,6 +314,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                                 val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
                                 if(result == "success"){
                                     Toast.makeText(context, "메모가 수정되었습니다.", Toast.LENGTH_SHORT).show()
+                                    //화면 새로고침
                                     val intent = (context as Activity).intent
                                     context.finish() //현재 액티비티 종료 실시
                                     context.overridePendingTransition(0, 0) //효과 없애기
@@ -325,6 +331,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                                     val result = CalendarDao.getInstance().memoInsert(CalendarDao.memoDate!!)
                                     if(result == "success"){
                                         Toast.makeText(context, "메모가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                        //화면 새로고침
                                         val intent = (context as Activity).intent
                                         context.finish() //현재 액티비티 종료 실시
                                         context.overridePendingTransition(0, 0) //효과 없애기
