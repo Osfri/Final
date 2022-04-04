@@ -103,7 +103,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val commentlist = BbsDao.getInstance().getCommentList(data!!.gr)
         var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
 
-        val mAdapter = CustomAdapterCommentList(this, commentlist)
+        val mAdapter = CustomAdapterCommentList(this, commentlist!!)
         bbsDetailCommentRecycleview.adapter = mAdapter
 
         val layout = LinearLayoutManager(this)

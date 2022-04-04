@@ -22,6 +22,10 @@ class BoardtypeDto(val type:Int,val name:String?,val code:String?,val auth:Int):
         return 0
     }
 
+    override fun toString(): String {
+        return "BoardtypeDto(type=$type, name=$name, code=$code, auth=$auth)"
+    }
+
     companion object CREATOR : Parcelable.Creator<BoardtypeDto> {
         override fun createFromParcel(parcel: Parcel): BoardtypeDto {
             return BoardtypeDto(parcel)
@@ -31,5 +35,6 @@ class BoardtypeDto(val type:Int,val name:String?,val code:String?,val auth:Int):
             return arrayOfNulls(size)
         }
     }
+
 
 }

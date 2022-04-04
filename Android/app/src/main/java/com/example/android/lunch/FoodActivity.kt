@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
+import com.example.android.bbs.bottomfragment.NaviCommentFragment
+import com.example.android.bbs.bottomfragment.NaviUpdateFragment
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.chat.ChatSingleton
@@ -89,6 +93,7 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val i = Intent(this, FoodWriteActivity::class.java)
             startActivity(i)
         }
+
 
     }
 

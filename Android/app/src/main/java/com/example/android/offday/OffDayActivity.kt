@@ -126,7 +126,6 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         recyclerView.adapter = calendarRecyclerViewAdapter
         recyclerView.layoutManager = gridManager
 
-
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
@@ -223,7 +222,6 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 }
             }
         }
-
         return  calendarList
     }
 
