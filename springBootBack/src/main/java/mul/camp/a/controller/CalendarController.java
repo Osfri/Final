@@ -34,7 +34,8 @@ public class CalendarController {
 	@RequestMapping(value ="/offList",method= RequestMethod.POST)
 	public List<CalendarDto> offList(@RequestBody String date) {
 		System.out.println("offList"+date);
-		date = date.substring(1, 8);
+		// "2022-04-14" 2022 04월까지 자름
+ 		date = date.substring(1, 8);
 		System.out.println(date);
 		List<CalendarDto> result = service.offList(date);
 		System.out.println(result.toString());
@@ -56,9 +57,9 @@ public class CalendarController {
 	public List<CalendarDto> dutyList(@RequestBody CalendarDto dto) {
 		System.out.println("dutyList"+dto.toString());
 		List<CalendarDto> result = service.dutyList(dto);
+		System.out.println(result.toString());
 		return result;
 	}
-
 	//메모 등록, 근무가 등록된 날짜에만 메모 입력할 수 있음
 	@RequestMapping(value ="/memoInsert",method= RequestMethod.POST)
 	public String memoInsert(@RequestBody CalendarDto dto) {

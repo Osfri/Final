@@ -1,32 +1,37 @@
 package com.example.android.bbs
 
 import com.example.android.manager.BoardtypeDto
+import com.example.android.bbs.RetrofitClient
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface BbsService {
 
-    @GET("/getBbsList")
-    fun getBbsList(code:String,type: Int): Call<ArrayList<BbsDto>>
+    @POST("/getBbsList")
+    fun getBbsList(@Body code:String,type: Int): Call<ArrayList<BbsDto>>
 
-    @GET("/bbswrite")
-    fun bbswrite(dto:BbsDto) : Call<String>
+    @POST("/bbswrite")
+    fun bbswrite(@Body dto:BbsDto) : Call<Int>
 
-    @GET("/bbsAdd")
-    fun bbsAdd(dto:BoardtypeDto) : Call<Int>
+    @POST("/bbsAdd")
+    fun bbsAdd(@Body dto:BoardtypeDto) : Call<Int>
 
     @POST("/bbsRandomCheck")
-    fun bbsRandomCheck(type: Int) : Call<BoardtypeDto>
+    fun bbsRandomCheck(@Body type: Int) : Call<BoardtypeDto>
 
-    @GET("/getBoardTypeList")
-    fun getBoardTypeList(code: String) : Call<ArrayList<BoardtypeDto>>
+    @POST("/getBoardTypeList")
+    fun getBoardTypeList(@Body code: String) : Call<ArrayList<BoardtypeDto>>
 
-    @GET("/getCommentList")
-    fun getCommentList(gr:Int) : Call<ArrayList<BbsDto>>
+    @POST("/getCommentList")
+    fun getCommentList(@Body gr:Int) : Call<ArrayList<BbsDto>>
 
-    @GET("/deleteBbs")
-    fun deleteBbs(seq: Int) : Call<Int>
+    @POST("/deleteBbs")
+    fun deleteBbs(@Body seq: Int) : Call<Int>
+
+    @POST("/updateBbs")
+    fun updateBbs(@Body dto:BbsDto) : Call<Int>
 }
 
 
@@ -43,7 +48,9 @@ class BbsDao {
         }
     }
     // 병원 코드 , 게시물 타입
-    fun getBbsList(code: String,type: Int): ArrayList<BbsDto> {
+    fun getBbsList(code: String,type: Int): ArrayList<BbsDto>? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -51,20 +58,30 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as ArrayList<BbsDto>
+        }catch (e:Exception){
+            return null
+        }
     }
     //게시물 작성
-    fun bbswrite(bbs: BbsDto): String {
+    fun bbswrite(bbs: BbsDto): Int? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
         val call = service?.bbswrite(bbs)
         val response = call?.execute()
 
-        return response?.body() as String
+        return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
     }
 
     //게시판 생성
-    fun bbsAdd(dto: BoardtypeDto): Int {
+    fun bbsAdd(dto: BoardtypeDto): Int? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -72,10 +89,15 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
     }
 
     //랜덤 생성된 BoardType 의 type 중복 확인
-    fun bbsRandomCheck(type: Int): BoardtypeDto {
+    fun bbsRandomCheck(type: Int): BoardtypeDto? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -83,10 +105,15 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as BoardtypeDto
+        }catch (e:Exception){
+            return null
+        }
     }
 
     // 게시판 불러오기 게시물x
-    fun getBoardTypeList(code: String) : ArrayList<BoardtypeDto> {
+    fun getBoardTypeList(code: String) : ArrayList<BoardtypeDto>? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -94,10 +121,15 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as ArrayList<BoardtypeDto>
+        }catch (e:Exception){
+            return null
+        }
     }
 
     //댓글 불러오기
-    fun getCommentList(gr:Int) : ArrayList<BbsDto>{
+    fun getCommentList(gr:Int) : ArrayList<BbsDto>?{
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -105,10 +137,15 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as ArrayList<BbsDto>
+        }catch (e:Exception){
+            return null
+        }
     }
 
     //게시글 삭제 , 댓글도 가능
-    fun deleteBbs(seq:Int) : Int {
+    fun deleteBbs(seq:Int) : Int? {
+        try {
+
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
@@ -116,6 +153,25 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
+    }
+
+    //게시물,댓글 수정
+    fun updateBbs(dto:BbsDto) : Int?{
+        try {
+
+        val retrofit = RetrofitClient.getInstance()
+
+        val service = retrofit?.create(BbsService::class.java)
+        val call = service?.updateBbs(dto)
+        val response = call?.execute()
+
+        return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
     }
 
 

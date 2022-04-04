@@ -34,7 +34,6 @@ public class CalendarService {
     public List<CalendarDto> dutyList(CalendarDto dto){
     	return dao.dutyList(dto);
     }
-
     public int memoInsert(CalendarDto dto){
     	return dao.memoInsert(dto);
     }
