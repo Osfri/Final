@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -43,8 +44,8 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
 
 
-        val manage_Btn_Bbs = findViewById<Button>(R.id.manage_Btn_Bbs)
-        val manage_Btn_Staff = findViewById<Button>(R.id.manage_Btn_Staff)
+        val manage_Btn_Bbs = findViewById<ImageButton>(R.id.manage_Btn_Bbs)
+        val manage_Btn_Staff = findViewById<ImageButton>(R.id.manage_Btn_Staff)
         // 게시물 관리
         manage_Btn_Bbs.setOnClickListener {
             val i = Intent(this, ManagerBbsActivity::class.java)

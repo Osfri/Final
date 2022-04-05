@@ -15,7 +15,41 @@
             android:orientation="vertical"
             tools:context=".LinearActivity">
 
+        <TextView android:layout_width="600dp"
+                  android:layout_height="200dp"
+                  android:layout_weight="1"/>
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center"
+                  android:text="게시물을 추가 또는 추가가 할 수 있는 페이지입니다(임시)"
+                  android:textSize="12dp"
+                  android:layout_weight="1"/>
+
+        <ImageButton
+                android:id="@+id/manage_Btn_Bbs"
+                android:layout_width="600dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/button_manager_click"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center"
+                  android:text="회원관리 페이지로 회원 강퇴, 가입 승인, 거절을 할 수 있는 페이지입니다"
+                  android:textSize="12dp"
+                  android:layout_weight="1"/>
+
+        <ImageButton
+                android:id="@+id/manage_Btn_Staff"
+                android:layout_width="600dp"
+                android:layout_height="200dp"
+                android:background="@drawable/button_manager_staff"/>
+
+        <TextView android:layout_width="600dp"
+                  android:layout_height="200dp"
+                  android:layout_weight="1"/>
+
+<!--  확정은 아니지만 일단 주석
     <Button
             android:id="@+id/manage_Btn_Bbs"
             android:text="게시물 관리"
@@ -33,8 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#0C5998"
-            android:layout_weight="1"/>
+            android:layout_weight="1"/>-->
     </LinearLayout>
+
 
     <include
             layout="@layout/ham_appbar"
@@ -49,7 +84,6 @@
             app:menu="@menu/ham_menu_bbslist"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

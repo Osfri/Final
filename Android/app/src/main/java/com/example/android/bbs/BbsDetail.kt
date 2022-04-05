@@ -68,6 +68,8 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
 
+
+
         bbsDetailId.text = data?.id
         bbsDetailCount.text = data?.readCount.toString()
         bbsDetailTitle.text = data?.title
@@ -81,6 +83,11 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val btnDetailUpdate = findViewById<TextView>(R.id.btnDetailUpdate)              // 글 수정
         val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        // 댓글 입력
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
+
+        val bbsCommentRecycleViewDelete = findViewById<Button>(R.id.bbsCommentRecycleViewDelete)    // 리사이클러뷰 댓글 삭제 버튼
+        val bbsCommentRecycleViewUpdate = findViewById<Button>(R.id.bbsCommentRecycleViewUpdate)    // 리사이클러뷰 댓글 수정 버튼
+        val bbsCommentRecycleViewWriter = findViewById<TextView>(R.id.bbsCommentRecycleViewWriter)  // 리사이클러뷰 댓글 작성자 표시 텍스트
+
 
         btnCommentWrite.setOnClickListener {
             val onlyDate: String = LocalDate.now().toString()
