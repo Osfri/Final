@@ -10,3 +10,5 @@ springBootBack/bin/src/main/resources/application.properties
 springBootBack/bin/src/main/resources/application.yml
 springBootBack/bin/src/main/resources/application.properties
 springBootBack/bin/src/main/resources/serviceAccountKey.json
+Android/.idea/misc.xml
+Android/app/google-services.json
