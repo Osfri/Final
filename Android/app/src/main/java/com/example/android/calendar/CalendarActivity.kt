@@ -73,7 +73,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
         val calEt = findViewById<EditText>(R.id.cal_et)
-        val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)  // 저장버튼
+        val calSaveBtn = findViewById<Button>(R.id.calSaveBtn)      // 저장버튼
         val calUpdateBtn = findViewById<Button>(R.id.calUpdateBtn)  // 수정버튼
         val calDeleteBtn = findViewById<Button>(R.id.calDeleteBtn)  // 저장버튼
         calSaveBtn.setOnClickListener {
