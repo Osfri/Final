@@ -35,6 +35,8 @@ public class BbsController {
     @RequestMapping(value = "/getBoardTypeList",method = RequestMethod.POST)
     public ArrayList<BoardTypeDto> getBoardTypeList(@RequestBody String code){
         System.out.println("게시판 불러오기 컨트롤러"+code);
+        ArrayList<BoardTypeDto> dto = service.getBoardTypeList(code);
+        System.out.println(dto.toString());
         return service.getBoardTypeList(code);
     }
     //게시물 작성

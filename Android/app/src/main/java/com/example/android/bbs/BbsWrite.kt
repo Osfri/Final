@@ -65,26 +65,23 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         picture.setOnClickListener {
             GetAlbum()
         }
+        // 게시판 타입 데이터 가져오기
+        val type:Int = BbsActivity.type
+        var typename:String = BbsActivity.typename
+        if (typename == ""){
+            typename = "공지사항"
+        }
 
-
-
-
-
-
-        // bbsWriteId.text = MemberDao.user?.id                  글쓰기 db완성시 주석 풀면 됩니다
         val bbsWriteTitle = findViewById<EditText>(R.id.bbsWriteTitle)
         val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
         val bbsWriteContent = findViewById<EditText>(R.id.bbsWriteContent)
         val btn_bbsWriteFin = findViewById<Button>(R.id.btn_bbsWriteFin)
+        bbsWriteId.text = "작성자 : ${MemberDao.user?.id} 게시판: ${typename}"
 
         // bbsWrite 글추가완료 버튼
         btn_bbsWriteFin.setOnClickListener {
-            println(bbsWriteId.text.toString())
-            println(bbsWriteTitle.text.toString())
-            println(bbsWriteContent.text.toString())
 
             val onlyDate:LocalDate = LocalDate.now() // 현재날짜
-
             val split = MemberDao.user!!.code!!.split("_")
             val trueCode:String = split[0] // 병동코드 123_1 -> 병원코드 123 변환
             //db쿼리문
@@ -96,7 +93,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                                                     0 , //readCount
                                                     onlyDate.toString() , //wdate
                                                      0 , //del
-                                                    0 , //type
+                                                    type , //type
                                                     trueCode , //code
                                                     0 , //step
                                                     0 , //group
@@ -111,7 +108,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
 
 
-
+        //=======================================Front=================================================================
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용

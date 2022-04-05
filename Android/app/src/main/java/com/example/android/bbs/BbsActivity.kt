@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -29,73 +30,82 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
 
-    // 게시판추가 리사이클러뷰 임시 확인 데이터(지워야됩니다)
-    val typebbs = arrayListOf<BoardtypeDto>(
-        BoardtypeDto(0,"게시판11111","814",3),
-        BoardtypeDto(0,"게시판22222","1848",3),
-        BoardtypeDto(0,"게시판22222","1848",3),
-        BoardtypeDto(0,"게시판22222","1848",3),
-        BoardtypeDto(0,"게시판22222","1848",3),
-        BoardtypeDto(0,"게시판22222","1848",3),
-        BoardtypeDto(0,"게시판22222","1848",3)
-        )
-
-
-
-    //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경 해야함
     companion object {
+        //최초 보이는 게시판 공지사항0 건의사항1 게시판 클릭시 값 변경
         var type = 0
+        //게시물 쓰기 권한 관리자만0 모두1 게시판 클릭시 값 변경
+        var bbswriteAuth = 0
+        //게시물 쓰기 전용 가져갈 데이터 게시판 이름
+        var typename = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
 
-        val a = intent?.getParcelableExtra<BoardtypeDto>("dataType")
-        if (a !== null){
-            type = a.type
-        }
 
-        // bbs리스트
+
         // 병원 코드 변환
         var code = MemberDao.user?.code!!
         if (code.contains("_")) {
             val split: List<String> = code.split("_")
             code = split[0]
         }
-        // 게시물 가져오는 곳
-        //val userList:ArrayList<BbsDto> = BbsDao.getInstance().getBbsList(code, type)
-        val userList = arrayListOf<BbsDto>(
-            BbsDto(0,"a","abc","abc",0,"2020-01-01",0,0,"2",0,0,""),
-            BbsDto(0,"a","bcd","bcd",0,"2020-02-02",0,0,"2",0,0,"")
-        )
+
+        // 게시판 불러오기
+        val typebbs = BbsDao.getInstance().getBoardTypeList(code)
+        println("=========================================="+typebbs.toString())
+
+        // 클릭한 게시판 타입 불러오기
+        val a = intent?.getParcelableExtra<BoardtypeDto>("dataType")
+        if (a !== null){
+            type = a.type
+            bbswriteAuth = a.auth
+            typename = a.name!!
+        }
+        // 클릭한 게시판 게시물 불러오기
+        val userList = BbsDao.getInstance().getBbsList(code, type)
+
+
+
+        // 게시판 리사이클러뷰
+        var bbsTypeRecyclerView = findViewById<RecyclerView>(R.id.bbsTypeRecyclerView)
+        val mAdaptertype = CustomAdapterBbsType(this, typebbs!!)
+        bbsTypeRecyclerView.adapter = mAdaptertype
+        bbsTypeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        bbsTypeRecyclerView.setHasFixedSize(true)
+
+        // 게시물 리사이클러뷰
+        try {
         var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
-        val mAdapter = CustomAdapterBbsList(this, userList)
+        val mAdapter = CustomAdapterBbsList(this, userList!!)
         bbslistRecyclerView.adapter = mAdapter
         val layout = LinearLayoutManager(this)
         bbslistRecyclerView.layoutManager = layout
         bbslistRecyclerView.setHasFixedSize(true)
+        }catch (e:NullPointerException){
+            Toast.makeText(this,"작성된 게시글이 없습니다.",Toast.LENGTH_SHORT).show()
+        }
 
 
 
-        // 게시판 추가 부분 리사이클러뷰
-        var bbsTypeRecyclerView = findViewById<RecyclerView>(R.id.bbsTypeRecyclerView)  // bbsRecyclerView 변수
-        //bbsTypeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        val mAdaptertype = CustomAdapterBbsType(this, typebbs)
-        bbsTypeRecyclerView.adapter = mAdaptertype
-        val layouttype = LinearLayoutManager(this)
-        bbsTypeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        bbsTypeRecyclerView.setHasFixedSize(true)
 
-
-
-        // bbs -> bbsWrite 이동    (글쓰기로 가는 버튼)
+        // 글쓰기
         val btn_bbsListWrite = findViewById<Button>(R.id.btn_bbsListWrite)
+        // 글쓰기 권한 확인
+        if (bbswriteAuth == 0){
+            if (MemberDao.user!!.auth != 0){
+                btn_bbsListWrite.isEnabled = false
+            }
+        }
         btn_bbsListWrite.setOnClickListener {
             val i = Intent(this, BbsWrite::class.java)
             startActivity(i)
         }
 
+
+
+        //=============================================Front===========================================================
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용

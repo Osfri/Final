@@ -20,7 +20,7 @@
     </select>
     <insert id="bbswrite" parameterType="mul.camp.a.dto.BoardDto">
         INTSERT INTO BOARD( SEQ , ID , TITLE , CONTENT , READCOUNT , WDATE , DEL , TYPE , CODE , STEP , GR , IMAGE )
-        VALUES { BOARD_SEQ.NEXTVAL , #{id} , #{title} , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , 0 , BOARDTYPE_SEQ.NEXTVAL , #{image} }
+        VALUES ( BOARD_SEQ.NEXTVAL , #{id} , #{title} , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , 0 , BOARDTYPE_SEQ.NEXTVAL , #{image} )
     </insert>
     <select id="getBbsList" parameterType="Map" resultType="mul.camp.a.dto.BoardDto">
         SELECT *
