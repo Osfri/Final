@@ -61,7 +61,7 @@ class SemiManagementActivity : AppCompatActivity() {
                     //최초 공지사항,건희사항 게시판 생성
                     val split = MemberDao.user!!.code!!
                     BbsDao.getInstance().bbsAdd(BoardtypeDto(0,"공지사항",split,0))
-                    BbsDao.getInstance().bbsAdd(BoardtypeDto(1,"건희사항",split,1))
+                    BbsDao.getInstance().bbsAdd(BoardtypeDto(1,"건의사항",split,1))
                     //메인화면
                     startActivity(Intent(this,MainActivity::class.java))
                 }else{

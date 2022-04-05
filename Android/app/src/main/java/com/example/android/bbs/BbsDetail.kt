@@ -52,13 +52,6 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
         val data = intent.getParcelableExtra<BbsDto>("data")
 
-
-
-/*
-        val dto = BbsDao.getInstance().bbsDetail(data!!.seq)
-        println(data?.id ) // aaa 넘어갈것
-*/
-
         // 디테일 글 정보 표시
 
         val bbsDetailId = findViewById<TextView>(R.id.bbsDetailId)
@@ -67,22 +60,24 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val bbsDetailImage = findViewById<ImageView>(R.id.bbsWriteImageView)
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
-
-
-
         bbsDetailId.text = data?.id
         bbsDetailCount.text = data?.readCount.toString()
         bbsDetailTitle.text = data?.title
         bbsDetailContent.text = data?.content
         bbsDetailDate.text = data?.wdate
 
-
-
         // 디테일 하단부 버튼들  (댓글쓰기, 글수정, 글삭제)
         val btnDetailDel = findViewById<TextView>(R.id.btnDetailDel)                    // 글 삭제
         val btnDetailUpdate = findViewById<TextView>(R.id.btnDetailUpdate)              // 글 수정
         val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        // 댓글 입력
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
+
+        if (MemberDao.user?.id.toString() != data?.id.toString()){
+            btnDetailUpdate.isEnabled = false
+            if (MemberDao.user?.id.toString() != data?.id.toString() || MemberDao.user?.auth != 0){
+                btnDetailDel.isEnabled = false
+            }
+        }
 
         val bbsCommentRecycleViewDelete = findViewById<Button>(R.id.bbsCommentRecycleViewDelete)    // 리사이클러뷰 댓글 삭제 버튼
         val bbsCommentRecycleViewUpdate = findViewById<Button>(R.id.bbsCommentRecycleViewUpdate)    // 리사이클러뷰 댓글 수정 버튼
@@ -93,13 +88,18 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
             val onlyDate: String = LocalDate.now().toString()
             val dto = BbsDto(0,MemberDao.user!!.id.toString(),"",bbsCommentEditText.text.toString(),0,onlyDate,0,data!!.type,data.code,1,data.gr,"")
             BbsDao.getInstance().bbswrite(dto)
-            /*val i = Intent(this, BbsDetail::class.java)
-            startActivity(i)*/
+            val i = Intent(this, BbsDetail::class.java)
+            startActivity(i)
         }
 
         btnDetailDel.setOnClickListener {
-
+            BbsDao.getInstance().deleteBbs(data!!.seq)
             val i = Intent(this, BbsActivity::class.java)
+            startActivity(i)
+        }
+
+        btnDetailUpdate.setOnClickListener {
+            val i = Intent(this,BbsUpdateActivity::class.java)
             startActivity(i)
         }
 

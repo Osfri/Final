@@ -61,14 +61,10 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, CalendarActivity::class.java)
             startActivity(i)
         }
-        // 식단표
+        // (수정,추가_백엔드) 식단표 (로그인 정보로 접속)
         btnLunch.setOnClickListener {
-            // (수정,추가_백엔드) 임시데이터
-            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
-            // (수정,추가_백엔드) 로그인했을시에만 동작
             if(MemberDao.user != null){
                 val i = Intent(this, FoodActivity::class.java)
-                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
                 startActivity(i)
             }
         }
@@ -77,25 +73,19 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this,OffDayActivity::class.java)
             startActivity(i)
         }
-        // 포인트몰
+        // (수정,추가_백엔드) 포인트몰 (로그인 정보로 접속)
         btnPointMall.setOnClickListener {
-            // (수정,추가_백엔드) 임시데이터
-            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
             // (수정,추가_백엔드) 로그인했을시에만 동작
             if(MemberDao.user != null){
                 val i = Intent(this,PointMallActivity::class.java)
-                i.putExtra("loginUserId", MemberDao.user!!.id)  // (수정,추가_백엔드) 로그인이 안되서 임시로 id 넘김 (MemberDto로 넘겨야 함)
                 startActivity(i)
             }
         }
-        // 채팅
+        // (수정,추가_백엔드) 채팅 (로그인 정보로 접속)
         btnChat.setOnClickListener {
-            // (수정,추가_백엔드) 임시데이터
-            MemberDao.user = MemberDto("test2", null, null, null, null, null, 0, 0, 0, 0)
             // (수정,추가_백엔드) 로그인했을시에만 동작
             if(MemberDao.user != null){
                 val i = Intent(this,ChatActivity::class.java)
-                i.putExtra("loginUserId", MemberDao.user!!.id) // 로그인 유저 아이디 전달 필요
                 startActivity(i)
             }
         }
@@ -105,14 +95,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(i)
             }
 
-        // 연락처
+        // (수정,추가_백엔드) 연락처 (로그인 정보로 접속)
         btnPhoneNumber.setOnClickListener {
-            // (수정,추가_백엔드) 임시데이터
-            MemberDao.user = MemberDto("test1", null, null, null, null, null, 0, 0, 0, 0)
             // (수정,추가_백엔드) 로그인했을시에만 동작
             if(MemberDao.user != null){
                 val i = Intent(this,PhoneNumActivity::class.java)
-                i.putExtra("loginUserId", MemberDao.user!!.id) // 로그인 유저 아이디 전달 필요
                 startActivity(i)
             }
         }

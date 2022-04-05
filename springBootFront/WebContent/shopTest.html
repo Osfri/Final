@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+	<title>shop Main Test</title>
+	
+	<!-- 제이쿼리 사용 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- 파이어베이스 스토리지 사용 -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+</head>
+<body>
+
+	<!-- 상품목록 -->
+		<table border= "1">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>상품명</th>
+					<th>상품설명</th>
+					<th>가격</th>
+					<th>사진</th>
+					<th>재고</th>
+				</tr>
+			</thead>
+			
+			<tbody id="tbody">
+			</tbody>
+		</table>
+
+	<script>
+		/* 파이어베이스 스토리지 설정 */
+		const firebaseConfig = {
+		    apiKey: "AIzaSyC047yE_SqX60Tg-bpMA-ZszC4alRRQItg",
+		    authDomain: "finalprojectchat-7cc05.firebaseapp.com",
+		    databaseURL: "https://finalprojectchat-7cc05-default-rtdb.asia-southeast1.firebasedatabase.app",
+		    projectId: "finalprojectchat-7cc05",
+		    storageBucket: "finalprojectchat-7cc05.appspot.com",
+		    messagingSenderId: "699634507401",
+		    appId: "1:699634507401:web:6e49377a51ad417621b058",
+		    measurementId: "G-KQ1X2SJDF5"
+	  	};
+		
+		/* 파이어베이스 초기화 */
+		firebase.initializeApp(firebaseConfig);	// Initialize Firebase 
+		const db = firebase.firestore();
+		const storage = firebase.storage();
+		
+		$(document).ready(function() {
+			getShopItemList()
+			
+			
+		}) // $(document).ready(function()
+				
+				
+				
+		// 상품목록 얻어오기 (페이지 기능 x)
+		function getShopItemList(){
+			$.ajax({
+				url:"http://localhost:3000/getShopItemAll",
+				type: "get",
+				success:function(list){
+					// alert('success');
+					// alert(JSON.stringify(list));
+					
+					/*
+					href="#"                        // 페이지 맨 위로 이동
+					href="#none"                 // 페이지 이동 X
+					href="javascript:void(0)"    // 페이지 이동 X
+					href="#특정id"                // 페이지에서 해당 아이디가 있는 화면으로 이동
+					*/
+					
+					$.each(list, function(index, item){
+						let str = "<tr>"
+									+ "<th>" + (index + 1) + "</th>"
+									+ "<td><a href='shopItemDetail.html?seq=" + item.seq + "'>" + item.title + "</a> </td>"
+									+ "<td>" + item.content + "</td>"
+									+ "<td>" + item.price + "</td>"
+									+ "<td> <img src=\"" + item.photo + "\" width='200'> </td>"
+									+ "<td>" + item.cnt + "</td>"
+									+ "</tr>"
+						$("#tbody").append(str);
+					});
+				},
+				error:function(){
+					alert('error');
+				}
+			});
+		}
+	</script>
+</body>
+</html>

@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface BbsService {
 
     @POST("/getBbsList")
-    fun getBbsList(@Body code:String,type: Int): Call<ArrayList<BbsDto>>
+    fun getBbsList(@Body code:String?,type: Int?): Call<ArrayList<BbsDto>>
 
     @POST("/bbswrite")
     fun bbswrite(@Body dto:BbsDto) : Call<Int>
@@ -48,7 +48,7 @@ class BbsDao {
         }
     }
     // 병원 코드 , 게시물 타입
-    fun getBbsList(code: String,type: Int): ArrayList<BbsDto>? {
+    fun getBbsList(code: String?,type: Int?): ArrayList<BbsDto>? {
         try {
 
         val retrofit = RetrofitClient.getInstance()

@@ -59,11 +59,11 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         cal.add(Calendar.MONTH, 1)
         var offData: List<OffdayDto>? = OffDayDao.getInstance().offList(df.format(cal.time).toString())
 
+        //db에 저장된 데이터가 없는 경우 빈 데이터 넣어주기
         if(offData == null || offData.size == 0){
-            println("ddddddddddddddd")
             val dto = OffdayDto("", "", "", "")
             curData = mutableMapOf(Pair("2022-03", mutableListOf(dto)))
-        }else{
+        }else{      //db에 저장된 데이터를 필요한 형태로 수정
             for(i in offData!!){
                 var d = i.wdate.toString().substring(0 until 10).replace("-", ".")
                 if(curData == null){
@@ -83,8 +83,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         //버튼 변수
         val offBtn = findViewById<Button>(R.id.offBtn)              // 신청
-        //val offBtnCancle = findViewById<Button>(R.id.offBtnCancle)  // 취소
-
+        //날짜 선택해서 off신청하기 최대 5일까지 한 번에 신청 가능
         offBtn.setOnClickListener {
             if(OffDayDao.useroff != null){
                 if(OffDayDao.useroff!!.size > 0){
@@ -262,16 +261,19 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     var linerLayout = itemView.findViewById<LinearLayout>(R.id.calendar_item_addContent)
                     linerLayout.removeAllViews()
                 }
+                //날짜 선택하기
                 itemView.setOnClickListener{
                     val mem: MemberDto? = MemberDao.user
                     if(mem != null){
                         val selectedDate:String = sdfAll.format((dto.wdate as GregorianCalendar).time).toString()
 
+                        //하루에 2명까지 신청 가능하도록
                         if(dto.content.size>1){
                             Toast.makeText(context, "하루에 2명이상 신청은 불가능합니다.", Toast.LENGTH_SHORT).show()
                         }else{
                             var chk = true
                             for(i in dto.content){
+                                //본인이 신청한 날짜에는 중복 신청 불가
                                 if(i.id == mem.id){
                                     Toast.makeText(context, "이미 신청 되었습니다.", Toast.LENGTH_SHORT).show()
                                     chk = false
@@ -285,16 +287,18 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                                     dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
                                 }else{
                                     var findId = -1
+                                    //선택된 날짜가 중복으로 선택되지 않도록 확인
                                     for (i in (0 until OffDayDao.useroff!!.size)){
                                         if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
                                             findId = i
                                             break
                                         }
                                     }
+                                    //이미 선택된 날짜면 선택 취소
                                     if(findId != -1){
                                         dayBack.setBackgroundColor(Color.parseColor("#33FFFFFF"))
                                         OffDayDao.useroff!!.removeAt(findId)
-                                    }else{
+                                    }else{      //새롭게 선택된 날짜이고 5일 이하로 신청한 경우에 off신청 가능
                                         if(OffDayDao.useroff!!.size > 4){
                                             Toast.makeText(context, "최대 5일까지 선택할 수 있습니다", Toast.LENGTH_SHORT).show()
                                         }else{
@@ -327,11 +331,12 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                         (layoutParams as LinearLayout.LayoutParams).setMargins(0,10,0,0)            // margin
                         textSize=16.0f                                                                                   // textSize
                         id = i
-                        gravity = Gravity.CENTER                                                                         // 정렬
+                        gravity = Gravity.CENTER
+                        //본인 아이디면 다른 색으로 표시
                         if(mem!!.id == dto.content.get(i).id){
                             setTextColor(Color.parseColor("#FF4081"))
                         }
-
+                        //이름을 클릭해 off신청 취소하기
                         setOnClickListener {
                             if(dto.content.get(i).id == mem!!.id){
                                 AlertDialog.Builder(context).setTitle("OFF 신청")

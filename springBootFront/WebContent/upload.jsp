@@ -10,20 +10,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>upload</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./js/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-<input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
-<button id="download_file_btn">근무표 양식 다운로드</button>
-<br><br><br>
-	
-<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
-<form id="upload_file_frm">
-	<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-	<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
-	<button type="button" id="upload_file_btn">근무표 업로드</button>
-</form>
+<div class="container">
+	<jsp:include page="navigation.jsp"></jsp:include>
+	<div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
+		<input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
+		<button id="download_file_btn">근무표 양식 다운로드</button>
+		<br><br><br>
+			
+		<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
+		<form id="upload_file_frm">
+			<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+			<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
+			<button type="button" id="upload_file_btn">근무표 업로드</button>
+		</form>
+		
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	</div>
+</div>
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
