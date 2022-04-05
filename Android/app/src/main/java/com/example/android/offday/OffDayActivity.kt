@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
+import androidx.core.view.marginTop
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -267,7 +268,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                         val selectedDate:String = sdfAll.format((dto.wdate as GregorianCalendar).time).toString()
 
                         if(dto.content.size>1){
-                            Toast.makeText(context, "2명 이상 신청은 불가능 합니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "하루에 2명이상 신청은 불가능합니다.", Toast.LENGTH_SHORT).show()
                         }else{
                             var chk = true
                             for(i in dto.content){
@@ -295,7 +296,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                                         OffDayDao.useroff!!.removeAt(findId)
                                     }else{
                                         if(OffDayDao.useroff!!.size > 4){
-                                            Toast.makeText(context, "5일 이상은 선택할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(context, "최대 5일까지 선택할 수 있습니다", Toast.LENGTH_SHORT).show()
                                         }else{
                                             OffDayDao.useroff!!.add(dto)
                                             dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
@@ -319,12 +320,14 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     val contentTextViewParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
                     val mem = MemberDao.user
                     // 텍스트뷰 생성
+                    val size1 = 20
                     val contentTextView = TextView(context).apply {
-                        text = dto.content.get(i).name
+                        text = dto.content.get(i).name                                                                   // 날짜 안 정보(이름)
                         layoutParams = contentTextViewParams
-                        textSize=16.0f
+                        (layoutParams as LinearLayout.LayoutParams).setMargins(0,10,0,0)            // margin
+                        textSize=16.0f                                                                                   // textSize
                         id = i
-                        gravity = Gravity.CENTER
+                        gravity = Gravity.CENTER                                                                         // 정렬
                         if(mem!!.id == dto.content.get(i).id){
                             setTextColor(Color.parseColor("#FF4081"))
                         }

@@ -53,7 +53,7 @@
 
 
     </LinearLayout>
-    <LinearLayout
+<!--    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -70,7 +70,7 @@
                 app:menu="@menu/bottom_nav_menu"
                 app:itemBackground="@color/black"
                 app:itemTextColor="@color/white"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
     <include
             layout="@layout/ham_appbar"

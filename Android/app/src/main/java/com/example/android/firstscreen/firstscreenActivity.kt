@@ -19,6 +19,7 @@ class firstscreenActivity : AppCompatActivity() {
         val signin = findViewById<Button>(R.id.btn_signin1)
         val signup = findViewById<ImageButton>(R.id.btn_signup1)
 
+        // 지워야 할 페이지 관리자 / 개인 선택창  임시연결
 
         // 임시 가입 후 관리자 개인 선택창
         signin.setOnClickListener {
