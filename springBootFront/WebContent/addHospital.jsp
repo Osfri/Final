@@ -65,70 +65,79 @@
 		});
 	})
 	function addHospital(name, curCode){
-		$.ajax({
-			url:"http://localhost:3000/addHospital",
-			type:"post",
-			data:{"name":name, "curCode":curCode},
-			success:function(result){
-				if(result=="already"){
-					alert("동일한 이름이 존재합니다. 다른 이름으로 변경해주세요.");
-					$("#addText").val("");
-				}
-				else if(result=="success"){
-					alert("추가되었습니다.");
-					getHospitalList(curCode);
-				}else{
-					alert("추가되지 않았습니다.");
-				}
-			},
-			error:function(){
-				alert("병동 추가 에러");
-			}
-		})
-	}
-	function getHospitalList(code){
-		$.ajax({
-			url:"http://localhost:3000/getHospitalList",
-			type:"post",
-			data:{"code":code},
-			success:function(list){
-				//alert("success");
-				$("#tbody").text("");
-				$.each(list, function(idx, item){
-					let str = "<tr>"
-					+"<td>" + (idx+1) + "</td>"
-					+"<td>" + item.name + "</td>"
-					+"<td>" + item.code + "</td>"
-					if(item.manager != null){
-						str += "<td>" + item.manager + "</td>";
-					}else{
-						str += "<td>관리자가 없습니다.</td>";
+			$.ajax({
+				url:"http://localhost:3000/addHospital",
+				type:"post",
+				data:{"name":name, "curCode":curCode},
+				success:function(result){
+					if(result=="already"){
+						alert("동일한 이름이 존재합니다. 다른 이름으로 변경해주세요.");
+						$("#addText").val("");
 					}
-					if(item.cnt == 0){
-						str += "<td>" + "<button type='button' onclick='delHospital(\""+item.code+"\")'>삭제</button></td>";
+					else if(result=="success"){
+						alert("추가되었습니다.");
+						$("#addText").val("");
+						getHospitalList(curCode);
 					}else{
-						str+="<td>해당 병동에 소속된 사람이 없어야 삭제 가능합니다.</td>";
+						alert("추가되지 않았습니다.");
 					}
-	                $("#tbody").append(str);
+				},
+				error:function(){
+					alert("병동 추가 에러");
+				}
+			})
+		}
+		function delHospital(code){
+			if(confirm("삭제하시겠습니까?")){
+				$.ajax({
+					url:"http://localhost:3000/delHospital",
+					type:"post",
+					data:{"code":code},
+					success:function(result){
+						if(result=="success"){
+							alert("삭제 되었습니다.");
+							location.reload();
+						}else{
+							alert("삭제되지 않았습니다.");
+						}
+					},
+					error:function(){
+						alert("삭제되지 않았습니다.");
+					}
 				});
-			},
-			error:function(){
-				alert("getHospitalList error");
 			}
-		});
-	}
-	function delHospital(code){
-		$.ajax({
-			url:"http://localhost:3000/addHospital",
-			type:"post",
-			data:{"name":name, "curCode":curCode},
-			success:function(result){
-			},
-			error:function(){
-				alert("삭제되지 않았습니다.");
-			}
-		});
-	}
+		}
+		function getHospitalList(code){
+			$.ajax({
+				url:"http://localhost:3000/getHospitalList",
+				type:"post",
+				data:{"code":code},
+				success:function(list){
+					//alert("success");
+					$("#tbody").text("");
+					$.each(list, function(idx, item){
+						let str = "<tr>"
+						+"<td>" + (idx+1) + "</td>"
+						+"<td>" + item.name + "</td>"
+						+"<td>" + item.code + "</td>"
+						if(item.manager != null){
+							str += "<td>" + item.manager + "</td>";
+						}else{
+							str += "<td>관리자가 없습니다.</td>";
+						}
+						if(item.cnt == 0){
+							str += "<td>" + "<button type='button' onclick='delHospital(\""+item.code+"\")'>삭제</button></td>";
+						}else{
+							str+="<td>해당 병동에 소속된 사람이 없어야 삭제 가능합니다.</td>";
+						}
+		                $("#tbody").append(str);
+					});
+				},
+				error:function(){
+					alert("getHospitalList error");
+				}
+			});
+		}	
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

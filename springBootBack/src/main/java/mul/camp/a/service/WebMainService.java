@@ -32,4 +32,28 @@ public class WebMainService {
 	public int hospitalChk(String code) {
 		return dao.hospitalChk(code);
 	}
+	
+	public int delHospital(String code) {
+		return dao.delHospital(code);
+	}
+	
+	public int toStaff(String id) {
+		return dao.toStaff(id);
+	}
+	
+	public int toManager(String id) {
+		return dao.toManager(id);
+	}
+	
+	public int managerChk(String code) {
+		return dao.managerChk(code);
+	}
+	
+	public int toYes(String id) {
+		return dao.toYes(id);
+	}
+	
+	public int toNo(String id) {
+		return dao.toNo(id);
+	}
 }

@@ -49,5 +49,64 @@ public class WebMainController {
 		System.out.println(result.toString());
 		return result;
 	}
-
+	
+	@RequestMapping(value ="/delHospital", method = RequestMethod.POST)
+	public String delHospital(String code) {
+		System.out.println("delHospital "+code);
+		int result = service.delHospital(code);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/toStaff", method = RequestMethod.POST)
+	public String toStaff(String id) {
+		System.out.println("toStaff "+id);
+		int result = service.toStaff(id);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/toManager", method = RequestMethod.POST)
+	public String toManager(String id, String code) {
+		System.out.println("toManager "+id+" "+code);
+		int cnt = service.managerChk(code);
+		System.out.println("cnt======="+cnt);
+		if(cnt != 0) {
+			return "already";
+		}
+		int result = service.toManager(id);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/toYes", method = RequestMethod.POST)
+	public String toYes(String id) {
+		System.out.println("toYes "+id);
+		int result = service.toYes(id);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/toNo", method = RequestMethod.POST)
+	public String toNo(String id) {
+		System.out.println("toNo "+id);
+		int result = service.toNo(id);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
 }

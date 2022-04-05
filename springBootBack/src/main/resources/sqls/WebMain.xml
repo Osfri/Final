@@ -8,7 +8,7 @@
 	<select id="getMemberList" resultType="mul.camp.a.dto.MemberDto">
 		SELECT * 
 		FROM MEMBER
-		WHERE CODE = #{code}
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
 	</select>
 	<insert id="addHospital" parameterType="java.lang.String">
 		INSERT INTO HOSPITAL(NAME, LOCATION, CODE)
@@ -29,4 +29,33 @@
 		FROM HOSPITAL
 		WHERE CODE=#{code}
 	</select>
+	<delete id="delHospital" parameterType="java.lang.String">
+		DELETE FROM HOSPITAL
+		WHERE CODE = #{code}
+	</delete>
+	<update id="toStaff" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=1
+		WHERE ID=#{id}
+	</update>
+	<update id="toManager" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=3
+		WHERE ID=#{id}
+	</update>
+	<select id="managerChk" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE CODE=#{code} AND AUTH=3
+	</select>
+	<update id="toYes" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=1
+		WHERE ID=#{id}
+	</update>
+	<update id="toNo" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=5, CODE=''
+		WHERE ID=#{id}
+	</update>
 </mapper>
