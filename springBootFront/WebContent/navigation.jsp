@@ -37,5 +37,11 @@
                     <span class="title">스케줄 등록</span>
                 </a>
             </li>
+            <li>
+                <a href="addHospital.jsp">
+                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+                    <span class="title">병동 관리</span>
+                </a>
+            </li>
         </ul>
     </div>

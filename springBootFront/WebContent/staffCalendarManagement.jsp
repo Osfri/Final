@@ -40,7 +40,7 @@
                      <i style="background-color:rgb(101,176,254);">D</i>
                  </td>
                  <td>DAY</td>
-                 <td>07:00~15:00</td>
+                 <td><input type="time" value="07:00"/>~<input type="time" value="15:00"/></td>
              </tr> 
              <tr>
                  <td>E</td>
@@ -48,7 +48,7 @@
                      <i style="background-color:rgb(112,87,250);">E</i>
                  </td>
                  <td>EVE</td>
-                 <td>14:00~22:00</td>
+                 <td><input type="time" value="14:00"/>~<input type="time" value="22:00"/></td>
              </tr> 
              <tr>
                  <td>N</td>
@@ -56,22 +56,22 @@
                      <i style="background-color:rgb(113,113,113);">N</i>
                  </td>
                  <td>NIGHT</td>
-                 <td>21:00~08:00</td>
+                 <td><input type="time" value="21:00"/>~<input type="time" value="08:00"/></td>
              </tr> 
+             <tr>
+                 <td>M</td>
+                 <td class="icons">
+                     <i style="background-color:rgb(255,120,142);">M</i>
+                 </td>
+                 <td>M</td>
+                 <td><input type="time" value="09:00"/>~<input type="time" value="17:00"/></td>
+             </tr>
              <tr>
                  <td>OFF</td>
                  <td class="icons">
                      <i style="background-color:rgb(82,195,175);">F</i>
                  </td>
                  <td>OFF</td>
-                 <td></td>
-             </tr> 
-             <tr>
-                 <td>Y</td>
-                 <td class="icons">
-                     <i style="background-color:rgb(255,120,142);">Y</i>
-                 </td>
-                 <td>YEAR</td>
                  <td></td>
              </tr> 
          </table>

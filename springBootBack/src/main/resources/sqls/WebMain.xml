@@ -10,5 +10,23 @@
 		FROM MEMBER
 		WHERE CODE = #{code}
 	</select>
-	
+	<insert id="addHospital" parameterType="java.lang.String">
+		INSERT INTO HOSPITAL(NAME, LOCATION, CODE)
+		VALUES(
+			((SELECT NAME FROM HOSPITAL WHERE CODE=#{curCode})||'_'||#{name}),
+			(SELECT LOCATION FROM HOSPITAL WHERE CODE=#{curCode}),
+			#{code}
+		)
+	</insert>
+	<select id="getHospitalList" resultType="mul.camp.a.dto.HospitalDto">
+		SELECT NAME, CODE, (SELECT ID FROM MEMBER M WHERE M.CODE=H.CODE AND M.AUTH=3) AS MANAGER, (SELECT COUNT(*) FROM MEMBER M WHERE M.CODE=H.CODE) AS CNT
+		FROM HOSPITAL H
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+		ORDER BY NAME, CODE
+	</select>
+	<select id="hospitalChk" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM HOSPITAL
+		WHERE CODE=#{code}
+	</select>
 </mapper>

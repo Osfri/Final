@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.camp.a.dao.WebMainDao;
 import mul.camp.a.dto.MemberDto;
+import mul.camp.a.dto.ChatDto.HospitalDto;
 
 @Service
 @Transactional
@@ -18,5 +19,17 @@ public class WebMainService {
 	
 	public List<MemberDto> getMemberList(MemberDto login){
 		return dao.getMemberList(login);
+	}
+	
+	public List<HospitalDto> getHospitalList(String code){
+		return dao.getHospitalList(code);
+	}
+	
+	public int addHospital(String curCode,String code, String name) {
+		return dao.addHospital(curCode, code, name);
+	}
+	
+	public int hospitalChk(String code) {
+		return dao.hospitalChk(code);
 	}
 }
