@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+	<title>shop Add Item Test</title>
+
+	
+	<!-- 제이쿼리 사용 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<!-- 파이어베이스 스토리지 사용 -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+  
+	
+</head>
+<body>
+	<table border= "1">
+		<tr>
+			<th>상품명</th>
+			<td>
+				<input type="text" id="title" size ="20">
+			</td>	
+		</tr>
+		<tr>
+			<th>상품설명</th>
+			<td>
+				<input type="text" id="content" size ="20">
+			</td>
+		</tr>
+		<tr>
+			<th>가격</th>
+			<td>
+				<input type="text" id="price" size ="20">
+			</td>						
+		</tr>
+		<tr>
+			<th>사진</th>			
+			<td>
+				<input type="file" id="photo" size ="20">
+			</td>
+		</tr>
+		<tr>
+			<th>재고</th>
+			<td>
+				<input type="text" id="cnt" size ="20">
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+				<button type="button" id="shopItemUpload">업로드</button>
+			</td>
+		</tr>
+	
+	</table>
+	
+	
+	<script>
+		/* 파이어베이스 스토리지 설정 */
+		const firebaseConfig = {
+		    apiKey: "AIzaSyC047yE_SqX60Tg-bpMA-ZszC4alRRQItg",
+		    authDomain: "finalprojectchat-7cc05.firebaseapp.com",
+		    databaseURL: "https://finalprojectchat-7cc05-default-rtdb.asia-southeast1.firebasedatabase.app",
+		    projectId: "finalprojectchat-7cc05",
+		    storageBucket: "finalprojectchat-7cc05.appspot.com",
+		    messagingSenderId: "699634507401",
+		    appId: "1:699634507401:web:6e49377a51ad417621b058",
+		    measurementId: "G-KQ1X2SJDF5"
+	  	};
+		
+		/* 파이어베이스 초기화 */
+		firebase.initializeApp(firebaseConfig);	// Initialize Firebase 
+		const db = firebase.firestore();
+		const storage = firebase.storage();
+		
+		$(document).ready(function() {
+			// 업로드 버튼 클릭시
+			$("#shopItemUpload").click(function(){
+				/* 파이어베이스 스토리지에 저장 */
+		        const imgFile = document.querySelector('#photo').files[0];
+		        const storageRef = storage.ref();
+		        const imgLocation = storageRef.child('image/' + imgFile.name);
+		        const uploadStart = imgLocation.put(imgFile);
+		        uploadStart.on(
+		                'state_changed',
+		                null,
+		                (error) => {	// 스토리지에 저장 실패시
+		                	console.error('실패 :', error);
+		                },
+		                function () {	// 스토리지에 저장 성공시
+		                	uploadStart.snapshot.ref.getDownloadURL().then((url) => {
+		                        const toSave = {
+		                        				title: $("#title").val(),
+		                        				content: $("#content").val(),
+		                        				price: $("#price").val(),
+		                                		photo: url,  //업로드에 성공한 이미지 url
+		                                		cnt: $("#cnt").val()
+	                                			};
+		                        
+		                     // 서버 전달
+	                        	$.ajax({
+	    							url:"http://localhost:3000/shopItemAdd",
+	    							type: "POST",
+	    							data: toSave,
+	    							success:function(result){
+	    								if(result){
+	    									alert("저장 완료!");
+	    								
+	    								}else{
+	    									alert("저장 실패!");
+	    							}
+	    							},
+	    							error:function(request,status,error){ alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); }
+			    				});
+		                    
+		                	})
+		                			}
+                ); // uploadStart.on
+			}) // $("#shopItemUpload").click(function()
+		}) // $(document).ready(function()
+			
+		
+	</script>
+</body>
+</html>

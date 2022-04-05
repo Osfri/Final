@@ -18,8 +18,8 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // 로그인한 회원정보 생성
-        ChatSingleton.getInstance().createLoginUserInfo(intent.getStringExtra("loginUserId")!!)
+        // (수정,추가_백엔드) 로그인한 회원정보 생성
+        ChatSingleton.getInstance().createLoginUserInfo(MemberDao.user!!.id!!)
 
         // 채팅방 하단 네비게이션
         var fragNavi: BottomNavigationView = binding.chatactivityBottomnavigationview

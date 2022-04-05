@@ -21,6 +21,7 @@ import com.example.android.chat.ChatActivity
 import com.example.android.chat.ChatSingleton
 import com.example.android.chat.ChatUserDto
 import com.example.android.offday.OffDayActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.signin.MemberDao
 import com.example.android.signin.MemberDto
 
@@ -34,9 +35,8 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_point_mall)
 
-        // TODO: 사이드바에서 쇼핑몰 진입시 오류 (로그인 객체 null)
-        // (수정,추가_백엔드) 임시데이터 생성 (객체로 넘어올 경우 삭제)
-        val loginUserId:String = intent.getStringExtra("loginUserId")!!
+        // (수정,추가_백엔드) 로그인한 회원정보 생성
+        val loginUserId:String = MemberDao.user!!.id!!
         val userInfo:ChatUserDto = ChatSingleton.getInstance().getLoginUserInfo(loginUserId)
         MemberDao.user = MemberDto(userInfo.id,userInfo.name,userInfo.email, userInfo.pw, userInfo.phonenumber,userInfo.code,userInfo.auth,userInfo.alarm, userInfo.alarmtime,userInfo.point)
 
@@ -60,8 +60,8 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onResume() {
         super.onResume()
-        // (수정,추가_백엔드) 현재 페이지에서 point 최신화 필요 => 아래방식으로 사용가능 or 최신화 함수 추가필요
-        val loginUserId:String = intent.getStringExtra("loginUserId")!!
+        // (수정,추가_백엔드) 로그인한 회원정보 생성
+        val loginUserId:String = MemberDao.user!!.id!!
         val userInfo:ChatUserDto = ChatSingleton.getInstance().getLoginUserInfo(loginUserId)
         MemberDao.user = MemberDto(userInfo.id,userInfo.name,userInfo.email, userInfo.pw, userInfo.phonenumber,userInfo.code,userInfo.auth,userInfo.alarm, userInfo.alarmtime,userInfo.point)
 
@@ -130,6 +130,11 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.menu_offday->  {
                 val i = Intent(this, OffDayActivity::class.java)
+                startActivity(i)
+            }
+            // (수정,추가_백엔드) 연락처 이동 부분 추가
+            R.id.menu_phonenumber -> {
+                val i = Intent(this, PhoneNumActivity::class.java)
                 startActivity(i)
             }
         }
