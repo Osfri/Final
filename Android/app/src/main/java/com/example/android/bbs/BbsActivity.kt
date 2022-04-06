@@ -3,9 +3,13 @@ package com.example.android.bbs
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -86,6 +90,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }catch (e:NullPointerException){
             Toast.makeText(this,"작성된 게시글이 없습니다.",Toast.LENGTH_SHORT).show()
         }
+
+        val bbs_et_select = findViewById<EditText>(R.id.bbs_et_select)
+        val btn_bbsListSelect = findViewById<Button>(R.id.btn_bbsListSelect)
+
+
 
 
 

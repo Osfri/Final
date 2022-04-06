@@ -39,7 +39,7 @@ class MemberDao {
         }
     }
     fun login(dto:MemberDto): MemberDto?{
-
+        println("~~~~~~~~~~~~login")
         try{
             val retrofit = RetrofitClient.getInstance()
 

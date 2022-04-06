@@ -56,12 +56,12 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         setContentView(R.layout.activity_bbs_write)
 
         // 카메라
-        val camera = findViewById<Button>(R.id.bbsWriteCamera)
+        val camera = findViewById<ImageButton>(R.id.bbsWriteCamera)
         camera.setOnClickListener {
             CallCamera()
         }
         // 사진 저장
-        val picture = findViewById<Button>(R.id.bbsWriteImage)
+        val picture = findViewById<ImageButton>(R.id.bbsWriteImage)
         picture.setOnClickListener {
             GetAlbum()
         }
