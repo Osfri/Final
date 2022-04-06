@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -17,7 +18,7 @@ public interface BbsDao {
 
     BoardTypeDto bbsRandomCheck(int type);
 
-    ArrayList<BoardTypeDto> getBoardTypeList(String code);
+    public List<BoardTypeDto> getBoardTypeList(String code);
 
     int bbswrite(BoardDto dto);
 
@@ -28,4 +29,8 @@ public interface BbsDao {
     int deleteBbs(int gr);
 
     int updateBbs(BoardDto dto);
+
+    int commentwrite(BoardDto dto);
+
+    int updatecomment(BoardDto dto);
 }

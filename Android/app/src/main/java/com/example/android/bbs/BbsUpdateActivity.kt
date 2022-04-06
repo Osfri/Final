@@ -7,7 +7,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
+import androidx.core.view.isGone
 import com.example.android.R
 import com.example.android.manager.BoardtypeDto
 import com.example.android.signin.MemberDao
@@ -24,6 +27,13 @@ class BbsUpdateActivity : AppCompatActivity() {
         val updateTitle = findViewById<EditText>(R.id.bbsUpdateTitle)
         val updateContent = findViewById<EditText>(R.id.bbsUpdateContent)
         val updateText = findViewById<TextView>(R.id.bbsUpdateId)
+        val updateImage = findViewById<ImageView>(R.id.bbsUpdateImage)
+
+        if (data?.image == "" || data?.image == null || data?.image == " "){
+            updateImage.isGone
+        }else{
+            updateImage.setImageURI(data?.image?.toUri())
+        }
 
         var title = ""
         var content = ""

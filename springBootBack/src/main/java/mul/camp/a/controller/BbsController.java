@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,11 +34,12 @@ public class BbsController {
     }
     //게시판 불러오기
     @RequestMapping(value = "/getBoardTypeList",method = RequestMethod.POST)
-    public ArrayList<BoardTypeDto> getBoardTypeList(@RequestBody String code){
+    public List<BoardTypeDto> getBoardTypeList(@RequestBody String code){
         System.out.println("게시판 불러오기 컨트롤러"+code);
-        ArrayList<BoardTypeDto> dto = service.getBoardTypeList(code);
+        String idModify = code.replaceAll("\"", "");
+        List<BoardTypeDto> dto = service.getBoardTypeList(idModify);
         System.out.println(dto.toString());
-        return service.getBoardTypeList(code);
+        return service.getBoardTypeList(idModify);
     }
     //게시물 작성
     @RequestMapping(value = "/bbswrite",method = RequestMethod.POST)
@@ -47,12 +49,8 @@ public class BbsController {
     }
     //게시물 불러오기
     @RequestMapping(value = "/getBbsList",method = RequestMethod.POST)
-    public ArrayList<BoardDto> getBbsList(@RequestBody String code,int type){
-        System.out.println("게시물 작성 컨트롤러"+code+type);
-        Map<String,Object> map = new HashMap<String,Object>();
-        String typeString = String.valueOf(type);
-        map.put("code",code);
-        map.put("type",typeString);
+    public ArrayList<BoardDto> getBbsList(@RequestBody HashMap<String,Object> map){
+        System.out.println("게시물 불러오기"+map.keySet());
         return service.getBbsList(map);
     }
     //댓글 불러오기
@@ -67,10 +65,22 @@ public class BbsController {
         System.out.println("게시물,댓글 삭제 컨트롤러"+seq);
         return service.deleteBbs(seq);
     }
-    //게시물,댓글 수정
+    //게시물 수정
     @RequestMapping(value = "/updateBbs",method = RequestMethod.POST)
     public int updateBbs(@RequestBody BoardDto dto){
         System.out.println("게시물,댓글 수정 컨트롤러"+dto.toString());
         return service.updateBbs(dto);
+    }
+    //댓글쓰기
+    @RequestMapping(value = "/commentwrite",method = RequestMethod.POST)
+    public int commentwrite(@RequestBody BoardDto dto){
+        System.out.println("댓글쓰기 컨트롤러"+dto.toString());
+        return service.commentwrite(dto);
+    }
+    //댓글 수정
+    @RequestMapping(value = "/updatecomment",method = RequestMethod.POST)
+    public int updatecomment(@RequestBody BoardDto dto){
+        System.out.println("댓글수정 컨트롤러"+dto.toString());
+        return service.updatecomment(dto);
     }
 }

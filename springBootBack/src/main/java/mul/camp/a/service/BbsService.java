@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -26,7 +27,7 @@ public class BbsService {
         return dao.bbsRandomCheck(type);
     }
 
-    public ArrayList<BoardTypeDto> getBoardTypeList(String code){
+    public List<BoardTypeDto> getBoardTypeList(String code){
         return dao.getBoardTypeList(code);
     }
 
@@ -49,4 +50,8 @@ public class BbsService {
     public int updateBbs(BoardDto dto){
         return dao.updateBbs(dto);
     }
+
+    public int commentwrite(BoardDto dto) { return dao.commentwrite(dto); }
+
+    public int updatecomment(BoardDto dto) { return dao.updatecomment(dto); }
 }

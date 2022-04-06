@@ -25,6 +25,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.lunch.FoodSingleton
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
@@ -249,7 +250,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val imageView = findViewById<ImageView>(R.id.bbsWriteImageView)
+        val imageView = findViewById<ImageView>(R.id.bbsUpdateImage)
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 //이미지 경로 얻어옴
@@ -257,6 +258,17 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                     if(data?.extras?.get("data") != null){
                         val img = data?.extras?.get("data") as Bitmap
                         val uri = saveFile(RandomFileName(), "image/jpeg", img)
+                        val filename:String = "bbs/${RandomFileName()}.${(contentResolver.getType(uri!!)?:"/none").split("/")[1]}"
+                        val imageRef = FoodSingleton.getInstance().storage.getReference(filename)
+                        val uploadTask = imageRef.putFile(uri!!)
+                        uploadTask.addOnSuccessListener {
+                            val downloadImageRef = FoodSingleton.getInstance().storage.getReference(filename)
+                            downloadImageRef.downloadUrl.addOnSuccessListener {
+                                val imageUri = it.toString()
+                                imageAddr = imageUri
+                            }
+                        }.addOnFailureListener {
+                        }
                         imageView.setImageURI(uri)
                         println("이미지경로:$uri")
                         println("실제 이미지경로      :" + getPath(uri))
@@ -275,6 +287,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     // 파일명을 날짜 저장
     fun RandomFileName() : String{
         val fileName = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+        // val path:String = "bbs/${fileName}."
         return fileName
     }
 
@@ -297,6 +310,9 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         return cursor.getString(columnIndex)
     }
 
+    fun uploadImage(uri: Uri?,dto:BbsDto){
+
+    }
 
 
 }
