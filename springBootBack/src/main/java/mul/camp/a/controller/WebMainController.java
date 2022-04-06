@@ -19,10 +19,10 @@ public class WebMainController {
 	WebMainService service;
 
 	@RequestMapping(value ="/getMemberList", method = RequestMethod.POST)
-	public List<MemberDto> getMemberList(MemberDto login) {
-		System.out.println("getMemberList "+login);
-		List<MemberDto> result = service.getMemberList(login);
-		System.out.println(result.toString());
+	public List<MemberDto> getMemberList(String code, String hospital) {
+		System.out.println("getMemberList "+code+" "+hospital);
+		List<MemberDto> result = service.getMemberList(code, hospital);
+		System.out.println("getMemberList result=="+result.toString());
 		return result;
 	}
 	
@@ -46,7 +46,7 @@ public class WebMainController {
 	public List<HospitalDto> getHospitalList(String code) {
 		System.out.println("getHospitalList "+code);
 		List<HospitalDto> result = service.getHospitalList(code);
-		System.out.println(result.toString());
+		System.out.println("getHospitalList result=="+result.toString());
 		return result;
 	}
 	
@@ -103,6 +103,22 @@ public class WebMainController {
 	public String toNo(String id) {
 		System.out.println("toNo "+id);
 		int result = service.toNo(id);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/changeHospital", method = RequestMethod.POST)
+	public String changeHospital(String id, String code) {
+		System.out.println("changeHospital "+id+" "+code);
+		int auth = service.authChk(id);
+		System.out.println(auth);
+		if(auth == 3) {
+			return "manager";
+		}
+		int result = service.changeHospital(id, code.substring(2));
 		if(result>0) {
 			return "success";
 		}else {
