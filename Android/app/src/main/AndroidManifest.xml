@@ -114,13 +114,13 @@
                 android:exported="true"/>
         <activity
                 android:name=".pointMall.PointMallDetailActivity"
-                android:exported="true"/>
+                android:exported="true" tools:ignore="DuplicateActivity"/>
         <activity
                 android:name=".phoneNumber.PhoneNumActivity"
-                android:exported="true"/>
+                android:exported="true" tools:ignore="DuplicateActivity"/>
         <activity
                 android:name=".lunch.FoodWriteActivity"
-                android:exported="true"/>
+                android:exported="true" tools:ignore="DuplicateActivity"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true"/>

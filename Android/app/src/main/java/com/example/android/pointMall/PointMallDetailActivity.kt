@@ -23,6 +23,7 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
@@ -215,6 +216,10 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
             }
             R.id.menu_offday->  {
                 val i = Intent(this, OffDayActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
             }
         }
