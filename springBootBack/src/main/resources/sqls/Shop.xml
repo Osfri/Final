@@ -23,11 +23,6 @@
 	</select>
 	
 	<update id="buyShopItemPoint" parameterType="Map">
-<!-- 		UPDATE MEMBER
-		SET POINT = POINT - (SELECT PRICE
-								FROM SHOP
-								WHERE SEQ = #{shopItem.seq})
-					WHERE ID = #{loginUser.id} -->
 		UPDATE MEMBER
 		SET POINT = POINT - ((SELECT PRICE
 								FROM SHOP

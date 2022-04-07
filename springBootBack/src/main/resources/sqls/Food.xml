@@ -8,9 +8,9 @@
 	<select id="getSameCodeFoodInfo" parameterType="mul.camp.a.dto.MemberDto" resultType="mul.camp.a.dto.FoodDto">
 		SELECT CODE, FDATE, MENU, PHOTO
 		FROM FOOD
-		WHERE code = (SELECT CODE
+		WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
 	                   FROM MEMBER
-	                   WHERE id = #{id})
+	                   WHERE id = #{id}),1,1)
 	    ORDER BY FDATE ASC
 	</select>
 	
