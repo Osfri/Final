@@ -31,6 +31,7 @@
             android:id="@+id/foodRecycleViewImage"
             android:layout_width="137dp"
             android:layout_height="117dp"
+            android:background="@drawable/imageview_round_basic"
             tools:srcCompat="@tools:sample/avatars"
             app:layout_constraintBottom_toBottomOf="@+id/foodRecycleViewMenu"
             app:layout_constraintTop_toTopOf="@+id/foodRecycleViewDate"

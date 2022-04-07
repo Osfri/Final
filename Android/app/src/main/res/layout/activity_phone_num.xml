@@ -9,11 +9,26 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+                android:text="연락처"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/phoneRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="650dp"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -30,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-
+    </LinearLayout>
     <include
             layout="@layout/ham_appbar"
             android:layout_width="match_parent"

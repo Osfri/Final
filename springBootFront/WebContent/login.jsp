@@ -49,8 +49,6 @@ $(document).ready(function(){
 			type:"post",
 			data:{ id:$("#id").val(), pw:$("#pwd").val() },
 			success:function(json){
-			//	alert('success');
-			//	alert(JSON.stringify(json));
 				if(json == ""){
 					alert("id나 비밀번호를 확인하세요");
 					$("#id").val("");
@@ -58,7 +56,7 @@ $(document).ready(function(){
 				}else{
 					sessionStorage.setItem("login", JSON.stringify(json));
 					alert(json.name + "님 환영합니다");	
-					location.href = "upload.jsp";
+					location.href = "staffManagement.jsp";
 				}			
 			},
 			error:function(){

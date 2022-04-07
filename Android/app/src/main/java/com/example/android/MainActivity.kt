@@ -41,9 +41,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        // 로딩화면
-        val intent = Intent(this, SplashActivity::class.java)
-        startActivity(intent)
         // 로그인
         btnLogin.setOnClickListener {
             val i = Intent(this, SigninActivity::class.java)

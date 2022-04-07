@@ -80,7 +80,7 @@
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintHorizontal_bias="0.377"/>
         <ImageView
-                android:id="@+id/bbsWriteImageView"
+                android:id="@+id/bbsUpdateImage"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"

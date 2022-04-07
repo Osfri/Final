@@ -25,6 +25,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.lunch.FoodSingleton
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
@@ -56,35 +57,32 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         setContentView(R.layout.activity_bbs_write)
 
         // 카메라
-        val camera = findViewById<Button>(R.id.bbsWriteCamera)
+        val camera = findViewById<ImageButton>(R.id.bbsWriteCamera)
         camera.setOnClickListener {
             CallCamera()
         }
         // 사진 저장
-        val picture = findViewById<Button>(R.id.bbsWriteImage)
+        val picture = findViewById<ImageButton>(R.id.bbsWriteImage)
         picture.setOnClickListener {
             GetAlbum()
         }
+        // 게시판 타입 데이터 가져오기
+        val type:Int = BbsActivity.type
+        var typename:String = BbsActivity.typename
+        if (typename == ""){
+            typename = "공지사항"
+        }
 
-
-
-
-
-
-        // bbsWriteId.text = MemberDao.user?.id                  글쓰기 db완성시 주석 풀면 됩니다
         val bbsWriteTitle = findViewById<EditText>(R.id.bbsWriteTitle)
         val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
         val bbsWriteContent = findViewById<EditText>(R.id.bbsWriteContent)
         val btn_bbsWriteFin = findViewById<Button>(R.id.btn_bbsWriteFin)
+        bbsWriteId.text = "작성자 : ${MemberDao.user?.id} 게시판: ${typename}"
 
         // bbsWrite 글추가완료 버튼
         btn_bbsWriteFin.setOnClickListener {
-            println(bbsWriteId.text.toString())
-            println(bbsWriteTitle.text.toString())
-            println(bbsWriteContent.text.toString())
 
             val onlyDate:LocalDate = LocalDate.now() // 현재날짜
-
             val split = MemberDao.user!!.code!!.split("_")
             val trueCode:String = split[0] // 병동코드 123_1 -> 병원코드 123 변환
             //db쿼리문
@@ -96,7 +94,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                                                     0 , //readCount
                                                     onlyDate.toString() , //wdate
                                                      0 , //del
-                                                    0 , //type
+                                                    type , //type
                                                     trueCode , //code
                                                     0 , //step
                                                     0 , //group
@@ -111,7 +109,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
 
 
-
+        //=======================================Front=================================================================
         // drawerlayout bar 설정
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
@@ -252,7 +250,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val imageView = findViewById<ImageView>(R.id.bbsWriteImageView)
+        val imageView = findViewById<ImageView>(R.id.bbsUpdateImage)
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 //이미지 경로 얻어옴
@@ -260,6 +258,17 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
                     if(data?.extras?.get("data") != null){
                         val img = data?.extras?.get("data") as Bitmap
                         val uri = saveFile(RandomFileName(), "image/jpeg", img)
+                        val filename:String = "bbs/${RandomFileName()}.${(contentResolver.getType(uri!!)?:"/none").split("/")[1]}"
+                        val imageRef = FoodSingleton.getInstance().storage.getReference(filename)
+                        val uploadTask = imageRef.putFile(uri!!)
+                        uploadTask.addOnSuccessListener {
+                            val downloadImageRef = FoodSingleton.getInstance().storage.getReference(filename)
+                            downloadImageRef.downloadUrl.addOnSuccessListener {
+                                val imageUri = it.toString()
+                                imageAddr = imageUri
+                            }
+                        }.addOnFailureListener {
+                        }
                         imageView.setImageURI(uri)
                         println("이미지경로:$uri")
                         println("실제 이미지경로      :" + getPath(uri))
@@ -278,6 +287,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     // 파일명을 날짜 저장
     fun RandomFileName() : String{
         val fileName = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+        // val path:String = "bbs/${fileName}."
         return fileName
     }
 
@@ -300,6 +310,9 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         return cursor.getString(columnIndex)
     }
 
+    fun uploadImage(uri: Uri?,dto:BbsDto){
+
+    }
 
 
 }

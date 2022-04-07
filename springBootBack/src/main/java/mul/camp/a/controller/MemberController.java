@@ -53,6 +53,7 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 	
+	
 	//@RequestBody
 	@RequestMapping(value ="/login",method= RequestMethod.POST)
 	public MemberDto login(@RequestBody MemberDto dto) {
@@ -90,6 +91,4 @@ public class MemberController {
 		return mem;
 
 	}
-	
-		 
 }

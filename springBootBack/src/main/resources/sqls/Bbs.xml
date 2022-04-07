@@ -14,13 +14,17 @@
         WHERE TYPE = #{type}
     </select>
     <select id="getBoardTypeList" parameterType="java.lang.String" resultType="mul.camp.a.dto.BoardTypeDto">
-        SELECT *
+        SELECT TYPE,NAME,CODE,AUTH
         FROM BOARDTYPE
         WHERE CODE = #{code}
     </select>
     <insert id="bbswrite" parameterType="mul.camp.a.dto.BoardDto">
-        INTSERT INTO BOARD( SEQ , ID , TITLE , CONTENT , READCOUNT , WDATE , DEL , TYPE , CODE , STEP , GR , IMAGE )
-        VALUES { BOARD_SEQ.NEXTVAL , #{id} , #{title} , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , 0 , BOARDTYPE_SEQ.NEXTVAL , #{image} }
+        INSERT INTO BOARD( SEQ , ID , TITLE , CONTENT , READCNT , WDATE , DEL , TYPE , CODE , STEP , GR , IMAGE )
+        VALUES ( BOARD_SEQ.NEXTVAL , #{id} , #{title} , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , #{step} , BOARD_GROUP.NEXTVAL , #{image} )
+    </insert>
+    <insert id="commentwrite" parameterType="mul.camp.a.dto.BoardDto">
+        INSERT INTO BOARD( SEQ , ID , TITLE , CONTENT , READCNT , WDATE , DEL , TYPE , CODE , STEP , GR , IMAGE )
+        VALUES ( BOARD_SEQ.NEXTVAL , #{id} , '댓글' , #{content} , 0 , #{wdate} , 0 , #{type} , #{code} , 1 , #{gr} , '' )
     </insert>
     <select id="getBbsList" parameterType="Map" resultType="mul.camp.a.dto.BoardDto">
         SELECT *
@@ -31,7 +35,7 @@
     <select id="getCommentList" parameterType="integer" resultType="mul.camp.a.dto.BoardDto">
         SELECT *
         FROM BOARD
-        WHERE GROUP = #{gr} AND STEP = 1
+        WHERE GR = #{gr} AND STEP = 1
         ORDER BY SEQ
     </select>
     <update id="deleteBbs" parameterType="integer">
@@ -42,6 +46,11 @@
     <update id="updateBbs" parameterType="mul.camp.a.dto.BoardDto">
         UPDATE BOARD
         SET TITLE = #{title} , CONTENT = #{content} , IMAGE = #{image}
+        WHERE SEQ = #{seq}
+    </update>
+    <update id="updatecomment" parameterType="mul.camp.a.dto.BoardDto">
+        UPDATE BOARD
+        SET CONTENT = #{content}
         WHERE SEQ = #{seq}
     </update>
 

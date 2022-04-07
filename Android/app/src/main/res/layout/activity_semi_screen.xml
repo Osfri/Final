@@ -9,22 +9,37 @@
         tools:context=".signinAf.SemiScreenActivity">
 
 
-    <Button
+    <TextView android:layout_width="600dp"
+              android:layout_height="200dp"
+    android:layout_weight="1"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="60dp"
+              android:layout_gravity="center"
+              android:text="관리자 코드를 받아 어플리케이션을 시작하세요(임시)"
+              android:textSize="12dp"
+              android:layout_weight="1"/>
+
+    <ImageButton
             android:id="@+id/semiSc_Btn_Manager"
-            android:text="관리자"
-            android:textSize="30dp"
-            android:textColor="@color/likeblue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#D3FFFFFF"
-            android:layout_weight="1"/>
-    <Button
+            android:layout_width="600dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/button_click"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="60dp"
+              android:layout_gravity="center"
+              android:text="개인 코드를 받아 어플리케이션을 시작하세요(임시)"
+              android:textSize="12dp"
+              android:layout_weight="1"/>
+
+    <ImageButton
             android:id="@+id/semiSc_Btn_Invidual"
-            android:text="개인"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#0C5998"
-            android:layout_weight="1"/>
+            android:layout_width="600dp"
+            android:layout_height="200dp"
+            android:background="@drawable/button_click_ma"/>
+
+    <TextView android:layout_width="600dp"
+              android:layout_height="200dp"
+              android:layout_weight="1"/>
 </LinearLayout>

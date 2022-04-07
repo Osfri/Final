@@ -7,13 +7,16 @@
         android:layout_height="match_parent"
         tools:context=".signinAf.SemiWaitingActivity">
 
-    <TextView
-            android:id="@+id/tv_SemiText"
-            android:text="승인 대기 중입니다.."
-            android:layout_width="148dp"
-            android:layout_height="47dp"
-            android:gravity="center"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+            android:id="@+id/semi_gif_waiting"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.56"
+            app:layout_constraintVertical_bias="0.499"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
