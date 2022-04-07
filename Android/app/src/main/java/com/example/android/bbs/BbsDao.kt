@@ -9,29 +9,35 @@ import retrofit2.http.POST
 
 interface BbsService {
 
-    @POST("/getBbsList")
-    fun getBbsList(@Body code:String?,type: Int?): Call<ArrayList<BbsDto>>
+    @POST("getBbsList")
+    fun getBbsList(@Body map: MutableMap<String,Any>): Call<ArrayList<BbsDto>>
 
-    @POST("/bbswrite")
+    @POST("bbswrite")
     fun bbswrite(@Body dto:BbsDto) : Call<Int>
 
-    @POST("/bbsAdd")
+    @POST("bbsAdd")
     fun bbsAdd(@Body dto:BoardtypeDto) : Call<Int>
 
-    @POST("/bbsRandomCheck")
+    @POST("bbsRandomCheck")
     fun bbsRandomCheck(@Body type: Int) : Call<BoardtypeDto>
 
-    @POST("/getBoardTypeList")
-    fun getBoardTypeList(@Body code: String) : Call<ArrayList<BoardtypeDto>>
+    @POST("getBoardTypeList")
+    fun getBoardTypeList(@Body code: String) : Call<List<BoardtypeDto>>
 
-    @POST("/getCommentList")
+    @POST("getCommentList")
     fun getCommentList(@Body gr:Int) : Call<ArrayList<BbsDto>>
 
-    @POST("/deleteBbs")
+    @POST("deleteBbs")
     fun deleteBbs(@Body seq: Int) : Call<Int>
 
-    @POST("/updateBbs")
+    @POST("updateBbs")
     fun updateBbs(@Body dto:BbsDto) : Call<Int>
+
+    @POST("commentwrite")
+    fun commentwrite(@Body dto:BbsDto) : Call<Int>
+
+    @POST("updatecomment")
+    fun updatecomment(@Body dto: BbsDto) : Call<Int>
 }
 
 
@@ -49,12 +55,15 @@ class BbsDao {
     }
     // 병원 코드 , 게시물 타입
     fun getBbsList(code: String?,type: Int?): ArrayList<BbsDto>? {
+        println("게시물 불러오기"+code+type)
         try {
-
+            val map = mutableMapOf<String, Any>()
+            map.put("code", code!!)
+            map.put("type", type!!)
         val retrofit = RetrofitClient.getInstance()
 
         val service = retrofit?.create(BbsService::class.java)
-        val call = service?.getBbsList(code,type)
+        val call = service?.getBbsList(map)
         val response = call?.execute()
 
         return response?.body() as ArrayList<BbsDto>
@@ -169,6 +178,36 @@ class BbsDao {
         val response = call?.execute()
 
         return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
+    }
+    //댓글쓰기
+    fun commentwrite(dto:BbsDto) : Int?{
+        try {
+
+            val retrofit = RetrofitClient.getInstance()
+
+            val service = retrofit?.create(BbsService::class.java)
+            val call = service?.commentwrite(dto)
+            val response = call?.execute()
+
+            return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
+    }
+    //댓글 수정
+    fun updatecomment(dto: BbsDto) : Int?{
+        try {
+
+            val retrofit = RetrofitClient.getInstance()
+
+            val service = retrofit?.create(BbsService::class.java)
+            val call = service?.updatecomment(dto)
+            val response = call?.execute()
+
+            return response?.body() as Int
         }catch (e:Exception){
             return null
         }

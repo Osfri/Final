@@ -27,6 +27,10 @@
 	        <div class="maintitle">
 	            <h2>직원관리</h2>
 	        </div>
+	        <select name="hospital" id="hospital">
+			  <option value="all" selected>전체</option>
+			</select>
+			<button type="button" id="searchBtn">검색</button>
 	        <table>
 		        <thead>
 		            <tr>
@@ -65,34 +69,45 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	let login = JSON.parse(sessionStorage.getItem("login"));
-	getMemberList(login);
+	getHospitalList(login.code);
+	getMemberList(login.code, "all");
+	$("#searchBtn").click(function(){
+		getMemberList(login.code, $("#hospital option:selected").val());
+	});
 })
 
-function getMemberList(login){
+function getMemberList(code, hospital){
 	$.ajax({
 		url:"http://localhost:3000/getMemberList",
 		type:"post",
-		data:login,
+		data:{"code":code, "hospital":hospital},
 		success:function(list){
 			$("#tbody").text("");
-			$.each(list, function(idx, item){
-				let str = "<tr>"
-				+"<td>" + (idx+1) + "</td>"
-				+"<td>" + item.name + "</td>"
-				+"<td>" + item.id + "</td>"
-				+"<td>" + item.code + "</td>"
-				+"<td>" + item.point + "</td>"
-				if(item.auth == 2){
-					str += "<td>" + "<button type='button' onclick='toYes(\""+item.id+"\")'>승인</button>"+
-					"<button type='button' onclick='toNo(\""+item.id+"\")'>거절</button>" + "</td>";
-				}else if(item.auth == 3){
-					str+="<td><button type='button' onclick='toStaff(\""+item.id+"\")'>직원으로 변경</button></td>";
-				}else{
-					str+="<td><button type='button' onclick='toManager(\""+item.id+"\",\""+item.code+"\")'>관리자로 변경</button></td>";
-				}
-                str += "<td>"+"<button type='button' onclick='delMember(\""+item.id+"\")'>탈퇴</button>"+"</td></tr>"
+			let str="";
+			if(list.length == 0){
+				str="<tr><td colspan='7'>해당 병동의 직원이 없습니다.</td></tr>"
                 $("#tbody").append(str);
-			});
+			}else{
+				$.each(list, function(idx, item){
+					str = "<tr>"
+					+"<td>" + (idx+1) + "</td>"
+					+"<td>" + item.name + "</td>"
+					+"<td>" + item.id + "</td>"
+					//+"<td><div id='"+item.id+"'>" + item.code + "</div><button type='button' id='changeBtn_"+item.id+"' onclick='changeHospital(\""+item.id+"\",\""+code+"\")'>변경</button></td>"
+					+"<td><div id='"+item.id+"'><a href='javascript:void(0);' onclick='changeHospital(\""+item.id+"\",\""+code+"\")'>" + item.code + "</a></div></td>"
+					+"<td>" + item.point + "</td>"
+					if(item.auth == 2){
+						str += "<td>" + "<button type='button' onclick='toYes(\""+item.id+"\")'>승인</button>"+
+						"<button type='button' onclick='toNo(\""+item.id+"\")'>거절</button>" + "</td>";
+					}else if(item.auth == 3){
+						str+="<td><button type='button' onclick='toStaff(\""+item.id+"\")'>직원으로 변경</button></td>";
+					}else{
+						str+="<td><button type='button' onclick='toManager(\""+item.id+"\",\""+item.code+"\")'>관리자로 변경</button></td>";
+					}
+	                str += "<td>"+"<button type='button' onclick='delMember(\""+item.id+"\")'>탈퇴</button>"+"</td></tr>"
+	                $("#tbody").append(str);
+				});
+			}
 		},
 		error:function(){
 			alert("getMemberList error");
@@ -201,6 +216,84 @@ function delMember(id){
 			}
 		});
 	}
+}
+//병동 리스트 불러오기
+function getHospitalList(code){
+	$.ajax({
+		url:"http://localhost:3000/getHospitalList",
+		type:"post",
+		data:{"code":code},
+		success:function(list){
+			$.each(list, function(idx, item){
+				  var elOptNew = document.createElement('option');
+				  elOptNew.text = item.code;
+				  elOptNew.value = item.code;
+				  var elSel = document.getElementById('hospital');
+				  try {
+				   elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+				  }catch(ex) {
+				   elSel.add(elOptNew); // IE only
+				  }
+			});
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+function changeHospital(id, code){
+	$.ajax({
+		url:"http://localhost:3000/getHospitalList",
+		type:"post",
+		data:{"code":code},
+		success:function(list){
+			var curCode = $("#"+id).text(); 
+			$("#"+id).empty();
+			$("#"+id).append("<select name='s_"+id+"' id='s_"+id+"'></select><button type='button' id='changeAfBtn_"+id+"' onclick='changeAf(\""+id+"\")'>변경하기</button>");
+			$.each(list, function(idx, item){
+				  var elOptNew = document.createElement('option');
+				  elOptNew.text = item.code;
+				  elOptNew.value = "s_"+item.code;
+				  if(curCode == item.code){
+					  elOptNew.selected = "true";  
+				  }
+				  var elSel = document.getElementById("s_"+id);
+				  try {
+				   elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
+				  }catch(ex) {
+				   elSel.add(elOptNew); // IE only
+				  }
+			});
+		},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+function changeAf(id){
+	let code = $("#s_"+id+" option:selected").val();
+	if(confirm(id+"님의 병동을 변경하시겠습니까?")){
+		$.ajax({
+			url:"http://localhost:3000/changeHospital",
+			type:"post",
+			data:{"id":id, "code":code},
+			success:function(result){
+				if(result == "manager"){
+					alert("관리자는 병동을 변경할 수 없습니다.");	
+					location.reload();
+				}else if(result=="success"){
+					alert("변경 되었습니다.");
+					location.reload();
+				}else{
+					alert("변경에 실패했습니다.");
+				}
+			},
+			error:function(){
+				alert("변경에 실패했습니다.");
+			}
+		});
+	}
+	
 }
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

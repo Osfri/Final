@@ -17,8 +17,8 @@ public class WebMainService {
 	@Autowired
 	WebMainDao dao;
 	
-	public List<MemberDto> getMemberList(MemberDto login){
-		return dao.getMemberList(login);
+	public List<MemberDto> getMemberList(String code, String hospital){
+		return dao.getMemberList(code, hospital);
 	}
 	
 	public List<HospitalDto> getHospitalList(String code){
@@ -55,5 +55,13 @@ public class WebMainService {
 	
 	public int toNo(String id) {
 		return dao.toNo(id);
+	}
+	
+	public int changeHospital(String id, String code) {
+		return dao.changeHospital(id, code);
+	}
+	
+	public int authChk(String id) {
+		return dao.authChk(id);
 	}
 }

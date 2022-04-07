@@ -13,7 +13,7 @@ import mul.camp.a.dto.MemberDto;
 public interface WebMainDao {
 
 	//직원 리스트 불러오기
-	public List<MemberDto> getMemberList(MemberDto login);
+	public List<MemberDto> getMemberList(String code, String hospital);
 	//병동 추가하기
 	public int addHospital(String curCode, String code, String name);
 	//병동 리스트 불러오기
@@ -32,4 +32,8 @@ public interface WebMainDao {
 	public int toYes(String id);
 	//병동에서 직원으로 승인 거부
 	public int toNo(String id);
+	//직원의 병동코드 변경
+	public int changeHospital(String id, String code);
+	//권한 확인
+	public int authChk(String id);
 }
