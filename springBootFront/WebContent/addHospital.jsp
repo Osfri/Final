@@ -26,7 +26,7 @@
 	        <div class="maintitle">
 	            <h2>병동관리</h2>
 	        </div>
-			<input type="text" id="addText"/>
+			<input type="text" id="addText" placeholder="병동 이름 입력"/>
 			<input type="button" id="addBtn" value="병동 추가하기"/>
 	        <table>
 		        <thead>
@@ -115,23 +115,29 @@
 				success:function(list){
 					//alert("success");
 					$("#tbody").text("");
-					$.each(list, function(idx, item){
-						let str = "<tr>"
-						+"<td>" + (idx+1) + "</td>"
-						+"<td>" + item.name + "</td>"
-						+"<td>" + item.code + "</td>"
-						if(item.manager != null){
-							str += "<td>" + item.manager + "</td>";
-						}else{
-							str += "<td>관리자가 없습니다.</td>";
-						}
-						if(item.cnt == 0){
-							str += "<td>" + "<button type='button' onclick='delHospital(\""+item.code+"\")'>삭제</button></td>";
-						}else{
-							str+="<td>해당 병동에 소속된 사람이 없어야 삭제 가능합니다.</td>";
-						}
+					if(list.length == 0){
+						let str="";
+						str="<tr><td colspan='5'>병동이 없습니다.</td></tr>"
 		                $("#tbody").append(str);
-					});
+					}else{
+						$.each(list, function(idx, item){
+							let str = "<tr>"
+							+"<td>" + (idx+1) + "</td>"
+							+"<td>" + item.name + "</td>"
+							+"<td>" + item.code + "</td>"
+							if(item.manager != null){
+								str += "<td>" + item.manager + "</td>";
+							}else{
+								str += "<td>관리자가 없습니다.</td>";
+							}
+							if(item.cnt == 0){
+								str += "<td>" + "<button type='button' onclick='delHospital(\""+item.code+"\")'>삭제</button></td>";
+							}else{
+								str+="<td>해당 병동에 소속된 사람이 없어야 삭제 가능합니다.</td>";
+							}
+			                $("#tbody").append(str);
+						});
+					}
 				},
 				error:function(){
 					alert("getHospitalList error");

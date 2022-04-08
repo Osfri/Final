@@ -56,7 +56,7 @@ $(document).ready(function(){
 				}else{
 					sessionStorage.setItem("login", JSON.stringify(json));
 					alert(json.name + "님 환영합니다");	
-					location.href = "staffManagement.jsp";
+					location.href = "staffCalendarManagement.jsp";
 				}			
 			},
 			error:function(){

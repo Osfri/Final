@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mul.camp.a.dao.WebMainDao;
 import mul.camp.a.dto.MemberDto;
+import mul.camp.a.dto.ParttimeDto;
 import mul.camp.a.dto.ChatDto.HospitalDto;
 
 @Service
@@ -63,5 +64,17 @@ public class WebMainService {
 	
 	public int authChk(String id) {
 		return dao.authChk(id);
+	}
+	
+	public List<ParttimeDto> getParttime(String code) {
+		return dao.getParttime(code);
+	}
+	
+	public int saveTime(String name, String st, String et, String code) {
+		return dao.saveTime(name, st, et, code);
+	}
+	
+	public int point(String code, String point) {
+		return dao.point(code, point);
 	}
 }

@@ -8,7 +8,6 @@
 	<select id="getMemberList" resultType="mul.camp.a.dto.MemberDto">
 		SELECT * 
 		FROM MEMBER
-		
 		<if test='hospital == "all"'>
 			WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
 		</if>
@@ -74,4 +73,19 @@
 		FROM MEMBER
 		WHERE ID=#{id}
 	</select>
+	<select id="getParttime" resultType="mul.camp.a.dto.ParttimeDto" parameterType="mul.camp.a.dto.ParttimeDto">
+		SELECT *
+		FROM PARTTIME
+		WHERE CODE=#{code}
+	</select>
+	<update id="saveTime" parameterType="java.lang.String">
+		UPDATE PARTTIME
+		SET START_TIME=#{st}, END_TIME=#{et}
+		WHERE NAME=#{name} AND CODE=#{code}
+	</update>
+	<update id="point" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET POINT=#{point}
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+	</update>
 </mapper>

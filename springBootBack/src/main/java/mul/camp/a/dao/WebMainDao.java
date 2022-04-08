@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import mul.camp.a.dto.ChatDto.HospitalDto;
 import mul.camp.a.dto.MemberDto;
+import mul.camp.a.dto.ParttimeDto;
 
 @Mapper
 @Repository
@@ -36,4 +37,10 @@ public interface WebMainDao {
 	public int changeHospital(String id, String code);
 	//권한 확인
 	public int authChk(String id);
+	//병원별 근무 시간 확인
+	public List<ParttimeDto> getParttime(String code);
+	//병원별 근무 시간 변경
+	public int saveTime(String name, String st, String et, String code);
+	//포인트 지급
+	public int point(String code, String point);
 }

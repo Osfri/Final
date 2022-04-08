@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mul.camp.a.dto.ChatDto.HospitalDto;
 import mul.camp.a.dto.MemberDto;
+import mul.camp.a.dto.ParttimeDto;
 import mul.camp.a.service.WebMainService;
 
 
@@ -109,7 +110,7 @@ public class WebMainController {
 			return "error";
 		}
 	}
-	
+
 	@RequestMapping(value ="/changeHospital", method = RequestMethod.POST)
 	public String changeHospital(String id, String code) {
 		System.out.println("changeHospital "+id+" "+code);
@@ -119,6 +120,37 @@ public class WebMainController {
 			return "manager";
 		}
 		int result = service.changeHospital(id, code.substring(2));
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/getParttime", method = RequestMethod.POST)
+	public List<ParttimeDto> getParttime(String code) {
+		System.out.println("getParttime "+code);
+		List<ParttimeDto> result = service.getParttime(code.split("_")[0]);
+		System.out.println(result.toString());
+		
+		return result;
+	}
+	
+	@RequestMapping(value ="/saveTime", method = RequestMethod.POST)
+	public String saveTime(String name, String st, String et, String code) {
+		System.out.println("saveTime "+name + " " +code+" "+st+" "+et);
+		int result = service.saveTime(name, st, et, code.split("_")[0]);
+		if(result>0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value ="/point", method = RequestMethod.POST)
+	public String point(String point, String code) {
+		System.out.println("point "+code+" "+point);
+		int result = service.point(code, point);
 		if(result>0) {
 			return "success";
 		}else {

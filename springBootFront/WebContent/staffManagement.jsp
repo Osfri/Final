@@ -31,6 +31,8 @@
 			  <option value="all" selected>전체</option>
 			</select>
 			<button type="button" id="searchBtn">검색</button>
+			<input type="number" id="point" placeholder="지급할 포인트를 입력하세요."/>
+			<button type="button" id="pointBtn" onclick="point()">포인트 지급하기</button>
 	        <table>
 		        <thead>
 		            <tr>
@@ -293,7 +295,28 @@ function changeAf(id){
 			}
 		});
 	}
-	
+}
+function point(){
+	let point = $("#point").val();
+	let login = JSON.parse(sessionStorage.getItem("login"));
+	if(confirm(point+" 포인트를 모든 직원에게 지급하시겠습니까?")){
+		$.ajax({
+			url:"http://localhost:3000/point",
+			type:"post",
+			data:{"point":point, "code":login.code},
+			success:function(result){
+				if(result=="success"){
+					alert("포인트가 지급되었습니다.");
+					location.reload();
+				}else{
+					alert("포인트가 지급되지 않았습니다.");
+				}
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}
 }
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
