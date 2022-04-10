@@ -27,12 +27,13 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_detail.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_update.xml" value="0.31145833333333334" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_write.xml" value="0.2965686274509804" />
-        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_calendar.xml" value="0.2623574144486692" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_calendar.xml" value="0.4280078895463511" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_calender.xml" value="0.28854166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_chat.xml" value="0.28854166666666664" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_firstscreen.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_food.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_food_write.xml" value="0.22604166666666667" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_group_message.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_main.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_manager_bbs.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_manager_menu.xml" value="0.4317708333333333" />
@@ -43,13 +44,47 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_point_mall.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_point_mall_detail.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_point_mall_history.xml" value="0.2965686274509804" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_select.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_select_people.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_individual.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_management.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_screen.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_waiting.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signin.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signup.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_splash.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_account.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_chat.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_navi_comment.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_navi_delete.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_navi_update.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_people.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/ham_appbar.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/ham_header.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/item_chat_friend.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/item_chat_friend_select.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/item_chat_message.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/main_drawer_header.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_dialog_layout_pointmall.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_cal_day.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_cal_empty.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_cal_header.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_alarm.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_alarmitem.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_bbs.xml" value="0.5714285714285714" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_bbstype.xml" value="0.5714285714285714" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_calendar.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_comment.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_food.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_manager_bbs.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_manager_staff.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_manager_staffjoin.xml" value="0.5142857142857143" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_phone.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_pointhistory.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_layout_pointmall.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_off_day.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_off_empty.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_off_header.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_bbslist.xml" value="0.353125" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_list.xml" value="0.44635416666666666" />
       </map>

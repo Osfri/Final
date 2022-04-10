@@ -25,7 +25,8 @@
             android:layout_height="41dp"
             tools:ignore="MissingConstraints"
             app:layout_constraintStart_toEndOf="@+id/alramRecycleViewTime"
-            app:layout_constraintTop_toTopOf="@+id/alramRecycleViewTime" android:layout_marginStart="16dp"/>
+            app:layout_constraintTop_toTopOf="@+id/alramRecycleViewTime" android:layout_marginStart="220dp"
+    />
     <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

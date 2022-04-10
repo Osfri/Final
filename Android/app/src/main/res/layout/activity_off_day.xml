@@ -54,21 +54,30 @@
                 android:layout_marginTop="700dp"
                 android:background="#A6A6A6"
                 tools:ignore="MissingConstraints"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:text="날짜를 선택시 신청 또는 취소가 가능합니다\n최대 선택기간은 5일입니다"/>
+
     </LinearLayout>
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="2"
+                android:gravity="center"
                 tools:context=".LinearActivity">
 
 
             <Button
                     android:id="@+id/offBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:text="off신청\n(취소는 이름을 눌러주세요.)"
-                    android:layout_weight="1"
+                    android:layout_width="100dp"
+                    android:layout_height="60dp"
+                    android:text="off 신청"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/button_round"
                     android:layout_gravity="bottom"
                     android:textColor="@color/white"
