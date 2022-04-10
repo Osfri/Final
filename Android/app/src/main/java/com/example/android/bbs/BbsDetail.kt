@@ -117,11 +117,11 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
         // bbsDetail -> Bbs 로 이동
-        val bbsDetailBack = findViewById<Button>(R.id.bbsDetailBack)
+/*        val bbsDetailBack = findViewById<Button>(R.id.bbsDetailBack)
         bbsDetailBack.setOnClickListener {
             val i = Intent(this, BbsActivity::class.java)
             startActivity(i)
-        }
+        }*/
 
 
 
