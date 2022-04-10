@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mul.camp.a.dao.WebMainDao">
+
+	<select id="getMemberList" resultType="mul.camp.a.dto.MemberDto">
+		SELECT * 
+		FROM MEMBER
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+	</select>
+	<insert id="addHospital" parameterType="java.lang.String">
+		INSERT INTO HOSPITAL(NAME, LOCATION, CODE)
+		VALUES(
+			((SELECT NAME FROM HOSPITAL WHERE CODE=#{curCode})||'_'||#{name}),
+			(SELECT LOCATION FROM HOSPITAL WHERE CODE=#{curCode}),
+			#{code}
+		)
+	</insert>
+	<select id="getHospitalList" resultType="mul.camp.a.dto.HospitalDto">
+		SELECT NAME, CODE, (SELECT ID FROM MEMBER M WHERE M.CODE=H.CODE AND M.AUTH=3) AS MANAGER, (SELECT COUNT(*) FROM MEMBER M WHERE M.CODE=H.CODE) AS CNT
+		FROM HOSPITAL H
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+		ORDER BY NAME, CODE
+	</select>
+	<select id="hospitalChk" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM HOSPITAL
+		WHERE CODE=#{code}
+	</select>
+	<delete id="delHospital" parameterType="java.lang.String">
+		DELETE FROM HOSPITAL
+		WHERE CODE = #{code}
+	</delete>
+	<update id="toStaff" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=1
+		WHERE ID=#{id}
+	</update>
+	<update id="toManager" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=3
+		WHERE ID=#{id}
+	</update>
+	<select id="managerChk" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE CODE=#{code} AND AUTH=3
+	</select>
+	<update id="toYes" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=1
+		WHERE ID=#{id}
+	</update>
+	<update id="toNo" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET AUTH=5, CODE=''
+		WHERE ID=#{id}
+	</update>
+</mapper>
