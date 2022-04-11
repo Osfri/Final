@@ -24,7 +24,9 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.manager.BoardtypeDto
 import com.example.android.manager.ManagerActivity
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
@@ -192,23 +194,15 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         when(item.itemId){
 
 
-            R.id.menu_bbs_important-> {                                                  // 공지사항
+            R.id.menu_bbs-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
                 Log.d("로그","공지")
                 startActivity(i)
 
             }
             R.id.menu_alram-> {
-
-/*
-                navigationView.menu.add(R.id.notice,0,0,"게시판221")
-                navigationView.menu.get(3).setIcon(R.drawable.alarm_back_ring)
-                navigationView.invalidateOutline()
-                navigationView.invalidate()*/
-
                 val i = Intent(this, AlarmActivity::class.java)
                 startActivity(i)
-
             }
             R.id.menu_cal->  {
                 val i = Intent(this, CalendarActivity::class.java)
@@ -226,8 +220,12 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val i = Intent(this, OffDayActivity::class.java)
                 startActivity(i)
             }
+            R.id.menu_phonenumber -> {
+                val i = Intent(this, PhoneNumActivity::class.java)
+                startActivity(i)
+            }
             R.id.menu_manager->  {
-                val i = Intent(this, ManagerActivity::class.java)
+                val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
             }
 

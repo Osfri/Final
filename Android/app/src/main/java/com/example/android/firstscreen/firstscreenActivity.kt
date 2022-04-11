@@ -15,6 +15,7 @@ class firstscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firstscreen)
+/*
 
         val signin = findViewById<Button>(R.id.btn_signin1)
         val signup = findViewById<ImageButton>(R.id.btn_signup1)
@@ -31,6 +32,7 @@ class firstscreenActivity : AppCompatActivity() {
             val i = Intent(this,SemiWaitingActivity::class.java)
             startActivity(i)
         }
+*/
 
 
     }

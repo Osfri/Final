@@ -9,64 +9,110 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
-    <LinearLayout
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".LinearActivity">
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="?attr/actionBarSize"/>
+            android:layout_weight="1">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:context=".LinearActivity">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/bbsUpdateId"
+                    android:text="작성자: 로그인님"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="15dp"
+                    android:layout_marginTop="95dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView6"
+                    app:layout_constraintTop_toTopOf="@+id/textView6"/>
 
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    tools:context=".LinearActivity">
+                <EditText
+                        android:id="@+id/bbsUpdateTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="제목을 입력해주세요."
+                        android:inputType="textPersonName"
+                        android:textSize="30dp"
+                        android:layout_gravity="center"
+                        app:layout_constraintTop_toTopOf="@+id/textView7"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@android:color/transparent"
+                        android:layout_weight="7"/>
+                <ImageButton
+                        android:id="@+id/bbsUpdateCamera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="?android:borderlessButtonStyle"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/drawable_imagesize"/>
+
+                <ImageButton
+                        android:id="@+id/bbsUpdateBtnImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="5dp"
+                        style="?android:borderlessButtonStyle"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/drawable_imagesize_image"/>
             <Button
                     android:id="@+id/btn_bbsUpdateFin"
-                    android:text="글 수정"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:backgroundTint="#ED3717"
+                    android:text="수정"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape_red"
                     android:textColor="#ffffff"
                     android:layout_weight="1"/>
         </LinearLayout>
 
-        <TextView
-                android:id="@+id/bbsUpdateId"
-                android:text="작성자: 로그인님"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6"/>
-
-        <EditText
-                android:id="@+id/bbsUpdateTitle"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="제목을 입력해주세요."
-                android:inputType="textPersonName"
-                android:textSize="30dp"
-                app:layout_constraintTop_toTopOf="@+id/textView7"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:layout_constraintStart_toEndOf="@+id/textView7"/>
+                android:orientation="horizontal"
+                android:weightSum="10"
+                tools:context=".LinearActivity">
 
+
+        </LinearLayout>
+
+            <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#D6D6D6"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="center"/>
+            <ImageView
+                    android:id="@+id/bbsUpdateImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"/>
 
         <EditText android:id="@+id/bbsUpdateContent"
                   android:layout_width="match_parent"
-                  android:layout_height="500dp"
+                  android:layout_height="wrap_content"
                   android:lines="10"
                   android:layout_marginLeft="20dp"
+                  android:background="@android:color/transparent"
                   android:layout_marginRight="20dp"
                   android:hint="내용을 입력해주세요"
                   android:gravity="top|left"
@@ -79,13 +125,7 @@
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintHorizontal_bias="0.377"/>
-        <ImageView
-                android:id="@+id/bbsUpdateImage"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-        />
+
     </LinearLayout>
     </ScrollView>
 

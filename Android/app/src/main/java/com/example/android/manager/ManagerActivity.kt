@@ -157,7 +157,7 @@ class ManagerActivity : AppCompatActivity() , NavigationView.OnNavigationItemSel
         when(item.itemId){
 
 
-            R.id.menu_bbs_important-> {                                                  // 공지사항
+            R.id.menu_bbs-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
                 Log.d("로그","공지")
                 startActivity(i)
