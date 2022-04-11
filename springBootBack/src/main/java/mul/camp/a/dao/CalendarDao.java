@@ -19,5 +19,8 @@ public interface CalendarDao {
 	// 취소
 	public int offCancel(CalendarDto dto);
 	public List<CalendarDto> dutyList(CalendarDto dto);
+	//메모 추가
 	public int memoInsert(CalendarDto dto);
+	//본인 off 개수 확인
+	public int offCount(String date, String id);
 }

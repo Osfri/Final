@@ -6,6 +6,9 @@ $(document).ready(function(){
 		document.getElementById("staff").style.display ="none";
 		document.getElementById("addHospital").style.display ="none";
 	}
+	if(login.auth == 0){
+		document.getElementById("calendar").style.display ="none";
+	}
 })
 </script>
 <div class="navigation">
@@ -22,26 +25,27 @@ $(document).ready(function(){
                 <span class="title">직원관리</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li id="calendar">
+            <a href="staffCalendarManagement.jsp">
+            <!-- <a href="test.jsp"> -->
                 <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                 <span class="title">근무관리</span>
             </a>
         </li>
         <li>
-            <a href="staffCalendarManagement.jsp">
+            <a href="staffScheduleManagement.jsp">
                 <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
                 <span class="title">스케줄관리</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="shopTest.html">
                 <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                 <span class="title">식단관리</span>
             </a>
         </li>
         <li>
-            <a href="upload.jsp">
+            <a href="fileUpload.jsp">
                 <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
                 <span class="title">스케줄 등록</span>
             </a>

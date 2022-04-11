@@ -20,7 +20,7 @@ body{
     min-height: 100vh;
     overflow-x: hidden;
 }
-.container{
+.custom_container{
     position: relative;
     width: 100%;
 }
@@ -211,3 +211,41 @@ i{
     text-align: center;
     font-size: 1.2rem;
 }
+
+button{
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    position:relative;
+    height:30px;
+    font-size:0.8em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+button:hover{
+  background:#fff;
+  color:var(--blue);
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: var(--blue);
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+​

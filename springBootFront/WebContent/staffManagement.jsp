@@ -7,12 +7,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- ss --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <title>Insert title here</title>
 <script src="./js/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+<!-- ss -->
+<script type="text/javascript" src="./jquery/jquery.twbsPagination.min.js"></script>
+
 </head>
 <body>
-<div class="container">
+<div class="custom_container">
     <jsp:include page="navigation.jsp"></jsp:include>
     <!-- main -->
     <div class="main">
@@ -46,43 +55,37 @@
 		                <th>탈퇴</th>
 		            </tr>
 	            </thead>
-	            <!--임시데이터-->
 	            <tbody id="tbody">
 	            
 	            </tbody>
-	            <!-- <tr>
-	                <td><input type="checkbox"></td>
-	                <td>aa</td>
-	                <td>aa</td>
-	                <td>aa</td>
-	                <td>관리자</td>
-	                <td>3800</td>
-	                <td>
-	                    <input type="button" value="승인">
-	                    <input type="button" value="거절">
-	                </td>
-	            </tr> -->
 	         </table>
-            <!-- <input type="submit" value="탈퇴" id="out" /> -->
+	           <div class="container" style="position: absolute; left: 50%; transform: translate(-50%, -50%); bottom: 50px;">
+			    <nav aria-label="Page navigation">
+			        <ul class="pagination" id="pagination" style="justify-content:center"></ul>
+			    </nav>
+			</div>
 	     </div>
-     </div>
+	</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function(){
 	let login = JSON.parse(sessionStorage.getItem("login"));
 	getHospitalList(login.code);
-	getMemberList(login.code, "all");
+	getMemberList(0, "all");
+	getStaffCount("all");
 	$("#searchBtn").click(function(){
-		getMemberList(login.code, $("#hospital option:selected").val());
+		getMemberList(0, $("#hospital option:selected").val());
+		getStaffCount($("#hospital option:selected").val());
 	});
 })
 
-function getMemberList(code, hospital){
+function getMemberList(page, hospital){
+	let code = JSON.parse(sessionStorage.getItem("login")).code;
 	$.ajax({
 		url:"http://localhost:3000/getMemberList",
 		type:"post",
-		data:{"code":code, "hospital":hospital},
+		data:{"page":page, "code":code, "hospital":hospital},
 		success:function(list){
 			$("#tbody").text("");
 			let str="";
@@ -239,7 +242,7 @@ function getHospitalList(code){
 			});
 		},
 		error:function(){
-			alert("error");
+			alert("getHospitalList error");
 		}
 	});
 }
@@ -268,7 +271,7 @@ function changeHospital(id, code){
 			});
 		},
 		error:function(){
-			alert("error");
+			alert("changeHospital error");
 		}
 	});
 }
@@ -313,10 +316,47 @@ function point(){
 				}
 			},
 			error:function(){
-				alert("error");
+				alert("point error");
 			}
 		});
 	}
+}
+function getStaffCount(hospital){
+	let code = JSON.parse(sessionStorage.getItem("login")).code;
+	$.ajax({
+		url:"http://localhost:3000/getStaffCount",
+		type:"post",
+		data:{"hospital":hospital, "code":code},
+		success:function(cnt){
+			loadPage(cnt);
+		},
+		error:function(){
+			alert("getStaffCount error");
+		}
+	});
+}
+
+function loadPage(totalCnt){
+	let _totalPages = totalCnt / 10;
+	if(totalCnt % 10 > 0){
+		_totalPages += 1;
+	}
+	
+	$('#pagination').twbsPagination('destroy');	
+
+	$('#pagination').twbsPagination({
+	    totalPages: _totalPages,
+	    visiblePages: 10,
+	    first:'<span sris-hidden="true">«</span>',
+	    last:'<span sris-hidden="true">»</span>',
+	    prev:"이전", 
+	    next:"다음",
+	    initiateStartPageClick:false,	//onPageClick
+	    onPageClick: function (event, page) {
+	        //alert(page);
+	        getMemberList(page - 1, $("#hospital option:selected").val());
+	    }
+	 })
 }
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

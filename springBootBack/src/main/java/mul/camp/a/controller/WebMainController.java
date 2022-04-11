@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import mul.camp.a.dto.CalendarDto;
 import mul.camp.a.dto.ChatDto.HospitalDto;
 import mul.camp.a.dto.MemberDto;
 import mul.camp.a.dto.ParttimeDto;
@@ -20,9 +21,14 @@ public class WebMainController {
 	WebMainService service;
 
 	@RequestMapping(value ="/getMemberList", method = RequestMethod.POST)
-	public List<MemberDto> getMemberList(String code, String hospital) {
-		System.out.println("getMemberList "+code+" "+hospital);
-		List<MemberDto> result = service.getMemberList(code, hospital);
+	public List<MemberDto> getMemberList(int page, String code, String hospital) {
+		System.out.println("getMemberList "+page+" "+code+" "+hospital);
+		
+		int sn = page;
+		int start = sn * 10 + 1;
+		int end = (sn + 1) * 10;
+		
+		List<MemberDto> result = service.getMemberList(start, end, code, hospital);
 		System.out.println("getMemberList result=="+result.toString());
 		return result;
 	}
@@ -46,7 +52,21 @@ public class WebMainController {
 	@RequestMapping(value ="/getHospitalList", method = RequestMethod.POST)
 	public List<HospitalDto> getHospitalList(String code) {
 		System.out.println("getHospitalList "+code);
+		
 		List<HospitalDto> result = service.getHospitalList(code);
+		System.out.println("getHospitalList result=="+result.toString());
+		return result;
+	}
+	
+	@RequestMapping(value ="/getHospitalListPage", method = RequestMethod.POST)
+	public List<HospitalDto> getHospitalListPage(int page, String code) {
+		System.out.println("getHospitalListPage "+" "+page+" "+code);
+		
+		int sn = page;
+		int start = sn * 10 + 1;
+		int end = (sn + 1) * 10;
+		
+		List<HospitalDto> result = service.getHospitalListPage(start, end, code);
 		System.out.println("getHospitalList result=="+result.toString());
 		return result;
 	}
@@ -156,5 +176,31 @@ public class WebMainController {
 		}else {
 			return "error";
 		}
+	}
+	
+	@RequestMapping(value ="/getStaffCount", method = RequestMethod.POST)
+	public int getStaffCount(String hospital, String code) {
+		System.out.println("getStaffCount "+hospital+" "+code);
+		int result = service.getStaffCount(hospital, code);
+		System.out.println("getStaffCount result======"+result);
+		return result;
+	}
+	
+	@RequestMapping(value ="/getHospitalCount", method = RequestMethod.POST)
+	public int getHospitalCount(String code) {
+		System.out.println("getHospitalCount "+code);
+		int result = service.getHospitalCount(code);
+		System.out.println("getHospitalCount result======"+result);
+		return result;
+	}
+	
+	@RequestMapping(value ="/getScheduleList", method = RequestMethod.POST)
+	public List<CalendarDto> getScheduleList(String code, String year, String month) {
+		month = ("0"+month).substring(("0"+month).length()-2, ("0"+month).length());
+		System.out.println("getScheduleList "+code+" "+year + " "+month);
+		String date = year+"-"+month;
+		List<CalendarDto> result = service.getScheduleList(code, date);
+		System.out.println("getScheduleList result======"+result.toString());
+		return result;
 	}
 }

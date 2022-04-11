@@ -6,7 +6,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="main.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        table {
+            clear: both;
+            margin-top: 50px;
+        }
+        th {
+            height: 50px;
+            width: 70px;
+            background-color:  #287bff;
+        }
+        td {
+            text-align: center;
+            height: 50px;
+            width: 70px;
+            padding: 40px 55px;
+        
+        }
+        input {
+            height: 50px;
+            width: 70px;
+            border: none;
+            background-color:  #287bff;
+            font-size: 30px;
+            color:white;
+        }
+        .year_mon{
+            font-size: 25px;
+        }
+        .colToday{
+        
+        }
+
+    </style>
+
+    <script>
+        $(function(){
+            var today = new Date();
+            var date = new Date();           
+
+            $("input[name=preMon]").click(function() { // 이전달
+                $("#calendar > tbody > td").remove();
+                $("#calendar > tbody > tr").remove();
+                today = new Date ( today.getFullYear(), today.getMonth()-1, today.getDate());
+                buildCalendar();
+            })
+            
+            $("input[name=nextMon]").click(function(){ //다음달
+                $("#calendar > tbody > td").remove();
+                $("#calendar > tbody > tr").remove();
+                today = new Date ( today.getFullYear(), today.getMonth()+1, today.getDate());
+                buildCalendar();
+            })
+
+
+            function buildCalendar() {
+                
+                nowYear = today.getFullYear();
+                nowMonth = today.getMonth();
+                firstDate = new Date(nowYear,nowMonth,1).getDate();
+                firstDay = new Date(nowYear,nowMonth,1).getDay(); //1st의 요일
+                lastDate = new Date(nowYear,nowMonth+1,0).getDate();
+
+                if((nowYear%4===0 && nowYear % 100 !==0) || nowYear%400===0) { //윤년 적용
+                    lastDate[1]=29;
+                }
+
+                $(".year_mon").text(nowYear+"년 "+(nowMonth+1)+"월");
+
+                for (i=0; i<firstDay; i++) { //첫번째 줄 빈칸
+                    $("#calendar tbody:last").append("<td></td>");
+                }
+                for (i=1; i <=lastDate; i++){ // 날짜 채우기
+                    plusDate = new Date(nowYear,nowMonth,i).getDay();
+                    if (plusDate==0) {
+                        $("#calendar tbody:last").append("<tr></tr>");
+                    }
+                    $("#calendar tbody:last").append("<td class='date'>"+ i +"</td>");
+                }
+                if($("#calendar > tbody > td").length%7!=0) { //마지막 줄 빈칸
+                    for(i=1; i<= $("#calendar > tbody > td").length%7; i++) {
+                        $("#calendar tbody:last").append("<td></td>");
+                    }
+                }
+                $(".date").each(function(index){ // 오늘 날짜 표시
+                    if(nowYear==date.getFullYear() && nowMonth==date.getMonth() && $(".date").eq(index).text()==date.getDate()) {
+                        $(".date").eq(index).addClass('colToday');
+                    }
+                }) 
+            }
+            buildCalendar();
+
+
+        })
+    </script>
     
     
 </head>
@@ -55,70 +150,43 @@
             </div>
 
         <!--table-->
-        <div>
             <div class="maintitle">
-                <h2>스케줄관리</h2>
-            </div>
-            <table>
-                <tr>
-                    <th>근무명</th>
-                    <th>아이콘 색상</th>
-                    <th>설명</th>
-                    <th>근무시간</th>
-                </tr>
-                <!--임시데이터-->
-                <tr>
-                    <td>D</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(101,176,254);">D</i>
-                    </td>
-                    <td>DAY</td>
-                    <td>07:00~15:00</td>
-                </tr> 
-                <tr>
-                    <td>E</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(112,87,250);">E</i>
-                    </td>
-                    <td>EVE</td>
-                    <td>14:00~22:00</td>
-                </tr> 
-                <tr>
-                    <td>N</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(113,113,113);">N</i>
-                    </td>
-                    <td>NIGHT</td>
-                    <td>21:00~08:00</td>
-                </tr> 
-                <tr>
-                    <td>OFF</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(82,195,175);">F</i>
-                    </td>
-                    <td>OFF</td>
-                    <td></td>
-                </tr> 
-                <tr>
-                    <td>Y</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(255,120,142);">Y</i>
-                    </td>
-                    <td>YEAR</td>
-                    <td></td>
-                </tr> 
-                <tr>
-                    <td>T</td>
-                    <td class="icons">
-                        <i style="background-color:rgb(255,202,59);">T</i>
-                    </td>
-                    <td>TRANING</td>
-                    <td></td>
-                </tr> 
+                <h2>근무관리</h2>
+            
+            <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
+		<button id="download_file_btn">근무표 양식 다운로드</button>
+		<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
+		<form id="upload_file_frm">
+			<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+			<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
+			<button type="button" id="upload_file_btn">근무표 업로드</button>
+		</form>
+		
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         </div>
-        
+            <div>
+            <table id="calendar">
+                <thead>
+                    <tr>
+                        <th><input name="preMon" type="button" value="<"></th>
+                        <th colspan="5" class="year_mon"></th>
+                        <th><input name="nextMon" type="button" value=">"></th>
+                    </tr>
+                    <tr>
+                        <th>일</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th>토</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-    </div>
 
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
