@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="mul.camp.a.dao.ShopDao">
+
+	<insert id="shopItemAdd" parameterType="mul.camp.a.dto.ShopDto">
+		INSERT INTO SHOP (SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT)
+		VALUES(SHOP_SEQ.NEXTVAL, #{title}, #{content}, #{price}, #{photo}, #{cnt})
+	</insert>
+	
+	<select id="getShopItemAll" resultType="mul.camp.a.dto.ShopDto">
+		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
+		FROM SHOP
+	</select>
+	
+	<select id="getShopItemInfo" parameterType="mul.camp.a.dto.ShopDto" resultType="mul.camp.a.dto.ShopDto">
+		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
+		FROM SHOP
+		WHERE SEQ = #{seq}
+	</select>
+	
+	<update id="buyShopItemPoint" parameterType="Map">
+<!-- 		UPDATE MEMBER
+		SET POINT = POINT - (SELECT PRICE
+								FROM SHOP
+								WHERE SEQ = #{shopItem.seq})
+					WHERE ID = #{loginUser.id} -->
+		UPDATE MEMBER
+		SET POINT = POINT - ((SELECT PRICE
+								FROM SHOP
+								WHERE SEQ = #{shopItem.seq}) * #{itemCnt})
+					WHERE ID = #{loginUser.id}
+	</update>
+	
+	<insert id="orderShopItem" parameterType="Map">
+		INSERT INTO BUY (SEQ, ID, ITEM, CNT, ADDR)
+		VALUES (BUY_SEQ.NEXTVAL, #{loginUser.id}, #{shopItem.seq}, #{itemCnt}, 
+		(SELECT LOCATION FROM HOSPITAL WHERE CODE = #{loginUser.code}))
+	</insert>
+	
+	<update id="buyShopItemCnt" parameterType="Map">
+		UPDATE SHOP
+		SET CNT = CNT - #{itemCnt}
+		WHERE SEQ = #{shopItem.seq}	
+	</update>
+
+	
+</mapper>

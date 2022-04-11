@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_weight="1"
             tools:context=".LinearActivity">
@@ -200,6 +201,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 tools:context=".LinearActivity">
+<!--
 
             <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFirstScreen"
@@ -211,6 +213,7 @@
                     android:textSize="12dp"
                     android:background="@drawable/button_main_menu"
                     android:textColor="#FFFFFF"/>
+-->
 
 
             <androidx.appcompat.widget.AppCompatButton

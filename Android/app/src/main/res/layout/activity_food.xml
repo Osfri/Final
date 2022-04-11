@@ -13,24 +13,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="?attr/actionBarSize"/>
-            <Button
-                    android:text="식단 등록"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:id="@+id/btnFoodWrite"
-                    android:backgroundTint="#ED3717"
-                    android:textColor="#ffffff"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_weight="1"/>
-        </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView

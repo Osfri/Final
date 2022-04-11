@@ -22,6 +22,7 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.chat.ChatSingleton
 import com.example.android.chat.ChatUserDto
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
@@ -47,8 +48,11 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // TODO: 식단등록은 웹에서 등록하므로 등록기능 해제함
         // (수정,추가_백엔드) 관리자인 경우만 식단등록 표시 => 앱에서는 권한 관계없이 등록페이지 안보이도록 수정함
-        val foodWriteBtn:Button = findViewById<Button>(R.id.btnFoodWrite)
-        foodWriteBtn.visibility = View.GONE
+
+
+        // 식단 등록은 웹에서 하기에 앱 등록버튼 삭제처리 22 04 07
+//        val foodWriteBtn:Button = findViewById<Button>(R.id.btnFoodWrite)
+//        foodWriteBtn.visibility = View.GONE
         /*
         if(MemberDao.user!!.auth == 0 || MemberDao.user!!.auth == 3){   // 0: 관리자, 3: 최고관리자
             foodWriteBtn.visibility = View.VISIBLE
@@ -85,6 +89,7 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         foodRecyclerView.setHasFixedSize(true)
 
 
+/*
 
         // food -> foodwrite 이동    (식단 등록으로 가는 버튼)
         val btnFoodWrite = findViewById<Button>(R.id.btnFoodWrite)
@@ -92,6 +97,7 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val i = Intent(this, FoodWriteActivity::class.java)
             startActivity(i)
         }
+*/
 
 
     }
@@ -151,6 +157,10 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // (수정,추가_백엔드) 연락처 이동 부분 추가
             R.id.menu_phonenumber -> {
                 val i = Intent(this, PhoneNumActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
             }
         }

@@ -22,16 +22,6 @@
 
 
 
-        <Button
-                android:id="@+id/bbsDetailBack"
-                android:text="목록으로 돌아가기"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="75dp"
-                android:backgroundTint="#ED3717"
-                android:textColor="#ffffff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
 
 
 
@@ -40,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp"
                 android:textSize="25dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
@@ -204,6 +195,7 @@
                     android:textSize="15dp"
                     android:text="글 수정"
                     android:textColor="@color/white"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_original"
                     android:layout_width="wrap_content"
@@ -215,6 +207,8 @@
                     android:text="글 삭제"
                     android:textColor="@color/white"
                     android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:background="@drawable/button_round"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

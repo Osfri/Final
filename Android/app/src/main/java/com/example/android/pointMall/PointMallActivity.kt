@@ -20,6 +20,8 @@ import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.chat.ChatSingleton
 import com.example.android.chat.ChatUserDto
+import com.example.android.manager.ManagerActivity
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.signin.MemberDao
@@ -135,6 +137,10 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             // (수정,추가_백엔드) 연락처 이동 부분 추가
             R.id.menu_phonenumber -> {
                 val i = Intent(this, PhoneNumActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
             }
         }

@@ -47,6 +47,7 @@
             </ul>
         </div>
         <!-- main -->
+        <!-- main -->
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
@@ -54,198 +55,52 @@
                 </div>
             </div>
 
-        <!--table-->
-        <div>
-            <div class="maintitle">
-                <h2>직원관리</h2>
+            <!--table-->
+            <div>
+                <div class="maintitle">
+                    <h2>직원관리</h2>
+                </div>
+                <select name="hospital" id="hospital">
+                    <option value="all" selected>전체</option>
+                </select>
+                <button type="button" id="searchBtn">검색</button>
+                <table>
+                    <thead>
+                    <tr>
+                        <!-- <th><input type="checkbox" id="allcheck"></th> -->
+                        <th></th>
+                        <th>이름</th>
+                        <th>아이디</th>
+                        <th>병동</th>
+                        <th>잔여포인트</th>
+                        <th>관리</th>
+                        <th>탈퇴</th>
+                    </tr>
+                    </thead>
+                    <!--임시데이터-->
+                    <tbody id="tbody">
+
+                    </tbody>
+                    <!-- <tr>
+                        <td><input type="checkbox"></td>
+                        <td>aa</td>
+                        <td>aa</td>
+                        <td>aa</td>
+                        <td>관리자</td>
+                        <td>3800</td>
+                        <td>
+                            <input type="button" value="승인">
+                            <input type="button" value="거절">
+                        </td>
+                    </tr> -->
+                </table>
+                <!-- <input type="submit" value="탈퇴" id="out" /> -->
             </div>
-            <table>
-                <tr>
-                    <th><input type="checkbox" id="allcheck"></th>
-                    <th>이름</th>
-                    <th>소속</th>
-                    <th>병동</th>
-                    <th>직급</th>
-                    <th>잔여포인트</th>
-                    <th>관리</th>
-                </tr>
-                <!--임시데이터-->
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>aa</td>
-                    <td>aa</td>
-                    <td>aa</td>
-                    <td>관리자</td>
-                    <td>3800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>bb</td>
-                    <td>bb</td>
-                    <td>bb</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>cc</td>
-                    <td>cc</td>
-                    <td>cc</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>ee</td>
-                    <td>ee</td>
-                    <td>ee</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>ff</td>
-                    <td>ff</td>
-                    <td>ff</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>gg</td>
-                    <td>일반</td>
-                    <td>2800</td>
-                    <td>
-                        <input type="button" value="승인">
-                        <input type="button" value="거절">
-                    </td>
-                </tr>
-                <input type="submit" value="탈퇴" id="out">
-            
-        </div>
-        
         </div>
     </div>
 
-    
+
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     

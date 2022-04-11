@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/ham_menu_bbslist"
+            app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 
