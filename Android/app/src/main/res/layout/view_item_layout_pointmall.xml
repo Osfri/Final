@@ -6,7 +6,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/point_itemlist_cardview"
         android:layout_margin="15dp"
-        card_view:cardBackgroundColor="#E8E8E8"
+        card_view:cardBackgroundColor="#ECF2F8"
         card_view:cardCornerRadius="30dp"
         card_view:cardElevation="5dp"
         card_view:contentPadding="4dp">

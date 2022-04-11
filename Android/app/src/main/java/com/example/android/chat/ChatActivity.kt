@@ -1,9 +1,12 @@
 package com.example.android.chat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.chat.fragment.AccountFragment
 import com.example.android.chat.fragment.ChatFragment
@@ -44,7 +47,6 @@ class ChatActivity : AppCompatActivity() {
             setCurrentFragment(fr!!)
             true
         }
-
 
     }
 

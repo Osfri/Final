@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.MainActivity
 import com.google.android.material.navigation.NavigationView
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
@@ -58,6 +60,10 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_PointMall)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("포인트몰")
     }
 
     override fun onResume() {

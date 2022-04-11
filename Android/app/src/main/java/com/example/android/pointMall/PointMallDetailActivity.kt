@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
@@ -153,6 +154,10 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_PointMallDetail)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("포인트몰")
     }
 
     // (수정,추가_백엔드) 선택한 상품 정보 보여주기

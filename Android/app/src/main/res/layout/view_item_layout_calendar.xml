@@ -8,6 +8,7 @@
     <TextView
             android:id="@+id/calRecycleViewMemo"
             android:text="메모"
+            android:gravity="left|center"
             android:layout_width="255dp"
             android:layout_height="38dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -17,6 +18,7 @@
     <TextView
             android:id="@+id/calRecycleViewTime"
             android:text="파트타임"
+            android:gravity="left|center"
             android:layout_width="94dp"
             android:layout_height="36dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +28,7 @@
     <TextView
             android:id="@+id/calRecycleViewId"
             android:text="아이디"
+            android:gravity="left|center"
             android:layout_width="94dp"
             android:layout_height="37dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +38,7 @@
     <TextView
             android:id="@+id/calRecycleViewDate"
             android:text="날짜"
+            android:gravity="left|center"
             android:layout_width="119dp"
             android:layout_height="38dp"
             app:layout_constraintTop_toTopOf="parent"

@@ -6,17 +6,16 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.media.Image
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.android.R
@@ -25,7 +24,6 @@ import com.example.android.bbs.BbsActivity
 import com.example.android.chat.ChatActivity
 import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
-import com.example.android.offday.OffdayDto
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
@@ -33,6 +31,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_calendar.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
     // 임시데이터
@@ -90,6 +89,7 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // 달력일자 생성
         val mCalendarList:MutableList<CalendarDto> = setCalendarList(curData!!)
 
+
         // 그리드 뷰 생성
         val gridManager: StaggeredGridLayoutManager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
 
@@ -113,8 +113,13 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Calendar)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
-    }
 
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("일정표")
+
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정

@@ -43,7 +43,7 @@
     <Button
             android:text="전송"
             android:layout_width="100dp"
-            android:background="@color/pointred"
+            android:background="@drawable/button_round"
             android:textColor="@color/white"
             android:layout_height="50dp" android:id="@+id/groupMessageActivity_sendBtn"
             android:layout_marginEnd="20dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp"
