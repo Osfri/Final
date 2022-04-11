@@ -23,21 +23,23 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
 
             <Button
                     android:id="@+id/manager_btn_check"
                     android:text="게시판 등록"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:backgroundTint="#ED3717"
-                    android:textColor="#ffffff"
-                    android:layout_marginTop="?attr/actionBarSize"
-                    app:layout_constraintStart_toEndOf="@+id/textView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_weight="1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"/>
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_round"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"/>
+
 
 
         </LinearLayout>
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 android:hint="등록할 게시판 이름을 입력하세요"/>
         <TextView
                 android:layout_width="wrap_content"
@@ -131,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/ham_menu_bbslist"
+            app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
 

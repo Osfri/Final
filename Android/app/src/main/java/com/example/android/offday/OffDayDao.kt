@@ -12,6 +12,9 @@ interface OffDayService{
     fun offList(@Body date: String): Call<List<OffdayDto>>
     @POST("/offCancel")
     fun offCancel(@Body dto: OffdayDto): Call<String>
+    @POST("/offCount")
+    fun offCount(@Body dto: OffdayDto): Call<Int>
+
 }
 
 class OffDayDao {
@@ -61,6 +64,18 @@ class OffDayDao {
             val call = service?.offCancel(dto)
             val response = call?.execute()
             return response?.body() as String
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
+    fun offCount(dto: OffdayDto): Int?{
+        try{
+            val retrofit = RetrofitClient.getInstance()
+            val service = retrofit?.create(OffDayService::class.java)
+            val call = service?.offCount(dto)
+            val response = call?.execute()
+            return response?.body() as Int
         } catch (e: Exception) {
             return null
         }

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)                      // 로그인
-        val btnFirstScreen = findViewById<Button>(R.id.btnFirstScreen)          // 관리자,개인 구분창
+//        val btnFirstScreen = findViewById<Button>(R.id.btnFirstScreen)          // 관리자,개인 구분창
         val btnBbs = findViewById<Button>(R.id.btnBbs)                          // 공지사항,건의사항
         val btnCalender = findViewById<Button>(R.id.btnCalender)                // 일정표
         val btnLunch = findViewById<Button>(R.id.btnLunch)                      // 식단표
@@ -47,10 +47,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
         // 관리자,개인 구분창
-        btnFirstScreen.setOnClickListener {
+/*        btnFirstScreen.setOnClickListener {
             val i = Intent(this,firstscreenActivity::class.java)
             startActivity(i)
-        }
+        }*/
         // 공지사항,건의사항
         btnBbs.setOnClickListener {
             val i = Intent(this, BbsActivity::class.java)

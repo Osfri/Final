@@ -26,6 +26,8 @@ import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.manager.ManagerMenuActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.example.android.signin.MemberDto
@@ -35,16 +37,10 @@ import java.util.*
 
 
 open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener   {
-    // 임시데이터
-//    var tempData:MutableMap<String, OffdayDto>
-//            = mutableMapOf(
-//        Pair("2022.04.24", OffdayDto("2022.04.24", mutableListOf("박현준", "최성규"))),
-//        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("김다균"))),
-//        Pair("2022.04.11", OffdayDto("2022.04.11", mutableListOf("추현지")))
-//    )
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
+    var offCnt: Int? = null
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +54,10 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         val df = SimpleDateFormat("yyyy-MM")
         cal.add(Calendar.MONTH, 1)
         var offData: List<OffdayDto>? = OffDayDao.getInstance().offList(df.format(cal.time).toString())
+
+        val dto = OffdayDto(df.format(cal.time).toString(), MemberDao.user!!.id!!)
+        offCnt =  OffDayDao.getInstance().offCount(dto)!!.toInt()
+
 
         //db에 저장된 데이터가 없는 경우 빈 데이터 넣어주기
         if(offData == null || offData.size == 0){
@@ -123,7 +123,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         // 리사이클러뷰 생성
         val recyclerView = findViewById<RecyclerView>(R.id.offRecyclerView)
-        val calendarRecyclerViewAdapter:CalendarRecyclerViewAdapter = CalendarRecyclerViewAdapter(mCalendarList, this)
+        val calendarRecyclerViewAdapter:CalendarRecyclerViewAdapter = CalendarRecyclerViewAdapter(offCnt!!, mCalendarList, this)
         recyclerView.adapter = calendarRecyclerViewAdapter
         recyclerView.layoutManager = gridManager
 
@@ -177,6 +177,14 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 val i = Intent(this, OffDayActivity::class.java)
                 startActivity(i)
             }
+            R.id.menu_phonenumber -> {
+                val i = Intent(this, PhoneNumActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
         }
         return false
     }
@@ -226,7 +234,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         return  calendarList
     }
 
-    class CalendarRecyclerViewAdapter(val mCalendarList:MutableList<OffdayDto>, val context: Context)
+    class CalendarRecyclerViewAdapter(val offCnt:Int, val mCalendarList:MutableList<OffdayDto>, val context: Context)
         : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
         // 날짜타입
@@ -241,12 +249,13 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         class EmptyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         }
         // 요일타입
-        class DayViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        class DayViewHolder(val offCnt:Int, itemView: View): RecyclerView.ViewHolder(itemView){
             val dayText = itemView.findViewById<TextView>(R.id.calendar_item_dayText)
             val dayBack = itemView.findViewById<ConstraintLayout>(R.id.dayBack)
             val sdf: SimpleDateFormat = SimpleDateFormat("dd")              //  "yyyy.MM.dd"
             val sdfAll:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
             fun dayBind(dto: OffdayDto, context: Context){
+                println("offcnt========"+offCnt)
                 dayText.text = sdf.format((dto.wdate as GregorianCalendar).time)
                 if((dto.wdate as GregorianCalendar).get(Calendar.DAY_OF_WEEK) == 1){
                     dayText.setTextColor(Color.parseColor("#FF4081"))
@@ -261,56 +270,60 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     var linerLayout = itemView.findViewById<LinearLayout>(R.id.calendar_item_addContent)
                     linerLayout.removeAllViews()
                 }
+
                 //날짜 선택하기
                 itemView.setOnClickListener{
-                    val mem: MemberDto? = MemberDao.user
-                    if(mem != null){
-                        val selectedDate:String = sdfAll.format((dto.wdate as GregorianCalendar).time).toString()
-
-                        //하루에 2명까지 신청 가능하도록
-                        if(dto.content.size>1){
-                            Toast.makeText(context, "하루에 2명이상 신청은 불가능합니다.", Toast.LENGTH_SHORT).show()
-                        }else{
-                            var chk = true
-                            for(i in dto.content){
-                                //본인이 신청한 날짜에는 중복 신청 불가
-                                if(i.id == mem.id){
-                                    Toast.makeText(context, "이미 신청 되었습니다.", Toast.LENGTH_SHORT).show()
-                                    chk = false
-                                    break;
-                                }
-                            }
-                            if(chk){
-                                val dto = OffdayDto(mem.id!!, selectedDate, "o")
-                                if(OffDayDao.useroff == null){
-                                    OffDayDao.useroff = mutableListOf(dto)
-                                    dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
-                                }else{
-                                    var findId = -1
-                                    //선택된 날짜가 중복으로 선택되지 않도록 확인
-                                    for (i in (0 until OffDayDao.useroff!!.size)){
-                                        if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
-                                            findId = i
-                                            break
-                                        }
-                                    }
-                                    //이미 선택된 날짜면 선택 취소
-                                    if(findId != -1){
-                                        dayBack.setBackgroundColor(Color.parseColor("#33FFFFFF"))
-                                        OffDayDao.useroff!!.removeAt(findId)
-                                    }else{      //새롭게 선택된 날짜이고 5일 이하로 신청한 경우에 off신청 가능
-                                        if(OffDayDao.useroff!!.size > 4){
-                                            Toast.makeText(context, "최대 5일까지 선택할 수 있습니다", Toast.LENGTH_SHORT).show()
-                                        }else{
-                                            OffDayDao.useroff!!.add(dto)
-                                            dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    if(offCnt >=5 ){
+                        Toast.makeText(context, "최대 5일까지 선택할 수 있습니다", Toast.LENGTH_SHORT).show()
                     }else{
-                        Toast.makeText(context, "로그인 후 이용해 주세요.", Toast.LENGTH_SHORT).show()
+                        val mem: MemberDto? = MemberDao.user
+                        if(mem != null){
+                            val selectedDate:String = sdfAll.format((dto.wdate as GregorianCalendar).time).toString()
+                            //하루에 2명까지 신청 가능하도록
+                            if(dto.content.size>1){
+                                Toast.makeText(context, "하루에 2명이상 신청은 불가능합니다.", Toast.LENGTH_SHORT).show()
+                            }else{
+                                var chk = true
+                                for(i in dto.content){
+                                    //본인이 신청한 날짜에는 중복 신청 불가
+                                    if(i.id == mem.id){
+                                        Toast.makeText(context, "이미 신청 되었습니다.", Toast.LENGTH_SHORT).show()
+                                        chk = false
+                                        break;
+                                    }
+                                }
+                                if(chk){
+                                    val dto = OffdayDto(mem.id!!, selectedDate, "o")
+                                    if(OffDayDao.useroff == null){
+                                        OffDayDao.useroff = mutableListOf(dto)
+                                        dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
+                                    }else{
+                                        var findId = -1
+                                        //선택된 날짜가 중복으로 선택되지 않도록 확인
+                                        for (i in (0 until OffDayDao.useroff!!.size)){
+                                            if(OffDayDao.useroff!!.get(i).wdate.toString() == dto.wdate.toString()){
+                                                findId = i
+                                                break
+                                            }
+                                        }
+                                        //이미 선택된 날짜면 선택 취소
+                                        if(findId != -1){
+                                            dayBack.setBackgroundColor(Color.parseColor("#33FFFFFF"))
+                                            OffDayDao.useroff!!.removeAt(findId)
+                                        }else{      //새롭게 선택된 날짜이고 5일 이하로 신청한 경우에 off신청 가능
+                                            if(OffDayDao.useroff!!.size + offCnt > 4){
+                                                Toast.makeText(context, "최대 5일까지 선택할 수 있습니다", Toast.LENGTH_SHORT).show()
+                                            }else{
+                                                OffDayDao.useroff!!.add(dto)
+                                                dayBack.setBackgroundColor(Color.parseColor("#FF4081"))
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else{
+                            Toast.makeText(context, "로그인 후 이용해 주세요.", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -392,7 +405,7 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                 return EmptyViewHolder(view)
             }else{
                 view = LayoutInflater.from(parent.context).inflate(R.layout.view_item_off_day, parent, false)
-                return DayViewHolder(view)
+                return DayViewHolder(offCnt, view)
             }
         }
 

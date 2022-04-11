@@ -3,7 +3,7 @@
     <item
             android:id="@+id/menu_bbs"
             android:icon="@drawable/ic_bbs"
-            android:title="공지/건의사항" />
+            android:title="공지사항" />
     <item
             android:id="@+id/menu_alram"
             android:icon="@drawable/ic_alarm"
@@ -33,5 +33,11 @@
             android:icon="@drawable/ic_manager"
             android:title="관리자"/>
 
+    <group android:id="@+id/menu_group">
+        <item
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="로그아웃"/>
+    </group>
 
 </menu>

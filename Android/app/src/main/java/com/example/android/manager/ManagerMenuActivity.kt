@@ -17,6 +17,7 @@ import com.example.android.chat.ChatActivity
 import com.example.android.manager.bbs.ManagerBbsActivity
 import com.example.android.manager.staff.ManagerStaffActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.google.android.material.navigation.NavigationView
 
@@ -106,8 +107,16 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
                     val i = Intent(this, ChatActivity::class.java)
                     startActivity(i)
                 }
+                R.id.menu_phonenumber -> {
+                    val i = Intent(this, PhoneNumActivity::class.java)
+                    startActivity(i)
+                }
                 R.id.menu_offday -> {
                     val i = Intent(this, OffDayActivity::class.java)
+                    startActivity(i)
+                }
+                R.id.menu_manager->  {
+                    val i = Intent(this, ManagerMenuActivity::class.java)
                     startActivity(i)
                 }
             }

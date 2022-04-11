@@ -26,11 +26,23 @@
             android:id="@+id/manage_btn_bbsdelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_round"
-            android:textColor="@color/white"
-            android:text="삭제" app:layout_constraintStart_toEndOf="@+id/managerRecycleViewBbsTitle"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="44dp"/>
+            android:text="삭제"
+            android:background="#00ff0000"
+            android:textColor="@color/pointred"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@+id/managerRecycleViewBbsTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.364"/>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D6D6D6" tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="79dp" android:id="@+id/view" app:layout_constraintStart_toStartOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
