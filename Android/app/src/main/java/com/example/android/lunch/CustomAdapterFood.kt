@@ -39,8 +39,6 @@ class CustomAdapterFood(val context: Context, val dataList:MutableList<FoodDto>)
             }else{
                 foodRecycleViewImg.setImageResource(R.drawable.outline_dining_24)
             }
-
-
         }
     }
 
