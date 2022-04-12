@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -77,6 +79,9 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         navigationView = findViewById(R.id.nav_Manager_menu)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("관리자페이지")
     }
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

@@ -8,10 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +18,7 @@ import androidx.core.view.marginTop
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
@@ -141,6 +139,10 @@ open class OffDayActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Offday)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("off신청")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

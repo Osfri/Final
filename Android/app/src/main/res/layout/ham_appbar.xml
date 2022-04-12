@@ -10,12 +10,34 @@
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
 
+
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary" >
 
-                android:background="?attr/colorPrimary" />
+
+              <TextView
+                    android:id="@+id/navi_title_center"
+                    android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                    android:textStyle="bold"
+                      android:textSize="18dp"
+                      android:text="페이지별 표시"/>
+<!--
+            <ImageButton
+                    android:id="@+id/navi_btn_logo"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/ic_logo_ho"
+                    android:layout_gravity="center"/>
+-->
+
+
+        </androidx.appcompat.widget.Toolbar>
 
 
     </com.google.android.material.appbar.AppBarLayout>

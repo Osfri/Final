@@ -6,6 +6,7 @@
     <TextView
             android:id="@+id/managerRecycleViewWaitName"
             android:text="맴버정보"
+            android:gravity="left|center"
             android:layout_width="231dp"
             android:layout_height="36dp"
             app:layout_constraintTop_toTopOf="parent"

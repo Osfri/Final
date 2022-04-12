@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -121,6 +118,10 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Manager_bbs)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("관리자페이지")
 
 
         // 리사이클러 뷰

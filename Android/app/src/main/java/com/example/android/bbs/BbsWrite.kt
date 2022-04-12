@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
@@ -124,6 +125,10 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_Bbs_Write)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
+
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("공지사항")
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

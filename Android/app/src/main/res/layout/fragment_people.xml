@@ -8,14 +8,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/peoplefragment_recyclerview"/>
+            android:layout_height="match_parent"
+            android:id="@+id/peoplefragment_recyclerview"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:src="@drawable/outline_forum_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/pointred"
-            android:clickable="true" android:id="@+id/peoplefragment_floatingActionButton" app:fabSize="normal"
-            android:layout_gravity="bottom|right" android:visibility="visible" android:layout_marginBottom="100dp"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/pointred"
+            android:clickable="true"
+            android:id="@+id/peoplefragment_floatingActionButton"
+            app:fabSize="normal"
+            android:layout_gravity="bottom|right"
+            android:visibility="visible"
+            android:layout_marginBottom="100dp"
             android:layout_marginRight="30dp"/>
 
 </FrameLayout>

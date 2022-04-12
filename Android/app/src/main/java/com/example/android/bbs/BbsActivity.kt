@@ -8,9 +8,7 @@ import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -100,9 +98,11 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }catch (e:NullPointerException){
             Toast.makeText(this,"작성된 게시글이 없습니다.",Toast.LENGTH_SHORT).show()
         }
-
+/*
+        검색창 일단 보류
         val bbs_et_select = findViewById<EditText>(R.id.bbs_et_select)
         val btn_bbsListSelect = findViewById<Button>(R.id.btn_bbsListSelect)
+*/
 
 
 
@@ -123,14 +123,18 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }
 
 
-
         //=============================================Front===========================================================
         // drawerlayout bar 설정
+
         val toolbar= findViewById<Toolbar>(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("공지사항")
+
 
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -185,7 +189,9 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return super.onCreateOptionsMenu(menu)
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
