@@ -248,4 +248,14 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-​
+
+.maintitle h2 { font-size: 2rem !important; font-weight: 700 !important; margin-top: 10px !important;}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+* {
+	font-family : 'Nanum Gothic', serif;
+} */
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+*{
+	font-family: 'Nanum Brush Script', cursive;
+} */

@@ -22,9 +22,16 @@
     table {
         clear: both;
         margin-top: 50px;
+        left: 100px;
+        width:90%;
+        top: 15%;
+        min-width:1300px;
+        transform:none;
+        margin-bottom: 100px;
+        position:relative;
     }
     th {
-        height: 50px;
+        height: 30px;
         width: 70px;
         background-color:  #287bff;
     }
@@ -35,59 +42,31 @@
         padding: 40px 55px;
     
     }
-    input {
+     input {
         height: 50px;
-        width: 70px;
+        width: 133px;
         border: none;
-        background-color:  #287bff;
-        font-size: 30px;
-        color:white;
-    }
+        /* background-color:  #287bff; */
+        font-size: 18px;
+        color:black;
+        cursor:pointer;
+    }  
     .year_mon{
         font-size: 25px;
     }
     .colToday{
     
     }
+    button{
+    	all: unset;
+    	text-decoration: none;
+    	cursor:pointer;
+    }
 </style>
 </head>
 <body>
 <div class="container">
     <jsp:include page="navigation.jsp"/>
-    <!-- <div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="title">Ho</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                        <span class="title">직원관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">근무관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                        <span class="title">스케줄관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">식단관리</span>
-                    </a>
-                </li>
-            </ul>
-        </div> -->
     <!-- main -->
     <div class="main">
         <div class="topbar">
@@ -98,27 +77,36 @@
 
     <!--table-->
     <div class="maintitle">
-      <h2>근무관리</h2>
-            
-        <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
-		<button id="download_file_btn">근무표 양식 다운로드</button>
+      <h2 style="margin-bottom:25px;">근무관리</h2>
+        <div style="text-align-last: left;padding-right: 90px;margin-bottom: -35px;"">
+	        <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
+			<!-- <button id="download_file_btn">양식 다운로드</button></div><br> -->
+			<button id="download_file_btn" style="border-radius: 10px;width: 50px;vertical-align: middle;height: 50px;padding: 0;background: #00ff0000;color: var(--blue);">
+				<ion-icon style="width: 40px;height: 40px;" name="arrow-down-circle-outline"></ion-icon>
+				<span style="font-size:20px;">양식</span>
+			</button>
+			<small style="font-size:initial; color:gray">*날짜를 선택하고 양식(엑셀파일)을 받아주세요.</small>
+		</div>
+		<br>
+		<div style="text-align-last: left;padding-right: 90px;">
 		<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
-		<form id="upload_file_frm">
-			<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-			<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
-			<button type="button" id="upload_file_btn">근무표 업로드</button>
+		<form id="upload_file_frm" style="display: inline-block;">
+			<input type="file" style="width:232px;" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+			<button type="button" id="upload_file_btn" style="border-radius: 10px;width: 50px;vertical-align: middle;height: 50px;padding: 0;background: #00ff0000;color: var(--blue);">
+				<ion-icon style="width: 40px;height: 40px;" name="arrow-up-circle-outline"></ion-icon>
+				<span style="font-size:20px;">등록</span>
+			</button>
 		</form>
-		
-		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+		<small style="font-size:initial; color:gray">*날짜를 선택하고 양식을 업로드 해주세요.</small>
+		</div>
         </div>
       <div>
 	  	<table id="calendar">
 	           <thead>
 	               <tr>
-	                   <th><input name="preMon" id="preMon" type="button" value="<"></th>
+	                   <th><input name="preMon" style="height: 50px; width: 70px; border: none; background-color:  #287bff; font-size: 30px; color:white;" id="preMon" type="button" value="<"></th>
 	                 <th colspan="5" class="year_mon"></th>
-	                 <th><input name="nextMon" id="nextMon" type="button" value=">"></th>
+	                 <th><input name="nextMon" style="height: 50px; width: 70px; border: none; background-color:  #287bff; font-size: 30px; color:white;"  id="nextMon" type="button" value=">"></th>
 	             </tr>
 	             <tr>
 	                 <th>일</th>
@@ -134,6 +122,7 @@
 	         </tbody>
 	     </table>
 	 </div> 
+		 <!-- <div style="height:300px; background:black; margin-top:1000px;"></div> -->
 	</div>
 </div>
 <script>
@@ -154,7 +143,44 @@ $(function(){
         today = new Date ( today.getFullYear(), today.getMonth()+1, today.getDate());
         buildCalendar();
     })
-
+    
+    $("#upload_file_btn").click(function(){
+    	let code = JSON.parse(sessionStorage.getItem("login")).code;
+		if($("#month").val() != null){
+			if($("#upload_file").val() == ""){
+				alert("파일을 등록해 주세요.");
+			}else{
+				$.ajax({
+ 					url:"http://localhost:3000/fileupload?date="+$("#month").val()+"&code="+code,
+					type: "POST",
+					data: new FormData($("#upload_file_frm")[0]),	
+					enctype: 'multipart/form-data',
+			        processData: false,
+			        contentType: false,
+			        cache: false,
+			        success: function () {   
+			        	alert("등록했습니다.");
+			        	location.reload();
+			        },
+			        error: function (e) { 
+			        	alert("error", e);
+			        }
+				}); 
+			}
+		}else{
+			alert("날짜를 입력해주세요.");
+		}
+	});
+	
+	$("#download_file_btn").click(function(){
+		let code = JSON.parse(sessionStorage.getItem("login")).code;
+		
+		// 클라이언트가 서버에서 기존 파일을 요청하면 AJAX success () 메소드가 실행되지만 파일이 다운로드되지도 않습니다. 
+		/* 해결법
+		1.ajax를 사용하지 말고 window.location.href를 파일의 URL로 설정하고 서버 스크립트에서 http 컨텐츠 처리 헤더를 설정하여 브라우저가 파일을 저장하도록하십시오.
+		*/
+		window.location.href = "http://localhost:3000/download?date="+$("#dmonth").val()+"&code="+code;
+	});
 
     function buildCalendar() {
         

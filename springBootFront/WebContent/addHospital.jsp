@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<title>Insert title here</title>
+<title>병동관리</title>
 <script src="./js/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -35,8 +35,10 @@
 	        <div class="maintitle">
 	            <h2>병동관리</h2>
 	        </div>
-			<input type="text" id="addText" placeholder="병동 이름 입력"/>
-			<input type="button" id="addBtn" value="병동 추가하기"/>
+	        <div style="text-align-last: right;padding-right: 90px;">
+				<input type="text" id="addText" placeholder="병동 이름 입력"/>
+				<button type="button" id="addBtn">병동 추가하기</button>
+			</div>
 	        <table>
 		        <thead>
 		            <tr>

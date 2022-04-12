@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<title>Insert title here</title>
+<title>직원관리</title>
 <script src="./js/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 
@@ -36,29 +36,32 @@
 	        <div class="maintitle">
 	            <h2>직원관리</h2>
 	        </div>
-	        <select name="hospital" id="hospital">
-			  <option value="all" selected>전체</option>
-			</select>
-			<button type="button" id="searchBtn">검색</button>
-			<input type="number" id="point" placeholder="지급할 포인트를 입력하세요."/>
-			<button type="button" id="pointBtn" onclick="point()">포인트 지급하기</button>
-	        <table>
-		        <thead>
-		            <tr>
-		                <!-- <th><input type="checkbox" id="allcheck"></th> -->
-		                <th></th>
-		                <th>이름</th>
-		                <th>아이디</th>
-		                <th>병동</th>
-		                <th>잔여포인트</th>
-		                <th>관리</th>
-		                <th>탈퇴</th>
-		            </tr>
-	            </thead>
-	            <tbody id="tbody">
-	            
-	            </tbody>
-	         </table>
+	        <div style="text-align-last: right;padding-right: 90px;">
+	        	<select name="hospital" id="hospital">
+				  <option value="all" selected>전체</option>
+				</select>
+				<button type="button" id="searchBtn">검색</button>
+				<input type="number" id="point" placeholder="지급할 포인트를 입력하세요."/>
+				<button type="button" id="pointBtn" onclick="point()">포인트 지급하기</button>
+			</div>
+				
+		        <table>
+			        <thead>
+			            <tr>
+			                <!-- <th><input type="checkbox" id="allcheck"></th> -->
+			                <th></th>
+			                <th>이름</th>
+			                <th>아이디</th>
+			                <th>병동</th>
+			                <th>잔여포인트</th>
+			                <th>관리</th>
+			                <th>탈퇴</th>
+			            </tr>
+		            </thead>
+		            <tbody id="tbody">
+		            
+		            </tbody>
+		         </table>
 	           <div class="container" style="position: absolute; left: 50%; transform: translate(-50%, -50%); bottom: 50px;">
 			    <nav aria-label="Page navigation">
 			        <ul class="pagination" id="pagination" style="justify-content:center"></ul>

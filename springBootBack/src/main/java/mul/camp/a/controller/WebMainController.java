@@ -38,6 +38,7 @@ public class WebMainController {
 		System.out.println("addHospital "+name+curCode);
 		int cnt = service.hospitalChk(curCode+"_"+name);
 		System.out.println("cnt============"+cnt);
+		//병동 이름 이미 존재할때
 		if(cnt != 0) {
 			return "already";
 		}
