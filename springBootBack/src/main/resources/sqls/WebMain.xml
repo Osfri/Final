@@ -5,16 +5,20 @@
   
 <mapper namespace="mul.camp.a.dao.WebMainDao">
 
-	<select id="getMemberList" resultType="mul.camp.a.dto.MemberDto">
+	<select id="getMemberList" parameterType="java.lang.String" resultType="mul.camp.a.dto.MemberDto">
 		SELECT * 
-		FROM MEMBER
-		
-		<if test='hospital == "all"'>
-			WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
-		</if>
-		<if test='hospital != "all"'>
-			WHERE CODE = #{hospital}
-		</if>
+		FROM 
+			(SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC) AS RNUM, 
+			ID, NAME, EMAIL, CODE, AUTH, POINT
+			FROM MEMBER
+			<if test='hospital == "all"'>
+				WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+			</if>
+			<if test='hospital != "all"'>
+				WHERE CODE = #{hospital}
+			</if>
+			ORDER BY NAME ASC)
+		WHERE RNUM BETWEEN ${start} AND ${end}
 	</select>
 	<insert id="addHospital" parameterType="java.lang.String">
 		INSERT INTO HOSPITAL(NAME, LOCATION, CODE)
@@ -29,6 +33,16 @@
 		FROM HOSPITAL H
 		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
 		ORDER BY NAME, CODE
+	</select>
+	<select id="getHospitalListPage"  parameterType="java.lang.String" resultType="mul.camp.a.dto.HospitalDto">
+		SELECT *
+		FROM
+			(SELECT ROW_NUMBER()OVER(ORDER BY NAME ASC, CODE ASC) AS RNUM, 
+			NAME, CODE, (SELECT ID FROM MEMBER M WHERE M.CODE=H.CODE AND M.AUTH=3) AS MANAGER, (SELECT COUNT(*) FROM MEMBER M WHERE M.CODE=H.CODE) AS CNT
+			FROM HOSPITAL H
+			WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+			ORDER BY NAME, CODE)
+		WHERE RNUM BETWEEN ${start} AND ${end}
 	</select>
 	<select id="hospitalChk" resultType="java.lang.Integer">
 		SELECT COUNT(*)
@@ -73,5 +87,41 @@
 		SELECT AUTH
 		FROM MEMBER
 		WHERE ID=#{id}
+	</select>
+	<select id="getParttime" resultType="mul.camp.a.dto.ParttimeDto" parameterType="mul.camp.a.dto.ParttimeDto">
+		SELECT *
+		FROM PARTTIME
+		WHERE CODE=#{code}
+	</select>
+	<update id="saveTime" parameterType="java.lang.String">
+		UPDATE PARTTIME
+		SET START_TIME=#{st}, END_TIME=#{et}
+		WHERE NAME=#{name} AND CODE=#{code}
+	</update>
+	<update id="point" parameterType="java.lang.String">
+		UPDATE MEMBER
+		SET POINT=#{point}
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+	</update>
+	<select id="getStaffCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM MEMBER
+		<if test='hospital == "all"'>
+			WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+		</if>
+		<if test='hospital != "all"'>
+			WHERE CODE = #{hospital}
+		</if>
+	</select>
+	<select id="getHospitalCount"  parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM HOSPITAL H
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\'
+	</select>
+	<select id="getScheduleList" parameterType="java.lang.String" resultType="mul.camp.a.dto.CalendarDto">
+		SELECT C.ID, C.WDATE, C.TIME, (SELECT NAME FROM MEMBER M WHERE M.ID=C.ID) AS NAME
+		FROM CALENDAR C
+		WHERE TO_CHAR(C.WDATE, 'YYYY-MM') = #{date} AND (SELECT CODE FROM MEMBER M WHERE M.ID=C.ID) = #{code}
+		ORDER BY C.WDATE ASC, NAME ASC
 	</select>
 </mapper>

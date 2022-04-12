@@ -7,12 +7,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Insert title here</title>
+
+<!-- ss --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<title>직원관리</title>
 <script src="./js/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+<!-- ss -->
+<script type="text/javascript" src="./jquery/jquery.twbsPagination.min.js"></script>
+
 </head>
 <body>
-<div class="container">
+<div class="custom_container">
     <jsp:include page="navigation.jsp"></jsp:include>
     <!-- main -->
     <div class="main">
@@ -27,60 +36,59 @@
 	        <div class="maintitle">
 	            <h2>직원관리</h2>
 	        </div>
-	        <select name="hospital" id="hospital">
-			  <option value="all" selected>전체</option>
-			</select>
-			<button type="button" id="searchBtn">검색</button>
-	        <table>
-		        <thead>
-		            <tr>
-		                <!-- <th><input type="checkbox" id="allcheck"></th> -->
-		                <th></th>
-		                <th>이름</th>
-		                <th>아이디</th>
-		                <th>병동</th>
-		                <th>잔여포인트</th>
-		                <th>관리</th>
-		                <th>탈퇴</th>
-		            </tr>
-	            </thead>
-	            <!--임시데이터-->
-	            <tbody id="tbody">
-	            
-	            </tbody>
-	            <!-- <tr>
-	                <td><input type="checkbox"></td>
-	                <td>aa</td>
-	                <td>aa</td>
-	                <td>aa</td>
-	                <td>관리자</td>
-	                <td>3800</td>
-	                <td>
-	                    <input type="button" value="승인">
-	                    <input type="button" value="거절">
-	                </td>
-	            </tr> -->
-	         </table>
-            <!-- <input type="submit" value="탈퇴" id="out" /> -->
+	        <div style="text-align-last: right;padding-right: 90px;">
+	        	<select name="hospital" id="hospital">
+				  <option value="all" selected>전체</option>
+				</select>
+				<button type="button" id="searchBtn">검색</button>
+				<input type="number" id="point" placeholder="지급할 포인트를 입력하세요."/>
+				<button type="button" id="pointBtn" onclick="point()">포인트 지급하기</button>
+			</div>
+				
+		        <table>
+			        <thead>
+			            <tr>
+			                <!-- <th><input type="checkbox" id="allcheck"></th> -->
+			                <th></th>
+			                <th>이름</th>
+			                <th>아이디</th>
+			                <th>병동</th>
+			                <th>잔여포인트</th>
+			                <th>관리</th>
+			                <th>탈퇴</th>
+			            </tr>
+		            </thead>
+		            <tbody id="tbody">
+		            
+		            </tbody>
+		         </table>
+	           <div class="container" style="position: absolute; left: 50%; transform: translate(-50%, -50%); bottom: 50px;">
+			    <nav aria-label="Page navigation">
+			        <ul class="pagination" id="pagination" style="justify-content:center"></ul>
+			    </nav>
+			</div>
 	     </div>
-     </div>
+	</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function(){
 	let login = JSON.parse(sessionStorage.getItem("login"));
 	getHospitalList(login.code);
-	getMemberList(login.code, "all");
+	getMemberList(0, "all");
+	getStaffCount("all");
 	$("#searchBtn").click(function(){
-		getMemberList(login.code, $("#hospital option:selected").val());
+		getMemberList(0, $("#hospital option:selected").val());
+		getStaffCount($("#hospital option:selected").val());
 	});
 })
 
-function getMemberList(code, hospital){
+function getMemberList(page, hospital){
+	let code = JSON.parse(sessionStorage.getItem("login")).code;
 	$.ajax({
 		url:"http://localhost:3000/getMemberList",
 		type:"post",
-		data:{"code":code, "hospital":hospital},
+		data:{"page":page, "code":code, "hospital":hospital},
 		success:function(list){
 			$("#tbody").text("");
 			let str="";
@@ -237,7 +245,7 @@ function getHospitalList(code){
 			});
 		},
 		error:function(){
-			alert("error");
+			alert("getHospitalList error");
 		}
 	});
 }
@@ -266,7 +274,7 @@ function changeHospital(id, code){
 			});
 		},
 		error:function(){
-			alert("error");
+			alert("changeHospital error");
 		}
 	});
 }
@@ -293,7 +301,65 @@ function changeAf(id){
 			}
 		});
 	}
+}
+function point(){
+	let point = $("#point").val();
+	let login = JSON.parse(sessionStorage.getItem("login"));
+	if(confirm(point+" 포인트를 모든 직원에게 지급하시겠습니까?")){
+		$.ajax({
+			url:"http://localhost:3000/point",
+			type:"post",
+			data:{"point":point, "code":login.code},
+			success:function(result){
+				if(result=="success"){
+					alert("포인트가 지급되었습니다.");
+					location.reload();
+				}else{
+					alert("포인트가 지급되지 않았습니다.");
+				}
+			},
+			error:function(){
+				alert("point error");
+			}
+		});
+	}
+}
+function getStaffCount(hospital){
+	let code = JSON.parse(sessionStorage.getItem("login")).code;
+	$.ajax({
+		url:"http://localhost:3000/getStaffCount",
+		type:"post",
+		data:{"hospital":hospital, "code":code},
+		success:function(cnt){
+			loadPage(cnt);
+		},
+		error:function(){
+			alert("getStaffCount error");
+		}
+	});
+}
+
+function loadPage(totalCnt){
+	let _totalPages = totalCnt / 10;
+	if(totalCnt % 10 > 0){
+		_totalPages += 1;
+	}
 	
+	$('#pagination').twbsPagination('destroy');	
+
+	$('#pagination').twbsPagination({
+	    totalPages: _totalPages,
+	    visiblePages: 10,
+	    first:'<span sris-hidden="true">«</span>',
+	    last:'<span sris-hidden="true">»</span>',
+	    prev:"이전", 
+	    next:"다음",
+	    initiateStartPageClick:false,	//onPageClick
+	    onPageClick: function (event, page) {
+	        //alert(page);
+	        getMemberList(page - 1, $("#hospital option:selected").val());
+	    }
+	 })
 }
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -11,6 +11,10 @@ class OffdayDto {
     constructor(wdate:Any):super(){
         this.wdate = wdate
     }
+    constructor(wdate:Any, id:String):super(){
+        this.wdate = wdate
+        this.id = id
+    }
     constructor(wdate: Any, content:MutableList<OffdayDto>):super(){
         this.wdate = wdate
         this.content = content

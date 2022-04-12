@@ -32,4 +32,9 @@
 		SET MEMO = #{memo}
 		WHERE ID=#{id} AND WDATE=TO_DATE(#{wdate})
 	</update>
+	<select id="offCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM CALENDAR
+		WHERE ID=#{id} AND TO_CHAR(WDATE, 'YYYY-MM') = #{date}
+	</select>
 </mapper>
