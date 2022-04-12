@@ -50,6 +50,92 @@
     
     }
 </style>
+</head>
+<body>
+<div class="container">
+    <jsp:include page="navigation.jsp"/>
+    <!-- <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Ho</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="title">직원관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+                        <span class="title">근무관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                        <span class="title">스케줄관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+                        <span class="title">식단관리</span>
+                    </a>
+                </li>
+            </ul>
+        </div> -->
+    <!-- main -->
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
+
+    <!--table-->
+    <div class="maintitle">
+      <h2>근무관리</h2>
+            
+        <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
+		<button id="download_file_btn">근무표 양식 다운로드</button>
+		<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
+		<form id="upload_file_frm">
+			<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+			<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
+			<button type="button" id="upload_file_btn">근무표 업로드</button>
+		</form>
+		
+		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        </div>
+      <div>
+	  	<table id="calendar">
+	           <thead>
+	               <tr>
+	                   <th><input name="preMon" id="preMon" type="button" value="<"></th>
+	                 <th colspan="5" class="year_mon"></th>
+	                 <th><input name="nextMon" id="nextMon" type="button" value=">"></th>
+	             </tr>
+	             <tr>
+	                 <th>일</th>
+	                 <th>월</th>
+	                 <th>화</th>
+	                 <th>수</th>
+	                 <th>목</th>
+	                 <th>금</th>
+	                 <th>토</th>
+	             </tr>
+	         </thead>
+	         <tbody>
+	         </tbody>
+	     </table>
+	 </div> 
+	</div>
+</div>
 <script>
 $(function(){
     var today = new Date();
@@ -130,93 +216,6 @@ $(function(){
     buildCalendar();
 })
 </script>
-</head>
-<body>
-<div class="container">
-    <%-- <jsp:include page="navigation.jsp"></jsp:include> --%>
-    <div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="title">Ho</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                        <span class="title">직원관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">근무관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                        <span class="title">스케줄관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                        <span class="title">식단관리</span>
-                    </a>
-                </li>
-            </ul>
-        </div> 
-    <!-- main -->
-    <div class="main">
-        <div class="topbar">
-            <div class="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-            </div>
-        </div>
-
-    <!--table-->
-    <div class="maintitle">
-      <h2>근무관리</h2>
-            
-        <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
-		<button id="download_file_btn">근무표 양식 다운로드</button>
-		<input type="month" id="month" name="nameFile" value="<%= dateForm %>">
-		<form id="upload_file_frm">
-			<input type="file" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-			<!-- <input type="file" id="upload_file" name="uploadFile" accept="*" /> -->
-			<button type="button" id="upload_file_btn">근무표 업로드</button>
-		</form>
-		
-		<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-		<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        </div>
-      <div>
-	  	<table id="calendar">
-	           <thead>
-	               <tr>
-	                   <th><input name="preMon" id="preMon" type="button" value="<"></th>
-	                 <th colspan="5" class="year_mon"></th>
-	                 <th><input name="nextMon" id="nextMon" type="button" value=">"></th>
-	             </tr>
-	             <tr>
-	                 <th>일</th>
-	                 <th>월</th>
-	                 <th>화</th>
-	                 <th>수</th>
-	                 <th>목</th>
-	                 <th>금</th>
-	                 <th>토</th>
-	             </tr>
-	         </thead>
-	         <tbody>
-	         </tbody>
-	     </table>
-	 </div> 
-	</div>
-</div>
-
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

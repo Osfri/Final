@@ -7,7 +7,7 @@ $(document).ready(function(){
 		document.getElementById("addHospital").style.display ="none";
 	}
 	if(login.auth == 0){
-		document.getElementById("calendar").style.display ="none";
+		document.getElementById("CalendarManagement").style.display ="none";
 	}
 })
 </script>
@@ -25,7 +25,7 @@ $(document).ready(function(){
                 <span class="title">직원관리</span>
             </a>
         </li>
-        <li id="calendar">
+        <li id="CalendarManagement">
             <a href="staffCalendarManagement.jsp">
             <!-- <a href="test.jsp"> -->
                 <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
