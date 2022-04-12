@@ -23,11 +23,6 @@
 	</select>
 	
 	<update id="buyShopItemPoint" parameterType="Map">
-<!-- 		UPDATE MEMBER
-		SET POINT = POINT - (SELECT PRICE
-								FROM SHOP
-								WHERE SEQ = #{shopItem.seq})
-					WHERE ID = #{loginUser.id} -->
 		UPDATE MEMBER
 		SET POINT = POINT - ((SELECT PRICE
 								FROM SHOP
@@ -46,6 +41,24 @@
 		SET CNT = CNT - #{itemCnt}
 		WHERE SEQ = #{shopItem.seq}	
 	</update>
+	
+	<select id="getShopItemList" parameterType="mul.camp.a.dto.ShopParam" resultType="mul.camp.a.dto.ShopDto">
+		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
+		FROM (SELECT ROW_NUMBER()OVER(ORDER BY SEQ ASC) AS RNUM, SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
+				FROM SHOP)
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="getShopItemListCnt" parameterType="mul.camp.a.dto.ShopParam" resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM SHOP
+	</select>
+	
+	<delete id="shopItemModify" parameterType="java.lang.String">
+		DELETE FROM SHOP
+		WHERE SEQ = #{seq}
+	</delete>
+	
 
 	
 </mapper>

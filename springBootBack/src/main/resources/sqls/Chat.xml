@@ -21,9 +21,9 @@
 	<select id="getSameCodeUsers" parameterType="mul.camp.a.dto.ChatDto" resultType="mul.camp.a.dto.ChatDto">
 		SELECT ID, NAME, EMAIL, PW, PHONENUMBER, CODE, AUTH, ALARM, ALARMTIME, POINT
 		FROM MEMBER
-		WHERE code = (SELECT CODE
+		WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
 						FROM MEMBER
-						WHERE id=#{id})
+						WHERE id=#{id}),1,1)
 	        AND NOT id = #{id}
 	        AND auth = 1
 	</select>

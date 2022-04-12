@@ -12,3 +12,7 @@ springBootBack/bin/src/main/resources/application.properties
 springBootBack/bin/src/main/resources/serviceAccountKey.json
 Android/.idea/misc.xml
 Android/app/google-services.json
+Android/app/src/main/java/com/example/android/bbs/RetrofitClient.kt
+Android/app/src/main/java/com/example/android/chat/ChatRetrofit.kt
+Android/app/src/main/java/com/example/android/bbs/RetrofitClient.kt
+Android/app/src/main/java/com/example/android/chat/ChatRetrofit.kt
