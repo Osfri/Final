@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="foodTest.jsp"">
                     <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                     <span class="title">식단관리</span>
                 </a>
@@ -41,6 +41,12 @@
                 <a href="addHospital.jsp">
                     <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                     <span class="title">병동 관리</span>
+                </a>
+            </li>
+            <li>
+                <a href="shopTest.jsp">
+                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
+                    <span class="title">포인트몰관리</span>
                 </a>
             </li>
         </ul>

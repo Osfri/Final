@@ -18,4 +18,30 @@
 		INSERT INTO FOOD (CODE, FDATE, MENU, PHOTO)
 		VALUES(#{code}, TO_DATE(#{fdate}, 'YYYY-MM-DD'), #{menu}, #{photo})
 	</insert>
+
+	<select id="getSameCodeFoodList" parameterType="mul.camp.a.dto.FoodParam" resultType="mul.camp.a.dto.FoodDto">
+		SELECT CODE, FDATE, MENU, PHOTO
+		FROM
+			(SELECT ROW_NUMBER()OVER(ORDER BY FDATE ASC) AS RNUM, CODE, FDATE, MENU, PHOTO
+				FROM FOOD
+				WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
+	                   FROM MEMBER
+	                   WHERE id = #{id}),1,1)
+	    		ORDER BY FDATE ASC)
+	    WHERE RNUM BETWEEN #{start} AND #{end}		
+	</select>
+	
+	<select id="getSameCodeFoodListCnt" parameterType="mul.camp.a.dto.FoodParam" resultType="java.lang.Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM FOOD
+		WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
+	                   FROM MEMBER
+	                   WHERE id = #{id}),1,1)
+	    ORDER BY FDATE ASC
+	</select>
+	
+	<delete id="foodItemModify" parameterType="java.lang.String">
+		DELETE FROM FOOD
+		WHERE PHOTO = #{photo}
+	</delete>
 </mapper>

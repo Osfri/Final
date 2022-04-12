@@ -2,14 +2,12 @@ package mul.camp.a.service;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import mul.camp.a.dao.ShopDao;
-import mul.camp.a.dto.MemberDto;
 import mul.camp.a.dto.ShopDto;
+import mul.camp.a.dto.ShopParam;
 
 @Service
 @Transactional
@@ -40,6 +38,18 @@ public class ShopService {
 	
 	public int buyShopItemCnt(HashMap<String, Object> map){
 		return dao.buyShopItemCnt(map);
+	}
+	
+	public List<ShopDto> getShopItemList(ShopParam param){
+		return dao.getShopItemList(param);
+	}
+	
+	public int getShopItemListCnt(ShopParam param) {
+		return dao.getShopItemListCnt(param);
+	}
+	
+	public int shopItemModify(String seq) {
+		return dao.shopItemModify(seq);
 	}
 
 }
