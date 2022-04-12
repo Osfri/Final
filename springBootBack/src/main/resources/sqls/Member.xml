@@ -24,4 +24,24 @@
 	    FROM MEMBER
 	    WHERE ID = #{id}
 	</select>
+	<select id="allmember" parameterType="java.lang.String" resultType="mul.camp.a.dto.MemberDto">
+		SELECT *
+		FROM MEMBER
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\' AND NOT AUTH = 2
+	</select>
+	<update id="yesjoin" parameterType="mul.camp.a.dto.MemberDto">
+		UPDATE MEMBER
+		SET AUTH = 1 , POINT = 0
+		WHERE ID = #{id}
+	</update>
+	<update id="nojoin" parameterType="mul.camp.a.dto.MemberDto">
+		UPDATE MEMBER
+		SET AUTH = 5 , CODE = '' , POINT = 0
+		WHERE ID = #{id}
+	</update>
+	<select id="waitmember" parameterType="java.lang.String" resultType="mul.camp.a.dto.MemberDto">
+		SELECT *
+		FROM MEMBER
+		WHERE CODE LIKE #{code}||'\_'||'%' ESCAPE '\' AND AUTH = 2
+	</select>
 </mapper>

@@ -38,8 +38,10 @@ public class MemberService {
 		return dao.idCheck(dto);
 	}
 	
-	
-	
+	public ArrayList<MemberDto> allmember(String code) { return dao.allmember(code); }
+	public int yesjoin(MemberDto dto) { return dao.yesjoin(dto); }
+	public int nojoin(MemberDto dto) { return dao.nojoin(dto); }
+	public ArrayList<MemberDto> waitmember(String code) { return dao.waitmember(code); }
 	
 }
 

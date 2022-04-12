@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mul.camp.a.dao.MemberDao;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -90,5 +91,29 @@ public class MemberController {
 		
 		return mem;
 
+	}
+
+	@RequestMapping(value = "/allmember",method = RequestMethod.POST)
+	public ArrayList<MemberDto> allmember(@RequestBody String code) {
+		System.out.println("올멤버 컨트롤러"+code);
+		ArrayList<MemberDto> mem = service.allmember(code.replaceAll("\"", ""));
+		System.out.println(mem.toString());
+		return mem;
+	}
+	@RequestMapping(value = "/yesjoin",method = RequestMethod.POST)
+	public int yesjoin(@RequestBody MemberDto dto) {
+		System.out.println("예스 컨트롤러"+dto.toString());
+		return service.yesjoin(dto);
+	}
+	@RequestMapping(value = "/nojoin",method = RequestMethod.POST)
+	public int nojoin(@RequestBody MemberDto dto) {
+		System.out.println("no 컨트롤러"+dto.toString());
+		return service.nojoin(dto);
+	}
+	@RequestMapping(value = "/waitmember",method = RequestMethod.POST)
+	public ArrayList<MemberDto> waitmember(@RequestBody String code) {
+		System.out.println("웨잇멤버 컨트롤러"+code);
+		ArrayList<MemberDto> mem = service.waitmember(code.replaceAll("\"", ""));
+		return mem;
 	}
 }

@@ -83,4 +83,10 @@ public class BbsController {
         System.out.println("댓글수정 컨트롤러"+dto.toString());
         return service.updatecomment(dto);
     }
+    //게시판 삭제
+    @RequestMapping(value = "/deleteBoardTypeDto",method = RequestMethod.POST)
+    public int deleteBoardTypeDto(@RequestBody BoardTypeDto dto){
+        System.out.println("게시판 삭제 컨트롤러"+dto.toString());
+        return service.deleteBoardTypeDto(dto);
+    }
 }

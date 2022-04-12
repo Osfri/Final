@@ -1,25 +1,33 @@
 package com.example.android.manager.staff
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 
-class CustomAdapterManagerStaff(val context: Context, val dataList:ArrayList<ManagerStaffJoinDto>):
+class CustomAdapterManagerStaff(val context: Context, val dataList:ArrayList<MemberDto>):
     RecyclerView.Adapter<CustomAdapterManagerStaff.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         val managerRecycleViewStaffName = itemView.findViewById<TextView>(R.id.managerRecycleViewStaffName)        // 가입승인 이름
-
-        fun bind(dataVo: ManagerStaffJoinDto, context: Context){
-
-            managerRecycleViewStaffName.text = dataVo.name
+        val managerRecyclerViewOut = itemView.findViewById<Button>(R.id.manage_btn_staffdelete)
 
 
+        fun bind(dataVo: MemberDto, context: Context){
+
+            managerRecycleViewStaffName.text = "${dataVo.name} / ${dataVo.id} / ${dataVo.phonenumber}"
+            managerRecyclerViewOut.setOnClickListener {
+                MemberDao.getInstance().nojoin(dataVo)
+                context.startActivity(Intent(context,ManagerStaffActivity::class.java))
+            }
         }
     }
 

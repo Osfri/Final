@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
@@ -25,7 +26,11 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
-
+    override fun onBackPressed() {
+        val main = Intent(this, MainActivity::class.java)
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(main)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_menu)

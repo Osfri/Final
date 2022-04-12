@@ -54,4 +54,6 @@ public class BbsService {
     public int commentwrite(BoardDto dto) { return dao.commentwrite(dto); }
 
     public int updatecomment(BoardDto dto) { return dao.updatecomment(dto); }
+
+    public int deleteBoardTypeDto(BoardTypeDto dto) { return dao.deleteBoardTypeDto(dto); }
 }

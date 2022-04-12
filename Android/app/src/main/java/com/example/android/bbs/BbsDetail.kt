@@ -1,5 +1,6 @@
 package com.example.android.bbs
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +15,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
@@ -27,6 +30,7 @@ import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.view_item_layout_comment.view.*
 import java.time.LocalDate
 
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +46,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
 
         var Detaildata:BbsDto? = null
+        var test:RecyclerView? = null
     }
 
     lateinit var navigationView: NavigationView
@@ -55,24 +60,32 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
 
         val data = intent.getParcelableExtra<BbsDto>("data")
-        Detaildata = data
+        if (data != null){
+            MemberDao.BBsDetaildata = data
+        }
+        Detaildata = MemberDao.BBsDetaildata
         // 디테일 글 정보 표시
 
+        var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
+        test = bbsDetailCommentRecycleview
         val bbsDetailId = findViewById<TextView>(R.id.bbsDetailId)
         val bbsDetailCount = findViewById<TextView>(R.id.bbsDetailCount)
         val bbsDetailTitle = findViewById<TextView>(R.id.bbsDetailTitle)
-        val bbsDetailImage = findViewById<ImageView>(R.id.bbsUpdateImage)
+        val bbsDetailImage = findViewById<ImageView>(R.id.bbsDetailImage)
         val bbsDetailContent = findViewById<TextView>(R.id.bbsDetailContent)
         val bbsDetailDate = findViewById<TextView>(R.id.bbsDetailDate)
-        bbsDetailId.text = data?.id
-        bbsDetailCount.text = data?.readCount.toString()
-        bbsDetailTitle.text = data?.title
-        bbsDetailContent.text = data?.content
-        bbsDetailDate.text = data?.wdate
-        if (data?.image == "" || data?.image == null || data?.image == " "){
-            bbsDetailImage.isGone
+        bbsDetailId.text = Detaildata?.id
+        bbsDetailCount.text = Detaildata?.readCount.toString()
+        bbsDetailTitle.text = Detaildata?.title
+        bbsDetailContent.text = Detaildata?.content
+        bbsDetailDate.text = Detaildata?.wdate
+        if (Detaildata?.image == "" || Detaildata?.image == null || Detaildata?.image == " "){
+            //bbsDetailImage.isGone
         }else{
-            bbsDetailImage.setImageURI(data?.image?.toUri())
+            Glide.with(this)
+                .load(Detaildata?.image) // 불러올 이미지 url
+                .into(bbsDetailImage) // 이미지를 넣을 뷰
+            //bbsDetailImage.setImageURI(Detaildata?.image?.toUri())
         }
 
 
@@ -82,9 +95,10 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         val bbsCommentEditText = findViewById<EditText>(R.id.bbsCommentEditText)        // 댓글 입력
         val btnCommentWrite = findViewById<Button>(R.id.btnCommentWrite)                // 댓글 쓰기 버튼
 
-        if (MemberDao.user?.id.toString() != data?.id.toString()){
+        //삭제 - 본인,관리자 수정 - 본인
+        if (MemberDao.user?.id.toString() != Detaildata?.id.toString()){
             btnDetailUpdate.isEnabled = false
-            if (MemberDao.user?.id.toString() != data?.id.toString() || MemberDao.user?.auth != 0){
+            if (MemberDao.user?.id.toString() != Detaildata?.id.toString() || MemberDao.user?.auth != 0){
                 btnDetailDel.isEnabled = false
             }
         }
@@ -96,24 +110,35 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
         btnCommentWrite.setOnClickListener {
             val onlyDate: String = LocalDate.now().toString()
-            val dto = BbsDto(0,MemberDao.user!!.id.toString(),"댓글",bbsCommentEditText.text.toString(),0,onlyDate,0,data!!.type,data.code,1,data.gr,"")
+            val dto = BbsDto(0,MemberDao.user!!.id.toString(),"댓글",bbsCommentEditText.text.toString(),0,onlyDate,0,Detaildata!!.type,
+                Detaildata!!.code,1,
+                Detaildata!!.gr,"")
             BbsDao.getInstance().commentwrite(dto)
-            commentlist(data)
+            commentlist()
         }
 
         btnDetailDel.setOnClickListener {
-            BbsDao.getInstance().deleteBbs(data!!.seq)
+            BbsDao.getInstance().deleteBbs(Detaildata!!.seq)
             val i = Intent(this, BbsActivity::class.java)
             startActivity(i)
         }
 
         btnDetailUpdate.setOnClickListener {
             val i = Intent(this,BbsUpdateActivity::class.java)
+            i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            i.putExtra("updatedata", Detaildata)
             startActivity(i)
         }
 
         // 댓글리스트
-        commentlist(data!!)
+
+        val mAdapter = CustomAdapterCommentList(this, commentlist())
+        test?.adapter = mAdapter
+        val layout = LinearLayoutManager(this)
+        test?.layoutManager = layout
+        test?.setHasFixedSize(true)
+        //commentlist(Detaildata!!)
+
 
 
         // bbsDetail -> Bbs 로 이동
@@ -188,20 +213,14 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         }
         return false
     }
-    fun commentlist(data:BbsDto){
-        val commentlist:ArrayList<BbsDto>? = BbsDao.getInstance().getCommentList(data!!.gr)
 
-        if (commentlist != null && commentlist.size != 0){
-            var bbsDetailCommentRecycleview = findViewById<RecyclerView>(R.id.bbsDetailCommentRecycleview)  // bbsRecyclerView 변수
-
-            val mAdapter = CustomAdapterCommentList(this, commentlist!!)
-            bbsDetailCommentRecycleview.adapter = mAdapter
-
-            val layout = LinearLayoutManager(this)
-            bbsDetailCommentRecycleview.layoutManager = layout
-            bbsDetailCommentRecycleview.setHasFixedSize(true)
-        }
+    @SuppressLint("NotifyDataSetChanged")
+    fun commentlist(): ArrayList<BbsDto>{
+        val commentlist:ArrayList<BbsDto>? = BbsDao.getInstance().getCommentList(Detaildata!!.gr)
+        CustomAdapterCommentList(this,commentlist!!).notifyDataSetChanged()
+        return commentlist
     }
+
 
 
 

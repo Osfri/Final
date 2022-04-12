@@ -4,7 +4,7 @@
                                                    android:layout_height="80dp">
 
     <TextView
-            android:id="@+id/managerRecycleViewStaffName"
+            android:id="@+id/managerRecycleViewWaitName"
             android:text="맴버정보"
             android:layout_width="231dp"
             android:layout_height="36dp"
@@ -23,7 +23,7 @@
             android:text="승인"
             android:textSize="14dp"
 
-            app:layout_constraintStart_toEndOf="@+id/managerRecycleViewStaffName"
+            app:layout_constraintStart_toEndOf="@+id/managerRecycleViewWaitName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="92dp"/>

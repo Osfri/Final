@@ -18,6 +18,7 @@ import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
@@ -45,6 +46,13 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         var typename = ""
     }
 
+        override fun onBackPressed() {
+            val main = Intent(this,MainActivity::class.java)
+            main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(main)
+            type = 0
+            typename = ""
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)

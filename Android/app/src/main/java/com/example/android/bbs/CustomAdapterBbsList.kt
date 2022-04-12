@@ -41,7 +41,7 @@ class CustomAdapterBbsList(val context: Context, val dataList:ArrayList<BbsDto>)
                     Intent(context, BbsDetail::class.java).apply {
 
                         putExtra("data", dataVo)
-
+                        setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     }.run { context.startActivity(this) }
                 } else{

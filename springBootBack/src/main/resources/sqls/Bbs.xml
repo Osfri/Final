@@ -53,5 +53,9 @@
         SET CONTENT = #{content}
         WHERE SEQ = #{seq}
     </update>
+    <delete id="deleteBoardTypeDto" parameterType="mul.camp.a.dto.BoardTypeDto">
+        DELETE FROM BOARDTYPE
+        WHERE TYPE = #{type}
+    </delete>
 
 </mapper>

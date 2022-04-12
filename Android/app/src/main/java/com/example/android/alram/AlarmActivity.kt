@@ -46,16 +46,18 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private var notificationManager: NotificationManager? = null
     var builder: NotificationCompat.Builder? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
-        val id = MemberDao.user?.id!!
-        val parttime:List<AlarmDto> = MemberDao.getInstance().alarmList(id)!!
+        val id:String = MemberDao.user?.id!!
+        println(id)
+        val parttime:List<AlarmDto>? = MemberDao?.getInstance()?.alarmList(id)!!
 
         var alarmlistRecyclerView = findViewById<RecyclerView>(R.id.AlarmRecyclerView)
 
-        val mAdapter = CustomAdapterAlarm(this,parttime)
+        val mAdapter = CustomAdapterAlarm(this,parttime!!)
         alarmlistRecyclerView.adapter = mAdapter
 
         val layout = LinearLayoutManager(this)
