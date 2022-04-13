@@ -7,20 +7,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
+import com.example.android.calendar.CalendarDto
 
-class CustomAdapterAlarm(val context: Context,val dataList: List<AlarmDto>):RecyclerView.Adapter<CustomAdapterAlarm.ItemViewHolder>(){
+class CustomAdapterAlarm(val context: Context,val dataList: List<CalendarDto>):RecyclerView.Adapter<CustomAdapterAlarm.ItemViewHolder>(){
 
     inner class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val alarmName = itemView.findViewById<TextView>(R.id.Alarm_name)
         val alarmStartTime = itemView.findViewById<TextView>(R.id.Alarm_starttime)
-        val alarmEndTime = itemView.findViewById<TextView>(R.id.Alarm_endtime)
+        //val alarmEndTime = itemView.findViewById<TextView>(R.id.Alarm_endtime)
         val alarmText = itemView.findViewById<TextView>(R.id.Alarm_text)
 
-        fun bind(dataVo:AlarmDto,context: Context){
-            alarmName.text = dataVo.name
-            alarmStartTime.text = dataVo.starttime
-            alarmEndTime.text = dataVo.endtime
-            alarmText.text = "~"
+        fun bind(dataVo:CalendarDto,context: Context){
+            alarmName.text = dataVo.time
+            alarmStartTime.text = dataVo.wdate.toString().split(" ")[0]
+            //alarmEndTime.text = dataVo.endtime
+            alarmText.text = ""
         }
     }
 

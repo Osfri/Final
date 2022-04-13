@@ -37,4 +37,7 @@ public class CalendarService {
     public int memoInsert(CalendarDto dto){
     	return dao.memoInsert(dto);
     }
+    public int offCount(String date, String id){
+    	return dao.offCount(date, id);
+    }
 }

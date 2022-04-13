@@ -70,4 +70,10 @@ public class CalendarController {
 		}
 		return "fail";
 	}
+	
+	@RequestMapping(value ="/offCount",method= RequestMethod.POST)
+	public Integer offCount(@RequestBody CalendarDto dto) {
+		System.out.println("offCount"+dto.getWdate()+dto.getId());
+		return service.offCount(dto.getWdate().toString(), dto.getId());
+	}
 }

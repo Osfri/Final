@@ -28,7 +28,11 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
-
+    override fun onBackPressed() {
+        val main = Intent(this, MainActivity::class.java)
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(main)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_menu)

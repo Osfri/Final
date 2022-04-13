@@ -33,4 +33,6 @@ public interface BbsDao {
     int commentwrite(BoardDto dto);
 
     int updatecomment(BoardDto dto);
+
+    int deleteBoardTypeDto(BoardTypeDto dto);
 }

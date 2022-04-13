@@ -33,13 +33,13 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     lateinit var drawerLayout: DrawerLayout
 
 
-        var userList = arrayListOf<ManagerBbsDto>(
-        ManagerBbsDto(1, "건의사항 두번째글", "박한솔"),
-        ManagerBbsDto(2, "건의사항 5번째글", "김주원"),
-        ManagerBbsDto(3, "건의사항 7번째글", "이수연")
-    )
+        var userList = BbsDao.getInstance().getBoardTypeList(MemberDao.user?.code!!)
 
-
+    override fun onBackPressed() {
+        val main = Intent(this, ManagerMenuActivity::class.java)
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(main)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,7 +126,7 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
         // 리사이클러 뷰
         var managerRecyclerView = findViewById<RecyclerView>(R.id.managerRecyclerView)
-        val mAdapter = CustomAdapterManagerBbs(this, userList)
+        val mAdapter = CustomAdapterManagerBbs(this, userList!!)
         managerRecyclerView.adapter = mAdapter
         var layout = LinearLayoutManager(this)
         managerRecyclerView.layoutManager = layout

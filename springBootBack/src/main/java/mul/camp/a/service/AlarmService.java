@@ -2,6 +2,7 @@ package mul.camp.a.service;
 
 
 import mul.camp.a.dao.AlarmDao;
+import mul.camp.a.dto.CalendarDto;
 import mul.camp.a.dto.ParttimeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,10 @@ public class AlarmService {
     AlarmDao dao;
 
 
-    public List<ParttimeDto> alarmList(String id){
-        return dao.alarmList(id);
+    public List<ParttimeDto> alarmList(String code){
+        return dao.alarmList(code);
+    }
+    public List<CalendarDto> calList(String id){
+        return dao.calList(id);
     }
 }

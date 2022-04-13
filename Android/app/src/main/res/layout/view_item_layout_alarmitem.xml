@@ -32,7 +32,6 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0" android:textAlignment="center"/>
     <TextView
-            android:text="2020-10-23 23:23"
             android:layout_width="133dp"
             android:layout_height="31dp" android:id="@+id/Alarm_endtime"
             android:textAlignment="center"

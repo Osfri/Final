@@ -38,6 +38,10 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 
 class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+    override fun onBackPressed() {
+        val i = Intent(this,BbsActivity::class.java)
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    }
     //STORAGE권한 처리에 필요한 변수 - Manifest 부분의 안드로이드 부분이 필요
     val CAMERA = arrayOf(Manifest.permission.CAMERA)
     val STORAGE = arrayOf(

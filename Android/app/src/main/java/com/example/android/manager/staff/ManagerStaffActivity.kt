@@ -23,27 +23,61 @@ import com.example.android.manager.bbs.ManagerBbsDto
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 import com.google.android.material.navigation.NavigationView
 
 class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
-
-
-    var userList = arrayListOf<ManagerStaffJoinDto>(
-        ManagerStaffJoinDto("aaa/aaaa/aaaa","id1"),
-        ManagerStaffJoinDto("bbb/bbbb/bbbb","id2"),
-        ManagerStaffJoinDto("ccc/cccc/cccc","id3")
-    )
-
+    override fun onBackPressed() {
+        val main = Intent(this, ManagerMenuActivity::class.java)
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(main)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_staff)
+        var allmember:ArrayList<MemberDto>? = null
+        var waitmember:ArrayList<MemberDto>? = null
+        var split = MemberDao.user?.code!!
+        if (MemberDao.user?.code!!.contains("_")){
+            split = MemberDao.user?.code!!.split("_")[0]
+        }
+        println(split)
+        try {
+            val all:ArrayList<MemberDto>? = MemberDao.getInstance().allmember(split)
+            val wait:ArrayList<MemberDto>? = MemberDao.getInstance().waitmember(split)
+            println(all.toString())
+            println(wait.toString())
+            allmember = all
+            waitmember = wait
+        }catch (e:Exception){
 
+        }
+        println(allmember.toString())
+        println(waitmember.toString())
+        if (allmember != null){
+            // 리사이클러 뷰 - 맴버 전체보기
+            var managerRecyclerView = findViewById<RecyclerView>(R.id.managerStaffMemRecyclerView)
+            val mAdapter = CustomAdapterManagerStaff(this, allmember!!)
+            managerRecyclerView.adapter = mAdapter
+            var layout = LinearLayoutManager(this)
+            managerRecyclerView.layoutManager = layout
+            managerRecyclerView.setHasFixedSize(true)
+        }
 
-
+        if (waitmember != null){
+            // 리사이클러 뷰 - 가입승인
+            var managerStaffJoinRecyclerView = findViewById<RecyclerView>(R.id.managerStaffJoinRecyclerView)
+            val mAdapterJoin = CustomAdapterManagerStaffJoin(this, waitmember!!)
+            managerStaffJoinRecyclerView.adapter = mAdapterJoin
+            var layoutJoin = LinearLayoutManager(this)
+            managerStaffJoinRecyclerView.layoutManager = layoutJoin
+            managerStaffJoinRecyclerView.setHasFixedSize(true)
+        }
 
 
 
@@ -76,23 +110,6 @@ class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationIte
         val tv = findViewById<TextView>(R.id.navi_title_center)
         tv.setText("관리자페이지")
 
-        // 리사이클러뷰 2개 구성
-        // 리사이클러 뷰 - 맴버 전체보기
-        var managerRecyclerView = findViewById<RecyclerView>(R.id.managerStaffMemRecyclerView)
-        val mAdapter = CustomAdapterManagerStaff(this, userList)
-        managerRecyclerView.adapter = mAdapter
-        var layout = LinearLayoutManager(this)
-        managerRecyclerView.layoutManager = layout
-        managerRecyclerView.setHasFixedSize(true)
-
-
-        // 리사이클러 뷰 - 가입승인
-        var managerStaffJoinRecyclerView = findViewById<RecyclerView>(R.id.managerStaffJoinRecyclerView)
-        val mAdapterJoin = CustomAdapterManagerStaffJoin(this, userList)
-        managerStaffJoinRecyclerView.adapter = mAdapterJoin
-        var layoutJoin = LinearLayoutManager(this)
-        managerStaffJoinRecyclerView.layoutManager = layoutJoin
-        managerStaffJoinRecyclerView.setHasFixedSize(true)
 
 
 

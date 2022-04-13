@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -36,8 +38,8 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsD
         // 2022-04-06 00:00:00
         fun bind(dataVo:BbsDto){
             var text = ""
-            bbsCommentRecyclerViewUpdateText.isGone
-            bbsCommentRecyclerViewUpdateDone.isGone
+            bbsCommentRecyclerViewUpdateText.visibility=View.GONE
+            bbsCommentRecyclerViewUpdateDone.visibility=View.GONE
             if (dataVo.id.toString() != MemberDao.user?.id.toString()){
                 bbsCommentRecyclerViewWriter.isInvisible
                 bbsCommentRecyclerViewUpdate.isInvisible
@@ -59,30 +61,32 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsD
             bbsCommentRecyclerViewDelete.setOnClickListener {
                 BbsDao.getInstance().deleteBbs(dataVo.seq)
                 val data = BbsDetail.Detaildata
-                BbsDetail.getInstance().commentlist(data!!)
+                BbsDetail.getInstance().commentlist()
             }
             bbsCommentRecyclerViewUpdate.setOnClickListener {
-                bbsCommentRecyclerViewUpdateText.isVisible
-                bbsCommentRecyclerViewUpdateDone.isVisible
+                bbsCommentRecyclerViewUpdateText.visibility=View.VISIBLE
+                bbsCommentRecyclerViewUpdateDone.visibility=View.VISIBLE
                 bbsCommentRecyclerViewUpdateText.setText(dataVo.content)
             }
             bbsCommentRecyclerViewUpdateDone.setOnClickListener {
                 val dto = BbsDto(dataVo.seq,dataVo.id,"댓글",text,0,dataVo.wdate,0,dataVo.type,dataVo.code,1,dataVo.gr,"")
                 BbsDao.getInstance().updatecomment(dto)
-                bbsCommentRecyclerViewUpdateText.isGone
-                bbsCommentRecyclerViewUpdateDone.isGone
+                bbsCommentRecyclerViewUpdateText.visibility=View.GONE
+                bbsCommentRecyclerViewUpdateDone.visibility=View.GONE
                 val data = BbsDetail.Detaildata
-                BbsDetail.getInstance().commentlist(data!!)
+                val i = Intent(context,BbsDetail::class.java)
+                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                context.startActivity(i)
             }
-            if (bbsCommentRecyclerViewUpdateText.isVisible){
-                bbsCommentRecyclerViewUpdateText.addTextChangedListener(object :TextWatcher{
-                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                    override fun afterTextChanged(p0: Editable?) {
-                        text = bbsCommentRecyclerViewUpdateText.text.toString()
-                    }
-                })
-            }
+            bbsCommentRecyclerViewUpdateText.addTextChangedListener(object :TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun afterTextChanged(p0: Editable?) {
+                    text = bbsCommentRecyclerViewUpdateText.text.toString()
+                    println(text)
+                }
+            })
+
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.android.bbs
 
+import android.app.VoiceInteractor
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -44,6 +45,14 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         var typename = ""
     }
 
+
+    override fun onBackPressed() {
+        val main = Intent(this,MainActivity::class.java)
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(main)
+        type = 0
+        typename = ""
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
@@ -182,9 +191,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정

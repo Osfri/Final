@@ -63,7 +63,8 @@ $(document).ready(function(){
 			        contentType: false,
 			        cache: false,
 			        success: function () {   
-			        	alert("success");
+			        	alert("등록했습니다.");
+			        	location.reload();
 			        },
 			        error: function (e) { 
 			        	alert("error", e);

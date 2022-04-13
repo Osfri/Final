@@ -3,17 +3,14 @@ package mul.camp.a.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import mul.camp.a.dto.MemberDto;
 import mul.camp.a.dto.ShopDto;
+import mul.camp.a.dto.ShopParam;
 import mul.camp.a.service.ShopService;
 
 // CORS 설정
@@ -63,5 +60,33 @@ public class ShopController {
 	public int buyShopItemCntApp(@RequestBody HashMap<String, Object> map) {
 		System.out.println("ShopController buyShopItemCntApp() : " + new Date());
 		return service.buyShopItemCnt(map);
+	}
+	
+	// (7) 상품목록 가져오기 (Web)
+	@RequestMapping(value = "/getShopItemList", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<ShopDto> getShopItemList(ShopParam param) {
+		System.out.println("ShopController getShopItemList() : " + new Date());
+		// 페이지 설정
+		int sn = param.getPageNumber();	// 0 1 2 3 ~
+		int start = sn * 3 +1;			// 1	11	21
+		int end = (sn + 1) * 3;		// 10	20	30
+		
+		param.setStart(start);
+		param.setEnd(end);
+		return service.getShopItemList(param);
+	}
+	
+	// (8) 상품목록 수 가져오기 (Web)
+	@RequestMapping(value = "/getShopItemListCnt", method = {RequestMethod.GET, RequestMethod.POST})
+	public int getShopItemListCnt(ShopParam param) {
+		System.out.println("ShopController getShopItemListCnt() : " + new Date());
+		return service.getShopItemListCnt(param);
+	}
+	
+	// (9) 상품 삭제하기 (Web)
+	@RequestMapping(value = "/shopItemModify", method = {RequestMethod.GET, RequestMethod.POST})
+	public int shopItemModify(String seq) {
+		System.out.println("ShopController shopItemModify() : " + new Date());
+		return service.shopItemModify(seq);
 	}
 }

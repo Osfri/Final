@@ -38,6 +38,9 @@ interface BbsService {
 
     @POST("updatecomment")
     fun updatecomment(@Body dto: BbsDto) : Call<Int>
+
+    @POST("deleteBoardTypeDto")
+    fun deleteBoardTypeDto(@Body dto:BoardtypeDto) : Call<Int>
 }
 
 
@@ -205,6 +208,20 @@ class BbsDao {
 
             val service = retrofit?.create(BbsService::class.java)
             val call = service?.updatecomment(dto)
+            val response = call?.execute()
+
+            return response?.body() as Int
+        }catch (e:Exception){
+            return null
+        }
+    }
+    fun deleteBoardTypeDto(dto:BoardtypeDto) : Int?{
+        try {
+
+            val retrofit = RetrofitClient.getInstance()
+
+            val service = retrofit?.create(BbsService::class.java)
+            val call = service?.deleteBoardTypeDto(dto)
             val response = call?.execute()
 
             return response?.body() as Int

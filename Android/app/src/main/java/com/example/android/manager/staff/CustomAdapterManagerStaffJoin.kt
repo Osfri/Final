@@ -1,26 +1,41 @@
 package com.example.android.manager.staff
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
 
-class CustomAdapterManagerStaffJoin(val context: Context, val dataList:ArrayList<ManagerStaffJoinDto>):
+class CustomAdapterManagerStaffJoin(val context: Context, val dataList:ArrayList<MemberDto>):
     RecyclerView.Adapter<CustomAdapterManagerStaffJoin.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val managerRecycleViewStaffName = itemView.findViewById<TextView>(R.id.managerRecycleViewStaffName)        // 가입승인 이름
-
-        fun bind(dataVo: ManagerStaffJoinDto, context: Context){
-
-            managerRecycleViewStaffName.text = dataVo.name
+        val managerRecycleViewStaffName = itemView.findViewById<TextView>(R.id.managerRecycleViewWaitName)        // 가입승인 이름
+        val yes = itemView.findViewById<Button>(R.id.manage_btn_staffok)
+        val no = itemView.findViewById<Button>(R.id.manage_btn_staffcancel)
 
 
+        fun bind(dataVo: MemberDto, context: Context){
+
+            managerRecycleViewStaffName.text = "${dataVo.name} / ${dataVo.id} / ${dataVo.phonenumber}"
+
+            yes.setOnClickListener {
+                MemberDao.getInstance().yesjoin(dataVo)
+                context.startActivity(Intent(context,ManagerStaffActivity::class.java))
+            }
+            no.setOnClickListener {
+                MemberDao.getInstance().nojoin(dataVo)
+                context.startActivity(Intent(context,ManagerStaffActivity::class.java))
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
