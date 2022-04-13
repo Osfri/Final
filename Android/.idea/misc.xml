@@ -88,13 +88,6 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_off_header.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_bbslist.xml" value="0.353125" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_list.xml" value="0.44635416666666666" />
-        <entry key="app/src/main/res/layout/activity_bbs_detail.xml" value="0.2734375" />
-        <entry key="app/src/main/res/layout/activity_bbs_update.xml" value="0.22291666666666668" />
-        <entry key="app/src/main/res/layout/activity_bbs_write.xml" value="0.2734375" />
-        <entry key="app/src/main/res/layout/view_item_layout_comment.xml" value="0.26927083333333335" />
-        <entry key="app/src/main/res/layout/view_item_layout_manager_bbs.xml" value="0.22291666666666668" />
-        <entry key="app/src/main/res/layout/view_item_layout_manager_staff.xml" value="0.22291666666666668" />
-        <entry key="app/src/main/res/layout/view_item_layout_manager_staffjoin.xml" value="0.22291666666666668" />
       </map>
     </option>
   </component>

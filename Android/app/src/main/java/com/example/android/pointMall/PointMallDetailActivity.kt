@@ -49,12 +49,14 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
         val shopItemInfo: ShopDto = PointMallSingleton.getInstance().getShopItemInfo(ShopDto(shopItemSeq))
         shopItemInfoView(shopItemInfo, this)
 
+/*
 
         // (수정,추가_백엔드) 관리자만 구매내역표시
         val historyBtn = findViewById<Button>(R.id.pointDetail_btn_History)
         if(MemberDao.user!!.auth !=0 && MemberDao.user!!.auth !=3){ // 0: 관리자, 3: 최고관리자
             historyBtn.visibility = View.GONE
         }
+*/
 
 
         // (수정,추가_백엔드) 구매버튼 클릭시
@@ -157,7 +159,7 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
 
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
         val tv = findViewById<TextView>(R.id.navi_title_center)
-        tv.setText("포인트몰")
+        tv.setText("포인트몰 상세페이지")
     }
 
     // (수정,추가_백엔드) 선택한 상품 정보 보여주기
