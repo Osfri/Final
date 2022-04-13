@@ -3,9 +3,8 @@ package com.example.android.alram
 import android.os.Parcel
 import android.os.Parcelable
 
-class AlarmDto(val id:String?,val name:String?,val starttime:String?,val endtime:String?,val code:String?) : Parcelable {
+class AlarmDto(val name:String?,val starttime:String?,val endtime:String?,val code:String?) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -14,7 +13,6 @@ class AlarmDto(val id:String?,val name:String?,val starttime:String?,val endtime
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeString(starttime)
         parcel.writeString(endtime)
@@ -26,7 +24,7 @@ class AlarmDto(val id:String?,val name:String?,val starttime:String?,val endtime
     }
 
     override fun toString(): String {
-        return "AlarmDto(id=$id, name=$name, starttime=$starttime, endtime=$endtime, code=$code)"
+        return "AlarmDto(name=$name, starttime=$starttime, endtime=$endtime, code=$code)"
     }
 
     companion object CREATOR : Parcelable.Creator<AlarmDto> {

@@ -3,6 +3,7 @@ package com.example.android.signin
 import com.example.android.alram.AlarmDto
 import com.example.android.bbs.BbsDto
 import com.example.android.bbs.RetrofitClient
+import com.example.android.calendar.CalendarDto
 import com.example.android.signinAf.HospitalDto
 import retrofit2.Call
 import retrofit2.http.Body
@@ -25,7 +26,9 @@ interface MemberService{
     @POST("/insertHospitalAf")
     fun insertHospitalAf(@Body dto:MemberDto) : Call<Int>
     @POST("/alarmList")
-    fun alarmList(@Body id:String) : Call<List<AlarmDto>>
+    fun alarmList(@Body code:String) : Call<List<AlarmDto>>
+    @POST("/calList")
+    fun calList(@Body id:String) : Call<List<CalendarDto>>
     @POST("/allmember")
     fun allmember(@Body code:String) : Call<ArrayList<MemberDto>>
     @POST("/yesjoin")
@@ -190,6 +193,18 @@ class MemberDao {
             val call = service?.waitmember(code)
             val response = call?.execute()
             return response?.body() as ArrayList<MemberDto>
+        } catch (e: Exception) {
+            return null
+        }
+    }
+    fun calList(code: String) : List<CalendarDto>?{
+        try{
+            val retrofit = RetrofitClient.getInstance()
+
+            val service = retrofit?.create(MemberService::class.java)
+            val call = service?.calList(code)
+            val response = call?.execute()
+            return response?.body() as List<CalendarDto>
         } catch (e: Exception) {
             return null
         }

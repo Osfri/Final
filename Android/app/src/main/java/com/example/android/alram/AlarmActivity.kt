@@ -17,9 +17,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.MainActivity
 import com.example.android.R
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
+import com.example.android.calendar.CalendarDto
 import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
@@ -29,96 +31,105 @@ import org.w3c.dom.Text
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
-    //임의로 알람 날짜와 시간을 지정 - 교대시간을 여기로 받아와야 할듯
-    //val from = "2022-03-23 13:24:00"
+    override fun onBackPressed() {
+        val i = Intent(this,MainActivity::class.java)
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(i)
+    }
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
-
-
     private var alarmManager: AlarmManager? = null
     private var mCalender: GregorianCalendar? = null
-
     private var notificationManager: NotificationManager? = null
     var builder: NotificationCompat.Builder? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
-        val id:String = MemberDao.user?.id!!
-        println(id)
-        val parttime:List<AlarmDto>? = MemberDao?.getInstance()?.alarmList(id)!!
-
-        var alarmlistRecyclerView = findViewById<RecyclerView>(R.id.AlarmRecyclerView)
-
-        val mAdapter = CustomAdapterAlarm(this,parttime!!)
-        alarmlistRecyclerView.adapter = mAdapter
-
-        val layout = LinearLayoutManager(this)
-        alarmlistRecyclerView.layoutManager = layout
-        alarmlistRecyclerView.setHasFixedSize(true)
-
-        for (i in parttime.indices){
-            val a:Int = i
-            println("===="+a)
-            val from:String = parttime[i].starttime!!
-            notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-        alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        mCalender = GregorianCalendar()
-
-        //AlarmReceiver에 값 전달
-        val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, a , receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-
-
-        //날짜 포맷을 바꿔주는 소스코드
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        var datetime: Date? = null
-        try {
-            //datetime = dateFormat.parse(from)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.time = datetime
-
-        alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
-
-        }
-
-
-        Log.v("AlarmActivity", mCalender!!.getTime().toString())
-
-//        setContentView(R.layout.activity_alarm)
-
-
-        //val ampmTextView = findViewById<TextView>(R.id.ampmTextView)
-        //접수일 알람 버튼
         val onOffButton = findViewById<View>(R.id.onOffButton) as Button
-        onOffButton.setOnClickListener{
-
-            //setAlarm()
-            Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
-            //ampmTextView.text = "$from 에 알람이 울립니다"
-        }
-
-
-        //취소 버튼
         val onOffButtonCancle = findViewById<Button>(R.id.onOffButtonCancle)
-        onOffButtonCancle.setOnClickListener {
-            //ampmTextView.text = "알람이 취소되었습니다"
-            Toast.makeText(this,"아직 취소 기능 구현은 안됨, 토스트만 뿌리는 중",Toast.LENGTH_SHORT).show()
+
+        //병동코드 제거
+        var code:String = MemberDao.user?.code!!
+        if (code.contains("_")){
+            code = code.split("_")[0]
         }
+
+        //파트타임db 이름(d,m,n)과 시간(starttime)가져오기
+        val parttime:List<AlarmDto>? = MemberDao?.getInstance()?.alarmList(code)!!
+        val hashmap = HashMap<String,Any>()
+        if (parttime != null){
+            //이름(d,m,n)의 시간값을 해쉬맵에 저장
+            for (i in parttime!!.indices){
+                hashmap.put("${parttime[i].name.toString()}","${parttime[i].starttime!!}")
+            }
+        }
+        //캘린더 가져오기
+        val calList: List<CalendarDto>? = MemberDao.getInstance().calList(MemberDao.user!!.id.toString())
+
+        if (parttime != null && calList != null){
+            //리사이클러뷰 설정
+            var alarmlistRecyclerView = findViewById<RecyclerView>(R.id.AlarmRecyclerView)
+            val mAdapter = CustomAdapterAlarm(this,calList!!)
+            alarmlistRecyclerView.adapter = mAdapter
+            val layout = LinearLayoutManager(this)
+            alarmlistRecyclerView.layoutManager = layout
+            alarmlistRecyclerView.setHasFixedSize(true)
+
+            //알람설정
+            val receiverIntent = Intent(this@AlarmActivity, AlarmReceiver::class.java)
+            var pendingIntent: PendingIntent = PendingIntent.getBroadcast(this@AlarmActivity,999,receiverIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            onOffButton.setOnClickListener{
+                for (i in calList!!.indices){
+                    // 캘린더DTO에서 연 월 일 분리
+                    val calYear = calList[i].wdate.toString().split(" ")[0].split("-")[0].toInt()
+                    val calMonth = calList[i].wdate.toString().split(" ")[0].split("-")[1].toInt()
+                    val calDay = calList[i].wdate.toString().split(" ")[0].split("-")[2].toInt()
+                    // 캘린더DTO에서 name(d,m,n) 을 파트타임과 매칭시켜 맞는 시간 가져오기
+                    println(hashmap.get("${calList[i].time.toUpperCase()}").toString())
+                    println(hashmap.get("D").toString())
+                    println(calList[i].time)
+                    val calHour = hashmap.get("${calList[i].time.toUpperCase()}").toString().split(":")[0].toInt()
+                    val calMinute = hashmap.get("${calList[i].time.toUpperCase()}").toString().split(":")[1].toInt()
+
+                    notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                    alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    mCalender = GregorianCalendar()
+
+                    //AlarmReceiver에 값 전달
+                    pendingIntent = PendingIntent.getBroadcast(this@AlarmActivity, i , receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+                    //시간설정
+                    val calendar = Calendar.getInstance()
+                    calendar.set(calYear,calMonth-1,calDay,calHour,calMinute,0)
+
+                    alarmManager!![AlarmManager.RTC, calendar.timeInMillis] = pendingIntent
+                }
+                    Toast.makeText(this,"알람이 설정되었습니다",Toast.LENGTH_LONG).show()
+            }
+            //취소 버튼
+            onOffButtonCancle.setOnClickListener {
+                pendingIntent.cancel()
+                Toast.makeText(this,"알람이 취소되었습니다",Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            onOffButton.setOnClickListener{
+                Toast.makeText(this,"설정할수 있는 스케줄이 없습니다.",Toast.LENGTH_SHORT).show()
+            }
+            onOffButtonCancle.setOnClickListener {
+                Toast.makeText(this,"취소할수 있는 스케줄이 없습니다.",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
 
 
         // drawerlayout bar 설정

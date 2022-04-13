@@ -47,7 +47,10 @@ import com.example.android.MainActivity
 import java.time.LocalDate
 
 class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    override fun onBackPressed() {
+        val i = Intent(this,BbsActivity::class.java)
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    }
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     val CAMERA = arrayOf(Manifest.permission.CAMERA)

@@ -35,6 +35,10 @@ import java.time.LocalDate
 
 class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
+    override fun onBackPressed() {
+        val i = Intent(this,BbsActivity::class.java)
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    }
     companion object {
         var BbsDetail: BbsDetail? = null
 
@@ -48,6 +52,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         var Detaildata:BbsDto? = null
         var test:RecyclerView? = null
     }
+
 
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
