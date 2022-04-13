@@ -87,7 +87,6 @@ public class MemberController {
 	@RequestMapping(value ="/webLogin",method= RequestMethod.POST)
 	public MemberDto webLogin(MemberDto dto) {
 		MemberDto mem = service.login(dto);
-		//System.out.println("MEM"+mem.toString());
 		
 		return mem;
 
