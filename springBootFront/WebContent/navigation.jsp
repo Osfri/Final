@@ -31,12 +31,12 @@
                     <span class="title">식단관리</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="upload.jsp">
                     <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
                     <span class="title">스케줄 등록</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="addHospital.jsp">
                     <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>

@@ -15,7 +15,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./jquery.twbsPagination.min.js"></script>
 
-	<title>Insert title here</title>
+	<title>포인트몰 관리</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>

@@ -75,7 +75,7 @@
 	</update>
 	<update id="toNo" parameterType="java.lang.String">
 		UPDATE MEMBER
-		SET AUTH=5, CODE=''
+		SET AUTH=5, CODE='', point=0
 		WHERE ID=#{id}
 	</update>
 	<update id="changeHospital" parameterType="java.lang.String">
