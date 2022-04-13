@@ -19,7 +19,7 @@ class CustomAdapterFood(val context: Context, val dataList:MutableList<FoodDto>)
         val foodRecycleViewMenu = itemView.findViewById<TextView>(R.id.foodRecycleViewMenu)        // 메뉴
         val foodRecycleViewDate = itemView.findViewById<TextView>(R.id.foodRecycleViewDate)        // 날짜
         val foodRecycleViewImg = itemView.findViewById<ImageView>(R.id.foodRecycleViewImage)        // 이미지
-        val sdfAf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd E요일")
+        val sdfAf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd E")
         val sdf:SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
 
         fun bind(dataVo: FoodDto, context: Context){

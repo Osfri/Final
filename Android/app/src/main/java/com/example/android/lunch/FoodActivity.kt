@@ -170,6 +170,10 @@ class FoodActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
             }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
+                startActivity(i)
+            }
         }
         return false
     }

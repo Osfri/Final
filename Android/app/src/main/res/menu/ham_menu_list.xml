@@ -3,7 +3,7 @@
     <item
             android:id="@+id/menu_bbs"
             android:icon="@drawable/ic_bbs"
-            android:title="공지사항" />
+            android:title="게시판" />
     <item
             android:id="@+id/menu_alram"
             android:icon="@drawable/ic_alarm"
@@ -29,9 +29,30 @@
             android:icon="@drawable/ic_phone"
             android:title="연락처" />
     <item
+            android:id="@+id/menu_food"
+            android:icon="@drawable/ic_food"
+            android:title="식단표" />
+
+    <item
             android:id="@+id/menu_manager"
             android:icon="@drawable/ic_manager"
             android:title="관리자"/>
+
+    <item
+            android:id="@+id/menu_manager2"
+            android:title=""/>
+
+    <item
+            android:id="@+id/menu_manager3"
+            android:title=""/>
+    <item
+            android:id="@+id/menu_manager4"
+            android:title=""/>
+    <item
+            android:id="@+id/menu_manager5"
+            android:title=""/>
+
+
 
     <group android:id="@+id/menu_group">
         <item

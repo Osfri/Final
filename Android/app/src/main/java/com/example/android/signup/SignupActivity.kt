@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -72,7 +73,7 @@ class SignupActivity : AppCompatActivity() {
                     nameCount = false
                     btn.isEnabled = false
                 } else {
-                    nameCheck.text = "확인"
+                    nameCheck.text = ""
                     nameCount = true
                     btn.isEnabled = idCount && pwCount && nameCount && emailCount && phonenumberCount
                 }
@@ -101,6 +102,7 @@ class SignupActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
                     emailCheck.text = "잘못된 이메일 형식 입니다."
+                    emailCheck.gravity = Gravity.LEFT
                     emailCount = false
                     btn.isEnabled = false
                 } else {

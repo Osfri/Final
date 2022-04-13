@@ -22,6 +22,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.lunch.FoodActivity
 import com.example.android.manager.BoardtypeDto
 import com.example.android.manager.ManagerActivity
 import com.example.android.manager.ManagerMenuActivity
@@ -69,6 +70,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         // 게시판 불러오기
         val typebbs = BbsDao.getInstance().getBoardTypeList(code)
         println("=========================================="+typebbs.toString())
+
 
         // 클릭한 게시판 타입 불러오기
         val a = intent?.getParcelableExtra<BoardtypeDto>("dataType")
@@ -135,8 +137,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
         val tv = findViewById<TextView>(R.id.navi_title_center)
-        tv.setText("공지사항")
-
+        tv.setText("게시판")
 
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -170,7 +171,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
 
     }
-
+/*      오른쪽 상단 점 3개짜리 게시판 추가용도 인데 안씀
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         Log.d("로그","${menu!![0].title}")
         return super.onPrepareOptionsMenu(menu)
@@ -189,7 +190,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         mi.setIcon(R.drawable.ic_bbs)
         menu!!.get(2).title = "게시판외"
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -211,7 +212,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val i = Intent(this, BbsActivity::class.java)
                 Log.d("로그","공지")
                 startActivity(i)
-
             }
             R.id.menu_alram-> {
                 val i = Intent(this, AlarmActivity::class.java)
@@ -239,6 +239,10 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
             }
             R.id.menu_manager->  {
                 val i = Intent(this, ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
 

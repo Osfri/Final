@@ -23,7 +23,10 @@ import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.calendar.CalendarDto
 import com.example.android.chat.ChatActivity
+import com.example.android.lunch.FoodActivity
+import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
+import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.google.android.material.navigation.NavigationView
@@ -61,6 +64,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         if (code.contains("_")){
             code = code.split("_")[0]
         }
+        println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~code~"+code)
 
         //파트타임db 이름(d,m,n)과 시간(starttime)가져오기
         val parttime:List<AlarmDto>? = MemberDao?.getInstance()?.alarmList(code)!!
@@ -145,6 +149,9 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         navigationView = findViewById(R.id.nav_Alarm)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("알람")
     }
 
 
@@ -165,9 +172,11 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     // drawerlayout 네비바
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_bbs-> {
+            R.id.menu_bbs-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
+                Log.d("로그","공지")
                 startActivity(i)
+
             }
             R.id.menu_alram-> {
                 val i = Intent(this, AlarmActivity::class.java)
@@ -187,6 +196,18 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
             R.id.menu_offday->  {
                 val i = Intent(this, OffDayActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_phonenumber -> {
+                val i = Intent(this, PhoneNumActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_manager->  {
+                val i = Intent(this, ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
         }

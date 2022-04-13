@@ -22,26 +22,29 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="60dp"
                   android:layout_gravity="center"
-                  android:text="게시물을 추가 또는 추가가 할 수 있는 페이지입니다(임시)"
+                  android:text="게시판을 추가 하거나 삭제 할 수 있는 관리자 페이지"
+                  android:gravity="center"
                   android:textSize="12dp"
                   android:layout_weight="1"/>
 
         <ImageButton
                 android:id="@+id/manage_Btn_Bbs"
-                android:layout_width="600dp"
+                android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginBottom="100dp"
                 android:background="@drawable/button_manager_click"/>
+
         <TextView android:layout_width="wrap_content"
                   android:layout_height="60dp"
                   android:layout_gravity="center"
-                  android:text="회원관리 페이지로 회원 강퇴, 가입 승인, 거절을 할 수 있는 페이지입니다"
+                  android:gravity="center"
+                  android:text="회원강퇴, 가입승인, 거절을 하는 관리자 페이지"
                   android:textSize="12dp"
                   android:layout_weight="1"/>
 
         <ImageButton
                 android:id="@+id/manage_Btn_Staff"
-                android:layout_width="600dp"
+                android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:background="@drawable/button_manager_staff"/>
 

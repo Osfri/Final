@@ -26,6 +26,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.calendar.CalendarActivity
 import com.example.android.chat.ChatActivity
+import com.example.android.lunch.FoodActivity
 import com.example.android.lunch.FoodSingleton
 import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
@@ -84,7 +85,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val bbsWriteId = findViewById<TextView>(R.id.bbsWriteId)
         val bbsWriteContent = findViewById<EditText>(R.id.bbsWriteContent)
         val btn_bbsWriteFin = findViewById<Button>(R.id.btn_bbsWriteFin)
-        bbsWriteId.text = "작성자 : ${MemberDao.user?.id} 게시판: ${typename}"
+        bbsWriteId.text = "작성자 : ${MemberDao.user?.id}     |     ${typename}"
 
         // bbsWrite 글추가완료 버튼
         btn_bbsWriteFin.setOnClickListener {
@@ -132,7 +133,7 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
         val tv = findViewById<TextView>(R.id.navi_title_center)
-        tv.setText("공지사항")
+        tv.setText("게시판")
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -177,6 +178,10 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
             }
             R.id.menu_manager->  {
                 val i = Intent(this, ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
         }

@@ -23,6 +23,7 @@ import com.example.android.R
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
 import com.example.android.calendar.CalendarActivity
+import com.example.android.lunch.FoodActivity
 import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
@@ -406,6 +407,10 @@ class GroupMessageActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             }
             R.id.menu_manager->  {
                 val i = Intent(this, ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
 

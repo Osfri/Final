@@ -38,19 +38,60 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bbsDetailId"/>
 
-        <TextView
-                android:id="@+id/bbsDetailTitle"
-                android:text="제목"
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_gravity="center_vertical"
-                android:textSize="25dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bbsDetailId"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:weightSum="10
+"
+                tools:context=".LinearActivity">
 
+            <TextView
+                    android:id="@+id/bbsDetailTitle"
+                    android:text="제목"
+                    android:layout_width="374dp"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.001" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <Button
+                    android:id="@+id/btnDetailUpdate"
+                    android:textSize="15dp"
+                    android:text="수정"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_round_original"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bbsDetailTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.218"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <Button
+                    android:id="@+id/btnDetailDel"
+                    android:textSize="15dp"
+                    android:text="삭제"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_round"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnDetailUpdate"
+                    app:layout_constraintHorizontal_bias="0.127"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnDetailUpdate"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +101,7 @@
             <TextView
                     android:id="@+id/bbsDetailId"
                     android:text="아이디"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:textSize="15dp"
                     android:layout_width="150dp"
                     android:layout_height="71dp"
@@ -73,7 +114,7 @@
             <TextView
                     android:id="@+id/bbsDetailDate"
                     android:hint="날짜"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:textSize="15dp"
                     android:layout_width="189dp"
                     android:layout_height="71dp"
@@ -85,7 +126,7 @@
             <TextView
                     android:id="@+id/bbsDetailCount"
                     android:text="조회수"
-                    android:gravity="left"
+                    android:gravity="left|center"
                     android:textSize="15dp"
                     android:layout_width="100dp"
                     android:layout_height="71dp"
@@ -107,8 +148,8 @@
 
         <ImageView
                 android:id="@+id/bbsDetailImage"
-                android:layout_width="94dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
@@ -119,31 +160,70 @@
         <TextView
                 android:id="@+id/bbsDetailContent"
                 android:text="내용"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bbsDetailTitle"
                 app:layout_constraintHorizontal_bias="0.497"/>
 
 
+
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#D6D6D6"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_gravity="center"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+
+                android:weightSum="2"
+                tools:context=".LinearActivity">
+
+            <EditText
+                    android:id="@+id/bbsCommentEditText"
+                    android:layout_width="398dp"
+                    android:layout_height="50dp"
+                    android:hint="댓글을 등록해주세요."
+                    android:layout_weight="1"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"/>
+            <Button
+                    android:id="@+id/btnCommentWrite"
+                    android:textSize="15dp"
+                    android:text="댓글쓰기"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_round"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+        </LinearLayout>
         <TextView
                 android:id="@+id/bbsDetailComment"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:text="댓글3"
-        />
+                android:text="댓글"
+                android:layout_marginTop="30dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bbsDetailCommentRecycleview"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -152,77 +232,11 @@
                 tools:layout_editor_absoluteX="16dp" />
 
 
-        <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="#D6D6D6"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_gravity="center"/>
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            tools:context=".LinearActivity">
 
-        <EditText
-                android:id="@+id/bbsCommentEditText"
-                android:layout_width="398dp"
-                android:layout_height="50dp"
-                android:hint="댓글을 등록해주세요."
-                android:layout_weight="1"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"/>
-        <Button
-                android:id="@+id/btnCommentWrite"
-                android:textSize="15dp"
-                android:text="댓글쓰기"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:background="@drawable/button_round"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-    </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:weightSum="2"
-                tools:context=".LinearActivity">
-
-            <Button
-                    android:id="@+id/btnDetailUpdate"
-                    android:textSize="15dp"
-                    android:text="글 수정"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_round_original"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
-            <Button
-                    android:id="@+id/btnDetailDel"
-                    android:textSize="15dp"
-                    android:text="글 삭제"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/button_round"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
-
-        </LinearLayout>
     </LinearLayout>
     </ScrollView>
+
 
 
     <include
@@ -238,6 +252,7 @@
             app:menu="@menu/ham_menu_list"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/ham_header"/>
+
 
 
 

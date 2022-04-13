@@ -314,6 +314,10 @@ class FoodWriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 val i = Intent(this, OffDayActivity::class.java)
                 startActivity(i)
             }
+            R.id.menu_food-> {
+                val i = Intent(this, FoodActivity::class.java)
+                startActivity(i)
+            }
         }
         return false
     }

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.UiThread
 import com.bumptech.glide.Glide
+import com.example.android.signin.SigninActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         val handler = Handler()
        // handler.postDelayed({ finish() }, 1000)
         handler.postDelayed({
-            val intent = Intent(baseContext, MainActivity::class.java)
+            val intent = Intent(baseContext, SigninActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)

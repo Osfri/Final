@@ -24,7 +24,7 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.4479166666666667" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_alarm.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs.xml" value="0.22604166666666667" />
-        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_detail.xml" value="0.2965686274509804" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_detail.xml" value="0.42857142857142855" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_update.xml" value="0.31145833333333334" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_bbs_write.xml" value="0.2965686274509804" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_calendar.xml" value="0.4280078895463511" />
@@ -51,7 +51,7 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_screen.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_semi_waiting.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signin.xml" value="0.4317708333333333" />
-        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signup.xml" value="0.4317708333333333" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_signup.xml" value="0.6285714285714287" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/activity_splash.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_account.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/fragment_chat.xml" value="0.4317708333333333" />
@@ -88,6 +88,7 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/layout/view_item_off_header.xml" value="0.4317708333333333" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_bbslist.xml" value="0.353125" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_list.xml" value="0.44635416666666666" />
+        <entry key="..\:/finalProject/Android/app/src/main/res/menu/main_drawer_navigation.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_bbs_detail.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/activity_bbs_update.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/activity_bbs_write.xml" value="0.2734375" />

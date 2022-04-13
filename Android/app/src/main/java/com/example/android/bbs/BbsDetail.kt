@@ -168,7 +168,9 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         navigationView = findViewById(R.id.nav_Bbs_Detail)
         navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
 
-
+        // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
+        val tv = findViewById<TextView>(R.id.navi_title_center)
+        tv.setText("게시판")
 
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
