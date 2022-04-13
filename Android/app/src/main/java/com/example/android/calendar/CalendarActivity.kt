@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.android.R
@@ -99,6 +100,15 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         recyclerView.adapter = calendarRecyclerViewAdapter
         //calendarRecyclerViewAdapter.notifyDataSetChanged()
         recyclerView.layoutManager = gridManager
+
+        //리사이클러뷰 스크롤 위치 조정
+        val smoothScroller: RecyclerView.SmoothScroller by lazy {
+            object : LinearSmoothScroller(this) {
+                override fun getVerticalSnapPreference() = SNAP_TO_START
+            }
+        }
+        smoothScroller.targetPosition = 207
+        recyclerView.layoutManager?.startSmoothScroll(smoothScroller)
 
 
         // drawerlayout bar 설정

@@ -34,7 +34,6 @@ function logout(){
         </li>
         <li id="CalendarManagement">
             <a href="staffCalendarManagement.jsp">
-            <!-- <a href="test.jsp"> -->
                 <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
                 <span class="title">근무관리</span>
             </a>
