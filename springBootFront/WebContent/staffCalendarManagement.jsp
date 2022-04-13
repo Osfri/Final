@@ -77,13 +77,12 @@
 
     <!--table-->
     <div class="maintitle">
-      <h2 style="margin-bottom:25px;">근무관리</h2>
+      <h2 style="margin-bottom:25px;" id="calendarManage"></h2>
         <div style="text-align-last: left;padding-right: 90px;margin-bottom: -35px;"">
 	        <input type="month" id="dmonth" name="dnameFile" value="<%= dateForm %>">
 			<!-- <button id="download_file_btn">양식 다운로드</button></div><br> -->
 			<button id="download_file_btn" style="border-radius: 10px;width: 50px;vertical-align: middle;height: 50px;padding: 0;background: #00ff0000;color: var(--blue);">
 				<ion-icon style="width: 40px;height: 40px;" name="arrow-down-circle-outline"></ion-icon>
-				<span style="font-size:20px;">양식</span>
 			</button>
 			<small style="font-size:initial; color:gray">*날짜를 선택하고 양식(엑셀파일)을 받아주세요.</small>
 		</div>
@@ -94,7 +93,6 @@
 			<input type="file" style="width:232px;" id="upload_file" name="uploadFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
 			<button type="button" id="upload_file_btn" style="border-radius: 10px;width: 50px;vertical-align: middle;height: 50px;padding: 0;background: #00ff0000;color: var(--blue);">
 				<ion-icon style="width: 40px;height: 40px;" name="arrow-up-circle-outline"></ion-icon>
-				<span style="font-size:20px;">등록</span>
 			</button>
 		</form>
 		<small style="font-size:initial; color:gray">*날짜를 선택하고 양식을 업로드 해주세요.</small>
@@ -127,6 +125,9 @@
 </div>
 <script>
 $(function(){
+	let login = JSON.parse(sessionStorage.getItem("login"));
+	document.getElementById("calendarManage").append(login.code+" 근무관리");
+	
     var today = new Date();
     var date = new Date();           
 

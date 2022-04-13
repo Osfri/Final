@@ -14,6 +14,8 @@ import mul.camp.a.dto.ParttimeDto;
 @Repository
 public interface WebMainDao {
 
+	//로그인
+	public MemberDto login(MemberDto dto);
 	//직원 리스트 불러오기
 	public List<MemberDto> getMemberList(int start, int end, String code, String hospital);
 	//병동 추가하기

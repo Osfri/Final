@@ -14,7 +14,7 @@ import com.example.android.signinAf.SemiScreenActivity
 import com.example.android.signinAf.SemiWaitingActivity
 import com.example.android.signup.SignupActivity
 
-class   SigninActivity : AppCompatActivity() {
+class SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)

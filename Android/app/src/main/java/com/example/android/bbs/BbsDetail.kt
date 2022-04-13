@@ -38,6 +38,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
     override fun onBackPressed() {
         val i = Intent(this,BbsActivity::class.java)
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(i)
     }
     companion object {
         var BbsDetail: BbsDetail? = null

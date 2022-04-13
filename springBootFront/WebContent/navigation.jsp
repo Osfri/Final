@@ -19,59 +19,6 @@ function logout(){
 }
 </script>
 <div class="navigation">
-<<<<<<< HEAD
-        <ul>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Ho</span>
-                </a>
-            </li>
-            <li>
-                <a href="staffManagement.jsp">
-                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                    <span class="title">직원관리</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                    <span class="title">근무관리</span>
-                </a>
-            </li>
-            <li>
-                <a href="staffCalendarManagement.jsp">
-                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                    <span class="title">스케줄관리</span>
-                </a>
-            </li>
-            <li>
-                <a href="foodTest.jsp"">
-                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                    <span class="title">식단관리</span>
-                </a>
-            </li>
-            <!-- <li>
-                <a href="upload.jsp">
-                    <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                    <span class="title">스케줄 등록</span>
-                </a>
-            </li> -->
-            <li>
-                <a href="addHospital.jsp">
-                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                    <span class="title">병동 관리</span>
-                </a>
-            </li>
-            <li>
-                <a href="shopTest.jsp">
-                    <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
-                    <span class="title">포인트몰관리</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-=======
     <ul>
         <li>
             <a href="#">
@@ -99,21 +46,21 @@ function logout(){
             </a>
         </li>
         <li>
-            <a href="shopTest.html">
+            <a href="food.jsp">
                 <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
                 <span class="title">식단관리</span>
             </a>
         </li>
-        <!-- <li>
-            <a href="fileUpload.jsp">
-                <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
-                <span class="title">스케줄 등록</span>
-            </a>
-        </li> -->
         <li id="addHospital">
             <a href="addHospital.jsp">
                 <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                 <span class="title">병동 관리</span>
+            </a>
+        </li>
+        <li>
+            <a href="shop.jsp">
+                <span class="icon"><ion-icon name="storefront-outline"></ion-icon></span>
+                <span class="title">포인트몰 관리</span>
             </a>
         </li>
         <li style="position:fixed; bottom:0; width:290px;">
@@ -124,5 +71,3 @@ function logout(){
         </li>
     </ul>
 </div>
-
->>>>>>> 7e947865ee4db6e8d521ab67b6822516679ccd8c

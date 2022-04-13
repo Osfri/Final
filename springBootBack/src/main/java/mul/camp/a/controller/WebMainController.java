@@ -19,6 +19,15 @@ public class WebMainController {
 	
 	@Autowired
 	WebMainService service;
+	
+
+	@RequestMapping(value ="/webLogin",method= RequestMethod.POST)
+	public MemberDto webLogin(MemberDto dto) {
+		MemberDto mem = service.login(dto);
+		
+		return mem;
+
+	}
 
 	@RequestMapping(value ="/getMemberList", method = RequestMethod.POST)
 	public List<MemberDto> getMemberList(int page, String code, String hospital) {

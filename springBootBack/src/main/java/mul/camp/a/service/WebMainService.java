@@ -19,6 +19,15 @@ public class WebMainService {
 	@Autowired
 	WebMainDao dao;
 	
+	public MemberDto login(MemberDto dto){
+		MemberDto mem = dao.login(dto);
+		if (mem != null){
+			return mem;
+		}else {
+			return null;
+		}
+	}
+	
 	public List<MemberDto> getMemberList(int start, int end, String code, String hospital){
 		return dao.getMemberList(start, end, code, hospital);
 	}
