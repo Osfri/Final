@@ -90,6 +90,7 @@
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_bbslist.xml" value="0.353125" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/ham_menu_list.xml" value="0.44635416666666666" />
         <entry key="..\:/finalProject/Android/app/src/main/res/menu/main_drawer_navigation.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/activity_bbs.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_bbs_detail.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/activity_bbs_update.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/activity_bbs_write.xml" value="0.2734375" />

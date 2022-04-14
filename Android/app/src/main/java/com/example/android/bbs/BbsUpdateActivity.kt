@@ -100,7 +100,11 @@ class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         var content = ""
         val typename = if (BbsActivity.typename == ""){"공지사항"}else{BbsActivity.typename}
         updateText.text = "작성자: ${MemberDao.user!!.id} 게시판:${typename}"
-        updateImgAddr = data?.image!!
+        if (data?.image != null){
+            updateImgAddr = data?.image!!
+        }
+        val headtext = findViewById<TextView>(R.id.navi_title_center)
+        headtext.text = typename
 
 
         updateTitle.setText("${data?.title}")
