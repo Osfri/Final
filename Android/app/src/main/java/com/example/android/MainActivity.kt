@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import com.example.android.alram.AlarmActivity
 import com.example.android.bbs.BbsActivity
@@ -22,6 +23,11 @@ import com.example.android.signin.MemberDto
 import com.example.android.signin.SigninActivity
 
 class MainActivity : AppCompatActivity() {
+    override fun onBackPressed() {
+        val i = Intent(this,SigninActivity::class.java)
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(i)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,7 +44,10 @@ class MainActivity : AppCompatActivity() {
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
         val btnManager = findViewById<Button>(R.id.btnManager)
 
-
+        btnLogin.visibility=View.GONE
+        if (MemberDao.user?.auth != 0){
+            btnManager.visibility=View.INVISIBLE
+        }
 
 
         // 로그인

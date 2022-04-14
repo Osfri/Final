@@ -1,5 +1,6 @@
 package com.example.android.bbs
 
+import android.annotation.SuppressLint
 import android.app.VoiceInteractor
 import android.content.DialogInterface
 import android.content.Intent
@@ -57,6 +58,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(main)
     }
+    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bbs)
@@ -83,6 +85,8 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
             typename = a.name!!
         }
         // 클릭한 게시판 게시물 불러오기
+        val headmenu = findViewById<TextView>(R.id.navi_title_center)
+        headmenu.text = if (typename == ""){"공지사항"}else{"${a!!.name}"}
         val userList = BbsDao.getInstance().getBbsList(code, type)
 
 
@@ -139,8 +143,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
-        val tv = findViewById<TextView>(R.id.navi_title_center)
-        tv.setText("게시판")
+
 
         // 네비게이션 드로어 생성
         drawerLayout = findViewById(R.id.drawer_layout)

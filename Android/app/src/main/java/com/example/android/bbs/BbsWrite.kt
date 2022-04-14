@@ -89,29 +89,33 @@ class BbsWrite : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
         // bbsWrite 글추가완료 버튼
         btn_bbsWriteFin.setOnClickListener {
+            if (bbsWriteTitle.text.toString() == "" || bbsWriteContent.text.toString() == ""){
+                Toast.makeText(this,"제목 또는 내용을 입력해 주세요",Toast.LENGTH_SHORT).show()
+            }else{
+                val onlyDate:LocalDate = LocalDate.now() // 현재날짜
+                val split = MemberDao.user!!.code!!.split("_")
+                val trueCode:String = split[0] // 병동코드 123_1 -> 병원코드 123 변환
+                //db쿼리문
+                // seq , id , title , content , readCount , wdate , del , type , code , step , group , image
+                BbsDao.getInstance().bbswrite(BbsDto(0 , //seq
+                                                        MemberDao.user!!.id , //id
+                                                        bbsWriteTitle.text.toString() , //title
+                                                        bbsWriteContent.text.toString() , //content
+                                                        0 , //readCount
+                                                        onlyDate.toString() , //wdate
+                                                         0 , //del
+                                                        type , //type
+                                                        trueCode , //code
+                                                        0 , //step
+                                                        0 , //group
+                                                        imageAddr)) //image
 
-            val onlyDate:LocalDate = LocalDate.now() // 현재날짜
-            val split = MemberDao.user!!.code!!.split("_")
-            val trueCode:String = split[0] // 병동코드 123_1 -> 병원코드 123 변환
-            //db쿼리문
-            // seq , id , title , content , readCount , wdate , del , type , code , step , group , image
-            BbsDao.getInstance().bbswrite(BbsDto(0 , //seq
-                                                    MemberDao.user!!.id , //id
-                                                    bbsWriteTitle.text.toString() , //title
-                                                    bbsWriteContent.text.toString() , //content
-                                                    0 , //readCount
-                                                    onlyDate.toString() , //wdate
-                                                     0 , //del
-                                                    type , //type
-                                                    trueCode , //code
-                                                    0 , //step
-                                                    0 , //group
-                                                    imageAddr)) //image
+                Toast.makeText(this, "추가되었습니다", Toast.LENGTH_LONG).show()
 
-            Toast.makeText(this, "추가되었습니다", Toast.LENGTH_LONG).show()
+                val i = Intent(this, BbsActivity::class.java)
+                startActivity(i)
+            }
 
-            val i = Intent(this, BbsActivity::class.java)
-            startActivity(i)
         }
 
 
