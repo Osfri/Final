@@ -244,6 +244,7 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
                         val i  = Intent(this, SigninActivity::class.java)
                         val dto = MemberDto("", "", "","","","",0,0,0,0)
                         MemberDao.user = dto
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(i)
                     })
                     .setNegativeButton("아니요", null)
