@@ -22,7 +22,7 @@ public class HospitalController {
     @RequestMapping(value = "/codeCheck",method = RequestMethod.POST)
     public HospitalDto codeCheck(@RequestBody String code){
         System.out.println("코드 체크"+code);
-        return service.codeCheck(code);
+        return service.codeCheck(code.replace("\"", ""));
     }
     @RequestMapping(value = "/insertHospital",method = RequestMethod.POST)
     public int insertHospital(@RequestBody HospitalDto dto){
