@@ -54,7 +54,7 @@ class SemiManagementActivity : AppCompatActivity() {
                 if (dto == 1){
                     Toast.makeText(this,"생성이 완료 되었습니다.",Toast.LENGTH_SHORT).show()
                     //MemberDao 에 code를 포함한 로그인 정보 넣기
-                    val mem = MemberDto(MemberDao.user?.id,MemberDao.user?.name,MemberDao.user?.email,MemberDao.user?.pw,MemberDao.user?.phonenumber,randomPass,3,MemberDao.user?.alarm,MemberDao.user?.alarmtime,MemberDao.user?.point)
+                    val mem = MemberDto(MemberDao.user?.id,MemberDao.user?.name,MemberDao.user?.email,MemberDao.user?.pw,MemberDao.user?.phonenumber,randomPass,0,MemberDao.user?.alarm,MemberDao.user?.alarmtime,MemberDao.user?.point)
                     MemberDao.getInstance().insertHospitalAf(mem)
                     MemberDao.user = mem
                     println("코드,권한 확인===="+MemberDao.user.toString())

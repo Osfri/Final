@@ -20,7 +20,7 @@ class ChatRetrofit {
                 // Gson(Google Json) = Java객체를 JSON으로 변환
                 val gson = GsonBuilder().setLenient().create()
                 instance = Retrofit.Builder()
-                    .baseUrl("http://39.122.100.63:3000/") // 개인아이피 추가 //172.30.1.36
+                    .baseUrl("http://172.30.1.36:3000/") // 개인아이피 추가 //172.30.1.36
                         .addConverterFactory(GsonConverterFactory.create(gson))
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build()
