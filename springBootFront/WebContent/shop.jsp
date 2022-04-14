@@ -13,7 +13,7 @@
 	<!-- 부트스트랩 페이징 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./jquery.twbsPagination.min.js"></script>
+	<script type="text/javascript" src="./jquery/jquery.twbsPagination.min.js"></script>
 
 	<title>포인트몰 관리</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -76,7 +76,7 @@
 			
 			/* 식단추가하기 버튼 클릭시 */
 			$("#addShopItem").click( function(){
-				location.href = "shopAddItemTest.jsp";
+				location.href = "shopAddItem.jsp";
 			});	
 			
 		}) // $(document).ready(function()
@@ -150,23 +150,26 @@
 					
 					/* 삭제버튼 클릭시 */
 					$(".delShopItem").click( function(){
-						$.ajax({
-							url:"http://localhost:3000/shopItemModify",
-							data:{"seq":$(this).val()},
-							type: "post",
-							success:function(result){
-								if(result>0){
-									getShopItemList(0);
-									getShopListCount();
-									alert("삭제완료!");
-								}else{
-									alert("삭제실패!");
+						if(confirm("삭제하시겠습니까?")){
+							$.ajax({
+								url:"http://localhost:3000/shopItemModify",
+								data:{"seq":$(this).val()},
+								type: "post",
+								success:function(result){
+									if(result>0){
+										getShopItemList(0);
+										getShopListCount();
+										alert("삭제되었습니다.");
+									}else{
+										alert("삭제실패!");
+									}
+								},
+								error:function(){
+									alert('error');
 								}
-							},
-							error:function(){
-								alert('error');
-							}
-						});
+							});
+						}
+						
 					});
 				},
 				error:function(){
