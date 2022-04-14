@@ -20,8 +20,8 @@ public class ShopService {
 		return dao.shopItemAdd(dto);
 	}
 	
-	public List<ShopDto> getShopItemAll(){
-		return dao.getShopItemAll();
+	public List<ShopDto> getShopItemAll(String code){
+		return dao.getShopItemAll(code);
 	}
 	
 	public ShopDto getShopItemInfo(ShopDto dto) {

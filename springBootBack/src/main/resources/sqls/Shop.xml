@@ -7,13 +7,14 @@
 <mapper namespace="mul.camp.a.dao.ShopDao">
 
 	<insert id="shopItemAdd" parameterType="mul.camp.a.dto.ShopDto">
-		INSERT INTO SHOP (SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT)
-		VALUES(SHOP_SEQ.NEXTVAL, #{title}, #{content}, #{price}, #{photo}, #{cnt})
+		INSERT INTO SHOP (SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT, CODE)
+		VALUES(SHOP_SEQ.NEXTVAL, #{title}, #{content}, #{price}, #{photo}, #{cnt}, #{code})
 	</insert>
 	
-	<select id="getShopItemAll" resultType="mul.camp.a.dto.ShopDto">
-		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
+	<select id="getShopItemAll" parameterType="java.lang.String" resultType="mul.camp.a.dto.ShopDto">
+		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT, CODE
 		FROM SHOP
+		WHERE (SUBSTR(CODE,1,1) = SUBSTR(#{code},1,1))
 	</select>
 	
 	<select id="getShopItemInfo" parameterType="mul.camp.a.dto.ShopDto" resultType="mul.camp.a.dto.ShopDto">
@@ -43,15 +44,17 @@
 	</update>
 	
 	<select id="getShopItemList" parameterType="mul.camp.a.dto.ShopParam" resultType="mul.camp.a.dto.ShopDto">
-		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
-		FROM (SELECT ROW_NUMBER()OVER(ORDER BY SEQ ASC) AS RNUM, SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT
-				FROM SHOP)
+		SELECT SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT, CODE
+		FROM (SELECT ROW_NUMBER()OVER(ORDER BY SEQ ASC) AS RNUM, SEQ, TITLE, CONTENT, PRICE, PHOTO, CNT, CODE
+				FROM SHOP
+				WHERE (SUBSTR(CODE,1,1) = SUBSTR(#{code},1,1)))
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="getShopItemListCnt" parameterType="mul.camp.a.dto.ShopParam" resultType="java.lang.Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM SHOP
+		WHERE (SUBSTR(CODE,1,1) = SUBSTR(#{code},1,1))
 	</select>
 	
 	<delete id="shopItemModify" parameterType="java.lang.String">

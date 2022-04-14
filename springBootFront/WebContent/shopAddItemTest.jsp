@@ -14,7 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-	<title>Insert title here</title>
+	<title>상품 추가</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
@@ -163,7 +163,8 @@
 			                        				content: $("#content").val(),
 			                        				price: $("#price").val(),
 			                                		photo: url,  //업로드에 성공한 이미지 url
-			                                		cnt: $("#cnt").val()
+			                                		cnt: $("#cnt").val(),
+			                                		code: JSON.parse(sessionStorage.getItem("login")).code
 		                                			};
 			                        
 			                     // 서버 전달

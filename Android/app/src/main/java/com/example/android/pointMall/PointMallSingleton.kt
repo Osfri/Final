@@ -33,8 +33,8 @@ class ShopDto{
 
 interface ShopService{
     // (2) 모든 상품가져오기
-    @POST("getShopItemAll")
-    fun getShopItemAll(): Call<List<ShopDto>>
+    @POST("getShopItemAllApp")
+    fun getShopItemAll(@Body code:String): Call<List<ShopDto>>
 
     // (3) 선택한 상품정보 가져오기
     @POST("getShopItemInfoApp")
@@ -70,10 +70,10 @@ class PointMallSingleton {
 
     // retrofit은 chat에서 끌어다 사용
     // (2) 모든 상품가져오기
-    fun getShopItemAll(){
+    fun getShopItemAll(code:String){
         val retrofit = ChatRetrofit.getInstance()
         val service = retrofit?.create(ShopService::class.java)
-        val call = service?.getShopItemAll()
+        val call = service?.getShopItemAll(code)
         val response = call?.execute()
         shopItemList = response?.body() as MutableList<ShopDto>
     }

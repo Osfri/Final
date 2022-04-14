@@ -7,10 +7,11 @@ public class ShopDto {
 	private int price;		// 가격
 	private String photo;	// 사진경로
 	private int cnt;		// 재고
+	private String code;		// 병원코드
 	
 	public ShopDto() {}
 
-	public ShopDto(int seq, String title, String content, int price, String photo, int cnt) {
+	public ShopDto(int seq, String title, String content, int price, String photo, int cnt, String code) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -18,6 +19,7 @@ public class ShopDto {
 		this.price = price;
 		this.photo = photo;
 		this.cnt = cnt;
+		this.code = code;
 	}
 
 	public int getSeq() {
@@ -68,10 +70,20 @@ public class ShopDto {
 		this.cnt = cnt;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	@Override
 	public String toString() {
 		return "ShopDto [seq=" + seq + ", title=" + title + ", content=" + content + ", price=" + price + ", photo="
-				+ photo + ", cnt=" + cnt + "]";
-	};	
+				+ photo + ", cnt=" + cnt + ", code=" + code + "]";
+	}
+
+	
 	
 }

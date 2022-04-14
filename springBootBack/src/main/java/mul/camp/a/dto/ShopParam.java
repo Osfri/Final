@@ -3,14 +3,16 @@ package mul.camp.a.dto;
 public class ShopParam {
 	private int pageNumber;	// 현재 페이지 번호
 	private int start, end;	// 페이지의 글 범위 (start~end) (1~10)(11~20)...
+	private String code;	// 병원코드
 	
 	public ShopParam() {}
 
-	public ShopParam(int pageNumber, int start, int end) {
+	public ShopParam(int pageNumber, int start, int end, String code) {
 		super();
 		this.pageNumber = pageNumber;
 		this.start = start;
 		this.end = end;
+		this.code = code;
 	}
 
 	public int getPageNumber() {
@@ -37,10 +39,20 @@ public class ShopParam {
 		this.end = end;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	@Override
 	public String toString() {
-		return "ShopParam [pageNumber=" + pageNumber + ", start=" + start + ", end=" + end + "]";
+		return "ShopParam [pageNumber=" + pageNumber + ", start=" + start + ", end=" + end + ", code=" + code + "]";
 	}
+
+	
 	
 	
 }

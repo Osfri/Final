@@ -15,7 +15,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./jquery.twbsPagination.min.js"></script>
 
-	<title>Insert title here</title>
+	<title>포인트몰 관리</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
@@ -36,8 +36,8 @@
 			    </div>
 			</div>
 			
-			<!-- 포인트몰 상품추가버튼 -->
-			<input type="button" id="addShopItem" value="상품 추가" style="position: absolute; right: 5%;"></input>
+			<!-- 포인트몰 상품추가 버튼 -->
+			<button type="button" id="addShopItem" value="상품 추가" style="position: absolute; right: 5%;">상품 추가</button>
 			
 			<!-- 상품목록 -->
 			<table>
@@ -78,6 +78,7 @@
 			$("#addShopItem").click( function(){
 				location.href = "shopAddItemTest.jsp";
 			});	
+			
 		}) // $(document).ready(function()
 			
 				
@@ -111,9 +112,11 @@
 		
 		// 상품의 총 개수 가져오기
 		function getShopListCount(){
+			let login = JSON.parse(sessionStorage.getItem("login"));
 			$.ajax({
 				url:"http://localhost:3000/getShopItemListCnt",
 				type: "post",
+				data:{"code": login.code},
 				success:function(count){
 					loadPage(count, 3);
 				},
@@ -125,10 +128,11 @@
 		
 		// 상품목록 얻어오기 (페이지 기능 o)
 		function getShopItemList(page){
+			let login = JSON.parse(sessionStorage.getItem("login"));
 			$("#tbody").html("");
 			$.ajax({
 				url:"http://localhost:3000/getShopItemList",
-				data:{"pageNumber": page},
+				data:{"pageNumber": page, "code": login.code},
 				type: "post",
 				success:function(list){
 					$.each(list, function(index, item){

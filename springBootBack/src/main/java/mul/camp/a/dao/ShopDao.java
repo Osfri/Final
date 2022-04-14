@@ -11,7 +11,7 @@ import mul.camp.a.dto.ShopParam;
 @Repository
 public interface ShopDao {
 	public int shopItemAdd(ShopDto dto);
-	public List<ShopDto> getShopItemAll();
+	public List<ShopDto> getShopItemAll(String code);
 	public ShopDto getShopItemInfo(ShopDto dto);
 	public int buyShopItemPoint(HashMap<String, Object> map);
 	public int orderShopItem(HashMap<String, Object> map);

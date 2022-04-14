@@ -37,7 +37,7 @@
 			</div>
 			
 			<!-- 식단추가버튼 -->
-			<input type="button" id="addFoodItem" value="식단 추가" style="position: absolute; right: 5%;"></input>
+			<button type="button" id="addFoodItem" value="식단 추가" style="position: absolute; right: 5%;">식단 추가</button>
 			
 			<!-- 식단목록 -->
 			<table>

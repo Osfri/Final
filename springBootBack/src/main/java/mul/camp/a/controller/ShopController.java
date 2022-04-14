@@ -28,10 +28,11 @@ public class ShopController {
 	}
 	
 	// (2) 모든 상품가져오기
-	@RequestMapping(value = "/getShopItemAll", method = {RequestMethod.GET, RequestMethod.POST})
-	public List<ShopDto> getShopItemAll() {
-		System.out.println("ShopController getShopItemAll() : " + new Date());
-		return service.getShopItemAll();
+	@RequestMapping(value = "/getShopItemAllApp", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<ShopDto> getShopItemAllApp(@RequestBody String code) {
+		System.out.println("ShopController getShopItemAllApp() : " + new Date());
+		String codeModify = code.replaceAll("\"", "");
+		return service.getShopItemAll(codeModify);
 	}
 	
 	// (3) 선택한 상품정보 가져오기

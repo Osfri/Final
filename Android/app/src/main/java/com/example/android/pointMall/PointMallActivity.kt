@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
@@ -85,7 +86,7 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         userPoint.text = "나의 포인트: ${MemberDao.user!!.point}"
 
         // (수정,추가_백엔드) 상품목록 생성
-        PointMallSingleton.getInstance().getShopItemAll()
+        PointMallSingleton.getInstance().getShopItemAll(MemberDao.user!!.code!!)
         val itemList:MutableList<ShopDto> = PointMallSingleton.getInstance().shopItemList
 
         // (수정,추가_백엔드) 리사이클러뷰 생성

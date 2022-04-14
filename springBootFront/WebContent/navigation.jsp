@@ -46,9 +46,15 @@ function logout(){
             </a>
         </li>
         <li>
-            <a href="shopTest.html">
+            <a href="foodTest.jsp">
                 <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
                 <span class="title">식단관리</span>
+            </a>
+        </li>
+        <li>
+            <a href="shopTest.jsp">
+                <span class="icon"><ion-icon name="storefront-outline"></ion-icon></span>
+                <span class="title"> 포인트몰 관리</span>
             </a>
         </li>
         <!-- <li>

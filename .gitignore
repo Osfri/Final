@@ -16,3 +16,8 @@ Android/app/src/main/java/com/example/android/bbs/RetrofitClient.kt
 Android/app/src/main/java/com/example/android/chat/ChatRetrofit.kt
 Android/app/src/main/java/com/example/android/bbs/RetrofitClient.kt
 Android/app/src/main/java/com/example/android/chat/ChatRetrofit.kt
+Android/.idea/deploymentTargetDropDown.xml
+Android/app/src/main/java/com/example/android/bbs/RetrofitClient.kt
+Android/app/src/main/java/com/example/android/chat/ChatRetrofit.kt
+springBootBack/src/main/resources/application.properties
+springBootFront/WebContent/navigation.jsp
