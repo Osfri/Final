@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/signin_email" android:hint="이메일을 입력해주세요" android:layout_marginTop="256dp"
+            android:id="@+id/signin_email" android:hint="아이디를 입력해주세요" android:layout_marginTop="256dp"
             android:layout_marginStart="40dp" android:layout_marginEnd="40dp" android:textSize="12sp"/>
     <Button
             android:text="로그인"
@@ -54,23 +54,6 @@
             android:textSize="16sp" android:textColor="#878787" app:layout_constraintEnd_toEndOf="@+id/btn_btin"
             app:layout_constraintTop_toBottomOf="@+id/btn_btin"
             android:layout_marginTop="12dp" android:layout_marginEnd="8dp"/>
-    <com.google.android.gms.common.SignInButton
-            android:id="@+id/googlesignin"
-            android:layout_width="383dp"
-            android:layout_height="67dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_btin"
-            android:layout_marginTop="96dp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageButton
-            android:id="@+id/kakao_login_button"
-            android:layout_width="380dp"
-            android:layout_height="60dp"
-            android:src="@drawable/kakao_login_large_narrow"
-            android:background="@android:color/transparent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/googlesignin"
-            app:layout_constraintEnd_toEndOf="@+id/googlesignin" android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/googlesignin" app:layout_constraintHorizontal_bias="0.0"/>
     <EditText
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -82,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/signin_email" android:textSize="12sp"
             app:layout_constraintHorizontal_bias="0.0"/>
     <CheckBox
-            android:text="자동로그인"
+            android:text="ID/PW 저장"
             android:layout_width="104dp"
             android:layout_height="48dp"
             app:layout_constraintStart_toStartOf="@+id/signin_pw"

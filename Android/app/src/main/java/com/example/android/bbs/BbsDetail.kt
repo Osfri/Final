@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -41,7 +42,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
         startActivity(i)
     }
     companion object {
-        var BbsDetail: BbsDetail? = null
+        /*var BbsDetail: BbsDetail? = null
 
         fun getInstance(): BbsDetail {
             if (BbsDetail == null) {
@@ -49,7 +50,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
             }
             return BbsDetail!!
         }
-
+*/
         var Detaildata:BbsDto? = null
         var test:RecyclerView? = null
     }
@@ -103,9 +104,9 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
 
         //삭제 - 본인,관리자 수정 - 본인
         if (MemberDao.user?.id.toString() != Detaildata?.id.toString()){
-            btnDetailUpdate.isEnabled = false
-            if (MemberDao.user?.id.toString() != Detaildata?.id.toString() || MemberDao.user?.auth != 0){
-                btnDetailDel.isEnabled = false
+            btnDetailUpdate.visibility= View.GONE
+            if (MemberDao.user?.id.toString() != Detaildata?.id.toString() && MemberDao.user?.auth != 0){
+                btnDetailDel.visibility=View.GONE
             }
         }
 
@@ -120,7 +121,7 @@ class BbsDetail : AppCompatActivity(),NavigationView.OnNavigationItemSelectedLis
                 Detaildata!!.code,1,
                 Detaildata!!.gr,"")
             BbsDao.getInstance().commentwrite(dto)
-            commentlist()
+            startActivity(Intent(this, BbsDetail::class.java))
         }
 
         btnDetailDel.setOnClickListener {

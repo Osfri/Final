@@ -92,6 +92,8 @@
         <entry key="app/src/main/res/layout/activity_bbs_detail.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/activity_bbs_update.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/activity_bbs_write.xml" value="0.2734375" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.22291666666666668" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/view_item_layout_comment.xml" value="0.26927083333333335" />
         <entry key="app/src/main/res/layout/view_item_layout_manager_bbs.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/view_item_layout_manager_staff.xml" value="0.22291666666666668" />

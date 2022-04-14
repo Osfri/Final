@@ -36,7 +36,7 @@
         SELECT *
         FROM BOARD
         WHERE GR = #{gr} AND STEP = 1
-        ORDER BY SEQ
+        ORDER BY SEQ DESC
     </select>
     <update id="deleteBbs" parameterType="integer">
         UPDATE BOARD

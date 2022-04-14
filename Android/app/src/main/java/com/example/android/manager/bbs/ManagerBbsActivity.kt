@@ -1,5 +1,7 @@
 package com.example.android.manager.bbs
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -74,24 +76,32 @@ class ManagerBbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         var result = true
         var type = 0
         manager_btn_check.setOnClickListener {
-            while (result){
-            var random:Int = (1..999999).random()
-            val temp:BoardtypeDto? = BbsDao.getInstance().bbsRandomCheck(random)
-                if (temp == null){
-                    type = random
-                    println("===randon"+random)
-                    println("===randon"+type)
-                    result = false
+            var index = 0
+            for (i in userList?.indices!!){
+                if (userList!![i].name.toString() == manager_et_bbs.toString()){
+                    index = 1
+                    AlertDialog.Builder(this).setTitle("오류").setMessage("이미 존재하는 게시판 이름 입니다.")
+                        .setPositiveButton("확인",object :DialogInterface.OnClickListener{
+                            override fun onClick(p0: DialogInterface?, p1: Int) {}}).create().show()
                 }
             }
-            var code = MemberDao.user!!.code
-            if (code!!.contains("_")){
-                code = code.split("_")[0]
+            if (index == 0){
+                while (result){
+                    var random:Int = (1..999999).random()
+                    val temp:BoardtypeDto? = BbsDao.getInstance().bbsRandomCheck(random)
+                        if (temp == null){
+                            type = random
+                            result = false
+                        }
+                }
+                var code = MemberDao.user!!.code
+                if (code!!.contains("_")){
+                    code = code.split("_")[0]
+                }
+                val typeDto = BoardtypeDto(type,manager_et_bbs.text.toString(),code,boardAuth)
+                BbsDao.getInstance().bbsAdd(typeDto)
+                startActivity(Intent(this,ManagerBbsActivity::class.java))
             }
-            println("===randon"+type)
-            val typeDto = BoardtypeDto(type,manager_et_bbs.text.toString(),code,boardAuth)
-            BbsDao.getInstance().bbsAdd(typeDto)
-            println("===========================fdsafdsafdsa"+typeDto.toString())
         }
 
 

@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -51,8 +52,6 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val main = Intent(this,MainActivity::class.java)
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(main)
-        type = 0
-        typename = ""
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,12 +92,12 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         // 게시물 리사이클러뷰
         try {
-        var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
-        val mAdapter = CustomAdapterBbsList(this, userList!!)
-        bbslistRecyclerView.adapter = mAdapter
-        val layout = LinearLayoutManager(this)
-        bbslistRecyclerView.layoutManager = layout
-        bbslistRecyclerView.setHasFixedSize(true)
+            var bbslistRecyclerView = findViewById<RecyclerView>(R.id.bbsRecyclerView)  // bbsRecyclerView 변수
+            val mAdapter = CustomAdapterBbsList(this, userList!!)
+            bbslistRecyclerView.adapter = mAdapter
+            val layout = LinearLayoutManager(this)
+            bbslistRecyclerView.layoutManager = layout
+            bbslistRecyclerView.setHasFixedSize(true)
         }catch (e:NullPointerException){
             Toast.makeText(this,"작성된 게시글이 없습니다.",Toast.LENGTH_SHORT).show()
         }
@@ -118,7 +117,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
         // 글쓰기 권한 확인
         if (bbswriteAuth == 0){
             if (MemberDao.user!!.auth != 0){
-                btn_bbsListWrite.isEnabled = false
+                btn_bbsListWrite.visibility=View.INVISIBLE
             }
         }
         btn_bbsListWrite.setOnClickListener {

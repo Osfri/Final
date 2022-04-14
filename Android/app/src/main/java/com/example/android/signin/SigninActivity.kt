@@ -26,21 +26,11 @@ class SigninActivity : AppCompatActivity() {
         val checkbox = findViewById<CheckBox>(R.id.Signin_autoin)
         val signup = findViewById<TextView>(R.id.signin_move)
 
-        /*val boo:Boolean = PreferenceManager.getBoolean(mContext,"check") //로그인 정보 기억하기 체크 유무 확인
+        val boo:Boolean = PreferenceManager.getBoolean(mContext,"check") //로그인 정보 기억하기 체크 유무 확인
         if(boo) { // 체크가 되어있다면 아래 코드를 수행 //저장된 아이디와 암호를 가져와 셋팅한다.
             id.setText(PreferenceManager.getString(mContext, "id"));
             pw.setText(PreferenceManager.getString(mContext, "pw"));
-            checkbox.isChecked = true; //체크박스는 여전히 체크 표시 하도록 셋팅
-            val dto = MemberDto(id.text.toString(), null, null, pw.text.toString(), null, null, 0, 0, 0, 0)
-            val mem = MemberDao.getInstance().login(dto)
-            MemberDao.user = mem
-            when (MemberDao.user!!.auth) {
-                null -> {} // 생성,추가 페이지
-                2 -> {} // 승인대기 페이지
-                0, 1 -> {} // main페이지
-            }
-            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-        }*/
+        }
 
         signup.setOnClickListener {
             val i = Intent(this, SignupActivity::class.java)

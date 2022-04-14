@@ -1,6 +1,8 @@
 package com.example.android.manager.bbs
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.R
 import com.example.android.bbs.BbsDao
+import com.example.android.bbs.BbsDetail
 import com.example.android.manager.BoardtypeDto
 
 class CustomAdapterManagerBbs(val context: Context, val dataList:ArrayList<BoardtypeDto>):
@@ -30,8 +33,19 @@ class CustomAdapterManagerBbs(val context: Context, val dataList:ArrayList<Board
                 else -> ""
             }
             managerRecyclerViewBbsDelete.setOnClickListener {
-                BbsDao.getInstance().deleteBoardTypeDto(dataVo)
-                context.startActivity(Intent(context,ManagerBbsActivity::class.java))
+                AlertDialog.Builder(context).setTitle("댓글 삭제").setMessage("댓글을 삭제하시겠습니까?")
+                    .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                        override fun onClick(p0: DialogInterface?, p1: Int) {
+
+                        }
+                    })
+                    .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                            BbsDao.getInstance().deleteBoardTypeDto(dataVo)
+                            context.startActivity(Intent(context,ManagerBbsActivity::class.java))
+                        }
+                    })
+                    .create().show()
             }
 
 

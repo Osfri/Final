@@ -1,6 +1,8 @@
 package com.example.android.bbs
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
@@ -40,11 +42,11 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsD
             var text = ""
             bbsCommentRecyclerViewUpdateText.visibility=View.GONE
             bbsCommentRecyclerViewUpdateDone.visibility=View.GONE
-            if (dataVo.id.toString() != MemberDao.user?.id.toString()){
-                bbsCommentRecyclerViewWriter.isInvisible
-                bbsCommentRecyclerViewUpdate.isInvisible
-                if (dataVo.id.toString() != MemberDao.user?.id.toString() || MemberDao.user?.auth != 0){
-                    bbsCommentRecyclerViewDelete.isInvisible
+            if (dataVo.id.toString() != MemberDao.user?.id.toString() || dataVo.del != 0){
+                bbsCommentRecyclerViewWriter.visibility=View.INVISIBLE
+                bbsCommentRecyclerViewUpdate.visibility=View.INVISIBLE
+                if (dataVo.id.toString() != MemberDao.user?.id.toString() && MemberDao.user?.auth != 0 || dataVo.del != 0){
+                    bbsCommentRecyclerViewDelete.visibility=View.INVISIBLE
                 }
             }
             if (dataVo.del == 0) {
@@ -59,9 +61,19 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsD
                 bbsCommentRecycleViewContent.text = "삭제됨"
             }
             bbsCommentRecyclerViewDelete.setOnClickListener {
-                BbsDao.getInstance().deleteBbs(dataVo.seq)
-                val data = BbsDetail.Detaildata
-                BbsDetail.getInstance().commentlist()
+                AlertDialog.Builder(context).setTitle("댓글 삭제").setMessage("댓글을 삭제하시겠습니까?")
+                    .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                        override fun onClick(p0: DialogInterface?, p1: Int) {
+
+                        }
+                    })
+                    .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                        override fun onClick(p0: DialogInterface?, p1: Int) {
+                            BbsDao.getInstance().deleteBbs(dataVo.seq)
+                            context.startActivity(Intent(context,BbsDetail::class.java))
+                        }
+                    })
+                    .create().show()
             }
             bbsCommentRecyclerViewUpdate.setOnClickListener {
                 bbsCommentRecyclerViewUpdateText.visibility=View.VISIBLE
@@ -73,9 +85,7 @@ class CustomAdapterCommentList(val context: Context, val dataList:ArrayList<BbsD
                 BbsDao.getInstance().updatecomment(dto)
                 bbsCommentRecyclerViewUpdateText.visibility=View.GONE
                 bbsCommentRecyclerViewUpdateDone.visibility=View.GONE
-                val data = BbsDetail.Detaildata
                 val i = Intent(context,BbsDetail::class.java)
-                i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                 context.startActivity(i)
             }
             bbsCommentRecyclerViewUpdateText.addTextChangedListener(object :TextWatcher{

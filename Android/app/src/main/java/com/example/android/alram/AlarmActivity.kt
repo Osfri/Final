@@ -78,7 +78,7 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         //캘린더 가져오기
         val calList: List<CalendarDto>? = MemberDao.getInstance().calList(MemberDao.user!!.id.toString())
 
-        if (parttime != null && calList != null){
+        if (parttime?.size != 0 && calList?.size != 0){
             //리사이클러뷰 설정
             var alarmlistRecyclerView = findViewById<RecyclerView>(R.id.AlarmRecyclerView)
             val mAdapter = CustomAdapterAlarm(this,calList!!)
