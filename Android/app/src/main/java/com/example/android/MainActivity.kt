@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val btnLogin = findViewById<Button>(R.id.btnLogin)                      // 로그인
+/*
+        val btnLogin = findViewById<Button>(R.id.btnLogin)                      // 로그인*/
 //        val btnFirstScreen = findViewById<Button>(R.id.btnFirstScreen)          // 관리자,개인 구분창
         val btnBbs = findViewById<Button>(R.id.btnBbs)                          // 공지사항,건의사항
         val btnCalender = findViewById<Button>(R.id.btnCalender)                // 일정표
@@ -39,13 +39,13 @@ class MainActivity : AppCompatActivity() {
         val btnManager = findViewById<Button>(R.id.btnManager)
 
 
-
+/*
 
         // 로그인
         btnLogin.setOnClickListener {
             val i = Intent(this, SigninActivity::class.java)
             startActivity(i)
-        }
+        }*/
         // 관리자,개인 구분창
 /*        btnFirstScreen.setOnClickListener {
             val i = Intent(this,firstscreenActivity::class.java)

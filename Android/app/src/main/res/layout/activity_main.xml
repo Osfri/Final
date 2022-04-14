@@ -200,40 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                tools:context=".LinearActivity">
-<!--
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnFirstScreen"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:text="login after"
-                    android:textSize="12dp"
-                    android:background="@drawable/button_main_menu"
-                    android:textColor="#FFFFFF"/>
--->
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogin"
-                    android:text="로그인"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="14dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="7dp"
-                    android:drawableTop="@drawable/ic_menu_login"
-                    android:fontFamily="@font/nanumbarungothic"
-                    android:background="@drawable/button_main_menu"/>
-
-
-        </LinearLayout>
+                tools:context=".LinearActivity"/>
 
     </LinearLayout>
 </LinearLayout>

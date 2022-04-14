@@ -177,6 +177,7 @@ class MessageActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hambar) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
         val tv = findViewById<TextView>(R.id.navi_title_center)
 
