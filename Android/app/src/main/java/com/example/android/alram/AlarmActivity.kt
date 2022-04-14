@@ -159,13 +159,18 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // 페이지별 제목 표시 (가운데 정렬) 네비게이션 앱바
         val tv = findViewById<TextView>(R.id.navi_title_center)
         tv.setText("알람")
+        //val loginId = findViewById<TextView>(R.id.hamLoginId)
+        //loginId.text = "test"
     }
-
-
 
 
     // drawerlayout 네비바
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val loginId = findViewById<TextView>(R.id.hamLoginId)
+        val mid = MemberDao.user!!.name
+        loginId.text =mid.toString()+" 님"
+        val loginCode = findViewById<TextView>(R.id.hamLoginCode)
+        loginCode.text = "환영합니다"
 
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
@@ -178,12 +183,12 @@ class AlarmActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
     // drawerlayout 네비바
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         when(item.itemId){
             R.id.menu_bbs-> {                                                  // 공지사항
                 val i = Intent(this, BbsActivity::class.java)
                 Log.d("로그","공지")
                 startActivity(i)
-
             }
             R.id.menu_alram-> {
                 val i = Intent(this, AlarmActivity::class.java)
