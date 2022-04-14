@@ -197,6 +197,8 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+        val v = findViewById<TextView>(R.id.hamLoginId)
+        v.text = "11"
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
         val btnManager = findViewById<Button>(R.id.btnManager)
 
-        btnLogin.visibility=View.GONE
+/*        btnLogin.visibility=View.GONE
         if (MemberDao.user?.auth != 0){
             btnManager.visibility=View.INVISIBLE
         }
