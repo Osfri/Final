@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -42,22 +43,7 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager_menu)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         val manage_Btn_Bbs = findViewById<ImageButton>(R.id.manage_Btn_Bbs)
         val manage_Btn_Staff = findViewById<ImageButton>(R.id.manage_Btn_Staff)
         // 게시물 관리
@@ -66,7 +52,7 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             startActivity(i)
         }
 
-        // 게시물 관리
+        //직원 관리
         manage_Btn_Staff.setOnClickListener {
             val i = Intent(this, ManagerStaffActivity::class.java)
             startActivity(i)

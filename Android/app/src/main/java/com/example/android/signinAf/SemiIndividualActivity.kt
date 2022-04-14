@@ -21,6 +21,7 @@ class SemiIndividualActivity : AppCompatActivity() {
         val semiInviBtnHospitalCode = findViewById<Button>(R.id.semiInvi_Btn_HospitalCode)      // 개인 코드등록 버튼
         val editText = findViewById<EditText>(R.id.semiInvi_Edit_HospitalCode)
         val text = findViewById<TextView>(R.id.semiInvi_Text_HospitalCode)
+        text.text = ""
 
         semiInviBtnHospitalCode.isEnabled = false
 
@@ -32,7 +33,7 @@ class SemiIndividualActivity : AppCompatActivity() {
                 if (dto == null){
                     text.text = "코드를 알맞게 입력해 주세요"
                 }else{
-                    text.text = dto.name
+                    text.text = dto.code
                     semiInviBtnHospitalCode.isEnabled = true
                 }
             }
@@ -41,7 +42,7 @@ class SemiIndividualActivity : AppCompatActivity() {
         })
         // 코드등록 후 승인대기 페이지로 이동
         semiInviBtnHospitalCode.setOnClickListener {
-            val dto = MemberDto(MemberDao.user?.id,MemberDao.user?.name,MemberDao.user?.email,MemberDao.user?.pw,MemberDao.user?.phonenumber,text.text.toString(),2,MemberDao.user?.alarm,MemberDao.user?.alarmtime,MemberDao.user?.point)
+            val dto = MemberDto(MemberDao.user?.id.toString(),MemberDao.user?.name,MemberDao.user?.email,MemberDao.user?.pw,MemberDao.user?.phonenumber,text.text.toString(),2,MemberDao.user?.alarm,MemberDao.user?.alarmtime,MemberDao.user?.point)
             MemberDao.getInstance().insertHospitalAf(dto)
             startActivity(Intent(this,SemiWaitingActivity::class.java))
         }
