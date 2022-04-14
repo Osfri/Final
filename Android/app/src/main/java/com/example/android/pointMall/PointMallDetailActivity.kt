@@ -192,7 +192,11 @@ class PointMallDetailActivity : AppCompatActivity(), NavigationView.OnNavigation
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        val loginId = findViewById<TextView>(R.id.hamLoginId)
+        val mid = MemberDao.user!!.name
+        loginId.text =mid.toString()+" 님"
+        val loginCode = findViewById<TextView>(R.id.hamLoginCode)
+        loginCode.text = "환영합니다"
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{
