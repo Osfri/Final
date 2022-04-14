@@ -1,6 +1,7 @@
 package com.example.android.bbs
 
 import android.app.VoiceInteractor
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -31,6 +33,8 @@ import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 
 class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -203,6 +207,7 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         return super.onOptionsItemSelected(item)
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_bbs-> {                                                  // 공지사항
@@ -242,7 +247,20 @@ class BbsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
-
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
+            }
         }
         return false
     }

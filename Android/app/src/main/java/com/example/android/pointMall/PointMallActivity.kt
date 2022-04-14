@@ -1,5 +1,6 @@
 package com.example.android.pointMall
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +32,7 @@ import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.signin.MemberDao
 import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 
 class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
@@ -154,6 +157,20 @@ class PointMallActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.menu_food-> {
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
         }
         return false

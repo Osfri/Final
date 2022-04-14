@@ -41,9 +41,13 @@ import com.google.android.material.navigation.NavigationView
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import android.Manifest
+import android.content.DialogInterface
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import com.example.android.MainActivity
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import java.time.LocalDate
 
 class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -213,6 +217,20 @@ class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.menu_manager->  {
                 val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
 
         }

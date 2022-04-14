@@ -29,6 +29,8 @@ import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_calendar.*
 import java.text.SimpleDateFormat
@@ -179,6 +181,20 @@ class CalendarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             R.id.menu_food-> {
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
 
         }

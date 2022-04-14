@@ -1,6 +1,7 @@
 package com.example.android.lunch
 
 import android.content.ContentValues
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -15,6 +16,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -28,6 +30,8 @@ import com.example.android.chat.ChatActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -317,6 +321,20 @@ class FoodWriteActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.menu_food-> {
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
         }
         return false
