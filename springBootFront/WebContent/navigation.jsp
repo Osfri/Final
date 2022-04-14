@@ -34,6 +34,7 @@ function logout(){
         </li>
         <li id="CalendarManagement">
             <a href="staffCalendarManagement.jsp">
+            <!-- <a href="test.jsp"> -->
                 <span class="icon"><ion-icon name="reader-outline"></ion-icon></span>
                 <span class="title">근무관리</span>
             </a>
@@ -45,21 +46,27 @@ function logout(){
             </a>
         </li>
         <li>
-            <a href="food.jsp">
+            <a href="foodTest.jsp">
                 <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
                 <span class="title">식단관리</span>
             </a>
         </li>
+        <li>
+            <a href="shopTest.jsp">
+                <span class="icon"><ion-icon name="storefront-outline"></ion-icon></span>
+                <span class="title"> 포인트몰 관리</span>
+            </a>
+        </li>
+        <!-- <li>
+            <a href="fileUpload.jsp">
+                <span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
+                <span class="title">스케줄 등록</span>
+            </a>
+        </li> -->
         <li id="addHospital">
             <a href="addHospital.jsp">
                 <span class="icon"><ion-icon name="desktop-outline"></ion-icon></span>
                 <span class="title">병동 관리</span>
-            </a>
-        </li>
-        <li>
-            <a href="shop.jsp">
-                <span class="icon"><ion-icon name="storefront-outline"></ion-icon></span>
-                <span class="title">포인트몰 관리</span>
             </a>
         </li>
         <li style="position:fixed; bottom:0; width:290px;">
@@ -70,3 +77,4 @@ function logout(){
         </li>
     </ul>
 </div>
+

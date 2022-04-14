@@ -9,7 +9,6 @@
 	<select id="getAllUserInfo" resultType="mul.camp.a.dto.ChatDto">
 		SELECT ID, NAME, EMAIL, PW, PHONENUMBER, CODE, AUTH, ALARM, ALARMTIME, POINT
 		FROM MEMBER
-		WHERE auth = 1
 	</select>
 	
 	<select id="getLoginUserInfo" parameterType="java.lang.String" resultType="mul.camp.a.dto.ChatDto">
@@ -25,7 +24,6 @@
 						FROM MEMBER
 						WHERE id=#{id}),1,1)
 	        AND NOT id = #{id}
-	        AND auth = 1
 	</select>
 	
 	<select id="getLoginUserHospitalInfo" parameterType="mul.camp.a.dto.ChatDto" resultType="mul.camp.a.dto.ChatDto$HospitalDto">

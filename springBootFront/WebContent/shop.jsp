@@ -13,7 +13,7 @@
 	<!-- 부트스트랩 페이징 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./jquery/jquery.twbsPagination.min.js"></script>
+	<script type="text/javascript" src="./jquery.twbsPagination.min.js"></script>
 
 	<title>포인트몰 관리</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -36,7 +36,7 @@
 			    </div>
 			</div>
 			
-			<!-- 포인트몰 상품추가버튼 -->
+			<!-- 포인트몰 상품추가 버튼 -->
 			<button type="button" id="addShopItem" value="상품 추가" style="position: absolute; right: 5%;">상품 추가</button>
 			
 			<!-- 상품목록 -->
@@ -76,8 +76,9 @@
 			
 			/* 식단추가하기 버튼 클릭시 */
 			$("#addShopItem").click( function(){
-				location.href = "shopAddItem.jsp";
+				location.href = "shopAddItemTest.jsp";
 			});	
+			
 		}) // $(document).ready(function()
 			
 				
@@ -111,9 +112,11 @@
 		
 		// 상품의 총 개수 가져오기
 		function getShopListCount(){
+			let login = JSON.parse(sessionStorage.getItem("login"));
 			$.ajax({
 				url:"http://localhost:3000/getShopItemListCnt",
 				type: "post",
+				data:{"code": login.code},
 				success:function(count){
 					loadPage(count, 3);
 				},
@@ -125,10 +128,11 @@
 		
 		// 상품목록 얻어오기 (페이지 기능 o)
 		function getShopItemList(page){
+			let login = JSON.parse(sessionStorage.getItem("login"));
 			$("#tbody").html("");
 			$.ajax({
 				url:"http://localhost:3000/getShopItemList",
-				data:{"pageNumber": page},
+				data:{"pageNumber": page, "code": login.code},
 				type: "post",
 				success:function(list){
 					$.each(list, function(index, item){
@@ -146,25 +150,23 @@
 					
 					/* 삭제버튼 클릭시 */
 					$(".delShopItem").click( function(){
-						if(confirm("삭제하시겠습니까?")){
-							$.ajax({
-								url:"http://localhost:3000/shopItemModify",
-								data:{"seq":$(this).val()},
-								type: "post",
-								success:function(result){
-									if(result>0){
-										getShopItemList(0);
-										getShopListCount();
-										alert("삭제되었습니다.");
-									}else{
-										alert("삭제실패!");
-									}
-								},
-								error:function(){
-									alert('error');
+						$.ajax({
+							url:"http://localhost:3000/shopItemModify",
+							data:{"seq":$(this).val()},
+							type: "post",
+							success:function(result){
+								if(result>0){
+									getShopItemList(0);
+									getShopListCount();
+									alert("삭제완료!");
+								}else{
+									alert("삭제실패!");
 								}
-							});
-						}
+							},
+							error:function(){
+								alert('error');
+							}
+						});
 					});
 				},
 				error:function(){

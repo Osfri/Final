@@ -163,7 +163,8 @@
 			                        				content: $("#content").val(),
 			                        				price: $("#price").val(),
 			                                		photo: url,  //업로드에 성공한 이미지 url
-			                                		cnt: $("#cnt").val()
+			                                		cnt: $("#cnt").val(),
+			                                		code: JSON.parse(sessionStorage.getItem("login")).code
 		                                			};
 			                        
 			                     // 서버 전달
