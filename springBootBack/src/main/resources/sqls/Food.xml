@@ -22,12 +22,12 @@
 	<select id="getSameCodeFoodList" parameterType="mul.camp.a.dto.FoodParam" resultType="mul.camp.a.dto.FoodDto">
 		SELECT CODE, FDATE, MENU, PHOTO
 		FROM
-			(SELECT ROW_NUMBER()OVER(ORDER BY FDATE ASC) AS RNUM, CODE, FDATE, MENU, PHOTO
+			(SELECT ROW_NUMBER()OVER(ORDER BY FDATE DESC) AS RNUM, CODE, FDATE, MENU, PHOTO
 				FROM FOOD
 				WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
 	                   FROM MEMBER
 	                   WHERE id = #{id}),1,1)
-	    		ORDER BY FDATE ASC)
+	    		ORDER BY FDATE DESC)
 	    WHERE RNUM BETWEEN #{start} AND #{end}		
 	</select>
 	
@@ -37,7 +37,7 @@
 		WHERE SUBSTR(code,1,1) = SUBSTR((SELECT CODE
 	                   FROM MEMBER
 	                   WHERE id = #{id}),1,1)
-	    ORDER BY FDATE ASC
+	    ORDER BY FDATE DESC
 	</select>
 	
 	<delete id="foodItemModify" parameterType="java.lang.String">

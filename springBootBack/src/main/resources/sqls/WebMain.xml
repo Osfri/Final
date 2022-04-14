@@ -5,6 +5,11 @@
   
 <mapper namespace="mul.camp.a.dao.WebMainDao">
 
+	<select id="login" parameterType="mul.camp.a.dto.MemberDto" resultType="mul.camp.a.dto.MemberDto">
+	    SELECT *
+	    FROM MEMBER
+	    WHERE ID = #{ id } AND PW = #{ pw }
+	</select>
 	<select id="getMemberList" parameterType="java.lang.String" resultType="mul.camp.a.dto.MemberDto">
 		SELECT * 
 		FROM 
@@ -75,7 +80,7 @@
 	</update>
 	<update id="toNo" parameterType="java.lang.String">
 		UPDATE MEMBER
-		SET AUTH=5, CODE=''
+		SET AUTH=5, CODE='', point=0
 		WHERE ID=#{id}
 	</update>
 	<update id="changeHospital" parameterType="java.lang.String">

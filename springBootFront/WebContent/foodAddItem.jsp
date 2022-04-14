@@ -14,7 +14,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-	<title>Insert title here</title>
+	<title>식단 추가</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
@@ -156,14 +156,14 @@
 		    							data: toSave,
 		    							success:function(result){
 		    								if(result){
-		    									alert("저장 완료!");
+		    									alert("저장되었습니다.");
 		    									// 초기화
 		    									$("#fdate").val("");
 		    									$("#menu").val("");
 		    									$("#photo").val("");
 		    									$("#imgPreView").attr("src", "");
 		    									// 페이지 이동
-		    									location.href = "foodTest.jsp";
+		    									location.href = "food.jsp";
 		    								
 		    								}else{
 		    									alert("저장 실패!");

@@ -74,8 +74,13 @@ function loginEnter(){
 					$("#pwd").val("");
 				}else{
 					sessionStorage.setItem("login", JSON.stringify(json));
-					alert(json.name + "님 환영합니다");	
-					location.href = "staffScheduleManagement.jsp";
+					if(json.auth != 0 && json.auth != 3){
+						alert("관리자만 로그인할 수 있습니다.");
+						location.reload();
+					}else{
+						alert(json.name + "님 환영합니다");	
+						location.href = "staffScheduleManagement.jsp";
+					}
 				}			
 			},
 			error:function(){
