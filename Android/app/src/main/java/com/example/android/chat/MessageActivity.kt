@@ -1,6 +1,7 @@
 package com.example.android.chat
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.get
@@ -30,6 +32,9 @@ import com.example.android.manager.ManagerMenuActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
+import com.example.android.signin.MemberDao
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 
 // 대화상대
@@ -423,7 +428,11 @@ class MessageActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        val loginId = findViewById<TextView>(R.id.hamLoginId)
+        val mid = MemberDao.user!!.name
+        loginId.text =mid.toString()+" 님"
+        val loginCode = findViewById<TextView>(R.id.hamLoginCode)
+        loginCode.text = "환영합니다"
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{
@@ -476,7 +485,20 @@ class MessageActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
             }
-
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
+            }
         }
         return false
     }

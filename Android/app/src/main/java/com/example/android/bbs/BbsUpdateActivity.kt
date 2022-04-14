@@ -41,9 +41,13 @@ import com.google.android.material.navigation.NavigationView
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import android.Manifest
+import android.content.DialogInterface
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import com.example.android.MainActivity
+import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import java.time.LocalDate
 
 class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -168,7 +172,11 @@ class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     // 네비게이션바
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        val loginId = findViewById<TextView>(R.id.hamLoginId)
+        val mid = MemberDao.user!!.name
+        loginId.text =mid.toString()+" 님"
+        val loginCode = findViewById<TextView>(R.id.hamLoginCode)
+        loginCode.text = "환영합니다"
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{
@@ -217,6 +225,21 @@ class BbsUpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.menu_manager->  {
                 val i = Intent(this, ManagerMenuActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
 
         }

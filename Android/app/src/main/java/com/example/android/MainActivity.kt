@@ -15,6 +15,7 @@ import com.example.android.firstscreen.firstscreenActivity
 import com.example.android.lunch.FoodActivity
 import com.example.android.manager.ManagerActivity
 import com.example.android.manager.ManagerMenuActivity
+import com.example.android.manager.bbs.ManagerBbsActivity
 import com.example.android.offday.OffDayActivity
 import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         val btnPhoneNumber = findViewById<Button>(R.id.btnPhoneNumber)          // 연락처
         val btnManager = findViewById<Button>(R.id.btnManager)
 
-/*        btnLogin.visibility=View.GONE
-        if (MemberDao.user?.auth != 0){
+        btnLogin.visibility=View.GONE
+        if (MemberDao.user?.auth != 0 && MemberDao.user?.auth != 3){
             btnManager.visibility=View.INVISIBLE
         }
 
@@ -113,8 +114,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         btnManager.setOnClickListener {
-            val i = Intent(this,ManagerMenuActivity::class.java)
-            startActivity(i)
+            if(MemberDao.user?.auth == 3){
+                val i = Intent(this,ManagerBbsActivity::class.java)
+                startActivity(i)
+            }else{
+                val i = Intent(this,ManagerMenuActivity::class.java)
+                startActivity(i)
+            }
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.android.manager.staff
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,6 +28,7 @@ import com.example.android.phoneNumber.PhoneNumActivity
 import com.example.android.pointMall.PointMallActivity
 import com.example.android.signin.MemberDao
 import com.example.android.signin.MemberDto
+import com.example.android.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 
 class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -117,7 +120,11 @@ class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
+        val loginId = findViewById<TextView>(R.id.hamLoginId)
+        val mid = MemberDao.user!!.name
+        loginId.text =mid.toString()+" 님"
+        val loginCode = findViewById<TextView>(R.id.hamLoginCode)
+        loginCode.text = "환영합니다"
         // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
         when(item!!.itemId){
             android.R.id.home->{
@@ -164,6 +171,21 @@ class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationIte
             R.id.menu_food-> {
                 val i = Intent(this, FoodActivity::class.java)
                 startActivity(i)
+            }
+            R.id.menu_logout-> {
+                AlertDialog.Builder(this)
+                    .setTitle("Logout")
+                    .setMessage("로그아웃 하시겠습니까?")
+                    .setPositiveButton("네", DialogInterface.OnClickListener { dialog, which ->
+                        val i  = Intent(this, SigninActivity::class.java)
+                        val dto = MemberDto("", "", "","","","",0,0,0,0)
+                        MemberDao.user = dto
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(i)
+                    })
+                    .setNegativeButton("아니요", null)
+                    .create()
+                    .show()
             }
         }
         return false
