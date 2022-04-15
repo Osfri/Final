@@ -36,7 +36,7 @@ class ManagerStaffActivity : AppCompatActivity(), NavigationView.OnNavigationIte
     lateinit var navigationView: NavigationView
     lateinit var drawerLayout: DrawerLayout
     override fun onBackPressed() {
-        val main = Intent(this, ManagerMenuActivity::class.java)
+        val main = Intent(this, MainActivity::class.java)
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(main)
     }
