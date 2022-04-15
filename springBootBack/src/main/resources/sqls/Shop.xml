@@ -62,6 +62,24 @@
 		WHERE SEQ = #{seq}
 	</delete>
 	
-
+	<select id="getOrderList" parameterType="mul.camp.a.dto.ShopOrderParam" resultType="mul.camp.a.dto.ShopOrderParam">
+		SELECT NAME, LOCATION, TITLE, PHOTO, CNT
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY a.SEQ ASC) AS RNUM, b.NAME, c.LOCATION, d.title, d.photo, a.CNT
+				FROM BUY a ,MEMBER b, HOSPITAL c, SHOP d
+				WHERE a.ID = b.ID
+    					AND b.CODE = c.CODE
+    					AND a.ITEM = d.SEQ
+    					AND  (SUBSTR(b.CODE,1,1) = SUBSTR(#{code},1,1)))
+    	WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="getOrderListCnt" parameterType="mul.camp.a.dto.ShopOrderParam" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0)
+	FROM BUY a ,MEMBER b, HOSPITAL c, SHOP d
+	WHERE a.ID = b.ID
+    		AND b.CODE = c.CODE
+    		AND a.ITEM = d.SEQ
+    		AND  (SUBSTR(b.CODE,1,1) = SUBSTR(#{code},1,1))
+	</select>
 	
 </mapper>

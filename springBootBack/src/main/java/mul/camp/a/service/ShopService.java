@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import mul.camp.a.dao.ShopDao;
 import mul.camp.a.dto.ShopDto;
+import mul.camp.a.dto.ShopOrderParam;
 import mul.camp.a.dto.ShopParam;
 
 @Service
@@ -50,6 +51,14 @@ public class ShopService {
 	
 	public int shopItemModify(String seq) {
 		return dao.shopItemModify(seq);
+	}
+	
+	public List<ShopOrderParam> getOrderList (ShopOrderParam param){
+		return dao.getOrderList(param);
+	}
+	
+	public int getOrderListCnt(ShopOrderParam param) {
+		return dao.getOrderListCnt(param);
 	}
 
 }
