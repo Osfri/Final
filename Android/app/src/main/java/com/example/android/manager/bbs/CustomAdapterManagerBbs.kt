@@ -33,7 +33,7 @@ class CustomAdapterManagerBbs(val context: Context, val dataList:ArrayList<Board
                 else -> ""
             }
             managerRecyclerViewBbsDelete.setOnClickListener {
-                AlertDialog.Builder(context).setTitle("댓글 삭제").setMessage("댓글을 삭제하시겠습니까?")
+                AlertDialog.Builder(context).setTitle("게시판 삭제").setMessage("게시판을 삭제하시겠습니까?")
                     .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
                         override fun onClick(p0: DialogInterface?, p1: Int) {
 

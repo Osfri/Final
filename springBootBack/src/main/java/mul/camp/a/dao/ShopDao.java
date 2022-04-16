@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import mul.camp.a.dto.ShopDto;
+import mul.camp.a.dto.ShopOrderParam;
 import mul.camp.a.dto.ShopParam;
 
 @Mapper
@@ -19,5 +20,7 @@ public interface ShopDao {
 	public List<ShopDto> getShopItemList(ShopParam param);
 	public int getShopItemListCnt(ShopParam param);
 	public int shopItemModify(String seq);
+	public List<ShopOrderParam> getOrderList (ShopOrderParam param);
+	public int getOrderListCnt(ShopOrderParam param);
 
 }

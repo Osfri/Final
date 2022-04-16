@@ -116,9 +116,11 @@ class MainActivity : AppCompatActivity() {
         btnManager.setOnClickListener {
             if(MemberDao.user?.auth == 3){
                 val i = Intent(this,ManagerBbsActivity::class.java)
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(i)
             }else{
                 val i = Intent(this,ManagerMenuActivity::class.java)
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(i)
             }
         }

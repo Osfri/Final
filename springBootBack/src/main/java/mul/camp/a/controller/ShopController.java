@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import mul.camp.a.dto.ShopDto;
+import mul.camp.a.dto.ShopOrderParam;
 import mul.camp.a.dto.ShopParam;
 import mul.camp.a.service.ShopService;
 
@@ -90,4 +91,27 @@ public class ShopController {
 		System.out.println("ShopController shopItemModify() : " + new Date());
 		return service.shopItemModify(seq);
 	}
+	
+	
+	// (10) 주문목록 가져오기 (Web)
+	@RequestMapping(value = "/getOrderList", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<ShopOrderParam> getOrderList(ShopOrderParam param) {
+		System.out.println("ShopController getOrderList() : " + new Date());
+		// 페이지 설정
+		int sn = param.getPageNumber();	// 0 1 2 3 ~
+		int start = sn * 3 +1;			// 1	11	21
+		int end = (sn + 1) * 3;		// 10	20	30
+		
+		param.setStart(start);
+		param.setEnd(end);
+		return service.getOrderList(param);
+	}
+	
+	// (11) 주문목록 수 가져오기 (Web)
+	@RequestMapping(value = "/getOrderListCnt", method = {RequestMethod.GET, RequestMethod.POST})
+	public int getOrderListCnt(ShopOrderParam param) {
+		System.out.println("ShopController getOrderListCnt() : " + new Date());
+		return service.getOrderListCnt(param);
+	}
+	
 }

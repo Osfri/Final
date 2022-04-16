@@ -49,12 +49,14 @@ class ManagerMenuActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // 게시물 관리
         manage_Btn_Bbs.setOnClickListener {
             val i = Intent(this, ManagerBbsActivity::class.java)
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(i)
         }
 
         //직원 관리
         manage_Btn_Staff.setOnClickListener {
             val i = Intent(this, ManagerStaffActivity::class.java)
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(i)
         }
 
